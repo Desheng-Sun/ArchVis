@@ -1,0 +1,230 @@
+#layout {
+    height: 99.4vh;
+    width: 99.6vw;
+    padding-top: 0.3vh;
+    padding-bottom: 0.3vh;
+    padding-left: 0.2vw;
+    padding-right: 0.2vw;
+    background-color: rgb(240, 239, 239);
+    overflow: hidden;
+}
+#ititle {
+    border-color: rgb(240, 239, 239) ;
+    height: 5vh;
+    width: 99.6vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
+.changePageButton {
+    height: 2.5vh;
+    width: 5vw;
+    margin-top: 2.5vh;
+    margin-right: 0.1vw;
+    border: 0;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.4vw rgb(0 0 0 / 28%);
+    float: left;
+    font-size: 1.5vh;
+    font-family: "微软雅黑";
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+}
+#title {
+    height: 5vh;
+    width: 84.6vw;
+    font-size: 3.5vh;
+    font-family: "微软雅黑";
+    text-align: center;
+}
+#viewList {
+    margin-top: 0.3vh;
+    height: 94.1vh;
+    width: 99.6vw;
+}
+
+
+
+
+#firstILeft{
+    height: 94.1vh;
+    width: 30vw;
+    float: left;
+}
+#firstSearchbar {
+    height: 30vh;
+    width: 30vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
+#firstIndicators {
+    margin-top: 0.3vh;
+    height: 63.8vh;
+    width: 30vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
+#firstIRight{
+    margin-left: 0.2vw;
+    height: 94.1vh;
+    width: 69.4vw;
+    float: left;
+}
+#firstIRightTop{
+    height: 63.8vh;
+    width: 69.4vw;
+}
+#firstArchMap {
+    height: 63.8vh;
+    width: 40vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+    float: left;
+}
+#firstArchList {
+    margin-left: 0.2vw;
+    height: 63.8vh;
+    width: 29.2vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+    float: left;
+}
+#firstArchrank {
+    margin-top: 0.3vh;
+    height: 30vh;
+    width: 69.4vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
+
+
+
+
+#secondILeft{
+    height: 94.1vh;
+    width: 30vw;
+    float: left;
+}
+#secondSearchbar {
+    height: 30vh;
+    width: 30vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
+#secondIndicators {
+    margin-top: 0.3vh;
+    height: 63.8vh;
+    width: 30vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
+#secondIRight{
+    margin-left: 0.2vw;
+    height: 94.1vh;
+    width: 69.4vw;
+    float: left;
+}
+#secondIRightTop{
+    height: 43.8vh;
+    width: 69.4vw;
+}
+#secondSelectIndiND {
+    height: 43.8vh;
+    width: 19.9vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+    float: left;
+}
+#secondSelectIndiRD {
+    margin-left: 0.2vw;
+    height: 43.8vh;
+    width: 19.9vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+    float: left;
+}
+#secondIndiRDExplane {
+    margin-left: 0.2vw;
+    height: 43.8vh;
+    width: 29.2vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+    float: left;
+}
+#secondIndiRDRank {
+    margin-top: 0.3vh;
+    height: 50vh;
+    width: 69.4vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
+
+
+
+#thirdILeft{
+    height: 94.1vh;
+    width: 30vw;
+    float: left;
+}
+#thirdSearchbar {
+    height: 30vh;
+    width: 30vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
+#thirdEPPosplashes {
+    margin-top: 0.3vh;
+    height: 63.8vh;
+    width: 30vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
+#thirdIRight{
+    margin-left: 0.2vw;
+    height: 94.1vh;
+    width: 69.4vw;
+    float: left;
+}
+#thirdIRightTop{
+    height: 46.9vh;
+    width: 69.4vw;
+}
+#thirdEPScoreIndiSD {
+    height: 46.9vh;
+    width: 34.6vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+    float: left;
+}
+#thirdEPScoreIndiND {
+    margin-left: 0.2vw;
+    height: 46.9vh;
+    width: 34.6vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+    float: left;
+}
+#thiedEPdigit {
+    margin-top: 0.3vh;
+    height: 46.9vh;
+    width: 69.4vw;
+    border-radius: 0.2vw;
+    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    background-color: white;
+}
