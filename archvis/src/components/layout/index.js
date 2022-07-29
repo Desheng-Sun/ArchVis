@@ -3,6 +3,7 @@ import { useCallback, useState, useEffect } from "react";
 
 
 import FirstIndicators from "../firstComponents/indicatorsSt"
+import FirstSearchBar from "../firstComponents/searchBar";
 
 export default function Layout() {
     const [size, setSize] = useState({
@@ -51,7 +52,7 @@ export default function Layout() {
                 document.getElementById("firstIndicators").getBoundingClientRect().height
             );
         }
-    }, [nowPageIndex,size])
+    }, [nowPageIndex, size])
 
 
     return (
@@ -78,6 +79,7 @@ export default function Layout() {
                 <div id="viewList">
                     <div id="firstILeft">
                         <div id="firstSearchbar">
+                            <FirstSearchBar />
 
                         </div>
                         <div id="firstIndicators">

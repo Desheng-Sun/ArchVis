@@ -11,7 +11,10 @@ export default function FirstIndicators(w, h) {
   }, [data])
   // 随系统缩放修改画布大小
   useEffect(() => {
-    const myChart = echarts.init(chartRef.current);
+    let myChart = echarts.getInstanceByDom(chartRef.current)
+    if (myChart == null) {
+      myChart = echarts.init(chartRef.current);
+    }
     const option = {
       legend: {
         data: [
