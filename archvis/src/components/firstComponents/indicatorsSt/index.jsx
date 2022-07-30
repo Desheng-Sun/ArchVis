@@ -16,98 +16,69 @@ export default function FirstIndicators(w, h) {
       myChart = echarts.init(chartRef.current);
     }
     const option = {
-      legend: {
-        data: [
-          "3-11岁任务数",
-          "3-11岁全程接种量",
-          "60岁任务数",
-          "60岁全程接种量",
-          "80岁任务数",
-          "80岁全程接种量",
-          "完成率",
-        ],
+      title: {
+        text: '一级指标概览',
+        left: 'center'
       },
-      xAxis: {
-        type: "category",
-        data: ["街道1", "街道2", "街道3", "街道4", "街道5", "街道6", "街道7"],
-      },
-      yAxis: [
-        { type: "value" },
-        {
-          type: "value",
-          name: "%",
-          nameTextStyle: {
-            color: "#ccc",
-            padding: [0, 0, 10, -30],
-          },
-          splitNumber: 5,
-          splitLine: {
-            show: true,
-            lineStyle: {
-              type: "dashed",
-              width: 1,
-              color: ["#ccc", "#ccc"],
-            },
-          },
-          axisLabel: {
-            show: true,
-            textStyle: {
-              fontSize: 12,
-            },
-          },
-        },
-      ],
       tooltip: {
-        trigger: "axis",
-        axisPointer: {
-          type: "shadow",
-        },
-        textStyle: {
-          color: "#fff",
-          align: "left",
-          fontSize: 14,
-        },
-        backgroundColor: "rgba(0,0,0,0.8)",
+        trigger: 'item',
+        formatter: '{a} <br/>{b}: {c} ({d}%)'
       },
       series: [
         {
-          name: "3-11岁任务数",
-          data: [150, 230, 224, 218, 135, 147, 260],
-          type: "bar",
+          name: '一级指标',
+          type: 'pie',
+          selectedMode: 'single',
+          radius: [0, '35%'],
+          label: {
+            show: true,
+            position: 'inner',
+            fontStyle: 'normal',
+            fontFamily: 'sans-serif',
+            color: '#fff',
+            fontSize: 10
+          },
+          labelLayout: {
+            hideOverlap: false
+          },
+          data: [
+            { value: 1548, name: '基本指标', selected: true },
+            { value: 775, name: '数字化研发创新指标' },
+            { value: 679, name: '组织指标' },
+            { value: 775, name: '战略指标' },
+            { value: 679, name: '行业特色指标（设计）' },
+            { value: 679, name: '行业特色指标（施工）' }
+          ]
         },
         {
-          name: "3-11岁全程接种量",
-          data: [150, 230, 224, 218, 135, 147, 260],
-          type: "bar",
-        },
-        {
-          name: "60岁任务数",
-          data: [150, 230, 224, 218, 135, 147, 260],
-          type: "bar",
-        },
-        {
-          name: "60岁全程接种量",
-          data: [880, 30, 124, 118, 35, 47, 160],
-          type: "bar",
-        },
-        {
-          name: "80岁任务数",
-          data: [660, 30, 124, 118, 35, 47, 160],
-          type: "bar",
-        },
-        {
-          name: "80岁全程接种量",
-          data: [880, 30, 124, 118, 35, 47, 160],
-          type: "bar",
-        },
-        {
-          name: "完成率",
-          data: [50, 130, 124, 18, 35, 47, 160],
-          yAxisIndex: 1,
-          type: "line",
-          smooth: true,
-        },
-      ],
+          name: '二级指标',
+          type: 'pie',
+          radius: ['45%', '60%'],
+          labelLine: {
+            length: 30
+          },
+          data: [
+            { value: 448, name: '规模状况' },
+            { value: 335, name: '财务状况' },
+            { value: 310, name: '研发状况' },
+            { value: 251, name: '数字化创新成果状况' },
+            { value: 234, name: '数字化技术应用状况' },
+            { value: 147, name: '组织结构' },
+            { value: 135, name: '承包联合体模式' },
+            { value: 102, name: '企业战略规划' },
+            { value: 310, name: '企业战略部门' },
+            { value: 251, name: '战略影响因素' },
+            { value: 234, name: '设计合作' },
+            { value: 147, name: '设计项目' },
+            { value: 135, name: '设计工具' },
+            { value: 102, name: '装配式建筑' },
+            { value: 234, name: '智慧工地' },
+            { value: 147, name: 'BIM应用' },
+            { value: 135, name: '施工管理数字化' },
+            { value: 102, name: '施工设施应用' }
+          ]
+        }
+      ]
     };
     myChart.setOption(option);
     myChart.resize();
