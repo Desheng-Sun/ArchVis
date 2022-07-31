@@ -5,6 +5,8 @@ import { useCallback, useState, useEffect } from "react";
 import FirstIndicators from "../firstComponents/indicatorsSt"
 import FirstSearchBar from "../firstComponents/searchBar";
 import FirstArchMap from "../firstComponents/archMap";
+import FirstArchList from "../firstComponents/archList";
+import FirstArchRank from "../firstComponents/archRank";
 
 export default function Layout() {
     const [size, setSize] = useState({
@@ -32,6 +34,11 @@ export default function Layout() {
     const [firstIndicatorsHeight, setFirstIndicatorsHeight] = useState(0);
     const [firstArchMapWidth, setFirstArchMapWidth] = useState(0);
     const [firstArchMapHeight, setFirstArchMapHeight] = useState(0);
+
+    const [firstArchListWidth, setFirstArchListWidth] = useState(0);
+    const [firstArchListHeight, setFirstArchListHeight] = useState(0);
+    const [firstArchRankWidth, setFirstArchRankWidth] = useState(0);
+    const [firstArchRankHeight, setFirstArchRankHeight] = useState(0);
 
 
     function ChangePageButton({ id, text }) {
@@ -102,11 +109,17 @@ export default function Layout() {
                             />
                             </div>
                             <div id="firstArchList">
-
+                            <FirstArchList
+                                w={firstArchListWidth}
+                                h={firstArchListHeight}
+                            />
                             </div>
                         </div>
                         <div id="firstArchrank">
-
+                        <FirstArchRank
+                                w={firstArchRankWidth}
+                                h={firstArchRankHeight}
+                            />
                         </div>
                     </div>
                 </div>
