@@ -8,6 +8,15 @@ import FirstArchMap from "../firstComponents/archMap";
 import FirstArchList from "../firstComponents/archList";
 import FirstArchRank from "../firstComponents/archRank";
 
+import SecondSearchBar from "../secondComponents/searchBar";
+import SecondIndicatorsNdSelect from "../secondComponents/indicatorsNd";
+import SecondIndicatorsRdSelect from "../secondComponents/indicatorsRd";
+import SecondIndicatorsRdExplain from "../secondComponents/indicatorsExplain";
+
+
+import ThirdSearchBar from "../thirdComponents/searchBar";
+
+
 export default function Layout() {
     const [size, setSize] = useState({
         width: document.documentElement.clientWidth,
@@ -27,6 +36,14 @@ export default function Layout() {
             window.removeEventListener('resize', onResize)
         })
     })
+
+    //第二屏，用户选择的二级指标
+    const [selectedIndicatorsNd, setSelectedIndicatorsNd] = useState("1")
+    //第二屏，用户选择的三级指标
+    
+    const [selectedIndicatorsRd, setSelectedIndicatorsRd] = useState("11")
+
+
 
     const [nowPageIndex, setNowPageIndex] = useState("firstButton")
 
@@ -103,20 +120,20 @@ export default function Layout() {
                     <div id="firstIRight">
                         <div id="firstIRightTop">
                             <div id="firstArchMap">
-                            <FirstArchMap
-                                w={firstArchMapWidth}
-                                h={firstArchMapHeight}
-                            />
+                                <FirstArchMap
+                                    w={firstArchMapWidth}
+                                    h={firstArchMapHeight}
+                                />
                             </div>
                             <div id="firstArchList">
-                            <FirstArchList
-                                w={firstArchListWidth}
-                                h={firstArchListHeight}
-                            />
+                                <FirstArchList
+                                    w={firstArchListWidth}
+                                    h={firstArchListHeight}
+                                />
                             </div>
                         </div>
                         <div id="firstArchrank">
-                        <FirstArchRank
+                            <FirstArchRank
                                 w={firstArchRankWidth}
                                 h={firstArchRankHeight}
                             />
@@ -129,7 +146,7 @@ export default function Layout() {
                 <div id="viewList">
                     <div id="secondILeft">
                         <div id="secondSearchbar">
-
+                            <SecondSearchBar />
                         </div>
                         <div id="secondIndicators">
 
@@ -139,12 +156,17 @@ export default function Layout() {
                     <div id="secondIRight">
                         <div id="secondIRightTop">
                             <div id="secondSelectIndiND">
-
+                                <SecondIndicatorsNdSelect
+                                    setSelectedIndicatorsNd={setSelectedIndicatorsNd} />
                             </div>
                             <div id="secondSelectIndiRD">
-
+                                <SecondIndicatorsRdSelect
+                                    selectedIndicatorsNd = {selectedIndicatorsNd}
+                                    setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
                             </div>
                             <div id="secondIndiRDExplane">
+                                <SecondIndicatorsRdExplain
+                                    selectedIndicatorsRd={selectedIndicatorsRd} />
 
                             </div>
                         </div>
@@ -159,7 +181,7 @@ export default function Layout() {
                 <div id="viewList">
                     <div id="thirdILeft">
                         <div id="thirdSearchbar">
-
+                            <ThirdSearchBar />
                         </div>
                         <div id="thirdEPPosplashes">
 
