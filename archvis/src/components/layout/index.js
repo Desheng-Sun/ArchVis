@@ -13,13 +13,19 @@ import SecondSearchBar from "../secondComponents/searchBar";
 import SecondIndicatorsNdSelect from "../secondComponents/indicatorsNd";
 import SecondIndicatorsRdSelect from "../secondComponents/indicatorsRd";
 import SecondIndicatorsRdExplain from "../secondComponents/indicatorsExplain";
+import SecondIndicators from "../secondComponents/indicatorsBreakdown";
+import SecondIndiRDRank from "../secondComponents/indiRdRank";
 
 
 import ThirdSearchBar from "../thirdComponents/searchBar";
+<<<<<<< HEAD
+import ThirdEPPosplashes from "../thirdComponents/ePPosplashes";
+=======
 import ThirdIndicatorsRadar from "../thirdComponents/indicatorsRadar";
 import ThirdIndicatorsStack from "../thirdComponents/indicatorsStack";
 import ThirdArchComparison from "../thirdComponents/archComparison";
 
+>>>>>>> b67b7c720389fa272fb0927ce5738dd42d82b3e1
 
 
 export default function Layout() {
@@ -161,7 +167,7 @@ export default function Layout() {
                             <SecondSearchBar />
                         </div>
                         <div id="secondIndicators">
-
+                            <SecondIndicators />
                         </div>
 
                     </div>
@@ -183,7 +189,7 @@ export default function Layout() {
                             </div>
                         </div>
                         <div id="secondIndiRDRank">
-
+                            <SecondIndiRDRank />
                         </div>
                     </div>
                 </div>
@@ -196,7 +202,7 @@ export default function Layout() {
                             <ThirdSearchBar />
                         </div>
                         <div id="thirdEPPosplashes">
-
+                            <ThirdEPPosplashes />
                         </div>
 
                     </div>
