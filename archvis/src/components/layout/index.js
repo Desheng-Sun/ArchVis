@@ -15,6 +15,10 @@ import SecondIndicatorsRdExplain from "../secondComponents/indicatorsExplain";
 
 
 import ThirdSearchBar from "../thirdComponents/searchBar";
+import ThirdIndicatorsRadar from "../thirdComponents/indicatorsRadar";
+import ThirdIndicatorsStack from "../thirdComponents/indicatorsStack";
+import ThirdArchComparison from "../thirdComponents/archComparison";
+
 
 
 export default function Layout() {
@@ -57,6 +61,13 @@ export default function Layout() {
     const [firstArchRankWidth, setFirstArchRankWidth] = useState(0);
     const [firstArchRankHeight, setFirstArchRankHeight] = useState(0);
 
+    const [thirdIndicatorsRadarWidth, setThirdIndicatorsRadarWidth] = useState(0);
+    const [thirdIndicatorsRadarHeight, setThirdIndicatorsRadarHeight] = useState(0);
+    const [thirdIndicatorsStackWidth, setThirdIndicatorsStackWidth] = useState(0);
+    const [thirdIndicatorsStackHeight, setThirdIndicatorsStackHeight] = useState(0);
+    const [thirdArchComparisonWidth, setThirdArchComparisonWidth] = useState(0);
+    const [thirdArchComparisonHeight, setThirdArchComparisonHeight] = useState(0);
+    
 
     function ChangePageButton({ id, text }) {
         return (
@@ -191,13 +202,24 @@ export default function Layout() {
                     <div id="thirdIRight">
                         <div id="thirdIRightTop">
                             <div id="thirdEPScoreIndiSD">
-
+                                <ThirdIndicatorsRadar 
+                                    w={thirdIndicatorsRadarWidth}
+                                    h={thirdIndicatorsRadarHeight}
+                                />
                             </div>
                             <div id="thirdEPScoreIndiND">
+                                <ThirdIndicatorsStack 
+                                    w={thirdIndicatorsStackWidth}
+                                    h={thirdIndicatorsStackHeight}
+                                />
 
                             </div>
                         </div>
                         <div id="thiedEPdigit">
+                            <ThirdArchComparison 
+                                w={thirdArchComparisonWidth}
+                                h={thirdArchComparisonHeight}
+                            />
 
                         </div>
                     </div>
