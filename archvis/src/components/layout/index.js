@@ -18,14 +18,10 @@ import SecondIndiRDRank from "../secondComponents/indiRdRank";
 
 
 import ThirdSearchBar from "../thirdComponents/searchBar";
-<<<<<<< HEAD
 import ThirdEPPosplashes from "../thirdComponents/ePPosplashes";
-=======
 import ThirdIndicatorsRadar from "../thirdComponents/indicatorsRadar";
 import ThirdIndicatorsStack from "../thirdComponents/indicatorsStack";
 import ThirdArchComparison from "../thirdComponents/archComparison";
-
->>>>>>> b67b7c720389fa272fb0927ce5738dd42d82b3e1
 
 
 export default function Layout() {
