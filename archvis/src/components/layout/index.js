@@ -1,6 +1,7 @@
 import "./index.css";
 import { useCallback, useState, useEffect } from "react";
 
+import ChartHeader from "../chartHeader";
 
 import FirstIndicators from "../firstComponents/indicatorsSt"
 import FirstSearchBar from "../firstComponents/searchBar";
@@ -44,7 +45,7 @@ export default function Layout() {
     //第二屏，用户选择的二级指标
     const [selectedIndicatorsNd, setSelectedIndicatorsNd] = useState("1")
     //第二屏，用户选择的三级指标
-    
+
     const [selectedIndicatorsRd, setSelectedIndicatorsRd] = useState("11")
 
 
@@ -67,7 +68,7 @@ export default function Layout() {
     const [thirdIndicatorsStackHeight, setThirdIndicatorsStackHeight] = useState(0);
     const [thirdArchComparisonWidth, setThirdArchComparisonWidth] = useState(0);
     const [thirdArchComparisonHeight, setThirdArchComparisonHeight] = useState(0);
-    
+
 
     function ChangePageButton({ id, text }) {
         return (
@@ -117,8 +118,8 @@ export default function Layout() {
                 <div id="viewList">
                     <div id="firstILeft">
                         <div id="firstSearchbar">
+                            <ChartHeader chartName={"行业指标搜索框"} />
                             <FirstSearchBar />
-
                         </div>
                         <div id="firstIndicators">
                             <FirstIndicators
@@ -172,7 +173,7 @@ export default function Layout() {
                             </div>
                             <div id="secondSelectIndiRD">
                                 <SecondIndicatorsRdSelect
-                                    selectedIndicatorsNd = {selectedIndicatorsNd}
+                                    selectedIndicatorsNd={selectedIndicatorsNd}
                                     setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
                             </div>
                             <div id="secondIndiRDExplane">
@@ -202,13 +203,13 @@ export default function Layout() {
                     <div id="thirdIRight">
                         <div id="thirdIRightTop">
                             <div id="thirdEPScoreIndiSD">
-                                <ThirdIndicatorsRadar 
+                                <ThirdIndicatorsRadar
                                     w={thirdIndicatorsRadarWidth}
                                     h={thirdIndicatorsRadarHeight}
                                 />
                             </div>
                             <div id="thirdEPScoreIndiND">
-                                <ThirdIndicatorsStack 
+                                <ThirdIndicatorsStack
                                     w={thirdIndicatorsStackWidth}
                                     h={thirdIndicatorsStackHeight}
                                 />
@@ -216,7 +217,7 @@ export default function Layout() {
                             </div>
                         </div>
                         <div id="thiedEPdigit">
-                            <ThirdArchComparison 
+                            <ThirdArchComparison
                                 w={thirdArchComparisonWidth}
                                 h={thirdArchComparisonHeight}
                             />
