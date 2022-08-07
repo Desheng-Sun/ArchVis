@@ -16,6 +16,18 @@ export default function FirstArchMap(w, h) {
       echarts.registerMap('china', {geoJSON: geoChina});
     }
     const option = {
+      color: [
+        "#5b8ff9",
+        "#5ad8a6",
+        "#5d7092",
+        "#f6bd16",
+        "#e86452",
+        "#6dc8ec",
+        "#945fb9",
+        "#ff9845",
+        "#1e9493",
+        "#ff99c3"
+      ],
         title: {
             text: '全国范围建筑企业数字化概览',
             textStyle: {
@@ -32,17 +44,12 @@ export default function FirstArchMap(w, h) {
             max: 38000000,
             inRange: {
               color: [
-                '#313695',
-                '#4575b4',
-                '#74add1',
-                '#abd9e9',
-                '#e0f3f8',
                 '#ffffbf',
-                '#fee090',
-                '#fdae61',
-                '#f46d43',
-                '#d73027',
-                '#a50026'
+                '#e0f3f8',
+                '#abd9e9',
+                '#74add1',
+                '#4575b4',
+                '#313695'
               ]
             },
             text: ['High', 'Low'],
@@ -52,13 +59,14 @@ export default function FirstArchMap(w, h) {
             type: 'map',
             map: 'china',
             roam: true,
+            center: [101.97, 34.71],
             geoIndex: 1,
-            zoom: 1.5,  //地图的比例
+            zoom: 1.8,  //地图的比例
             label: {
               normal: {
                 show: true,
                 textStyle: {
-                  color: '#1890ff'  //字体颜色
+                  color: '#333'  //字体颜色
                 }
               },
               emphasis: {
@@ -69,15 +77,15 @@ export default function FirstArchMap(w, h) {
             },
             itemStyle: {
               normal: {
-                areaColor: '#051537',
-                borderColor: '#b5f5ec',
+                areaColor: '#87b3ff',
+                borderColor: 'white',
                 borderWidth: 2,
 			          shadowColor: 'rgba(63,218,255,0.3)',
 			          shadowBlur: 20,
 			          show: true
               },
               emphasis: {
-                areaColor: '#1890ff',
+                areaColor: '#5b8ff9',
               }
             }
         }
