@@ -14,6 +14,18 @@ export default function FirstIndicators(w, h) {
       myChart = echarts.init(chartRef.current);
     }
     const option = {
+      color: [
+        "#5b8ff9",
+        "#5ad8a6",
+        "#5d7092",
+        "#f6bd16",
+        "#e86452",
+        "#6dc8ec",
+        "#945fb9",
+        "#ff9845",
+        "#1e9493",
+        "#ff99c3"
+      ],
         title: {
             text: '二、三级指标企业对比',
             left: 'center'
@@ -47,31 +59,27 @@ export default function FirstIndicators(w, h) {
             {
               name: '企业1',
               type: 'line',
-              stack: 'Total',
               data: [160, 132, 181]
             },
             {
               name: '企业2',
               type: 'line',
-              stack: 'Total',
               data: [220, 182, 161]
             },
             {
               name: '企业3',
               type: 'line',
-              stack: 'Total',
+              
               data: [150, 332, 201]
             },
             {
               name: '企业4',
               type: 'line',
-              stack: 'Total',
               data: [220, 312, 301]
             },
             {
               name: '企业5',
               type: 'line',
-              stack: 'Total',
               data: [200, 332, 401]
             }
           ]
