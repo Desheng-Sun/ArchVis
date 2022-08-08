@@ -12,7 +12,18 @@ export default function ThirdIndicatorsStack(w, h) {
   
     // 方案一：堆叠图
     const option = {
-      color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
+      color: [
+        "#5b8ff9",
+        "#5ad8a6",
+        "#5d7092",
+        "#f6bd16",
+        "#e86452",
+        "#6dc8ec",
+        "#945fb9",
+        "#ff9845",
+        "#1e9493",
+        "#ff99c3"
+      ],
       title: {
         text: '二级指标得分堆叠图'
       },
@@ -122,10 +133,10 @@ export default function ThirdIndicatorsStack(w, h) {
               {
                 offset: 0,
                 color: 'rgb(55, 162, 255)'
-              },
-              {
-                offset: 1,
-                color: 'rgb(116, 21, 219)'
+          },
+          {
+            offset: 1,
+            color: 'rgb(116, 21, 219)'
               }
             ])
           },

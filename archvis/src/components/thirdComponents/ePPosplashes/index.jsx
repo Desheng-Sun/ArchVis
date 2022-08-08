@@ -128,7 +128,18 @@ export default function FirstIndicators(w, h) {
         text: '全行业企业数字化散点图',
         left: 'center'
       },
-      color: ['#dd4444', '#fec42c', '#80F1BE'],
+      color: [
+        "#5b8ff9",
+        "#5ad8a6",
+        "#5d7092",
+        "#f6bd16",
+        "#e86452",
+        "#6dc8ec",
+        "#945fb9",
+        "#ff9845",
+        "#1e9493",
+        "#ff99c3"
+      ],
   grid: {
     left: '10%',
     right: 150,

@@ -15,7 +15,170 @@ export default function FirstIndicators(w, h) {
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
+    const data = [
+      {
+        name: '基本指标',
+        itemStyle: {
+          color: '#5b8ff9'
+        },
+        children: [
+          {
+            name: '规模状况',
+            value: 1,
+            itemStyle: {
+              color: '#87b3ff'
+            }
+          },
+          {
+            name: '财务状况',
+            value: 1,
+            itemStyle: {
+              color: '#d9e9ff'
+            }
+          }
+        ]
+      },
+      {
+        name: '数字化研发创新指标',
+        itemStyle: {
+          color: "#5ad8a6"
+        },
+        children: [
+          {
+            name: '研发状况',
+            value: 1,
+            itemStyle: {
+              color: '#42b389'
+            }
+          },
+          {
+            name: '数字化创新成果状况',
+            value: 1,
+            itemStyle: {
+              color: '#b3f2d5'
+            }
+          },
+          {
+            name: '数字化技术应用状况',
+            value: 1,
+            itemStyle: {
+              color: '#85e6bc'
+            }
+          }
+        ]
+      },
+      {
+        name: '组织指标',
+        itemStyle: {
+          color: "#5d7092"
+        },
+        children: [
+          {
+            name: '组织结构',
+            value: 1,
+            itemStyle: {
+              color: '#3f4e6b'
+            }
+          },
+          {
+            name: '承包联合体模式',
+            value: 1,
+            itemStyle: {
+              color: '#a1a5ab'
+            }
+          }
+        ]
+      },
+      {
+        name: '战略指标',
+        itemStyle: {
+          color: "#f6bd16"
+        },
+        children: [
+          {
+            name: '企业战略规划',
+            value: 1,
+            itemStyle: {
+              color: '#ffd640'
+            }
+          },
+          {
+            name: '企业战略部门',
+            value: 1,
+            itemStyle: {
+              color: '#ffef91'
+            }
+          },
+          {
+            name: '战略影响因素',
+            value: 1,
+            itemStyle: {
+              color: '#ffe369'
+            }
+          }
+        ]
+      },
+      {
+        name: '特色指标(施工)',
+        itemStyle: {
+          color: "#e86452"
+        },
+        children: [
+          {
+            name: '装配式建筑',
+            value: 1,
+            itemStyle: {
+              color: '#c2453a'
+            }
+          },
+          {
+            name: '智慧工地',
+            value: 1,
+            itemStyle: {
+              color: '#ffbaab'
+            }
+          },
+          {
+            name: 'BIM应用',
+            value: 1,
+            itemStyle: {
+              color: '#f58f7d'
+            }
+          },
+          {
+            name: '施工管理数字化',
+            value: 1,
+            itemStyle: {
+              color: '#ffddd4'
+            }
+          },
+          {
+            name: '施工设施应用',
+            value: 1,
+            itemStyle: {
+              color: '#c2453a'
+            }
+          }
+        ]
+      }
+    ];
     const option = {
+      // title: {
+      //   text: '一级指标概览',
+      //   left: 'center'
+      // },
+      color: [
+        "#5b8ff9",
+        "#5ad8a6",
+        "#5d7092",
+        "#f6bd16",
+        "#e86452",
+        "#6dc8ec",
+        "#945fb9",
+        "#ff9845",
+        "#1e9493",
+        "#ff99c3"
+      ],
       // title: {
       //   text: '一级指标概览',
       //   left: 'center'
@@ -26,56 +189,29 @@ export default function FirstIndicators(w, h) {
       },
       series: [
         {
-          name: '一级指标',
-          type: 'pie',
-          selectedMode: 'single',
-          radius: [0, '35%'],
+          type: 'sunburst',
+          center: ['50%', '52%'],
+          data: data,
           label: {
-            show: true,
-            position: 'inner',
-            fontStyle: 'normal',
-            fontFamily: 'sans-serif',
-            color: '#fff',
-            fontSize: 10
+            rotate: 'radial'
           },
-          labelLayout: {
-            hideOverlap: false
+          itemStyle: {
+            borderColor: 'white',
+            borderWidth: 2
           },
-          data: [
-            { value: 1548, name: '基本指标', selected: true },
-            { value: 775, name: '数字化研发创新指标' },
-            { value: 679, name: '组织指标' },
-            { value: 775, name: '战略指标' },
-            { value: 679, name: '行业特色指标（设计）' },
-            { value: 679, name: '行业特色指标（施工）' }
-          ]
-        },
-        {
-          name: '二级指标',
-          type: 'pie',
-          radius: ['45%', '60%'],
-          labelLine: {
-            length: 30
-          },
-          data: [
-            { value: 448, name: '规模状况' },
-            { value: 335, name: '财务状况' },
-            { value: 310, name: '研发状况' },
-            { value: 251, name: '数字化创新成果状况' },
-            { value: 234, name: '数字化技术应用状况' },
-            { value: 147, name: '组织结构' },
-            { value: 135, name: '承包联合体模式' },
-            { value: 102, name: '企业战略规划' },
-            { value: 310, name: '企业战略部门' },
-            { value: 251, name: '战略影响因素' },
-            { value: 234, name: '设计合作' },
-            { value: 147, name: '设计项目' },
-            { value: 135, name: '设计工具' },
-            { value: 102, name: '装配式建筑' },
-            { value: 234, name: '智慧工地' },
-            { value: 147, name: 'BIM应用' },
-            { value: 135, name: '施工管理数字化' },
-            { value: 102, name: '施工设施应用' }
+          levels: [
+            {},
+            {
+              r0: 0,
+              r: '40%',
+              label: {
+                rotate: 0
+              }
+            },
+            {
+              r0: '40%',
+              r: '90%'
+            }
           ]
         }
       ]

@@ -10,6 +10,18 @@ export default function ThirdIndicatorsRadar(w, h) {
       myChart = echarts.init(chartRef.current);
     }
     const option = {
+      color: [
+        "#5b8ff9",
+        "#5ad8a6",
+        "#5d7092",
+        "#f6bd16",
+        "#e86452",
+        "#6dc8ec",
+        "#945fb9",
+        "#ff9845",
+        "#1e9493",
+        "#ff99c3"
+      ],
       title: {
         text: '企业一级指标得分'
       },
