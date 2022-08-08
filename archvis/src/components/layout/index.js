@@ -58,7 +58,6 @@ export default function Layout() {
     const [firstIndicatorsHeight, setFirstIndicatorsHeight] = useState(0);
     const [firstArchMapWidth, setFirstArchMapWidth] = useState(0);
     const [firstArchMapHeight, setFirstArchMapHeight] = useState(0);
-
     const [firstArchListWidth, setFirstArchListWidth] = useState(0);
     const [firstArchListHeight, setFirstArchListHeight] = useState(0);
     const [firstArchRankWidth, setFirstArchRankWidth] = useState(0);
@@ -92,6 +91,36 @@ export default function Layout() {
             setFirstIndicatorsHeight(
                 document.getElementById("firstIndicators").getBoundingClientRect().height
             );
+            setFirstArchMapWidth(
+                document.getElementById("firstArchMap").getBoundingClientRect().width
+            );
+            setFirstArchMapHeight(
+                document.getElementById("firstArchMap").getBoundingClientRect().height
+            );
+            setFirstArchListWidth(
+                document.getElementById("firstArchList").getBoundingClientRect().width
+            );
+            setFirstArchListHeight(
+                document.getElementById("firstArchList").getBoundingClientRect().height
+            );
+            setFirstArchRankWidth(
+                document.getElementById("firstArchRank").getBoundingClientRect().width
+            );
+            setFirstArchRankHeight(
+                document.getElementById("firstArchRank").getBoundingClientRect().height
+            );
+            // setFirstIndicatorsHeight(
+            //     document.getElementById("firstIndicators").getBoundingClientRect().width
+            // );
+            // setFirstIndicatorsHeight(
+            //     document.getElementById("firstIndicators").getBoundingClientRect().height
+            // );
+            // setFirstIndicatorsHeight(
+            //     document.getElementById("firstIndicators").getBoundingClientRect().width
+            // );
+            // setFirstIndicatorsHeight(
+            //     document.getElementById("firstIndicators").getBoundingClientRect().height
+            // );
         }
     }, [nowPageIndex, size])
 
@@ -124,6 +153,7 @@ export default function Layout() {
                             <FirstSearchBar />
                         </div>
                         <div id="firstIndicators">
+                            <ChartHeader chartName={"一级指标概览"} />
                             <FirstIndicators
                                 w={firstIndicatorsWidth}
                                 h={firstIndicatorsHeight}
@@ -134,6 +164,7 @@ export default function Layout() {
                     <div id="firstIRight">
                         <div id="firstIRightTop">
                             <div id="firstArchMap">
+                                <ChartHeader chartName={"全国范围建筑企业数字化概览"} />
                                 <FirstArchMap
                                     w={firstArchMapWidth}
                                     h={firstArchMapHeight}
@@ -146,7 +177,7 @@ export default function Layout() {
                                 />
                             </div>
                         </div>
-                        <div id="firstArchrank">
+                        <div id="firstArchRank">
                             <FirstArchRank
                                 w={firstArchRankWidth}
                                 h={firstArchRankHeight}

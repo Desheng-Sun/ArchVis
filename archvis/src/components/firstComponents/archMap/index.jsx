@@ -2,7 +2,7 @@ import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import geoChina from "./geo.json";
 
-export default function FirstArchMap(w, h) {
+export default function FirstArchMap({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
@@ -17,10 +17,6 @@ export default function FirstArchMap(w, h) {
     }
     const option = {
         title: {
-            text: '全国范围建筑企业数字化概览',
-            textStyle: {
-              color:'#fff'
-            },
             left: 'center'
           },
           tooltip: {
@@ -53,24 +49,26 @@ export default function FirstArchMap(w, h) {
             map: 'china',
             roam: true,
             geoIndex: 1,
-            zoom: 1.5,  //地图的比例
+            zoom: 1.2,  //地图的比例
             label: {
               normal: {
                 show: true,
                 textStyle: {
-                  color: '#1890ff'  //字体颜色
+                  color: '#1890ff',  //字体颜色
+                  fontSize:"2vw"
                 }
               },
               emphasis: {
                 textStyle: {
-                  color: '#fff'  //选中后的字体颜色
+                  color: '#fff',  //选中后的字体颜色
+                  fontSize:"10px"
                 }
               }
             },
             itemStyle: {
               normal: {
-                areaColor: '#051537',
-                borderColor: '#b5f5ec',
+                areaColor: '#e0f3f8',
+                borderColor: '#abd9e9',
                 borderWidth: 2,
 			          shadowColor: 'rgba(63,218,255,0.3)',
 			          shadowBlur: 20,
@@ -79,7 +77,7 @@ export default function FirstArchMap(w, h) {
               emphasis: {
                 areaColor: '#1890ff',
               }
-            }
+            },
         }
     };
     myChart.setOption(option, true);
@@ -87,7 +85,7 @@ export default function FirstArchMap(w, h) {
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "51vh"}}>
     </div>
   )
 }

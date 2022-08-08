@@ -16,10 +16,10 @@ export default function FirstIndicators(w, h) {
       myChart = echarts.init(chartRef.current);
     }
     const option = {
-      title: {
-        text: '一级指标概览',
-        left: 'center'
-      },
+      // title: {
+      //   text: '一级指标概览',
+      //   left: 'center'
+      // },
       tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b}: {c} ({d}%)'
@@ -85,7 +85,7 @@ export default function FirstIndicators(w, h) {
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "61vh" }}>
     </div>
   )
 }
