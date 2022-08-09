@@ -191,9 +191,11 @@ export default function Layout() {
                 <div id="viewList">
                     <div id="secondILeft">
                         <div id="secondSearchbar">
+                        <ChartHeader chartName={"行业企业检索"} />
                             <SecondSearchBar />
                         </div>
                         <div id="secondIndicators">
+                        <ChartHeader chartName={"二级指标细分"} />
                             <SecondIndicators />
                         </div>
 
@@ -201,21 +203,25 @@ export default function Layout() {
                     <div id="secondIRight">
                         <div id="secondIRightTop">
                             <div id="secondSelectIndiND">
+                            <ChartHeader chartName={"二级指标勾选栏"} />
                                 <SecondIndicatorsNdSelect
                                     setSelectedIndicatorsNd={setSelectedIndicatorsNd} />
                             </div>
                             <div id="secondSelectIndiRD">
+                            <ChartHeader chartName={"三级指标勾选栏"} />
                                 <SecondIndicatorsRdSelect
                                     selectedIndicatorsNd={selectedIndicatorsNd}
                                     setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
                             </div>
                             <div id="secondIndiRDExplane">
+                            <ChartHeader chartName={"三级指标解释栏"} />
                                 <SecondIndicatorsRdExplain
                                     selectedIndicatorsRd={selectedIndicatorsRd} />
 
                             </div>
                         </div>
                         <div id="secondIndiRDRank">
+                        <ChartHeader chartName={"二、三级指标企业对比"} />
                             <SecondIndiRDRank />
                         </div>
                     </div>

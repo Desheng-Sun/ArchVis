@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function FirstIndicators(w, h) {
+export default function FirstIndicators({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
@@ -26,15 +26,11 @@ export default function FirstIndicators(w, h) {
         "#1e9493",
         "#ff99c3"
       ],
-        title: {
-            text: '二、三级指标企业对比',
-            left: 'center'
-          },
           tooltip: {
             trigger: 'axis'
           },
           legend: {
-            top: '9%',
+            top: '5%',
             data: ['企业1', '企业2', '企业3', '企业4', '企业5']
           },
           grid: {
@@ -89,7 +85,7 @@ export default function FirstIndicators(w, h) {
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "47.2vh" }}>
     </div>
   )
 }

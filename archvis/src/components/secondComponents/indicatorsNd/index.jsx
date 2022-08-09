@@ -8,7 +8,7 @@ export default function SecondIndicatorsNdSelect({setSelectedIndicatorsNd}) {
     setSelectedIndicatorsNd(e.target.value)
   };
   return (
-    <>
+    <div style={{ paddingTop: "5%" }}>
       <Radio.Group onChange={onChange} defaultValue={IndicatorsNd[0]}>
         {IndicatorsNd.map((item, index) => (
           <Radio.Button key={index} value={item}>
@@ -16,6 +16,6 @@ export default function SecondIndicatorsNdSelect({setSelectedIndicatorsNd}) {
           </Radio.Button>
         ))}
       </Radio.Group>
-    </>
+    </div>
   )
 }

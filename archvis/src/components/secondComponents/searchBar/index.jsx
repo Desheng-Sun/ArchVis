@@ -21,7 +21,7 @@ export default function SecondSearchBar() {
   };
 
   return (
-    <>
+    <div style={{ paddingTop: "5%"}}>
       <Select
         defaultValue={allIndustry[0]}
         style={{
@@ -48,7 +48,7 @@ export default function SecondSearchBar() {
           <Option key={industry}>{industry}</Option>
         ))}
       </Select>
-    </>
+    </div>
   );
 }
 

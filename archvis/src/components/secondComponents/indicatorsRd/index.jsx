@@ -15,7 +15,7 @@ export default function SecondIndicatorsRdSelect({selectedIndicatorsNd, setSelec
     }
   }, [selectedIndicatorsNd])
   return (
-    <>
+    <div style={{ paddingTop: "5%" }}>
       <Radio.Group onChange={onChange} defaultValue={indicatorsRd[0]}>
         {indicatorsRd.map((item, index) => (
           <Radio key={index} value={item}>
@@ -23,6 +23,6 @@ export default function SecondIndicatorsRdSelect({selectedIndicatorsNd, setSelec
           </Radio>
         ))}
       </Radio.Group>
-    </>
+    </div>
   )
 }
