@@ -57,7 +57,7 @@ export default function FirstArchMap({w, h}) {
             roam: true,
             center: [101.97, 34.71],
             geoIndex: 1,
-            zoom: 1.2,  //地图的比例
+            zoom: 1.4,  //地图的比例
             label: {
               normal: {
                 show: true,
@@ -74,12 +74,11 @@ export default function FirstArchMap({w, h}) {
             },
             itemStyle: {
               normal: {
-
                 areaColor: '#87b3ff',
                 borderColor: 'white',
-                borderWidth: 2,
-			          shadowColor: 'rgba(63,218,255,0.3)',
-			          shadowBlur: 20,
+                // borderWidth: 2,
+			          // shadowColor: 'rgba(63,218,255,0.3)',
+			          // shadowBlur: 20,
 			          show: true
               },
               emphasis: {

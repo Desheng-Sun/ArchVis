@@ -3,7 +3,8 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function FirstIndicators({w, h}) {
+
+export default function FirstIndicators({ w, h }) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {

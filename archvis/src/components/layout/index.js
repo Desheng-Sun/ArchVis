@@ -63,6 +63,13 @@ export default function Layout() {
     const [firstArchRankWidth, setFirstArchRankWidth] = useState(0);
     const [firstArchRankHeight, setFirstArchRankHeight] = useState(0);
 
+    const [secondIndicatorsWidth, setSecondIndicatorsWidth] = useState(0);
+    const [secondIndicatorsHeight, setSecondIndicatorsHeight] = useState(0);
+    const [secondIndiRDRankWidth, setSecondIndiRDRankWidth] = useState(0);
+    const [secondIndiRDRankHeight, setSecondIndiRDRankHeight] = useState(0);
+
+    const [thirdEPPosplashesWidth, setThirdEPPosplashesWidth] = useState(0);
+    const [thirdEPPosplashesHeight, setThirdEPPosplashesHeight] = useState(0);
     const [thirdIndicatorsRadarWidth, setThirdIndicatorsRadarWidth] = useState(0);
     const [thirdIndicatorsRadarHeight, setThirdIndicatorsRadarHeight] = useState(0);
     const [thirdIndicatorsStackWidth, setThirdIndicatorsStackWidth] = useState(0);
@@ -109,18 +116,28 @@ export default function Layout() {
             setFirstArchRankHeight(
                 document.getElementById("firstArchRank").getBoundingClientRect().height
             );
-            // setFirstIndicatorsHeight(
-            //     document.getElementById("firstIndicators").getBoundingClientRect().width
-            // );
-            // setFirstIndicatorsHeight(
-            //     document.getElementById("firstIndicators").getBoundingClientRect().height
-            // );
-            // setFirstIndicatorsHeight(
-            //     document.getElementById("firstIndicators").getBoundingClientRect().width
-            // );
-            // setFirstIndicatorsHeight(
-            //     document.getElementById("firstIndicators").getBoundingClientRect().height
-            // );
+        };
+        if (nowPageIndex === "secondButton") {
+            setSecondIndicatorsWidth(
+                document.getElementById("secondIndicators").getBoundingClientRect().width
+            );
+            setSecondIndicatorsHeight(
+                document.getElementById("secondIndicators").getBoundingClientRect().height
+            );
+            setSecondIndiRDRankWidth(
+                document.getElementById("secondIndiRDRank").getBoundingClientRect().width
+            );
+            setSecondIndiRDRankHeight(
+                document.getElementById("secondIndiRDRank").getBoundingClientRect().height
+            );
+        }
+        if (nowPageIndex === "thirdButton") {
+            setThirdEPPosplashesWidth(
+                document.getElementById("thirdEPPosplashes").getBoundingClientRect().width
+            );
+            setThirdEPPosplashesHeight(
+                document.getElementById("thirdEPPosplashes").getBoundingClientRect().height
+            );
         }
     }, [nowPageIndex, size])
 
@@ -171,6 +188,7 @@ export default function Layout() {
                                 />
                             </div>
                             <div id="firstArchList">
+                                <ChartHeader chartName={"全国建筑业上市企业名单"} />
                                 <FirstArchList
                                     w={firstArchListWidth}
                                     h={firstArchListHeight}
@@ -178,6 +196,7 @@ export default function Layout() {
                             </div>
                         </div>
                         <div id="firstArchRank">
+                            <ChartHeader chartName={"全国上市建筑企业数字化总体排名"} />
                             <FirstArchRank
                                 w={firstArchRankWidth}
                                 h={firstArchRankHeight}
@@ -196,7 +215,10 @@ export default function Layout() {
                         </div>
                         <div id="secondIndicators">
                         <ChartHeader chartName={"二级指标细分"} />
-                            <SecondIndicators />
+                            <SecondIndicators
+                                w={secondIndicatorsWidth}
+                                h={secondIndicatorsHeight}
+                            />
                         </div>
 
                     </div>
@@ -222,7 +244,10 @@ export default function Layout() {
                         </div>
                         <div id="secondIndiRDRank">
                         <ChartHeader chartName={"二、三级指标企业对比"} />
-                            <SecondIndiRDRank />
+                            <SecondIndiRDRank
+                                w={secondIndiRDRankWidth}
+                                h={secondIndiRDRankHeight}
+                            />
                         </div>
                     </div>
                 </div>
@@ -235,7 +260,10 @@ export default function Layout() {
                             <ThirdSearchBar />
                         </div>
                         <div id="thirdEPPosplashes">
-                            <ThirdEPPosplashes />
+                            <ThirdEPPosplashes
+                                w={thirdEPPosplashesWidth}
+                                h={thirdEPPosplashesHeight}
+                            />
                         </div>
 
                     </div>

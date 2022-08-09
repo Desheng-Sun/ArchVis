@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function ThirdArchComparison(w, h) {
+export default function ThirdArchComparison({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {

@@ -30,10 +30,7 @@ export default function FirstArchRank(w, h) {
           type: 'shadow'
         }
       },
-      title:{
-        text:'全国上市建筑企业数字化总体排名',
-        left: 'center'
-      },
+
       dataset: [
         {
           dimensions: ['name', 'score', 'rank'],
@@ -80,7 +77,7 @@ export default function FirstArchRank(w, h) {
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "37.2vh" }}>
     </div>
   )
 }
