@@ -171,6 +171,7 @@ export default function Layout() {
                                 />
                             </div>
                             <div id="firstArchList">
+                                <ChartHeader chartName={"全国建筑业上市企业名单"} />
                                 <FirstArchList
                                     w={firstArchListWidth}
                                     h={firstArchListHeight}
@@ -178,6 +179,7 @@ export default function Layout() {
                             </div>
                         </div>
                         <div id="firstArchRank">
+                            <ChartHeader chartName={"全国上市建筑企业数字化总体排名"} />
                             <FirstArchRank
                                 w={firstArchRankWidth}
                                 h={firstArchRankHeight}

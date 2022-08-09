@@ -62,7 +62,7 @@ export default function FirstSearchBar() {
     )
   }
   return (
-    <div style={{ height: "100%"}}>
+    <div style={{ height: "27.2vh"}}>
       <div style={{ height: "30%", paddingTop: "5%", }}>
         <SelectComponent
           useData={allIndustry}
