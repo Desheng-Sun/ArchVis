@@ -179,10 +179,6 @@ export default function FirstIndicators({w, h}) {
         "#1e9493",
         "#ff99c3"
       ],
-      // title: {
-      //   text: '一级指标概览',
-      //   left: 'center'
-      // },
       tooltip: {
         trigger: 'item',
         formatter: '{a} <br/>{b}: {c} ({d}%)'
@@ -190,7 +186,7 @@ export default function FirstIndicators({w, h}) {
       series: [
         {
           type: 'sunburst',
-          center: ['50%', '52%'],
+          center: ['50%', '50%'],
           data: data,
           label: {
             rotate: 'radial'

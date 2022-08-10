@@ -9,18 +9,18 @@ export default function FirstArchList({w, h}) {
       key: '1',
       ticker: '000001',
       name: '平安银行股份有限公司',
-      abbreviation:'平安银行',
+      abbreviation: '平安银行',
       business: '银行',
     },
     {
       key: '2',
       ticker: '000002',
       name: '光电股份有限公司',
-      abbreviation:'光电公司',
+      abbreviation: '光电公司',
       business: '光电业务',
     },
   ];
-  
+
   const columns = [
     {
       title: '',
@@ -50,7 +50,7 @@ export default function FirstArchList({w, h}) {
   ];
 
   return (
-    <div style={{ height: "51vh"}}>
+    <div style={{ width: "100%", height: "51vh"}}>
       <Table dataSource={dataSource} columns={columns} />
     </div>
 

@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function FirstIndicators(w, h) {
+export default function FirstIndicators({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
@@ -360,10 +360,6 @@ export default function FirstIndicators(w, h) {
         "#1e9493",
         "#ff99c3"
       ],
-      title: {
-        text: '二级指标细分',
-        left: 'center'
-      },
       series: [
         {
           type: 'sunburst',
@@ -401,7 +397,7 @@ export default function FirstIndicators(w, h) {
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "61vh" }}>
     </div>
   )
 }

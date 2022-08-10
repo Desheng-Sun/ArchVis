@@ -2,6 +2,7 @@ import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
 export default function ThirdEPdight({w, h}) {
+
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {

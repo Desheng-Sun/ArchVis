@@ -27,7 +27,7 @@ export default function SecondIndicatorsRdExplain({ selectedIndicatorsRd }) {
     )
   }
   return (
-    <>
+    <div style={{ paddingTop: "5%" }}>
       <Form>
        <ExlpainItem
        labelName="指标公式"
@@ -38,6 +38,6 @@ export default function SecondIndicatorsRdExplain({ selectedIndicatorsRd }) {
        defaultValue = {nowIndicatorsRdExplain[1]}
        />
       </Form>
-    </>
+    </div>
   )
 }

@@ -13,7 +13,7 @@ export default function FirstIndicators({w, h}) {
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
-    const dataBJ = [
+    const data1 = [
       [1, 55, '', 56, 0.46, 18, 6, '良'],
       [2, 25, '企业2', 21, 0.65, 34, 9, '优'],
       [3, 56, '', 63, 0.3, 14, 5, '良'],
@@ -25,6 +25,9 @@ export default function FirstIndicators({w, h}) {
       [9, 267, '企业3', 280, 4.8, 108, 64, '重度污染'],
       [10, 185, '', 216, 2.52, 61, 27, '中度污染'],
       [11, 39, '', 38, 0.57, 31, 15, '优'],
+      
+    ];
+    const data2 = [
       [12, 41, '', 40, 0.43, 21, 7, '优'],
       [13, 64, '', 74, 1.04, 46, 22, '良'],
       [14, 108, '', 120, 1.7, 75, 41, '轻度污染'],
@@ -36,6 +39,8 @@ export default function FirstIndicators({w, h}) {
       [20, 22, '', 17, 0.48, 23, 10, '优'],
       [21, 39, '', 36, 0.61, 29, 13, '优'],
       [22, 94, '', 114, 2.08, 73, 39, '良'],
+    ];
+    const data3 = [
       [23, 99, '企业1', 110, 2.43, 76, 48, '良'],
       [24, 31, '', 30, 0.5, 32, 16, '优'],
       [25, 42, '', 43, 1, 53, 22, '优'],
@@ -189,7 +194,7 @@ export default function FirstIndicators({w, h}) {
       name: '一类企业',
       type: 'scatter',
       itemStyle: itemStyle,
-      data: dataBJ,
+      data: data1,
       label: {
         show: true,
         position: 'top',
@@ -199,16 +204,45 @@ export default function FirstIndicators({w, h}) {
           return value[2]
         }
       }
-      
     },
     {
       name: '二类企业',
       type: 'scatter',
       itemStyle: itemStyle,
-      data: dataSH
+      data: data2,
+      label: {
+        show: true,
+        position: 'top',
+        color: '#000',
+        formatter: function (param) {
+          var value = param.value;
+          return value[2]
+        }
+      }
     },
     {
       name: '三类企业',
+      type: 'scatter',
+      itemStyle: itemStyle,
+      data: data3,
+      label: {
+        show: true,
+        position: 'top',
+        color: '#000',
+        formatter: function (param) {
+          var value = param.value;
+          return value[2]
+        }
+      }
+    },
+    {
+      name: '四类企业',
+      type: 'scatter',
+      itemStyle: itemStyle,
+      data: dataSH
+    },
+    {
+      name: '五类企业',
       type: 'scatter',
       itemStyle: itemStyle,
       data: dataGZ
