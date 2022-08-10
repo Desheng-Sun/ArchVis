@@ -138,6 +138,24 @@ export default function Layout() {
             setThirdEPPosplashesHeight(
                 document.getElementById("thirdEPPosplashes").getBoundingClientRect().height
             );
+            setThirdEPScoreIndiSDWidth(
+                document.getElementById("thirdEPScoreIndiSD").getBoundingClientRect().width
+            );
+            setThirdEPScoreIndiSDHeight(
+                document.getElementById("thirdEPScoreIndiSD").getBoundingClientRect().height
+            );
+            setThirdEPScoreIndiNDWidth(
+                document.getElementById("thirdEPScoreIndiND").getBoundingClientRect().width
+            );
+            setThirdEPScoreIndiNDHeight(
+                document.getElementById("thirdEPScoreIndiND").getBoundingClientRect().height
+            );
+            setThirdEPdightWidth(
+                document.getElementById("thirdEPdight").getBoundingClientRect().width
+            );
+            setThirdEPdightHeight(
+                document.getElementById("thirdEPdight").getBoundingClientRect().height
+            );
         }
     }, [nowPageIndex, size])
 
@@ -257,7 +275,7 @@ export default function Layout() {
                 <div id="viewList">
                     <div id="thirdILeft">
                         <div id="thirdSearchbar">
-                            <ChartHeader chartName={"检索栏"}/>
+                            <ChartHeader chartName={"行业企业检索栏"}/>
                             <ThirdSearchBar />
                         </div>
                         <div id="thirdEPPosplashes">
@@ -293,7 +311,6 @@ export default function Layout() {
                                 w={thirdEPdightWidth}
                                 h={thirdEPdightHeight}
                             />
-
                         </div>
                     </div>
                 </div>
