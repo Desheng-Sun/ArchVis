@@ -9,7 +9,7 @@ export default function FirstSearchBar() {
   const allIndex = ["全部指标", "基本指标", "数字研发创新指标", "组织指标", "战略指标", "行业特色指标"]
   const allRegion = ["全国", "东北", "华北", "中南", "西北", "西南"]
 
-
+ 
   const handleChange = (value) => {
     console.log(`Selected: ${value}`);
   };

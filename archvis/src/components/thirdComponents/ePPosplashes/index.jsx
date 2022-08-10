@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function FirstIndicators(w, h) {
+export default function FirstIndicators({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
@@ -124,10 +124,6 @@ export default function FirstIndicators(w, h) {
       shadowColor: 'rgba(0,0,0,0.3)'
     };
     const option = {
-      title: {
-        text: '全行业企业数字化散点图',
-        left: 'center'
-      },
       color: [
         "#5b8ff9",
         "#5ad8a6",
@@ -224,7 +220,7 @@ export default function FirstIndicators(w, h) {
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "61vh" }}>
     </div>
   )
 }

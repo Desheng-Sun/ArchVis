@@ -3,7 +3,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function FirstArchRank(w, h) {
+export default function FirstArchRank({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
@@ -29,10 +29,6 @@ export default function FirstArchRank(w, h) {
         axisPointer: {
           type: 'shadow'
         }
-      },
-      title:{
-        text:'全国上市建筑企业数字化总体排名',
-        left: 'center'
       },
       dataset: [
         {
@@ -80,7 +76,7 @@ export default function FirstArchRank(w, h) {
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "37.2vh" }}>
     </div>
   )
 }

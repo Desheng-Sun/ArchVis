@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function ThirdArchComparison(w, h) {
+export default function ThirdEPdight({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
@@ -22,9 +22,6 @@ export default function ThirdArchComparison(w, h) {
         "#1e9493",
         "#ff99c3"
       ],
-      title: {
-        text: '企业数字化程度对比图'
-      },
       tooltip: {
         trigger: 'axis'
       },
@@ -63,7 +60,7 @@ export default function ThirdArchComparison(w, h) {
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>
     </div>
   )
 }

@@ -1,11 +1,9 @@
 // import {Table} from "antd";
 // import "./index"
 // import '../../../App';
-import {Layout, Table } from 'antd';
- 
-const { Header, Content } = Layout;
+import { Table } from 'antd';
 
-export default function FirstArchList(w, h) {
+export default function FirstArchList({w, h}) {
   const dataSource = [
     {
       key: '1',
@@ -52,16 +50,9 @@ export default function FirstArchList(w, h) {
   ];
 
   return (
-    <Layout>
-    <Header>
-        <div style={{lineHeight:'64px', fontSize:"20px", color:"white",textAlign:"center"}}> 
-        全国建筑业上市企业名单
-        </div>
-    </Header>
+    <div style={{ height: "51vh"}}>
+      <Table dataSource={dataSource} columns={columns} />
+    </div>
 
-    <Content> {/* style={{"border":"solid red"}} */}
-        <Table dataSource={dataSource} columns={columns} />;
-    </Content>
-  </Layout>
   )
 }

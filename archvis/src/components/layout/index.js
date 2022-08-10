@@ -19,9 +19,9 @@ import SecondIndiRDRank from "../secondComponents/indiRdRank";
 
 import ThirdSearchBar from "../thirdComponents/searchBar";
 import ThirdEPPosplashes from "../thirdComponents/ePPosplashes";
-import ThirdIndicatorsRadar from "../thirdComponents/indicatorsRadar";
-import ThirdIndicatorsStack from "../thirdComponents/indicatorsStack";
-import ThirdArchComparison from "../thirdComponents/archComparison";
+import ThirdEPScoreIndiSD from "../thirdComponents/EPScoreIndiSD";
+import ThirdEPScoreIndiND from "../thirdComponents/EPScoreIndiND";
+import ThirdEPdight from "../thirdComponents/EPDight";
 
 
 export default function Layout() {
@@ -63,12 +63,12 @@ export default function Layout() {
     const [firstArchRankWidth, setFirstArchRankWidth] = useState(0);
     const [firstArchRankHeight, setFirstArchRankHeight] = useState(0);
 
-    const [thirdIndicatorsRadarWidth, setThirdIndicatorsRadarWidth] = useState(0);
-    const [thirdIndicatorsRadarHeight, setThirdIndicatorsRadarHeight] = useState(0);
-    const [thirdIndicatorsStackWidth, setThirdIndicatorsStackWidth] = useState(0);
-    const [thirdIndicatorsStackHeight, setThirdIndicatorsStackHeight] = useState(0);
-    const [thirdArchComparisonWidth, setThirdArchComparisonWidth] = useState(0);
-    const [thirdArchComparisonHeight, setThirdArchComparisonHeight] = useState(0);
+    const [thirdEPScoreIndiSDWidth, setthirdEPScoreIndiSDWidth] = useState(0);
+    const [thirdEPScoreIndiSDHeight, setthirdEPScoreIndiSDHeight] = useState(0);
+    const [thirdEPScoreIndiNDWidth, setthirdEPScoreIndiNDWidth] = useState(0);
+    const [thirdEPScoreIndiNDHeight, setthirdEPScoreIndiNDHeight] = useState(0);
+    const [thirdEPdightWidth, setthirdEPdightWidth] = useState(0);
+    const [thirdEPdightHeight, setthirdEPdightHeight] = useState(0);
 
 
     function ChangePageButton({ id, text }) {
@@ -171,6 +171,7 @@ export default function Layout() {
                                 />
                             </div>
                             <div id="firstArchList">
+                                <ChartHeader chartName={"全国建筑业上市企业名单"}/>
                                 <FirstArchList
                                     w={firstArchListWidth}
                                     h={firstArchListHeight}
@@ -178,6 +179,7 @@ export default function Layout() {
                             </div>
                         </div>
                         <div id="firstArchRank">
+                            <ChartHeader chartName={"全国上市建筑企业数字化总体排名"}/>
                             <FirstArchRank
                                 w={firstArchRankWidth}
                                 h={firstArchRankHeight}
@@ -226,9 +228,11 @@ export default function Layout() {
                 <div id="viewList">
                     <div id="thirdILeft">
                         <div id="thirdSearchbar">
+                            <ChartHeader chartName={"检索栏"}/>
                             <ThirdSearchBar />
                         </div>
                         <div id="thirdEPPosplashes">
+                            <ChartHeader chartName={"全行业企业数字化散点图"}/>
                             <ThirdEPPosplashes />
                         </div>
 
@@ -236,23 +240,26 @@ export default function Layout() {
                     <div id="thirdIRight">
                         <div id="thirdIRightTop">
                             <div id="thirdEPScoreIndiSD">
-                                <ThirdIndicatorsRadar
-                                    w={thirdIndicatorsRadarWidth}
-                                    h={thirdIndicatorsRadarHeight}
+                                <ChartHeader chartName={"企业一级指标得分雷达图"}/>
+                                <ThirdEPScoreIndiSD
+                                    w={thirdEPScoreIndiSDWidth}
+                                    h={thirdEPScoreIndiSDHeight}
                                 />
                             </div>
                             <div id="thirdEPScoreIndiND">
-                                <ThirdIndicatorsStack
-                                    w={thirdIndicatorsStackWidth}
-                                    h={thirdIndicatorsStackHeight}
+                                <ChartHeader chartName={"企业二级指标得分堆叠图"}/>
+                                <ThirdEPScoreIndiND
+                                    w={thirdEPScoreIndiNDWidth}
+                                    h={thirdEPScoreIndiNDHeight}
                                 />
 
                             </div>
                         </div>
                         <div id="thiedEPdigit">
-                            <ThirdArchComparison
-                                w={thirdArchComparisonWidth}
-                                h={thirdArchComparisonHeight}
+                            <ChartHeader chartName={"企业数字化程度对比图"}/>
+                            <ThirdEPdight
+                                w={thirdEPdightWidth}
+                                h={thirdEPdightHeight}
                             />
 
                         </div>
