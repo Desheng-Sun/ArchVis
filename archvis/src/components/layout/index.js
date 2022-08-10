@@ -70,12 +70,12 @@ export default function Layout() {
 
     const [thirdEPPosplashesWidth, setThirdEPPosplashesWidth] = useState(0);
     const [thirdEPPosplashesHeight, setThirdEPPosplashesHeight] = useState(0);
-    const [thirdEPScoreIndiSDWidth, setthirdEPScoreIndiSDWidth] = useState(0);
-    const [thirdEPScoreIndiSDHeight, setthirdEPScoreIndiSDHeight] = useState(0);
-    const [thirdEPScoreIndiNDWidth, setthirdEPScoreIndiNDWidth] = useState(0);
-    const [thirdEPScoreIndiNDHeight, setthirdEPScoreIndiNDHeight] = useState(0);
-    const [thirdEPdightWidth, setthirdEPdightWidth] = useState(0);
-    const [thirdEPdightHeight, setthirdEPdightHeight] = useState(0);
+    const [thirdEPScoreIndiSDWidth, setThirdEPScoreIndiSDWidth] = useState(0);
+    const [thirdEPScoreIndiSDHeight, setThirdEPScoreIndiSDHeight] = useState(0);
+    const [thirdEPScoreIndiNDWidth, setThirdEPScoreIndiNDWidth] = useState(0);
+    const [thirdEPScoreIndiNDHeight, setThirdEPScoreIndiNDHeight] = useState(0);
+    const [thirdEPdightWidth, setThirdEPdightWidth] = useState(0);
+    const [thirdEPdightHeight, setThirdEPdightHeight] = useState(0);
 
 
     function ChangePageButton({ id, text }) {
@@ -150,12 +150,13 @@ export default function Layout() {
             setThirdEPScoreIndiNDHeight(
                 document.getElementById("thirdEPScoreIndiND").getBoundingClientRect().height
             );
-            setThirdEPdightWidth(
-                document.getElementById("thirdEPdight").getBoundingClientRect().width
-            );
-            setThirdEPdightHeight(
-                document.getElementById("thirdEPdight").getBoundingClientRect().height
-            );
+            // setThirdEPdightWidth(
+            //     document.getElementById("thirdEPdight").getBoundingClientRect().width
+            // )
+            // setThirdEPdightHeight(
+            //     document.getElementById("thirdEPdight").getBoundingClientRect().height
+            // );
+            
         }
     }, [nowPageIndex, size])
 
@@ -305,12 +306,13 @@ export default function Layout() {
 
                             </div>
                         </div>
-                        <div id="thiedEPdigit">
+                        <div id="thirdEPdight">
                             <ChartHeader chartName={"企业数字化程度对比图"}/>
                             <ThirdEPdight
                                 w={thirdEPdightWidth}
                                 h={thirdEPdightHeight}
                             />
+
                         </div>
                     </div>
                 </div>
