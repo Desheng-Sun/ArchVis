@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function ThirdIndicatorsRadar(w, h) {
+export default function ThirdEPScoreIndiSD({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
@@ -22,9 +22,6 @@ export default function ThirdIndicatorsRadar(w, h) {
         "#1e9493",
         "#ff99c3"
       ],
-      title: {
-        text: '企业一级指标得分'
-      },
       legend: {
         bottom: 5,
         data: ['得分'],
@@ -62,7 +59,7 @@ export default function ThirdIndicatorsRadar(w, h) {
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "100%" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>
     </div>
   )
 }

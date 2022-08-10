@@ -3,7 +3,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function FirstArchRank(w, h) {
+export default function FirstArchRank({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
@@ -30,7 +30,6 @@ export default function FirstArchRank(w, h) {
           type: 'shadow'
         }
       },
-
       dataset: [
         {
           dimensions: ['name', 'score', 'rank'],

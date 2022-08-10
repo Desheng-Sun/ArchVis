@@ -1,11 +1,9 @@
 // import {Table} from "antd";
 // import "./index"
 // import '../../../App';
-import { Layout, Table } from 'antd';
+import { Table } from 'antd';
 
-const { Header, Content } = Layout;
-
-export default function FirstArchList(w, h) {
+export default function FirstArchList({w, h}) {
   const dataSource = [
     {
       key: '1',
@@ -52,13 +50,9 @@ export default function FirstArchList(w, h) {
   ];
 
   return (
-    <Layout style={{ width: "100%", height: "51vh" }}>
-      <Content>
-        <Table
-          dataSource={dataSource}
-          columns={columns}
-        />
-      </Content>
-    </Layout>
+    <div style={{ width: "100%", height: "51vh"}}>
+      <Table dataSource={dataSource} columns={columns} />
+    </div>
+
   )
 }
