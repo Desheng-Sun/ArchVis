@@ -17,26 +17,29 @@ export default function SecondIndicatorsRdExplain({ selectedIndicatorsRd }) {
       setNowIndicatorsRdExplain(IndicatorsRdExplain[selectedIndicatorsRd])
     }
   }, [selectedIndicatorsRd])
-  function ExlpainItem({labelName, defaultValue}){
-    return(
-      <Form.Item
-      label={labelName}
-    >
-      <Input defaultValue={defaultValue} readOnly />
-    </Form.Item>
+  function ExlpainItem({ labelName, defaultValue }) {
+    return (
+      <div style={{ paddingTop: "5vh", height: "15vh" }}>
+        <Form.Item
+          label={labelName}
+        >
+          <Input defaultValue={defaultValue} readOnly />
+        </Form.Item>
+      </div>
     )
   }
   return (
-    <div style={{ paddingTop: "5%" }}>
+    <div style={{height:"41vh", width:"100%", fontSize:"5vh"}}>
       <Form>
-       <ExlpainItem
-       labelName="指标公式"
-       defaultValue = {nowIndicatorsRdExplain[0]}
-       />
-       <ExlpainItem
-       labelName="指标解释"
-       defaultValue = {nowIndicatorsRdExplain[1]}
-       />
+        <ExlpainItem
+        // style={{fontSize:"15px"}}
+          labelName="指标公式"
+          defaultValue={nowIndicatorsRdExplain[0]}
+        />
+        <ExlpainItem
+          labelName="指标解释"
+          defaultValue={nowIndicatorsRdExplain[1]}
+        />
       </Form>
     </div>
   )

@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `archindicators` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `archindicators` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `archindicators`;
 -- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
 --
@@ -23,7 +23,7 @@ USE `archindicators`;
 
 DROP TABLE IF EXISTS `constru_property`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `constru_property` (
   `股票代码` varchar(20) NOT NULL,
   `企业名称` varchar(45) NOT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE `constru_property` (
   `A、智能塔吊` double NOT NULL,
   PRIMARY KEY (`股票代码`),
   UNIQUE KEY `id_UNIQUE` (`股票代码`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `constru_structure`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `constru_structure` (
   `id` int NOT NULL AUTO_INCREMENT,
   `indi_name` varchar(45) NOT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE `constru_structure` (
   `level` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +123,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `design_property`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `design_property` (
   `股票代码` varchar(20) NOT NULL,
   `企业名称` varchar(45) NOT NULL,
@@ -173,7 +173,7 @@ CREATE TABLE `design_property` (
   `在设计过程中是否使用BIM技术` tinyint NOT NULL,
   PRIMARY KEY (`股票代码`),
   UNIQUE KEY `股票代码_UNIQUE` (`股票代码`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +192,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `design_structure`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `design_structure` (
   `id` int NOT NULL AUTO_INCREMENT,
   `indi_name` varchar(45) NOT NULL,
@@ -200,7 +200,7 @@ CREATE TABLE `design_structure` (
   `level` int NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

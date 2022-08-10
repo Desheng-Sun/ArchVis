@@ -21,33 +21,40 @@ export default function SecondSearchBar() {
   };
 
   return (
-    <div style={{ paddingTop: "5%"}}>
-      <Select
-        defaultValue={allIndustry[0]}
-        style={{
-          width: "80%",
-        }}
-        onChange={handleIndustryChange}
-      >
-        {allIndustry.map((industry) => (
-          <Option key={industry}>{industry}</Option>
-        ))}
-      </Select>
-      <Select
-        allowClear
-        showArrow
-        showSearch
-        mode="multiple"
-        style={{
-          width: "80%",
-        }}
-        value={nowEnterprise}
-        onChange={onNowEnterprise}
-      >
-        {nowIndustry.map((industry) => (
-          <Option key={industry}>{industry}</Option>
-        ))}
-      </Select>
+    <div style={{ height: "27.2vh", width: "100%" }}>
+      <div style={{ height: "40%", paddingTop: "5%" }}>
+        <Select
+          defaultValue={allIndustry[0]}
+          style={{
+            width: "80%",
+          }}
+          onChange={handleIndustryChange}
+        >
+          {allIndustry.map((industry) => (
+            <Option key={industry}>{industry}</Option>
+          ))}
+        </Select>
+      </div>
+
+      <div style={{ height: "40%", paddingTop: "5%" }}>
+        <Select
+          allowClear
+          showArrow
+          showSearch
+          mode="multiple"
+          style={{
+            width: "80%",
+          }}
+          value={nowEnterprise}
+          onChange={onNowEnterprise}
+        >
+          {nowIndustry.map((industry) => (
+            <Option key={industry}>{industry}</Option>
+          ))}
+        </Select>
+      </div>
+
+
     </div>
   );
 }
