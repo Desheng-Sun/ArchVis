@@ -1,6 +1,6 @@
 #layout {
-    height: 99.4vh;
-    width: 99.6vw;
+    height: 100vh;
+    width: 100vw;
     padding-top: 0.3vh;
     padding-bottom: 0.3vh;
     padding-left: 0.2vw;
@@ -220,7 +220,7 @@
     background-color: white;
     float: left;
 }
-#thiedEPdigit {
+#thirdEPdight {
     margin-top: 0.3vh;
     height: 46.9vh;
     width: 69.4vw;

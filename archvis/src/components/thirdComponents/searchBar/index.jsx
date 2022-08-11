@@ -22,7 +22,6 @@ export default function ThirdSearchBar() {
 
   return (
     <div style={{ height: "27.2vh", width: "100%" }}>
-
       <div style={{ height: "40%", paddingTop: "5%" }}>
         <Select
           defaultValue={allIndustry[0]}
@@ -52,8 +51,6 @@ export default function ThirdSearchBar() {
           ))}
         </Select>
       </div>
-
-
     </div>
   );
 }

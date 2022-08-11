@@ -25,6 +25,7 @@ import ThirdEPdight from "../thirdComponents/EPDight";
 
 
 export default function Layout() {
+    // 获取当前整个页面的长宽
     const [size, setSize] = useState({
         width: document.documentElement.clientWidth,
         hieght: document.documentElement.clientHeight
@@ -44,16 +45,16 @@ export default function Layout() {
         })
     })
 
-    //第二屏，用户选择的二级指标
+    // 第二屏，用户选择的二级指标
     const [selectedIndicatorsNd, setSelectedIndicatorsNd] = useState("1")
-    //第二屏，用户选择的三级指标
-
+    // 第二屏，用户选择的三级指标
     const [selectedIndicatorsRd, setSelectedIndicatorsRd] = useState("11")
 
 
-
+    // 当前页面所在第几屏
     const [nowPageIndex, setNowPageIndex] = useState("firstButton")
 
+    // 第一屏各个组件的长宽
     const [firstIndicatorsWidth, setFirstIndicatorsWidth] = useState(0);
     const [firstIndicatorsHeight, setFirstIndicatorsHeight] = useState(0);
     const [firstArchMapWidth, setFirstArchMapWidth] = useState(0);
@@ -63,11 +64,13 @@ export default function Layout() {
     const [firstArchRankWidth, setFirstArchRankWidth] = useState(0);
     const [firstArchRankHeight, setFirstArchRankHeight] = useState(0);
 
+    // 第二屏各个组件的长宽
     const [secondIndicatorsWidth, setSecondIndicatorsWidth] = useState(0);
     const [secondIndicatorsHeight, setSecondIndicatorsHeight] = useState(0);
     const [secondIndiRDRankWidth, setSecondIndiRDRankWidth] = useState(0);
     const [secondIndiRDRankHeight, setSecondIndiRDRankHeight] = useState(0);
 
+    // 第三屏各个组件的长宽
     const [thirdEPPosplashesWidth, setThirdEPPosplashesWidth] = useState(0);
     const [thirdEPPosplashesHeight, setThirdEPPosplashesHeight] = useState(0);
     const [thirdEPScoreIndiSDWidth, setThirdEPScoreIndiSDWidth] = useState(0);
@@ -78,6 +81,7 @@ export default function Layout() {
     const [thirdEPdightHeight, setThirdEPdightHeight] = useState(0);
 
 
+    // 切换页面的组件
     function ChangePageButton({ id, text }) {
         return (
             <button
@@ -90,7 +94,9 @@ export default function Layout() {
             >{text}</button>
         )
     }
+
     useEffect(() => {
+        // 根据当前页面所在第几屏来更改相应组件的长宽
         if (nowPageIndex === "firstButton") {
             setFirstIndicatorsWidth(
                 document.getElementById("firstIndicators").getBoundingClientRect().width
@@ -150,13 +156,6 @@ export default function Layout() {
             setThirdEPScoreIndiNDHeight(
                 document.getElementById("thirdEPScoreIndiND").getBoundingClientRect().height
             );
-            // setThirdEPdightWidth(
-            //     document.getElementById("thirdEPdight").getBoundingClientRect().width
-            // )
-            // setThirdEPdightHeight(
-            //     document.getElementById("thirdEPdight").getBoundingClientRect().height
-            // );
-            
         }
     }, [nowPageIndex, size])
 

@@ -18,15 +18,15 @@ connection.connect();//用参数与数据库进行连接
  * 设置跨域请求
  */
 
- let sql = 'select * from constru_property';
- let str = '';
- connection.query(sql, function(err, result) {
-    if (err) {
-        console.log('[SELECT ERROR]：', err.message);
-    }
-    str = JSON.stringify(result);
-    console.log(result);
- })
+//  let sql = 'select * from constru_property';
+//  let str = '';
+//  connection.query(sql, function(err, result) {
+//     if (err) {
+//         console.log('[SELECT ERROR]：', err.message);
+//     }
+//     str = JSON.stringify(result);
+//     console.log(result);
+//  })
 
 
 app.all("*", function (req, res, next) {

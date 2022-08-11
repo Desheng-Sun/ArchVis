@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
-export default function ThirdEPScoreIndiSD({w, h}) {
+export default function ThirdEPScoreIndiSD({ w, h }) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
@@ -24,7 +24,14 @@ export default function ThirdEPScoreIndiSD({w, h}) {
       ],
       legend: {
         bottom: 5,
-        data: ['得分'],
+        data: [{
+          name: '得分',
+          icon: "circle"
+        },
+        {
+          name: '得分2',
+          icon: "circle"
+        }],
         itemGap: 20,
         textStyle: {
           color: '#aaa',
@@ -32,13 +39,12 @@ export default function ThirdEPScoreIndiSD({w, h}) {
         }
       },
       radar: {
-        // shape: 'circle',
         indicator: [
-          { name: '基本指标', max: 6500 },
-          { name: '数字化研发创新指标', max: 16000 },
-          { name: '组织指标', max: 30000 },
-          { name: '战略指标', max: 38000 },
-          { name: '行业特色指标', max: 52000 }
+          { name: '基本指标', max: 65 },
+          { name: '数字化研发创新指标', max: 160 },
+          { name: '组织指标', max: 300 },
+          { name: '战略指标', max: 380 },
+          { name: '行业特色指标', max: 520 }
         ]
       },
       series: [
@@ -47,8 +53,12 @@ export default function ThirdEPScoreIndiSD({w, h}) {
           type: 'radar',
           data: [
             {
-              value: [5000, 14000, 28000, 26000, 42000],
+              value: [50, 140, 280, 260, 420],
               name: '得分'
+            },
+            {
+              value: [5, 14, 80, 20, 20],
+              name: '得分2'
             }
           ]
         }

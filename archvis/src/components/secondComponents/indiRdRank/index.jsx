@@ -47,7 +47,6 @@ export default function FirstIndicators({w, h}) {
           yAxis: {
             type: 'value',
             max: (value) => {
-                console.log(value)
                 return value.max
               }
           },
