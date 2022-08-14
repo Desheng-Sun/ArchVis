@@ -7,12 +7,13 @@ export function helloworld() {
 
 
 // 获取视图的初始数据：node信息改为json文件
-export function getInitialSds(type, industry, id) {
-  return post("/getInitialSds", {
-    type: type,
-    industry: industry,
-    id: id,
-  });
+export function firstIndicatorsSt() {
+  return post("/firstIndicatorsSt");
 }
 
 
+export function firstArchRank(region) {
+  return post("/firstArchRank", {
+    region : region
+  });
+}

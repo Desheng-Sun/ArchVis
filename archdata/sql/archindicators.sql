@@ -14,7 +14,7 @@
  Date: 12/08/2022 16:07:25
 */
 
-SET NAMES utf8mb4;
+SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -22,8 +22,8 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `constru_property`;
 CREATE TABLE `constru_property`  (
-  `股票代码` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `企业名称` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `股票代码` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `总资产` double NOT NULL,
   `企业成立年限` int(0) NOT NULL,
   `成立年份` int(0) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE `constru_property`  (
   `企业年报中是否有专项数字化转型报告` tinyint(0) NOT NULL,
   `企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语` tinyint(0) NOT NULL,
   `企业战略职能中是否具有专门数字化业务部门` tinyint(0) NOT NULL,
-  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语` int(0) NOT NULL,
   `企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语` int(0) NOT NULL,
   `装配式建筑项目数` int(0) NOT NULL,
@@ -71,13 +71,13 @@ CREATE TABLE `constru_property`  (
   `智能建造平台数量` int(0) NOT NULL,
   `采用电子签名/签章项目占比` int(0) NOT NULL,
   `拥有电子化工程档案项目占比` int(0) NOT NULL,
-  `A、智能塔吊` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `A、智能塔吊` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `施工设施应用个数` int(0) NOT NULL,
   `企业业务中是否运用信息化技术系统个数` int(0) NOT NULL,
   `年份` int(0) NOT NULL,
   PRIMARY KEY (`股票代码`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`股票代码`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of constru_property
@@ -166,12 +166,12 @@ INSERT INTO `constru_property` VALUES ('603979', '金诚信', 6572393800.82, 17,
 DROP TABLE IF EXISTS `constru_structure`;
 CREATE TABLE `constru_structure`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `indi_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `indi_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `parent_id` int(0) NULL DEFAULT NULL,
   `level` int(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of constru_structure
@@ -253,8 +253,8 @@ INSERT INTO `constru_structure` VALUES (71, 'A、智能塔吊', 20, 3);
 -- ----------------------------
 DROP TABLE IF EXISTS `design_property`;
 CREATE TABLE `design_property`  (
-  `股票代码` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `企业名称` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `股票代码` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `总资产` double NOT NULL,
   `企业成立年限` int(0) NOT NULL,
   `成立年份` int(0) NOT NULL,
@@ -288,7 +288,7 @@ CREATE TABLE `design_property`  (
   `企业年报中是否有专项数字化转型报告` tinyint(0) NOT NULL,
   `企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语` int(0) NOT NULL,
   `企业战略职能中是否具有专门数字化业务部门` tinyint(0) NOT NULL,
-  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语` int(0) NOT NULL,
   `企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语` int(0) NOT NULL,
   `企业业务中是否运用信息化技术系统个数` int(0) NULL DEFAULT NULL,
@@ -303,7 +303,7 @@ CREATE TABLE `design_property`  (
   `年份` int(0) NOT NULL,
   PRIMARY KEY (`股票代码`) USING BTREE,
   UNIQUE INDEX `股票代码_UNIQUE`(`股票代码`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of design_property
@@ -335,12 +335,12 @@ INSERT INTO `design_property` VALUES ('603909', '合诚股份', 1430130634.85, 2
 DROP TABLE IF EXISTS `design_structure`;
 CREATE TABLE `design_structure`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `indi_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `indi_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `parent_id` int(0) NULL DEFAULT NULL,
   `level` int(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of design_structure

@@ -2,10 +2,17 @@
 
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
+import { firstArchRank } from '../../../apis/api';
 
 export default function FirstArchRank({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
+  useEffect (() => {
+    firstArchRank("西北").then((res) => {
+      console.log(res)
+      setData(res)
+    })
+  }, [])
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
