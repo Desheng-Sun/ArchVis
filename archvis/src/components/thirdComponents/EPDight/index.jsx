@@ -1,15 +1,32 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
+import { thirdEPdight } from '../../../apis/api';
 
 export default function ThirdEPdight({w, h}) {
-
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
+  useEffect(() => {
+    thirdEPdight("交建股份").then((res) => {
+      setData(res)
+    })
+  }, [])
+
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
+
+    //创建两个一维数组存储数据
+    var years=[];
+    var scores=[];
+    for(let index in data){
+      years.push(data[index].年份)
+    }
+    for(let index in data){
+      scores.push(data[index].资产负债率)
+    }
+
     const option = {
       color: [
         "#5b8ff9",
@@ -41,18 +58,18 @@ export default function ThirdEPdight({w, h}) {
         {
           name: '选中的企业',
           type: 'line',
-          data: [7, 2, 6],
+          data: scores,
     
         },
         {
           name: '数字化程度最高企业',
           type: 'line',
-          data: [10, 11, 13],
+          data: [0.9, 0.9, 1],
         },
         {
           name: '数字化程度最低企业',
           type: 'line',
-          data: [1, 0, 2],
+          data: [0.1, 0, 0.1],
         }
       ]
     };

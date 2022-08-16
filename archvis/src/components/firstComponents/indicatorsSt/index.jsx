@@ -2,17 +2,17 @@
 
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { firstIndicatorsSt } from '../../../apis/api';
+// import { firstIndicatorsSt } from '../../../apis/api';
 
 export default function FirstIndicators({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
-  useEffect(() => {
-    firstIndicatorsSt().then((res) =>{
-      console.log(res)
-      setData(res)
-    })
-  }, [])
+  // useEffect(() => {
+  //   firstIndicatorsSt().then((res) =>{
+  //     console.log(res)
+  //     setData(res)
+  //   })
+  // }, [])
   // 随系统缩放修改画布大小
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)

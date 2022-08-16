@@ -207,10 +207,7 @@ export default function Layout() {
                             </div>
                             <div id="firstArchList">
                                 <ChartHeader chartName={"全国建筑业上市企业名单"} />
-                                <FirstArchList
-                                    w={firstArchListWidth}
-                                    h={firstArchListHeight}
-                                />
+                                <FirstArchList />
                             </div>
                         </div>
                         <div id="firstArchRank">

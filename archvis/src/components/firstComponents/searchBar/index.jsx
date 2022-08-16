@@ -3,6 +3,8 @@ import { SearchOutlined } from '@ant-design/icons';
 import "./index"
 import '../../../App';
 import { useState } from "react";
+import { firstArchIndustry } from "../../../apis/api";
+
 const { Option, OptGroup } = Select;
 
 export default function FirstSearchBar() {
@@ -14,14 +16,12 @@ export default function FirstSearchBar() {
   const [nowIndex, setNowIndex] = useState(allIndex[0]);
   const [nowRegion, setNowRegion] = useState(allRegion[0]);
 
-
   const searchIndex = (value) => {
     console.log(value)
     if (value.length === 0) {
       setNowIndex()
     }
     else {
-
       if (value.indexOf(allIndex[0]) == 0 && value[value.length - 1] !== allIndex[0]) {
         value.splice(0, 1)
       }
@@ -116,6 +116,11 @@ export default function FirstSearchBar() {
           searchValue = {nowIndustry}
         />
         <Button onClick = {() => {
+          firstArchIndustry(nowIndustry).then((res) => {
+            // let result = res;
+            console.log(res)
+          })
+
           console.log(nowIndustry)
         }}>
           搜索
