@@ -2,14 +2,16 @@
 
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { firstIndicatorsSt } from '../../../apis/api';
+import { selectIndicators } from '../../../apis/api';
 
 export default function FirstIndicators({w, h}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
-    firstIndicatorsSt().then((res) =>{
-      console.log(res)
+    selectIndicators('constru').then((res) =>{
+      // console.log(res)
+      // console.log(JSON.parse(res)[0].indi_name)
+      // console.log((res)[0].indi_name)
       setData(res)
     })
   }, [])
@@ -19,158 +21,27 @@ export default function FirstIndicators({w, h}) {
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
-    const data = [
-      {
-        name: '基本指标',
-        itemStyle: {
-          color: '#5b8ff9'
-        },
-        children: [
-          {
-            name: '规模状况',
-            value: 1,
-            itemStyle: {
-              color: '#87b3ff'
-            }
-          },
-          {
-            name: '财务状况',
-            value: 1,
-            itemStyle: {
-              color: '#d9e9ff'
-            }
-          }
-        ]
-      },
-      {
-        name: '数字化研发创新指标',
-        itemStyle: {
-          color: "#5ad8a6"
-        },
-        children: [
-          {
-            name: '研发状况',
-            value: 1,
-            itemStyle: {
-              color: '#42b389'
-            }
-          },
-          {
-            name: '数字化创新成果状况',
-            value: 1,
-            itemStyle: {
-              color: '#b3f2d5'
-            }
-          },
-          {
-            name: '数字化技术应用状况',
-            value: 1,
-            itemStyle: {
-              color: '#85e6bc'
-            }
-          }
-        ]
-      },
-      {
-        name: '组织指标',
-        itemStyle: {
-          color: "#5d7092"
-        },
-        children: [
-          {
-            name: '组织结构',
-            value: 1,
-            itemStyle: {
-              color: '#3f4e6b'
-            }
-          },
-          {
-            name: '承包联合体模式',
-            value: 1,
-            itemStyle: {
-              color: '#a1a5ab'
-            }
-          }
-        ]
-      },
-      {
-        name: '战略指标',
-        itemStyle: {
-          color: "#f6bd16"
-        },
-        children: [
-          {
-            name: '企业战略规划',
-            value: 1,
-            itemStyle: {
-              color: '#ffd640'
-            }
-          },
-          {
-            name: '企业战略部门',
-            value: 1,
-            itemStyle: {
-              color: '#ffef91'
-            }
-          },
-          {
-            name: '战略影响因素',
-            value: 1,
-            itemStyle: {
-              color: '#ffe369'
-            }
-          }
-        ]
-      },
-      {
-        name: '特色指标(施工)',
-        itemStyle: {
-          color: "#e86452"
-        },
-        children: [
-          {
-            name: '装配式建筑',
-            value: 1,
-            itemStyle: {
-              color: '#c2453a'
-            }
-          },
-          {
-            name: '智慧工地',
-            value: 1,
-            itemStyle: {
-              color: '#ffbaab'
-            }
-          },
-          {
-            name: 'BIM应用',
-            value: 1,
-            itemStyle: {
-              color: '#f58f7d'
-            }
-          },
-          {
-            name: '施工管理数字化',
-            value: 1,
-            itemStyle: {
-              color: '#ffddd4'
-            }
-          },
-          {
-            name: '施工设施应用',
-            value: 1,
-            itemStyle: {
-              color: '#c2453a'
-            }
-          }
-        ]
+    // console.log(data)
+    var drawdata = [];
+    for (let i in data) {
+      if (data[i].level == 1) {
+        drawdata.push({
+          name: data[i].indi_name,
+          children: []
+        })
       }
-    ];
+      else if (data[i].level == 2){
+        drawdata[data[i].parent_id - 1].children.push({
+          name: data[i].indi_name,
+          value: 1
+        })
+      }
+      else {
+        break;
+      }
+    }
+    
     const option = {
-      // title: {
-      //   text: '一级指标概览',
-      //   left: 'center'
-      // },
       color: [
         "#5b8ff9",
         "#5ad8a6",
@@ -185,13 +56,13 @@ export default function FirstIndicators({w, h}) {
       ],
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} ({d}%)'
+        formatter: '{b}: {c}'
       },
       series: [
         {
           type: 'sunburst',
           center: ['50%', '50%'],
-          data: data,
+          data: drawdata,
           label: {
             rotate: 'radial'
           },
@@ -203,14 +74,20 @@ export default function FirstIndicators({w, h}) {
             {},
             {
               r0: 0,
-              r: '40%',
+              r: '50%',
               label: {
-                rotate: 0
+                rotate: 0,
+                width: '50',
+                overflow: 'break'
               }
             },
             {
-              r0: '40%',
-              r: '90%'
+              r0: '50%',
+              r: '90%',
+              label: {
+                width: '70',
+                overflow: 'break'
+              }
             }
           ]
         }
