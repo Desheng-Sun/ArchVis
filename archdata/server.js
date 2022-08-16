@@ -44,7 +44,16 @@ app.listen(port, () => {
 app.post("/selectIndicators",jsonParser, (req, res) => {
   const industry = req.body.industry;
   let sql = 'select * from ' + industry + '_structure';
-
+  let str = '';
+    connection.query(sql, function(err, result) {
+      if(err){
+        console.log('[SELECT ERROR]：',err.message);
+      }
+      str = JSON.stringify(result);
+      res.send(str)
+      res.end()
+    })      
+  })
 /////////////第一屏检索栏
 //行业检索
 app.post("/firstArchIndustry", jsonParser,(req, res) => {
@@ -160,4 +169,4 @@ app.post("/thirdEPDight",jsonParser, (req, res) => {
     res.send(str)
     res.end()
   })
-});
+})
