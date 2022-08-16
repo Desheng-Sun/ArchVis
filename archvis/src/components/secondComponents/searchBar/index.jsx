@@ -1,19 +1,51 @@
 import { Select } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../../../App';
+import { selectEnterprise } from '../../../apis/api';
 
 const { Option } = Select;
 
-export default function SecondSearchBar() {
+export default function SecondSearchBar({setSelectedIndustry}) {
   const allIndustry = ["施工行业", "设计行业"]
-  const allEnterprise = { 施工行业: ["1", "2", "3"], 设计行业: ["4", "5", "6"] }
+  const [construEnterprise, setConstruEnterprise] = useState([]);
+  const [designEnterprise, setDesignEnterprise] = useState([]);
 
-  const [nowIndustry, setNowIndustry] = useState(allEnterprise[allIndustry[0]]);
-  const [nowEnterprise, setNowEnterprise] = useState(allEnterprise[allIndustry[0]][0]);
+  const [NowEnterpriseList, setNowEnterpriseList] = useState([]);
+  const [nowEnterprise, setNowEnterprise] = useState();
+  useEffect(() => {
+
+    selectEnterprise('constru').then((res) =>{
+      var tmp = [];
+      for (let i in res) {
+        tmp.push(res[i].企业名称);
+      }
+      setConstruEnterprise(tmp);
+      setNowEnterpriseList(tmp);
+      setNowEnterprise(tmp[0]);
+      // console.log(tmp);
+    });
+    
+    selectEnterprise('design').then((res) =>{
+      var tmp = [];
+      for (let i in res) {
+        tmp.push(res[i].企业名称);
+      }
+      setDesignEnterprise(tmp);
+      // console.log(tmp);
+    });
+
+  }, [])
 
   const handleIndustryChange = (value) => {
-    setNowIndustry(allEnterprise[value]);
-    setNowEnterprise(allEnterprise[value][0]);
+    setSelectedIndustry(value);
+    if(value == "施工行业"){
+      setNowEnterpriseList(construEnterprise);
+      setNowEnterprise(construEnterprise[0]);
+    }
+    else if(value == "设计行业"){
+      setNowEnterpriseList(designEnterprise);
+      setNowEnterprise(designEnterprise[0]);
+    }
   };
 
   const onNowEnterprise = (value) => {
@@ -48,7 +80,7 @@ export default function SecondSearchBar() {
           value={nowEnterprise}
           onChange={onNowEnterprise}
         >
-          {nowIndustry.map((industry) => (
+          {NowEnterpriseList.map((industry) => (
             <Option key={industry}>{industry}</Option>
           ))}
         </Select>

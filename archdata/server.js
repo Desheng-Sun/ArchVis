@@ -41,19 +41,9 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-// app.post("/firstIndicatorsSt", (req, res) => {
-//   let sql = 'select * from constru_property';
-//   let str = '';
-//   connection.query(sql, function (err, result) {
-//     if (err) {
-//       console.log('[SELECT ERROR]：', err.message);
-//     }
-//     str = JSON.stringify(result);
-//     // console.log(result);
-//     res.send(str)
-//     res.end()
-//   })
-// });
+app.post("/selectIndicators",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = 'select * from ' + industry + '_structure';
 
 /////////////第一屏检索栏
 //行业检索
@@ -118,7 +108,7 @@ app.post("/firstArchList", jsonParser, (req, res) =>{
       console.log('[SELECT ERROR]：', err.message);
     }
     str = JSON.stringify(result);
-    // console.log(result);
+    // console.log(str);
     res.send(str)
     res.end()
   })
@@ -143,6 +133,19 @@ app.post("/firstArchRank",jsonParser, (req, res) => {
   })
 });
 
+app.post("/selectEnterprise",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = 'select 企业名称 from ' + industry + '_property';
+   let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
+});
 // 企业数字化程度对比
 app.post("/thirdEPDight",jsonParser, (req, res) => {
   const name = req.body.name
@@ -154,7 +157,6 @@ app.post("/thirdEPDight",jsonParser, (req, res) => {
       console.log('[SELECT ERROR]：', err.message);
     }
     str = JSON.stringify(result);
-    // console.log(result);
     res.send(str)
     res.end()
   })
