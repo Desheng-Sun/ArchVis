@@ -11,8 +11,8 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: 'sds0917..',//密码
-  database: 'archsql'//数据库名称
+  password: '990921',//密码
+  database: 'archindicators'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -41,15 +41,16 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-app.post("/firstIndicatorsSt", (req, res) => {
-  let sql = 'select * from constru_property';
+app.post("/selectIndicators",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = 'select * from ' + industry + '_structure';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
       console.log('[SELECT ERROR]：', err.message);
     }
     str = JSON.stringify(result);
-    // console.log(result);
+    // console.log(str);
     res.send(str)
     res.end()
   })
@@ -57,10 +58,9 @@ app.post("/firstIndicatorsSt", (req, res) => {
 
 app.post("/firstArchRank",jsonParser, (req, res) => {
   const region = req.body.region
-  region = ["西北","东北"]
-  // let sql = 'select * where region = ' + region + ' from constru_property';
+  // region = ["西北","东北"]
+  let sql = 'select * where region = ' + region + ' from constru_property';
   console.log(region)
-  let sql = 'select * from constru_property';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -73,3 +73,17 @@ app.post("/firstArchRank",jsonParser, (req, res) => {
   })
 });
 
+app.post("/selectEnterprise",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = 'select 企业名称 from ' + industry + '_property';
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    console.log(str);
+    res.send(str)
+    res.end()
+  })
+});
