@@ -2,9 +2,9 @@ import { Radio, Space } from 'antd';
 import React, { useState, useEffect }  from 'react';
 import { selectIndicators } from '../../../apis/api';
 
-export default function SecondIndicatorsNdSelect({ selectedIndustry, indicatorsNd, setSelectedIndicatorsNd, setIndicatorsNd }) {
+export default function SecondIndicatorsNdSelect({ selectedIndustry, setSelectedIndicatorsNd }) {
   const [industry, setIndustry] = useState('constru');
-  // const [IndicatorsNd, setIndicatorsNd] = useState([]);
+  const [indicatorsNd, setIndicatorsNd] = useState([]);
 
   useEffect(() => {
     if (selectedIndustry == '施工行业') {

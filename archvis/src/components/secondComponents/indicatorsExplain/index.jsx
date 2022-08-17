@@ -34,11 +34,11 @@ export default function SecondIndicatorsRdExplain({ selectedIndicatorsRd }) {
         <ExlpainItem
         // style={{fontSize:"15px"}}
           labelName="指标公式"
-          defaultValue={nowIndicatorsRdExplain[0]}
+          // defaultValue={nowIndicatorsRdExplain[0]}
         />
         <ExlpainItem
           labelName="指标解释"
-          defaultValue={nowIndicatorsRdExplain[1]}
+          // defaultValue={nowIndicatorsRdExplain[1]}
         />
       </Form>
     </div>

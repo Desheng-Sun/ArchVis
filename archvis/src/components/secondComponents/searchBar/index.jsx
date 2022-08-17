@@ -5,15 +5,13 @@ import { selectEnterprise } from '../../../apis/api';
 
 const { Option } = Select;
 
-export default function SecondSearchBar({setSelectedIndustry}) {
+export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, setNowEnterprise }) {
   const allIndustry = ["施工行业", "设计行业"]
   const [construEnterprise, setConstruEnterprise] = useState([]);
   const [designEnterprise, setDesignEnterprise] = useState([]);
-
   const [NowEnterpriseList, setNowEnterpriseList] = useState([]);
-  const [nowEnterprise, setNowEnterprise] = useState();
+  // const [nowEnterprise, setNowEnterprise] = useState();
   useEffect(() => {
-
     selectEnterprise('constru').then((res) =>{
       var tmp = [];
       for (let i in res) {
@@ -21,7 +19,7 @@ export default function SecondSearchBar({setSelectedIndustry}) {
       }
       setConstruEnterprise(tmp);
       setNowEnterpriseList(tmp);
-      setNowEnterprise(tmp[0]);
+      setNowEnterprise([tmp[0]]);
       // console.log(tmp);
     });
     
@@ -51,7 +49,7 @@ export default function SecondSearchBar({setSelectedIndustry}) {
   const onNowEnterprise = (value) => {
     setNowEnterprise(value);
   };
-
+  console.log(nowEnterprise);
   return (
     <div style={{ height: "27.2vh", width: "100%" }}>
       <div style={{ height: "40%", paddingTop: "5%" }}>
