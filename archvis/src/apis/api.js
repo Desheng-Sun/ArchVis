@@ -45,8 +45,18 @@ export function firstArchRank(region) {
 export function selectEnterprise(industry) {
   return post("/selectEnterprise", {
     industry: industry
-    });
+  });
 }
+
+export function selectProperty(industry, enterprise, indicator) {
+  return post("/selectProperty", {
+    industry: industry,
+    enterprise: enterprise,
+    indicator: indicator
+  });
+}
+
+
 // 企业数字化程度对比
 export function thirdEPdight(name) {
   return post("/thirdEPdight", {

@@ -6,7 +6,7 @@ import { selectIndicators } from '../../../apis/api';
 
 export default function SecondIndicatorsRdSelect({ selectedIndustry, selectedIndicatorsNd, setSelectedIndicatorsRd }) {
   const [industry, setIndustry] = useState('constru');
-  const [indicatorsNd, setIndicatorsNd] = useState({});
+  // const [indicatorsNd, setIndicatorsNd] = useState({});
   const [indicatorsRd, setIndicatorsRd] = useState([]);
   const onChange = (e) => {
     setSelectedIndicatorsRd(e.target.value)

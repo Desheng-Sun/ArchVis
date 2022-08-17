@@ -47,12 +47,12 @@ export default function Layout() {
 
     // 第二屏，用户选择的行业
     const [selectedIndustry, setSelectedIndustry] = useState("建筑业（施工与设计加总）");
+    // 第二屏，用户选择的公司
+    const [nowEnterprise, setNowEnterprise] = useState(["美丽生态"]);
     // 第二屏，用户选择的二级指标
     const [selectedIndicatorsNd, setSelectedIndicatorsNd] = useState("规模状况");
-    // 第二屏，行业对应的二级指标列表
-    const [indicatorsNd, setIndicatorsNd] = useState([]);
     // 第二屏，用户选择的三级指标
-    const [selectedIndicatorsRd, setSelectedIndicatorsRd] = useState("股票代码");
+    const [selectedIndicatorsRd, setSelectedIndicatorsRd] = useState();
 
 
     // 当前页面所在第几屏
@@ -231,7 +231,9 @@ export default function Layout() {
                         <div id="secondSearchbar">
                         <ChartHeader chartName={"行业企业检索"} />
                             <SecondSearchBar 
+                                nowEnterprise={nowEnterprise}
                                 setSelectedIndustry={setSelectedIndustry}
+                                setNowEnterprise={setNowEnterprise}
                             />
                         </div>
                         <div id="secondIndicators">
@@ -250,9 +252,7 @@ export default function Layout() {
                             <ChartHeader chartName={"二级指标勾选栏"} />
                                 <SecondIndicatorsNdSelect
                                     selectedIndustry={selectedIndustry}
-                                    indicatorsNd={indicatorsNd}
-                                    setSelectedIndicatorsNd={setSelectedIndicatorsNd}
-                                    setIndicatorsNd={setIndicatorsNd}    
+                                    setSelectedIndicatorsNd={setSelectedIndicatorsNd} 
                                 />
                             </div>
                             <div id="secondSelectIndiRD">
@@ -274,6 +274,10 @@ export default function Layout() {
                             <SecondIndiRDRank
                                 w={secondIndiRDRankWidth}
                                 h={secondIndiRDRankHeight}
+                                selectedIndustry={selectedIndustry}
+                                nowEnterprise={nowEnterprise}
+                                selectedIndicatorsNd={selectedIndicatorsNd}
+                                selectedIndicatorsRd={selectedIndicatorsRd}
                             />
                         </div>
                     </div>

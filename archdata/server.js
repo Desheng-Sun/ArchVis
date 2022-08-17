@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: 'root',//密码
+  password: '990921',//密码
   database: 'archindicators'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
@@ -53,7 +53,36 @@ app.post("/selectIndicators",jsonParser, (req, res) => {
       res.send(str)
       res.end()
     })      
+});
+app.post("/selectEnterprise",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = 'select 企业名称 from ' + industry + '_property';
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
   })
+});
+app.post("/selectProperty",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  const enterprise = req.body.enterprise;
+  const indicator = req.body.indicator;
+  let sql = 'select ' + indicator + ' from ' + industry + '_property where 企业名称 = "' + enterprise + '"';
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
+});
+
 /////////////第一屏检索栏
 //行业检索
 app.post("/firstArchIndustry", jsonParser,(req, res) => {
@@ -142,19 +171,7 @@ app.post("/firstArchRank",jsonParser, (req, res) => {
   })
 });
 
-app.post("/selectEnterprise",jsonParser, (req, res) => {
-  const industry = req.body.industry;
-  let sql = 'select 企业名称 from ' + industry + '_property';
-   let str = '';
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log('[SELECT ERROR]：', err.message);
-    }
-    str = JSON.stringify(result);
-    res.send(str)
-    res.end()
-  })
-});
+
 // 企业数字化程度对比
 app.post("/thirdEPDight",jsonParser, (req, res) => {
   const name = req.body.name
