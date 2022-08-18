@@ -41,14 +41,37 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-
-
-
-app.post("/selectProperty", jsonParser, (req, res) => {
+app.post("/selectIndicators",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = 'select * from ' + industry + '_structure';
+  let str = '';
+    connection.query(sql, function(err, result) {
+      if(err){
+        console.log('[SELECT ERROR]：',err.message);
+      }
+      str = JSON.stringify(result);
+      res.send(str)
+      res.end()
+    })      
+});
+app.post("/selectEnterprise",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = 'select 企业名称 from ' + industry + '_property';
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
+});
+app.post("/selectProperty",jsonParser, (req, res) => {
   const industry = req.body.industry;
   const enterprise = req.body.enterprise;
   const indicator = req.body.indicator;
-  let sql = 'select ' + indicator + ' from ' + industry + '_property where 企业名称 = "' + enterprise + '"';
+  let sql = 'select ' + indicator + ',年份 from ' + industry + '_property where 企业名称 = "' + enterprise + '" order by 年份';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
