@@ -96,20 +96,20 @@ app.post("/firstArchIndustry", jsonParser, (req, res) => {
     "战略指标": 4,
     "行业特色指标": 5
   }
-  let useIndex = "( NULL, "
+  let useIndex = "("
   for (let i of index) {
     useIndex += indexList[i] + ","
   }
   useIndex = useIndex.slice(0, useIndex.length - 1) + ")"
   if (industry.length === 2) {
     // 全选施工行业与设计行业
-    let sql1 = `select * from constru_structure where parent_id in ${useIndex} or id in ${useIndex}`
-    let sql2 = `select * from design_structure where parent_id in ${useIndex} or id in ${useIndex}`;
+    let sql = `select * from constru_structure where parent_id in ${useIndex} or id in ${useIndex} union select * from design_structure where parent_id in ${useIndex} or id in ${useIndex}`;
     let str = '';
-    connection.query(sql1, sql2, function (err, result) {
+    connection.query(sql, function (err, result) {
       if (err) {
         console.log('[SELECT ERROR]：', err.message);
       }
+      console.log(result)
       str = JSON.stringify(result);
       res.send(str)
       res.end()
