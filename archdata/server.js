@@ -56,7 +56,7 @@ app.post("/selectIndicators",jsonParser, (req, res) => {
 });
 app.post("/selectEnterprise",jsonParser, (req, res) => {
   const industry = req.body.industry;
-  let sql = 'select 企业名称 from ' + industry + '_property';
+  let sql = 'select distinct 企业名称 from ' + industry + '_property';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -71,7 +71,7 @@ app.post("/selectProperty",jsonParser, (req, res) => {
   const industry = req.body.industry;
   const enterprise = req.body.enterprise;
   const indicator = req.body.indicator;
-  let sql = 'select ' + indicator + ' from ' + industry + '_property where 企业名称 = "' + enterprise + '"';
+  let sql = 'select ' + indicator + ',年份 from ' + industry + '_property where 企业名称 = "' + enterprise + '" order by 年份';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
