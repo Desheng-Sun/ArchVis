@@ -16,6 +16,8 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
   }, [selectedIndustry])
   useEffect(() => {
     var tmp = {};
+    console.log('nowEnterprise');
+    console.log(nowEnterprise);
     for (let i in nowEnterprise) {
       tmp[nowEnterprise[i]] = [];
       if (selectedIndicatorsRd == null) {
@@ -24,22 +26,34 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
         // })
       }
       else {
+        // 异步
         selectProperty(industry, nowEnterprise[i], selectedIndicatorsRd).then((res) => {
           console.log('res');
           console.log(res);
-          tmp[nowEnterprise[i]].push(res[0][selectedIndicatorsRd]);
+          for (let j in res) {
+            if (res[j]['年份'] == 2019) {
+              tmp[nowEnterprise[i]][0] = res[j][selectedIndicatorsRd];
+            }
+            else if (res[j]['年份'] == 2020) {
+              tmp[nowEnterprise[i]][1] = res[j][selectedIndicatorsRd];
+            }
+            else if (res[j]['年份'] == 2021) {
+              tmp[nowEnterprise[i]][2] = res[j][selectedIndicatorsRd];
+            }
+            console.log('debug1');
+          }
+          setData(tmp);
         })
       }
     }
-    setData(tmp);
   }, [industry, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd])
   // 随系统缩放修改画布大小
   useEffect(() => {
     console.log('data');
     console.log(data);
     var series = [];
+    var j = 0;
     for (let i in data) {
-      let j = 0;
       series[j] = {
         name: i,
         type: 'line',
