@@ -1,3 +1,30 @@
-.ant-select {
-  margin: 100px;
+.ant-divider,
+.ant-divider-horizontal {
+  margin: 0.2vw !important
+}
+
+.multipleCheck {
+  height: 35%;
+  padding-bottom: 2%;
+}
+
+/* .ant-select,
+.ant-select-single,
+.ant-select-allow-clear,
+.ant-select-show-arrow,
+.ant-select-show-search  */
+.ant-select-selector{
+  height: 2.4vh;
+
+}
+
+.ant-select-selection-item {
+  font-size: 1.1vh;
+
+}
+
+.ant-btn,
+.ant-btn-default {
+  font-size: 1.1vh;
+  height: 2.4vh;
 }

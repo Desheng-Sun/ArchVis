@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import React, { useState, useEffect } from "react";
 import '../../../App';
-import { selectEnterprise } from '../../../apis/api';
+import {selectEnterprise } from '../../../apis/api';
 
 const { Option } = Select;
 
@@ -12,7 +12,7 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, se
   const [NowEnterpriseList, setNowEnterpriseList] = useState([]);
   // const [nowEnterprise, setNowEnterprise] = useState();
   useEffect(() => {
-    selectEnterprise('constru').then((res) =>{
+    selectEnterprise('constru').then((res) => {
       var tmp = [];
       for (let i in res) {
         tmp.push(res[i].企业名称);
@@ -22,8 +22,8 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, se
       setNowEnterprise([tmp[0]]);
       // console.log(tmp);
     });
-    
-    selectEnterprise('design').then((res) =>{
+
+    selectEnterprise('design').then((res) => {
       var tmp = [];
       for (let i in res) {
         tmp.push(res[i].企业名称);
@@ -36,11 +36,11 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, se
 
   const handleIndustryChange = (value) => {
     setSelectedIndustry(value);
-    if(value == "施工行业"){
+    if (value === "施工行业") {
       setNowEnterpriseList(construEnterprise);
       setNowEnterprise(construEnterprise[0]);
     }
-    else if(value == "设计行业"){
+    else if (value === "设计行业") {
       setNowEnterpriseList(designEnterprise);
       setNowEnterprise(designEnterprise[0]);
     }

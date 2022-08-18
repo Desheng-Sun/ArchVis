@@ -1,17 +1,20 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import geoChina from "./geo.json";
+import { firstArchMap } from '../../../apis/api';
 
-export default function FirstArchMap({ w, h }) {
+export default function FirstArchMap({ w, h, selectedRegionFirst, setSelectedYearFirst }) {
   const [data, setData] = useState([]);
+  const [date, setDate] = useState([2019,2020,2021]);
   const chartRef = useRef(null);
   useEffect(() => {
-
-  }, [data])
+    firstArchMap().then((res) => {
+      setData(res);
+    });
+  }, [])
   // 随系统缩放修改画布大小
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
-
     let fontsizeNow = parseInt(14 * h / 698)
     fontsizeNow = Math.max(10, fontsizeNow)
 
@@ -40,8 +43,8 @@ export default function FirstArchMap({ w, h }) {
       },
       visualMap: {
         top: 'bottom',
-        min: 500000,
-        max: 38000000,
+        min: 0,
+        max: 10,
         inRange: {
           color: [
             '#ffffbf',
@@ -86,9 +89,65 @@ export default function FirstArchMap({ w, h }) {
           // shadowBlur: 20,
           show: true
         },
-      }
+      },
+      timeline: {
+        data: date,
+        axisType: "category",
+        autoPlay: false,
+        realtime: false,
+        left: "15%",
+        right: "5%",
+        bottom: "0%",
+        width: "80%",
+        symbolSize: 10,
+        //  height: null,
+        label: {
+          normal: {
+            show: true,
+            color: "rgb(92, 151, 191)",
+          },
+        },
+        lineStyle: {
+          show: true,
+          color: "rgb(92, 151, 191)",
+        },
+        itemStyle: {
+          show: true,
+          color: "rgb(92, 151, 191)",
+        },
+        controlStyle: {
+          show: true,
+          showPlayBtn: false,
+          color: "rgb(92, 151, 191)",
+          borderColor: "rgb(92, 151, 191)",
+        },
+        checkpointStyle: {
+          symbolSize: 13,
+          color: "rgb(115, 192, 222)",
+          borderWidth: 2,
+          borderColor: "rgb(255, 255, 138)",
+        },
+      },
     };
     myChart.setOption(option, true);
+    myChart.on('click', function (param) {
+      console.log(param)
+      if (param.componentType === "geo") {
+        selectedRegionFirst([param.name])
+      }
+    })
+    myChart.dispatchAction({
+      type: "timelineChange",
+      // 时间点的 index
+      currentIndex: date.length - 1,
+    });
+    myChart.on("timelinechanged", (timelineIndex) => {
+      setSelectedYearFirst(date[timelineIndex.currentIndex])
+    });
+    if (myChart._$handlers.click) {
+      myChart._$handlers.click.length = 1;
+      myChart._$handlers.timelinechanged.length = 1;
+    }
     myChart.resize();
   }, [data, w, h]);
 

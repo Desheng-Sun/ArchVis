@@ -1,28 +1,30 @@
 import { Radio, Space } from 'antd';
 import React, { useState, useEffect }  from 'react';
-import { selectIndicators } from '../../../apis/api';
+import { secondSelectIndicators } from '../../../apis/api'
+import "./index.css"
+
 
 export default function SecondIndicatorsNdSelect({ selectedIndustry, setSelectedIndicatorsNd }) {
   const [industry, setIndustry] = useState('constru');
   const [indicatorsNd, setIndicatorsNd] = useState([]);
 
   useEffect(() => {
-    if (selectedIndustry == '施工行业') {
+    if (selectedIndustry === '施工行业') {
       setIndustry('constru');
     }
-    else if (selectedIndustry == '设计行业') {
+    else if (selectedIndustry === '设计行业') {
       setIndustry('design');
     }
   }, [selectedIndustry])
 
   useEffect(() => {
-    selectIndicators(industry).then((res) =>{
+    secondSelectIndicators(industry).then((res) =>{
       var tmp = [];
       for (let i in res) {
-        if (res[i].level == 2) {
+        if (res[i].level === 2) {
           tmp.push(res[i].indi_name);
         }
-        else if (res[i].level == 3) {
+        else if (res[i].level === 3) {
           break;
         }
       }
@@ -34,7 +36,7 @@ export default function SecondIndicatorsNdSelect({ selectedIndustry, setSelected
     setSelectedIndicatorsNd(e.target.value)
   };
   return (
-    <div style={{ paddingTop: "5%" }}>
+    <div id ="secondIndicatorsNdSelect">
       <Radio.Group onChange={onChange}>
         <Space direction="vertical">
           {indicatorsNd.map((item, index) => (

@@ -11,8 +11,8 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: '990921',//密码
-  database: 'archindicators'//数据库名称
+  password: 'sds091',//密码
+  database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -41,33 +41,10 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-app.post("/selectIndicators",jsonParser, (req, res) => {
-  const industry = req.body.industry;
-  let sql = 'select * from ' + industry + '_structure';
-  let str = '';
-    connection.query(sql, function(err, result) {
-      if(err){
-        console.log('[SELECT ERROR]：',err.message);
-      }
-      str = JSON.stringify(result);
-      res.send(str)
-      res.end()
-    })      
-});
-app.post("/selectEnterprise",jsonParser, (req, res) => {
-  const industry = req.body.industry;
-  let sql = 'select 企业名称 from ' + industry + '_property';
-  let str = '';
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log('[SELECT ERROR]：', err.message);
-    }
-    str = JSON.stringify(result);
-    res.send(str)
-    res.end()
-  })
-});
-app.post("/selectProperty",jsonParser, (req, res) => {
+
+
+
+app.post("/selectProperty", jsonParser, (req, res) => {
   const industry = req.body.industry;
   const enterprise = req.body.enterprise;
   const indicator = req.body.indicator;
@@ -84,29 +61,42 @@ app.post("/selectProperty",jsonParser, (req, res) => {
 });
 
 /////////////第一屏检索栏
-//行业检索
-app.post("/firstArchIndustry", jsonParser,(req, res) => {
+//指标检索
+app.post("/firstArchIndustry", jsonParser, (req, res) => {
   const industry = req.body.industry
-  console.log(industry);
-  if(industry == "建筑业（施工与设计加总）"){
+  const index = req.body.index
+  let indexList =
+  {
+    "基本指标": 1,
+    "数字研发创新指标": 2,
+    "组织指标": 3,
+    "战略指标": 4,
+    "行业特色指标": 5
+  }
+  let useIndex = "( NULL, "
+  for (let i of index) {
+    useIndex += indexList[i] + ","
+  }
+  useIndex = useIndex.slice(0, useIndex.length - 1) + ")"
+  if (industry.length === 2) {
     // 全选施工行业与设计行业
-    let sql = 'select * from constru_property union select * from design_property';
+    let sql = `select * from constru_structure where parent_id in ${useIndex} union select * from design_structure where parent_id in ${useIndex} `;
     let str = '';
-    connection.query(sql, function(err, result) {
-      if(err){
-        console.log('[SELECT ERROR]：',err.message);
+    connection.query(sql, function (err, result) {
+      if (err) {
+        console.log('[SELECT ERROR]：', err.message);
       }
       str = JSON.stringify(result);
       res.send(str)
       res.end()
-    })      
+    })
   }
   else {
-    if(industry == "施工行业"){
-      let sql = 'select * from constru_propertry';
+    if (industry[0] === "施工行业") {
+      let sql = `select * from constru_structure where parent_id in ${useIndex}`;
       let str = '';
-      connection.query(sql, function(err, result){
-        if(err){
+      connection.query(sql, function (err, result) {
+        if (err) {
           console.log('[SELECT ERROR]：', err.message);
         }
         str = JSON.stringify(result);
@@ -114,11 +104,11 @@ app.post("/firstArchIndustry", jsonParser,(req, res) => {
         res.end()
       })
     }
-    else if(industry == "设计行业"){
-      let sql = 'select * from design_propertry';
+    else if (industry[0] === "设计行业") {
+      let sql = `select * from design_structure where parent_id in ${useIndex}`;
       let str = '';
-      connection.query(sql, function(err, result){
-        if(err){
+      connection.query(sql, function (err, result) {
+        if (err) {
           console.log('[SELECT ERROR：', err.message);
         }
         str = JSON.stringify(result);
@@ -128,18 +118,10 @@ app.post("/firstArchIndustry", jsonParser,(req, res) => {
     }
   }
 })
-//指标检索
-
 
 //地区检索
-
-
-
-// 企业名单
-app.post("/firstArchList", jsonParser, (req, res) =>{
-  const region = req.body.region
-  // console.log(region)
-  let sql = 'select * from constru_property where 地区 = "'+ region+'" and 年份="2019" ';
+app.post("/firstArchMap", jsonParser, (req, res) => {
+  let sql = 'select 省份, COUNT(*) from constru_region group by 省份';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -153,12 +135,40 @@ app.post("/firstArchList", jsonParser, (req, res) =>{
 
 })
 
-// 企业数字化程度排名
-app.post("/firstArchRank",jsonParser, (req, res) => {
+
+// 企业名单
+app.post("/firstArchList", jsonParser, (req, res) => {
   const region = req.body.region
-  // console.log(region)
+  const date = req.body.date
+  let useRegion = "("
+  for (let i of region) {
+    useRegion += '"' + i + '" ,'
+  }
+  useRegion = useRegion.slice(0, useRegion.length - 1) + ")"
+  let sql = `select * from constru_property where 企业名称 in (select 企业名称 from constru_region where 地区 in ${useRegion} or 省份 in ${useRegion} ) and 年份 = ${date}`;
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    // console.log(str);
+    res.send(str)
+    res.end()
+  })
+})
+
+// 企业数字化程度排名
+app.post("/firstArchRank", jsonParser, (req, res) => {
+  const region = req.body.region
   // 暂时没有企业数字化得分数据，用资产负债率代替
-  let sql = 'select * from constru_property where 地区 = "'+ region+'" and 年份="2019"  order by 资产负债率 desc';
+  const date = req.body.date
+  let useRegion = "("
+  for (let i of region) {
+    useRegion += '"' + i + '" ,'
+  }
+  useRegion = useRegion.slice(0, useRegion.length - 1) + ")"
+  let sql = `select * from constru_property where 企业名称 in (select 企业名称 from constru_region where 地区 in ${useRegion} or 省份 in ${useRegion} )and 年份 = ${date}`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -172,11 +182,43 @@ app.post("/firstArchRank",jsonParser, (req, res) => {
 });
 
 
+/////////////第一屏检索栏
+//指标检索
+app.post("/secondSelectIndicators", jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = 'select * from ' + industry + '_structure';
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
+});
+
+
+//企业检索
+app.post("/selectEnterprise", jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = 'select 企业名称 from ' + industry + '_property';
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
+});
+
 // 企业数字化程度对比
-app.post("/thirdEPDight",jsonParser, (req, res) => {
+app.post("/thirdEPDight", jsonParser, (req, res) => {
   const name = req.body.name
   // 查询某个企业的数据，根据年份升序排序
-  let sql = 'select * from constru_property where 企业名称 = "'+ name+'" order by 年份 asc';
+  let sql = 'select * from constru_property where 企业名称 = "' + name + '" order by 年份 asc';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {

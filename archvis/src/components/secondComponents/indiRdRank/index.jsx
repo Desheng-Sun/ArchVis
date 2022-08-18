@@ -7,10 +7,10 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
   const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
   useEffect(() => {
-    if (selectedIndustry == '施工行业') {
+    if (selectedIndustry === '施工行业') {
       setIndustry('constru');
     }
-    else if (selectedIndustry == '设计行业') {
+    else if (selectedIndustry === '设计行业') {
       setIndustry('design');
     }
   }, [selectedIndustry])
@@ -18,7 +18,7 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
     var tmp = {};
     for (let i in nowEnterprise) {
       tmp[nowEnterprise[i]] = [];
-      if (selectedIndicatorsRd == null) {
+      if (selectedIndicatorsRd === null) {
         // selectProperty(industry, nowEnterprise[i], selectedIndicatorsNd).then((res) => {
         //   tmp[nowEnterprise[i]].push(res);
         // })

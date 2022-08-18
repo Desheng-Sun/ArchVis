@@ -1,20 +1,24 @@
-import { Select, Button } from "antd";
-import { SearchOutlined } from '@ant-design/icons';
-import "./index"
+import { Select, Button, Checkbox, Divider } from "antd";
+import "./index.css"
 import '../../../App';
 import { useState } from "react";
 import { firstArchIndustry } from "../../../apis/api";
+import CheckMultipleComponent from "./checkMultple";
 
 const { Option, OptGroup } = Select;
 
-export default function FirstSearchBar() {
 
+export default function FirstSearchBar({setSelectdIndustry, setSelectedIndexFirst, setSelectedRegionFirst}) {
   const allIndustry = ["建筑业（施工与设计加总）", "施工行业", "设计行业"]
   const allIndex = ["全部指标", "基本指标", "数字研发创新指标", "组织指标", "战略指标", "行业特色指标"]
-  const allRegion = ["全国", "东北", "华北", "中原", "西北", "西南"]
+  const allRegion = ["全国", "东北", "华北", "华东", "华中", "华南", "西北", "西南"]
+  
+  const allIndustry2 = ["施工行业", "设计行业"]
+  const allIndex2 = ["基本指标", "数字研发创新指标", "组织指标", "战略指标", "行业特色指标"]
+  const allRegion2 = ["东北", "华北", "华东", "华中", "华南", "西北", "西南"]
   const [nowIndustry, setNowIndustry] = useState(allIndustry[0]);
-  const [nowIndex, setNowIndex] = useState(allIndex[0]);
-  const [nowRegion, setNowRegion] = useState(allRegion[0]);
+  const [nowIndex, setNowIndex] = useState(allIndex2);
+  const [nowRegion, setNowRegion] = useState(allRegion2);
 
   const searchIndex = (value) => {
     console.log(value)
@@ -22,7 +26,7 @@ export default function FirstSearchBar() {
       setNowIndex()
     }
     else {
-      if (value.indexOf(allIndex[0]) == 0 && value[value.length - 1] !== allIndex[0]) {
+      if (value.indexOf(allIndex[0]) === 0 && value[value.length - 1] !== allIndex[0]) {
         value.splice(0, 1)
       }
       else if (value[value.length - 1] === allIndex[0]) {
@@ -37,7 +41,7 @@ export default function FirstSearchBar() {
       setNowRegion()
     }
     else {
-      if (value.indexOf(allRegion[0]) == 0 && value[value.length - 1] !== allRegion[0]) {
+      if (value.indexOf(allRegion[0]) === 0 && value[value.length - 1] !== allRegion[0]) {
         value.splice(0, 1)
       }
       else if (value[value.length - 1] === allRegion[0]) {
@@ -61,11 +65,11 @@ export default function FirstSearchBar() {
   function SelectComponent({ useData, changeData, searchData, nowSize, searchValue }) {
     return (
       <Select
-        allowClear
+        // allowClear
         showArrow
         showSearch
         size={nowSize}
-        value = {searchValue}
+        value={searchValue}
         onChange={changeData}
         onSearch={searchData}
         style={{ width: '60%' }}
@@ -106,49 +110,64 @@ export default function FirstSearchBar() {
       </Select>
     )
   }
+
+
   return (
     <div style={{ height: "27.2vh", width: "100%" }}>
       <div style={{ height: "30%", paddingTop: "5%" }}>
-        <SelectComponent
+        {/* <SelectComponent
           useData={allIndustry}
           changeData={onChange}
           searchData={onSearch}
-          searchValue = {nowIndustry}
+          searchValue={nowIndustry}
         />
-        <Button onClick = {() => {
+        <Button onClick={() => {
           firstArchIndustry(nowIndustry).then((res) => {
             // let result = res;
             console.log(res)
           })
-
           console.log(nowIndustry)
         }}>
           搜索
-        </Button>
+        </Button> */}
+        <CheckMultipleComponent
+          useData={allIndustry2}
+          dataName="建筑业（施工与设计加总）"
+          setCheckData={setNowIndustry}
+          setSelectedData = {setSelectdIndustry}
+        />
       </div>
-      <div style={{ height: "30%", paddingTop: "5%" }}>
-        <SelectMultipleComponent
+      <div className="multipleCheck">
+        {/* <SelectMultipleComponent
           useData={allIndex}
           changeData={searchIndex}
           searchValue={nowIndex}
+        /> */}
+        <CheckMultipleComponent
+          useData={allIndex2}
+          dataName="全部指标"
+          setCheckData={setNowIndex}
+          setSelectedData = {setSelectedIndexFirst}
         />
-        <Button onClick = {() => {
-          console.log(nowIndex)
-        }}>
-          搜索
-        </Button>
       </div>
-      <div style={{ height: "30%", paddingTop: "5%" }}>
-        <SelectMultipleComponent
+      <div className="multipleCheck">
+        {/* <SelectMultipleComponent
           useData={allRegion}
           changeData={searchRegion}
           searchValue={nowRegion}
-        />
-        <Button onClick = {() => {
+        /> */}
+        {/* <Button onClick={() => {
           console.log(nowRegion)
         }}>
           搜索
-        </Button>
+        </Button> */}
+        <CheckMultipleComponent
+          useData={allRegion2}
+          dataName="全国"
+          setCheckData={setNowRegion}
+          setSelectedData = {setSelectedRegionFirst}
+        />
+
       </div>
     </div>
   );

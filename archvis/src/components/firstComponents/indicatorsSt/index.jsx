@@ -2,35 +2,35 @@
 
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { selectIndicators } from '../../../apis/api';
+import { firstArchIndustry } from '../../../apis/api';
 
-export default function FirstIndicators({w, h}) {
+export default function FirstIndicators({w, h, selectdIndustry, selectedIndexFirst}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
-    selectIndicators('constru').then((res) =>{
-      // console.log(res)
-      // console.log(JSON.parse(res)[0].indi_name)
-      // console.log((res)[0].indi_name)
+    firstArchIndustry(selectdIndustry, selectedIndexFirst).then((res) =>{
+      console.log(res)
       setData(res)
     })
-  }, [])
+  }, [selectdIndustry, selectedIndexFirst])
+
   // 随系统缩放修改画布大小
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
+      console.log(myChart)
     }
     // console.log(data)
-    var drawdata = [];
+    let drawdata = [];
     for (let i in data) {
-      if (data[i].level == 1) {
+      if (data[i].level === 1) {
         drawdata.push({
           name: data[i].indi_name,
           children: []
         })
       }
-      else if (data[i].level == 2){
+      else if (data[i].level === 2){
         drawdata[data[i].parent_id - 1].children.push({
           name: data[i].indi_name,
           value: 1

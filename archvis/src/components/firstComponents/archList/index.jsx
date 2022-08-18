@@ -4,14 +4,13 @@ import { Table } from 'antd';
 import { useState, useEffect } from 'react';
 import { firstArchList } from '../../../apis/api';
 
-export default function FirstArchList() {
+export default function FirstArchList({selectedRegionFirst, selectedYearFirst}) {
   const [data, setData] = useState([]);
   useEffect (() => {
-    firstArchList("西南").then((res) => {
-      // console.log(res)
+    firstArchList(selectedRegionFirst, selectedYearFirst).then((res) => {
       setData(res)
     })
-  }, [])
+  }, [selectedRegionFirst, selectedYearFirst])
 
   // const dataSource = [
   //   {

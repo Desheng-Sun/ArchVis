@@ -5,16 +5,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { firstArchRank } from '../../../apis/api';
 
 
-export default function FirstArchRank({w, h}) {
+export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearFirst }) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
-  useEffect (() => {
-    firstArchRank("西南").then((res) => {
-      // console.log(res)
+  useEffect(() => {
+    firstArchRank(selectedRegionFirst, selectedYearFirst).then((res) => {
       setData(res)
     })
-  
-  }, [])
+
+  }, [selectedRegionFirst, selectedYearFirst])
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
@@ -22,15 +21,15 @@ export default function FirstArchRank({w, h}) {
     }
 
     //创建两个一维数组存储数据
-    var names=[];
-    var scores=[];
-    for(let index in data){
+    var names = [];
+    var scores = [];
+    for (let index in data) {
       names.push(data[index].企业名称)
     }
-    for(let index in data){
+    for (let index in data) {
       scores.push(data[index].资产负债率)
     }
-    
+
     const option = {
       color: [
         "#5b8ff9",
@@ -50,7 +49,7 @@ export default function FirstArchRank({w, h}) {
           type: 'shadow'
         }
       },
-      
+
       // dataset: [
       //   {
       //     dimensions: ['name', 'score', 'rank'],
@@ -78,14 +77,25 @@ export default function FirstArchRank({w, h}) {
       xAxis: {
         type: 'category',
         name: '企业简称',
-        data: names,       
-        axisLabel: { interval: 0, rotate: 30 }
+        data: names,
+        axisLabel: {
+          interval: 0, 
+          rotate: 90
+        }
       },
       yAxis: {
-        type:'value',
-        name:'企业数字化综合得分'
+        type: 'value',
+        name: '企业数字化综合得分'
 
       },
+      dataZoom: [
+        {
+          type: "inside",
+          xAxisIndex: 0,
+          start: 0,
+          end: 100,
+        }
+      ],
       series: {
         name: '得分',
         data: scores,

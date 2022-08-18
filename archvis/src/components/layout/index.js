@@ -44,6 +44,14 @@ export default function Layout() {
             window.removeEventListener('resize', onResize)
         })
     })
+    // 第一屏 用户选择的行业
+    const [selectdIndustry, setSelectdIndustry] = useState(["施工行业", "设计行业"])
+    // 第一屏 用户选择的指标
+    const [selectedIndexFirst, setSelectedIndexFirst] = useState(["基本指标", "数字研发创新指标", "组织指标", "战略指标", "行业特色指标"])
+    // 第一屏 用户选择的地区
+    const [selectedRegionFirst, setSelectedRegionFirst] = useState(["东北", "华北", "华东", "华中", "华南", "西北", "西南"])
+    // 第一屏，用户选择的时间
+    const [selectedYearFirst, setSelectedYearFirst] = useState(2019)
 
     // 第二屏，用户选择的行业
     const [selectedIndustry, setSelectedIndustry] = useState("建筑业（施工与设计加总）");
@@ -189,13 +197,18 @@ export default function Layout() {
                     <div id="firstILeft">
                         <div id="firstSearchbar">
                             <ChartHeader chartName={"行业指标搜索框"} />
-                            <FirstSearchBar />
+                            <FirstSearchBar
+                                setSelectdIndustry={setSelectdIndustry}
+                                setSelectedIndexFirst={setSelectedIndexFirst}
+                                setSelectedRegionFirst={setSelectedRegionFirst} />
                         </div>
                         <div id="firstIndicators">
                             <ChartHeader chartName={"一级指标概览"} />
                             <FirstIndicators
                                 w={firstIndicatorsWidth}
                                 h={firstIndicatorsHeight}
+                                selectdIndustry={selectdIndustry}
+                                selectedIndexFirst={selectedIndexFirst}
                             />
                         </div>
 
@@ -207,11 +220,17 @@ export default function Layout() {
                                 <FirstArchMap
                                     w={firstArchMapWidth}
                                     h={firstArchMapHeight}
+                                    selectedRegionFirst={selectedRegionFirst}
+                                    setSelectedRegionFirst={setSelectedRegionFirst}
+                                    setSelectedYearFirst={setSelectedYearFirst}
                                 />
                             </div>
                             <div id="firstArchList">
                                 <ChartHeader chartName={"全国建筑业上市企业名单"} />
-                                <FirstArchList />
+                                <FirstArchList
+                                    selectedRegionFirst={selectedRegionFirst}
+                                    selectedYearFirst={selectedYearFirst}
+                                />
                             </div>
                         </div>
                         <div id="firstArchRank">
@@ -219,6 +238,8 @@ export default function Layout() {
                             <FirstArchRank
                                 w={firstArchRankWidth}
                                 h={firstArchRankHeight}
+                                selectedRegionFirst={selectedRegionFirst}
+                                selectedYearFirst={selectedYearFirst}
                             />
                         </div>
                     </div>
@@ -229,15 +250,15 @@ export default function Layout() {
                 <div id="viewList">
                     <div id="secondILeft">
                         <div id="secondSearchbar">
-                        <ChartHeader chartName={"行业企业检索"} />
-                            <SecondSearchBar 
+                            <ChartHeader chartName={"行业企业检索"} />
+                            <SecondSearchBar
                                 nowEnterprise={nowEnterprise}
                                 setSelectedIndustry={setSelectedIndustry}
                                 setNowEnterprise={setNowEnterprise}
                             />
                         </div>
                         <div id="secondIndicators">
-                        <ChartHeader chartName={"二级指标细分"} />
+                            <ChartHeader chartName={"二级指标细分"} />
                             <SecondIndicators
                                 w={secondIndicatorsWidth}
                                 h={secondIndicatorsHeight}
@@ -249,28 +270,28 @@ export default function Layout() {
                     <div id="secondIRight">
                         <div id="secondIRightTop">
                             <div id="secondSelectIndiND">
-                            <ChartHeader chartName={"二级指标勾选栏"} />
+                                <ChartHeader chartName={"二级指标勾选栏"} />
                                 <SecondIndicatorsNdSelect
                                     selectedIndustry={selectedIndustry}
-                                    setSelectedIndicatorsNd={setSelectedIndicatorsNd} 
+                                    setSelectedIndicatorsNd={setSelectedIndicatorsNd}
                                 />
                             </div>
                             <div id="secondSelectIndiRD">
-                            <ChartHeader chartName={"三级指标勾选栏"} />
+                                <ChartHeader chartName={"三级指标勾选栏"} />
                                 <SecondIndicatorsRdSelect
                                     selectedIndustry={selectedIndustry}
                                     selectedIndicatorsNd={selectedIndicatorsNd}
                                     setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
                             </div>
                             <div id="secondIndiRDExplane">
-                            <ChartHeader chartName={"三级指标解释栏"} />
+                                <ChartHeader chartName={"三级指标解释栏"} />
                                 <SecondIndicatorsRdExplain
                                     selectedIndicatorsRd={selectedIndicatorsRd} />
 
                             </div>
                         </div>
                         <div id="secondIndiRDRank">
-                        <ChartHeader chartName={"二、三级指标企业对比"} />
+                            <ChartHeader chartName={"二、三级指标企业对比"} />
                             <SecondIndiRDRank
                                 w={secondIndiRDRankWidth}
                                 h={secondIndiRDRankHeight}
@@ -288,11 +309,11 @@ export default function Layout() {
                 <div id="viewList">
                     <div id="thirdILeft">
                         <div id="thirdSearchbar">
-                            <ChartHeader chartName={"行业企业检索栏"}/>
+                            <ChartHeader chartName={"行业企业检索栏"} />
                             <ThirdSearchBar />
                         </div>
                         <div id="thirdEPPosplashes">
-                            <ChartHeader chartName={"全行业企业数字化散点图"}/>
+                            <ChartHeader chartName={"全行业企业数字化散点图"} />
                             <ThirdEPPosplashes
                                 w={thirdEPPosplashesWidth}
                                 h={thirdEPPosplashesHeight}
@@ -303,14 +324,14 @@ export default function Layout() {
                     <div id="thirdIRight">
                         <div id="thirdIRightTop">
                             <div id="thirdEPScoreIndiSD">
-                                <ChartHeader chartName={"企业一级指标得分雷达图"}/>
+                                <ChartHeader chartName={"企业一级指标得分雷达图"} />
                                 <ThirdEPScoreIndiSD
                                     w={thirdEPScoreIndiSDWidth}
                                     h={thirdEPScoreIndiSDHeight}
                                 />
                             </div>
                             <div id="thirdEPScoreIndiND">
-                                <ChartHeader chartName={"企业二级指标得分堆叠图"}/>
+                                <ChartHeader chartName={"企业二级指标得分堆叠图"} />
                                 <ThirdEPScoreIndiND
                                     w={thirdEPScoreIndiNDWidth}
                                     h={thirdEPScoreIndiNDHeight}
@@ -319,7 +340,7 @@ export default function Layout() {
                             </div>
                         </div>
                         <div id="thirdEPdight">
-                            <ChartHeader chartName={"企业数字化程度对比图"}/>
+                            <ChartHeader chartName={"企业数字化程度对比图"} />
                             <ThirdEPdight
                                 w={thirdEPdightWidth}
                                 h={thirdEPdightHeight}

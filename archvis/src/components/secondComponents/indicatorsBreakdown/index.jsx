@@ -1,21 +1,21 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { selectIndicators } from '../../../apis/api';
+import { secondSelectIndicators } from '../../../apis/api';
 
 export default function FirstIndicators({w, h, selectedIndustry}) {
   const [industry, setIndustry] = useState('constru');
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
-    if (selectedIndustry == '施工行业') {
+    if (selectedIndustry === '施工行业') {
       setIndustry('constru');
     }
-    else if (selectedIndustry == '设计行业') {
+    else if (selectedIndustry === '设计行业') {
       setIndustry('design');
     }
   }, [selectedIndustry])
   useEffect(() => {
-    selectIndicators(industry).then((res) =>{
+    secondSelectIndicators(industry).then((res) =>{
       setData(res)
     })
   }, [industry])
@@ -28,13 +28,13 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
     var drawdata = [];
     var dataChildren = [];
     for (let i in data) {
-      if (data[i].level == 2) {
+      if (data[i].level === 2) {
         dataChildren.push({
           name: data[i].indi_name,
           children: []
         })
       }
-      else if (data[i].level == 3){
+      else if (data[i].level === 3){
         dataChildren[data[i].parent_id - 6].children.push({
           name: data[i].indi_name,
           value: 1
@@ -43,13 +43,13 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
     }
     var j = 0;
     for (let i in data) {
-      if (data[i].level == 1) {
+      if (data[i].level === 1) {
         drawdata.push({
           name: data[i].indi_name,
           children: []
         })
       }
-      else if (data[i].level == 2) {
+      else if (data[i].level === 2) {
         drawdata[data[i].parent_id - 1].children.push(dataChildren[j]);
         j++;
       }
