@@ -103,9 +103,10 @@ app.post("/firstArchIndustry", jsonParser, (req, res) => {
   useIndex = useIndex.slice(0, useIndex.length - 1) + ")"
   if (industry.length === 2) {
     // 全选施工行业与设计行业
-    let sql = `select * from constru_structure where parent_id in ${useIndex} union select * from design_structure where parent_id in ${useIndex} `;
+    let sql1 = `select * from constru_structure where parent_id in ${useIndex} or id in ${useIndex}`
+    let sql2 = `select * from design_structure where parent_id in ${useIndex} or id in ${useIndex}`;
     let str = '';
-    connection.query(sql, function (err, result) {
+    connection.query(sql1, sql2, function (err, result) {
       if (err) {
         console.log('[SELECT ERROR]：', err.message);
       }
@@ -116,7 +117,7 @@ app.post("/firstArchIndustry", jsonParser, (req, res) => {
   }
   else {
     if (industry[0] === "施工行业") {
-      let sql = `select * from constru_structure where parent_id in ${useIndex}`;
+      let sql = `select * from constru_structure where parent_id in ${useIndex} or id in ${useIndex}`;
       let str = '';
       connection.query(sql, function (err, result) {
         if (err) {
@@ -128,7 +129,7 @@ app.post("/firstArchIndustry", jsonParser, (req, res) => {
       })
     }
     else if (industry[0] === "设计行业") {
-      let sql = `select * from design_structure where parent_id in ${useIndex}`;
+      let sql = `select * from design_structure where parent_id in ${useIndex} or id in ${useIndex}`;
       let str = '';
       connection.query(sql, function (err, result) {
         if (err) {
