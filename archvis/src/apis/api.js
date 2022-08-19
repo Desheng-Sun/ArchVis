@@ -24,8 +24,10 @@ export function firstArchIndustry(industry) {
 
 }
 
-export function firstArchMap() {
-  return post("/firstArchMap")
+export function firstArchMap(date) {
+  return post("/firstArchMap", {
+    date: date
+  })
 }
 
 // 企业名单

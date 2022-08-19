@@ -11,10 +11,10 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: '990921',//密码
-  database: 'archindicators'//数据库名称
-  // password: 'sds091',//密码
-  // database: 'archsql'//数据库名称
+  // password: '990921',//密码
+  // database: 'archindicators'//数据库名称
+  password: 'sds091',//密码
+  database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -62,7 +62,8 @@ app.post("/firstArchIndustry", jsonParser, (req, res) => {
 
 //地区检索
 app.post("/firstArchMap", jsonParser, (req, res) => {
-  let sql = 'select 省份, COUNT(*) from constru_region group by 省份';
+  const date = req.body.date
+  let sql = `select 省份, COUNT(*) from constru_region where 企业名称 in (select 企业名称 from constru_property where 年份 = ${date}) group by 省份`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {

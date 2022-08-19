@@ -45,7 +45,7 @@ export default function Layout() {
         })
     })
     // 第一屏 用户选择的行业
-    const [selectdIndustry, setSelectdIndustry] = useState(["施工行业", "设计行业"])
+    const [selectdIndustryFirst, setSelectdIndustryFirst] = useState(["施工行业", "设计行业"])
     // 第一屏 用户选择的指标
     const [selectedIndexFirst, setSelectedIndexFirst] = useState(["基本指标", "数字研发创新指标", "组织指标", "战略指标", "行业特色指标"])
     // 第一屏 用户选择的地区
@@ -198,7 +198,7 @@ export default function Layout() {
                         <div id="firstSearchbar">
                             <ChartHeader chartName={"行业指标搜索框"} />
                             <FirstSearchBar
-                                setSelectdIndustry={setSelectdIndustry}
+                                setSelectdIndustryFirst={setSelectdIndustryFirst}
                                 setSelectedIndexFirst={setSelectedIndexFirst}
                                 setSelectedRegionFirst={setSelectedRegionFirst} />
                         </div>
@@ -207,7 +207,7 @@ export default function Layout() {
                             <FirstIndicators
                                 w={firstIndicatorsWidth}
                                 h={firstIndicatorsHeight}
-                                selectdIndustry={selectdIndustry}
+                                selectdIndustryFirst={selectdIndustryFirst}
                                 selectedIndexFirst={selectedIndexFirst}
                             />
                         </div>
@@ -221,6 +221,7 @@ export default function Layout() {
                                     w={firstArchMapWidth}
                                     h={firstArchMapHeight}
                                     selectedRegionFirst={selectedRegionFirst}
+                                    selectedYearFirst = {selectedYearFirst}
                                     setSelectedRegionFirst={setSelectedRegionFirst}
                                     setSelectedYearFirst={setSelectedYearFirst}
                                 />
