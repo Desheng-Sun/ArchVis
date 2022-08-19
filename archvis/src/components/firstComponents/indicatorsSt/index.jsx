@@ -59,8 +59,8 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
       useIndex.push(indexList[i])
     }
     let drawdata = [];
-    const colorTypeBoth = '#5b8ff9';
-    const colorTypeSpecial = '#f6bd16';
+    const color = ["#5b8ff9", "#5ad8a6", "#5d7092", "#e86452", "#f6bd16"];
+    const colorChildren = ["#87b3ff", "#b3f2d5", "#a1a5ab", "#f58f7d", "#ffe369"];
     const colorTypeCon = '#fff7ba';
     const colorTypeDes = '#ffe369';
     if (useData) {
@@ -89,20 +89,17 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
       console.log(nowUseData)
       for (let i in nowUseData) {
         if (useIndex.includes(parseInt(i))) {
-          if ((useIndex.includes(5)) && (selectdIndustry.length == 2)) {
-            let addColor = nowUseData[i];
-            console.log('addColor');
-            console.log(addColor);
-            if ( i == 5 ) {
-              addColor.itemStyle = {
-                color: colorTypeSpecial
-              };
+          let addColor = nowUseData[i];
+          addColor.itemStyle = {
+            color: color[i - 1]
+          };
+          for (let j in addColor.children) {
+            addColor.children[j].itemStyle = {
+              color: colorChildren[i - 1]
+            };
+          }
+          if ((i == 5) && (useIndex.includes(5)) && (selectdIndustryFirst.length == 2)) {
               for (let j in addColor.children) {
-                // if (addColor.children[j].industry.length == 2) {
-                //   addColor.children[j].itemStyle = {
-                //     color: colorTypeBoth
-                //   };
-                // }
                 if (addColor.children[j].industry == '施工行业') {
                   addColor.children[j].itemStyle = {
                     color: colorTypeCon
@@ -113,22 +110,12 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
                     color: colorTypeDes
                   };
                 }
-              }
             }
-            // else {
-            //   addColor.itemStyle = {
-            //     color: colorTypeBoth
-            //   };
-            //   for (let j in addColor.children) {
-            //     addColor.children[j].itemStyle = {
-            //       color: '#87b3ff'
-            //     };
-            //   }
-            // }
             drawdata.push(addColor)
           }
           else {
-            drawdata.push(nowUseData[i])
+            // drawdata.push(nowUseData[i])
+            drawdata.push(addColor)
           }
         }
       }
@@ -158,13 +145,13 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
         "#5b8ff9",
         "#5ad8a6",
         "#5d7092",
+        "#f6bd16",
         "#e86452",
         "#6dc8ec",
         "#945fb9",
         "#ff9845",
         "#1e9493",
-        "#ff99c3",
-        "#f6bd16"
+        "#ff99c3"
       ],
       tooltip: {
         trigger: 'item',
