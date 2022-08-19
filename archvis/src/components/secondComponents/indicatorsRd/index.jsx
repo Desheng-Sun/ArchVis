@@ -1,7 +1,8 @@
 import { Radio, Space } from 'antd';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { secondSelectIndicators } from '../../../apis/api';
+import { secondIndicators } from '../../../apis/api';
+import "./index.css"
 
 
 export default function SecondIndicatorsRdSelect({ selectedIndustry, selectedIndicatorsNd, setSelectedIndicatorsRd }) {
@@ -20,7 +21,7 @@ export default function SecondIndicatorsRdSelect({ selectedIndustry, selectedInd
     }
   }, [selectedIndustry])
   useEffect(() => {
-    secondSelectIndicators(industry).then((res) =>{
+    secondIndicators(industry).then((res) =>{
       var tmp = {};
       for (let i in res) {
         if (res[i].level === 2) {
@@ -37,7 +38,7 @@ export default function SecondIndicatorsRdSelect({ selectedIndustry, selectedInd
     });
   }, [industry, selectedIndicatorsNd])
   return (
-    <div style={{ paddingTop: "5%" }}>
+    <div id ="secondIndicatorsRdSelect" style={{ paddingTop: "5%" }}>
       <Radio.Group onChange={onChange}>
         <Space direction="vertical">
           {indicatorsRd.map((item, index) => (
