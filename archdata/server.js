@@ -54,6 +54,7 @@ app.post("/selectIndicators",jsonParser, (req, res) => {
       res.end()
     })      
 });
+
 app.post("/selectEnterprise",jsonParser, (req, res) => {
   const industry = req.body.industry;
   let sql = 'select 企业名称 from ' + industry + '_property';
@@ -67,6 +68,7 @@ app.post("/selectEnterprise",jsonParser, (req, res) => {
     res.end()
   })
 });
+
 app.post("/selectProperty",jsonParser, (req, res) => {
   const industry = req.body.industry;
   const enterprise = req.body.enterprise;
@@ -87,60 +89,16 @@ app.post("/selectProperty",jsonParser, (req, res) => {
 //指标检索
 app.post("/firstArchIndustry", jsonParser, (req, res) => {
   const industry = req.body.industry
-  const index = req.body.index
-  let indexList =
-  {
-    "基本指标": 1,
-    "数字研发创新指标": 2,
-    "组织指标": 3,
-    "战略指标": 4,
-    "行业特色指标": 5
-  }
-  let useIndex = "("
-  for (let i of index) {
-    useIndex += indexList[i] + ","
-  }
-  useIndex = useIndex.slice(0, useIndex.length - 1) + ")"
-  if (industry.length === 2) {
-    // 全选施工行业与设计行业
-    let sql = `select * from constru_structure where parent_id in ${useIndex} or id in ${useIndex} union select * from design_structure where parent_id in ${useIndex} or id in ${useIndex}`;
-    let str = '';
-    connection.query(sql, function (err, result) {
-      if (err) {
-        console.log('[SELECT ERROR]：', err.message);
-      }
-      console.log(result)
-      str = JSON.stringify(result);
-      res.send(str)
-      res.end()
-    })
-  }
-  else {
-    if (industry[0] === "施工行业") {
-      let sql = `select * from constru_structure where parent_id in ${useIndex} or id in ${useIndex}`;
-      let str = '';
-      connection.query(sql, function (err, result) {
-        if (err) {
-          console.log('[SELECT ERROR]：', err.message);
-        }
-        str = JSON.stringify(result);
-        res.send(str)
-        res.end()
-      })
+  let sql = `select * from ${industry}_structure`;
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
     }
-    else if (industry[0] === "设计行业") {
-      let sql = `select * from design_structure where parent_id in ${useIndex} or id in ${useIndex}`;
-      let str = '';
-      connection.query(sql, function (err, result) {
-        if (err) {
-          console.log('[SELECT ERROR：', err.message);
-        }
-        str = JSON.stringify(result);
-        res.send(str)
-        res.end()
-      })
-    }
-  }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
 })
 
 //地区检索

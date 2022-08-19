@@ -139,7 +139,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, setSelectedYea
     myChart.dispatchAction({
       type: "timelineChange",
       // 时间点的 index
-      currentIndex: date.length - 1,
+      currentIndex: 0,
     });
     myChart.on("timelinechanged", (timelineIndex) => {
       setSelectedYearFirst(date[timelineIndex.currentIndex])

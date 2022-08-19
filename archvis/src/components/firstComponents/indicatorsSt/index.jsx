@@ -1,46 +1,111 @@
-// import "./index.css";
+// import "./index.css";d
 
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { firstArchIndustry } from '../../../apis/api';
 
-export default function FirstIndicators({w, h, selectdIndustry, selectedIndexFirst}) {
-  const [data, setData] = useState([]);
+export default function FirstIndicators({ w, h, selectdIndustry, selectedIndexFirst }) {
+  const [construData, setConstruData] = useState();
+  const [designData, setDesignData] = useState();
+  const [useData, setUseData] = useState();
   const chartRef = useRef(null);
   useEffect(() => {
-    firstArchIndustry(selectdIndustry, selectedIndexFirst).then((res) =>{
-      console.log(res)
-      setData(res)
-    })
-  }, [selectdIndustry, selectedIndexFirst])
+    firstArchIndustry('constru').then((res) => {
+      setConstruData(res);
+    });
+    firstArchIndustry('design').then((res) => {
+      setDesignData(res);
+    });
+  }, [])
+
+  useEffect(() => {
+    if (construData && designData) {
+      let nowData = {}
+      for (let i of construData) {
+        nowData[i.indi_name] = i
+        nowData[i.indi_name]['industry'] = ['施工行业']
+      }
+      for (let i of designData) {
+        if (nowData.hasOwnProperty(i.indi_name)) {
+          nowData[i.indi_name]['industry'].push('设计行业')
+        }
+        else {
+          nowData[i.indi_name] = i
+          nowData[i.indi_name]['industry'] = ['设计行业']
+        }
+      }
+      setUseData(nowData)
+    }
+  }, [construData, designData])
+
 
   // 随系统缩放修改画布大小
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
-      console.log(myChart)
     }
     // console.log(data)
-    let drawdata = [];
-    for (let i in data) {
-      if (data[i].level === 1) {
-        drawdata.push({
-          name: data[i].indi_name,
-          children: []
-        })
-      }
-      else if (data[i].level === 2){
-        drawdata[data[i].parent_id - 1].children.push({
-          name: data[i].indi_name,
-          value: 1
-        })
-      }
-      else {
-        break;
-      }
+    let indexList =
+    {
+      "基本指标": 1,
+      "数字研发创新指标": 2,
+      "组织指标": 3,
+      "战略指标": 4,
+      "行业特色指标": 5
     }
-    
+    let useIndex = []
+    for (let i of selectedIndexFirst) {
+      useIndex.push(indexList[i])
+    }
+    let drawdata = [];
+    if (useData) {
+      console.log(useData)
+      let nowUseData = {}
+      for (let i in useData) {
+        if (useData[i].level === 1) {
+          nowUseData[useData[i].id] = {
+            name: i,
+            children: [],
+            industry: useData[i].industry
+          }
+        }
+        else if (useData[i].level === 2) {
+          if(selectdIndustry.includes(useData[i].industry[0]) || selectdIndustry.includes(useData[i].industry[useData[i].industry.length - 1])){
+            nowUseData[useData[i].parent_id].children.push({
+              name: i,
+              industry: useData[i].industry,
+              value: 1
+            })
+          }
+        }
+      }
+      console.log(nowUseData)
+      for (let i in nowUseData) {
+        if (useIndex.includes(parseInt(i))) {
+          drawdata.push(nowUseData[i])
+        }
+      }
+      console.log(drawdata)
+    }
+    // for (let i in useData) {
+    //   if (useDara[i].level === 1) {
+    //     drawdata.push({
+    //       name: data[i].indi_name,
+    //       children: []
+    //     })
+    //   }
+    //   else if (data[i].level === 2) {
+    //     drawdata[data[i].parent_id - 1].children.push({
+    //       name: data[i].indi_name,
+    //       value: 1
+    //     })
+    //   }
+    //   else {
+    //     break;
+    //   }
+    // }
+
     const option = {
       color: [
         "#5b8ff9",
@@ -95,7 +160,7 @@ export default function FirstIndicators({w, h, selectdIndustry, selectedIndexFir
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [data, w, h]);
+  }, [selectdIndustry, selectedIndexFirst, w, h, useData]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "61vh" }}>

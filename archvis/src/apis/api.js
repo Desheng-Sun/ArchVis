@@ -17,10 +17,9 @@ export function helloworld() {
 
 //////// 第一屏检索栏
 // 行业检索
-export function firstArchIndustry(industry, index) {
+export function firstArchIndustry(industry) {
   return post("/firstArchIndustry", {
     industry: industry,
-    index: index
   })
 
 }
