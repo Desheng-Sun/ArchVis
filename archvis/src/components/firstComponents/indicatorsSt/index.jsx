@@ -59,7 +59,12 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
       useIndex.push(indexList[i])
     }
     let drawdata = [];
+    const colorTypeBoth = '#5b8ff9';
+    const colorTypeSpecial = '#f6bd16';
+    const colorTypeCon = '#fff7ba';
+    const colorTypeDes = '#ffe369';
     if (useData) {
+      console.log('useData')
       console.log(useData)
       let nowUseData = {}
       for (let i in useData) {
@@ -80,12 +85,54 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
           }
         }
       }
+      console.log('nowUsedata')
       console.log(nowUseData)
       for (let i in nowUseData) {
         if (useIndex.includes(parseInt(i))) {
-          drawdata.push(nowUseData[i])
+          if ((useIndex.includes(5)) && (selectdIndustry.length == 2)) {
+            let addColor = nowUseData[i];
+            console.log('addColor');
+            console.log(addColor);
+            if ( i == 5 ) {
+              addColor.itemStyle = {
+                color: colorTypeSpecial
+              };
+              for (let j in addColor.children) {
+                // if (addColor.children[j].industry.length == 2) {
+                //   addColor.children[j].itemStyle = {
+                //     color: colorTypeBoth
+                //   };
+                // }
+                if (addColor.children[j].industry == '施工行业') {
+                  addColor.children[j].itemStyle = {
+                    color: colorTypeCon
+                  };
+                }
+                else if (addColor.children[j].industry == '设计行业') {
+                  addColor.children[j].itemStyle = {
+                    color: colorTypeDes
+                  };
+                }
+              }
+            }
+            // else {
+            //   addColor.itemStyle = {
+            //     color: colorTypeBoth
+            //   };
+            //   for (let j in addColor.children) {
+            //     addColor.children[j].itemStyle = {
+            //       color: '#87b3ff'
+            //     };
+            //   }
+            // }
+            drawdata.push(addColor)
+          }
+          else {
+            drawdata.push(nowUseData[i])
+          }
         }
       }
+      console.log('drawdata')
       console.log(drawdata)
     }
     // for (let i in useData) {
@@ -105,19 +152,19 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
     //     break;
     //   }
     // }
-
+    
     const option = {
       color: [
         "#5b8ff9",
         "#5ad8a6",
         "#5d7092",
-        "#f6bd16",
         "#e86452",
         "#6dc8ec",
         "#945fb9",
         "#ff9845",
         "#1e9493",
-        "#ff99c3"
+        "#ff99c3",
+        "#f6bd16"
       ],
       tooltip: {
         trigger: 'item',
