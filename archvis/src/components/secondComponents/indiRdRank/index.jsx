@@ -1,6 +1,6 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { selectProperty } from '../../../apis/api';
+import { secondProperty } from '../../../apis/api';
 
 export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd}) {
   const [data, setData] = useState([]);
@@ -26,8 +26,7 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
         // })
       }
       else {
-        // 异步
-        selectProperty(industry, nowEnterprise[i], selectedIndicatorsRd).then((res) => {
+        secondProperty(industry, nowEnterprise[i], selectedIndicatorsRd).then((res) => {
           console.log('res');
           console.log(res);
           for (let j in res) {
@@ -40,9 +39,8 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
             else if (res[j]['年份'] == 2021) {
               tmp[nowEnterprise[i]][2] = res[j][selectedIndicatorsRd];
             }
-            console.log('debug1');
+            setData(tmp);
           }
-          setData(tmp);
         })
       }
     }
@@ -85,8 +83,7 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
           },
           legend: {
             top: '5%',
-            // data: ['企业1', '企业2', '企业3', '企业4', '企业5']
-            data: data
+            data: nowEnterprise
           },
           grid: {
             left: '3%',
@@ -109,7 +106,7 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [data, w, h]);
+  }, [nowEnterprise, data, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "47.2vh" }}>

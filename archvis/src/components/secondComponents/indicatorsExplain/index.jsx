@@ -1,22 +1,36 @@
 import { Form, Input } from 'antd';
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { secondIndicators } from '../../../apis/api';
+import { secondExplain } from '../../../apis/api';
 
 
-export default function SecondIndicatorsRdExplain({ selectedIndicatorsRd }) {
-  const IndicatorsRdExplain = {
-    "股票代码": ["111", "112"], "12": ["121", "122"], "53": ["131", "132"],
-    "21": ["211", "212"], "22": ["221", "222"], "23": ["231", "232"],
-    "31": ["311", "312"], "32": ["321", "322"], "33": ["331", "332"],
-    "41": ["411", "412"], "42": ["421", "422"], "43": ["431", "432"],
-    "51": ["511", "512"], "52": ["521", "522"], "53": ["531", "532"],
-  }
-  const [nowIndicatorsRdExplain, setNowIndicatorsRdExplain] = useState(IndicatorsRdExplain[selectedIndicatorsRd])
+export default function SecondIndicatorsRdExplain({ selectedIndustry, selectedIndicatorsNd, selectedIndicatorsRd }) {
+  const [industry, setIndustry] = useState('constru');
+  const [nowIndicatorsRdExplain, setNowIndicatorsRdExplain] = useState();
+  useEffect(() => {
+    if (selectedIndustry === '施工行业') {
+      setIndustry('constru');
+    }
+    else if (selectedIndustry === '设计行业') {
+      setIndustry('design');
+    }
+  }, [selectedIndustry])
   useEffect(() => {
     if (selectedIndicatorsRd !== undefined) {
-      setNowIndicatorsRdExplain(IndicatorsRdExplain[selectedIndicatorsRd])
+      secondExplain(industry, selectedIndicatorsRd).then((res) => {
+        console.log('explain');
+        console.log(res);
+        if (res[0].explanation != null) {
+          setNowIndicatorsRdExplain(res[0].explanation);
+        }
+        else {
+          secondExplain(industry, res[0].parent_id).then((res) => {
+            setNowIndicatorsRdExplain(res[0].explanation);
+          })
+        }
+      });
     }
-  }, [selectedIndicatorsRd])
+  }, [industry, selectedIndicatorsNd, selectedIndicatorsRd])
   function ExlpainItem({ labelName, defaultValue }) {
     return (
       <div style={{ paddingTop: "5vh", height: "15vh" }}>
@@ -38,7 +52,7 @@ export default function SecondIndicatorsRdExplain({ selectedIndicatorsRd }) {
         />
         <ExlpainItem
           labelName="指标解释"
-          // defaultValue={nowIndicatorsRdExplain[1]}
+          defaultValue={nowIndicatorsRdExplain}
         />
       </Form>
     </div>

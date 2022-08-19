@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import React, { useState, useEffect } from "react";
 import '../../../App';
-import {selectEnterprise } from '../../../apis/api';
+import { secondEnterprise } from '../../../apis/api';
 
 const { Option } = Select;
 
@@ -10,9 +10,8 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, se
   const [construEnterprise, setConstruEnterprise] = useState([]);
   const [designEnterprise, setDesignEnterprise] = useState([]);
   const [NowEnterpriseList, setNowEnterpriseList] = useState([]);
-  // const [nowEnterprise, setNowEnterprise] = useState();
   useEffect(() => {
-    selectEnterprise('constru').then((res) => {
+    secondEnterprise('constru').then((res) => {
       var tmp = [];
       for (let i in res) {
         tmp.push(res[i].企业名称);
@@ -23,7 +22,7 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, se
       // console.log(tmp);
     });
 
-    selectEnterprise('design').then((res) => {
+    secondEnterprise('design').then((res) => {
       var tmp = [];
       for (let i in res) {
         tmp.push(res[i].企业名称);

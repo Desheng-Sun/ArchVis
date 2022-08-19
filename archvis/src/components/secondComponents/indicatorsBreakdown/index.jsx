@@ -1,6 +1,6 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { secondSelectIndicators } from '../../../apis/api';
+import { secondIndicators } from '../../../apis/api';
 
 export default function FirstIndicators({w, h, selectedIndustry}) {
   const [industry, setIndustry] = useState('constru');
@@ -15,7 +15,7 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
     }
   }, [selectedIndustry])
   useEffect(() => {
-    secondSelectIndicators(industry).then((res) =>{
+    secondIndicators(industry).then((res) =>{
       setData(res)
     })
   }, [industry])
