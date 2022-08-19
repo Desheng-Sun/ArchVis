@@ -4,7 +4,7 @@ import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { firstArchIndustry } from '../../../apis/api';
 
-export default function FirstIndicators({ w, h, selectdIndustry, selectedIndexFirst }) {
+export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIndexFirst }) {
   const [construData, setConstruData] = useState();
   const [designData, setDesignData] = useState();
   const [useData, setUseData] = useState();
@@ -71,7 +71,7 @@ export default function FirstIndicators({ w, h, selectdIndustry, selectedIndexFi
           }
         }
         else if (useData[i].level === 2) {
-          if(selectdIndustry.includes(useData[i].industry[0]) || selectdIndustry.includes(useData[i].industry[useData[i].industry.length - 1])){
+          if(selectdIndustryFirst.includes(useData[i].industry[0]) || selectdIndustryFirst.includes(useData[i].industry[useData[i].industry.length - 1])){
             nowUseData[useData[i].parent_id].children.push({
               name: i,
               industry: useData[i].industry,
@@ -160,7 +160,7 @@ export default function FirstIndicators({ w, h, selectdIndustry, selectedIndexFi
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [selectdIndustry, selectedIndexFirst, w, h, useData]);
+  }, [selectdIndustryFirst, selectedIndexFirst, w, h, useData]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "61vh" }}>

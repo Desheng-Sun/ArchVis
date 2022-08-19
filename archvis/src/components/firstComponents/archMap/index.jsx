@@ -3,19 +3,28 @@ import React, { useState, useEffect, useRef } from "react";
 import geoChina from "./geo.json";
 import { firstArchMap } from '../../../apis/api';
 
-export default function FirstArchMap({ w, h, selectedRegionFirst, setSelectedYearFirst }) {
+export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFirst, setSelectedRegionFirst, setSelectedYearFirst }) {
   const [data, setData] = useState([]);
-  const [date, setDate] = useState([2019,2020,2021]);
+  const [date, setDate] = useState([2019, 2020, 2021]);
   const chartRef = useRef(null);
   useEffect(() => {
-    firstArchMap().then((res) => {
-      setData(res);
+    firstArchMap(selectedYearFirst).then((res) => {
+      let useData = []
+      for (let i of res) {
+        useData.push({
+          name: i["省份"],
+          value: i["COUNT(*)"]
+        })
+      }
+      setData(useData);
+      console.log(res)
     });
-  }, [])
+  }, [selectedYearFirst])
   // 随系统缩放修改画布大小
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     let fontsizeNow = parseInt(14 * h / 698)
+    let index = date.indexOf(selectedYearFirst)
     fontsizeNow = Math.max(10, fontsizeNow)
 
     if (myChart == null) {
@@ -128,18 +137,20 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, setSelectedYea
           borderColor: "rgb(255, 255, 138)",
         },
       },
+      series: [
+      ]
     };
     myChart.setOption(option, true);
     myChart.on('click', function (param) {
       console.log(param)
       if (param.componentType === "geo") {
-        selectedRegionFirst([param.name])
+        setSelectedRegionFirst([param.name])
       }
     })
     myChart.dispatchAction({
       type: "timelineChange",
       // 时间点的 index
-      currentIndex: 0,
+      currentIndex: index,
     });
     myChart.on("timelinechanged", (timelineIndex) => {
       setSelectedYearFirst(date[timelineIndex.currentIndex])

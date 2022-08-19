@@ -8,7 +8,7 @@ import CheckMultipleComponent from "./checkMultple";
 const { Option, OptGroup } = Select;
 
 
-export default function FirstSearchBar({setSelectdIndustry, setSelectedIndexFirst, setSelectedRegionFirst}) {
+export default function FirstSearchBar({setSelectdIndustryFirst, setSelectedIndexFirst, setSelectedRegionFirst}) {
   const allIndustry = ["建筑业（施工与设计加总）", "施工行业", "设计行业"]
   const allIndex = ["全部指标", "基本指标", "数字研发创新指标", "组织指标", "战略指标", "行业特色指标"]
   const allRegion = ["全国", "东北", "华北", "华东", "华中", "华南", "西北", "西南"]
@@ -114,7 +114,7 @@ export default function FirstSearchBar({setSelectdIndustry, setSelectedIndexFirs
 
   return (
     <div style={{ height: "27.2vh", width: "100%" }}>
-      <div style={{ height: "30%", paddingTop: "5%" }}>
+      <div className="multipleCheck">
         {/* <SelectComponent
           useData={allIndustry}
           changeData={onChange}
@@ -134,7 +134,7 @@ export default function FirstSearchBar({setSelectdIndustry, setSelectedIndexFirs
           useData={allIndustry2}
           dataName="建筑业（施工与设计加总）"
           setCheckData={setNowIndustry}
-          setSelectedData = {setSelectdIndustry}
+          setSelectedData = {setSelectdIndustryFirst}
         />
       </div>
       <div className="multipleCheck">
