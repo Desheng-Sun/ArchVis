@@ -17,7 +17,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
         })
       }
       setData(useData);
-      console.log(res)
+      console.log(useData)
     });
   }, [selectedYearFirst])
   // 随系统缩放修改画布大小
