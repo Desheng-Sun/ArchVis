@@ -98,7 +98,7 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
               color: colorChildren[i - 1]
             };
           }
-          if ((i == 5) && (useIndex.includes(5)) && (selectdIndustry.length == 2)) {
+          if ((i == 5) && (useIndex.includes(5)) && (selectdIndustryFirst.length == 2)) {
               for (let j in addColor.children) {
                 if (addColor.children[j].industry == '施工行业') {
                   addColor.children[j].itemStyle = {
