@@ -11,8 +11,10 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: 'sds091',//密码
-  database: 'archsql'//数据库名称
+  password: '990921',//密码
+  database: 'archindicators'//数据库名称
+  // password: 'sds091',//密码
+  // database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -41,47 +43,6 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-app.post("/selectIndicators",jsonParser, (req, res) => {
-  const industry = req.body.industry;
-  let sql = 'select * from ' + industry + '_structure';
-  let str = '';
-    connection.query(sql, function(err, result) {
-      if(err){
-        console.log('[SELECT ERROR]：',err.message);
-      }
-      str = JSON.stringify(result);
-      res.send(str)
-      res.end()
-    })      
-});
-app.post("/selectEnterprise",jsonParser, (req, res) => {
-  const industry = req.body.industry;
-  let sql = 'select 企业名称 from ' + industry + '_property';
-  let str = '';
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log('[SELECT ERROR]：', err.message);
-    }
-    str = JSON.stringify(result);
-    res.send(str)
-    res.end()
-  })
-});
-app.post("/selectProperty",jsonParser, (req, res) => {
-  const industry = req.body.industry;
-  const enterprise = req.body.enterprise;
-  const indicator = req.body.indicator;
-  let sql = 'select ' + indicator + ',年份 from ' + industry + '_property where 企业名称 = "' + enterprise + '" order by 年份';
-  let str = '';
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log('[SELECT ERROR]：', err.message);
-    }
-    str = JSON.stringify(result);
-    res.send(str)
-    res.end()
-  })
-});
 
 /////////////第一屏检索栏
 //指标检索
@@ -206,9 +167,9 @@ app.post("/firstArchRank", jsonParser, (req, res) => {
 });
 
 
-/////////////第一屏检索栏
+/////////////第二屏检索栏
 //指标检索
-app.post("/secondSelectIndicators", jsonParser, (req, res) => {
+app.post("/secondIndicators", jsonParser, (req, res) => {
   const industry = req.body.industry;
   let sql = 'select * from ' + industry + '_structure';
   let str = '';
@@ -222,11 +183,10 @@ app.post("/secondSelectIndicators", jsonParser, (req, res) => {
   })
 });
 
-
 //企业检索
-app.post("/selectEnterprise", jsonParser, (req, res) => {
+app.post("/secondEnterprise", jsonParser, (req, res) => {
   const industry = req.body.industry;
-  let sql = 'select 企业名称 from ' + industry + '_property';
+  let sql = 'select distinct 企业名称 from ' + industry + '_property';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -237,6 +197,49 @@ app.post("/selectEnterprise", jsonParser, (req, res) => {
     res.end()
   })
 });
+
+// 指标值查询
+app.post("/secondProperty",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  const enterprise = req.body.enterprise;
+  const indicator = req.body.indicator;
+  let sql = 'select ' + indicator + ',年份 from ' + industry + '_property where 企业名称 = "' + enterprise + '" order by 年份';
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
+});
+
+// 指标解释查询
+app.post("/secondExplain",jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  const indicator = req.body.indicator;
+  let sql = '';
+  if (isNaN(indicator)) {
+    sql = 'select * from ' + industry + '_structure where indi_name = "' + indicator + '"';
+  }
+  else {
+    sql = 'select * from ' + industry + '_structure where id = "' + indicator + '"';
+  }
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
+});
+
+
+
+
 
 // 企业数字化程度对比
 app.post("/thirdEPDight", jsonParser, (req, res) => {

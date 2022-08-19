@@ -46,25 +46,33 @@ export function firstArchRank(region, date) {
 }
 
 //////// 第二屏检索栏
-export function secondSelectIndicators(industry) {
-  return post("/secondSelectIndicators", {
+export function secondIndicators(industry) {
+  return post("/secondIndicators", {
     industry: industry
   });
 }
 
-export function selectEnterprise(industry) {
-  return post("/selectEnterprise", {
+export function secondEnterprise(industry) {
+  return post("/secondEnterprise", {
     industry: industry
   });
 }
 
-export function selectProperty(industry, enterprise, indicator) {
-  return post("/selectProperty", {
+export function secondProperty(industry, enterprise, indicator) {
+  return post("/secondProperty", {
     industry: industry,
     enterprise: enterprise,
     indicator: indicator
   });
 }
+
+export function secondExplain(industry, indicator) {
+  return post("/secondExplain", {
+    industry: industry,
+    indicator: indicator
+  });
+}
+
 
 
 // 企业数字化程度对比

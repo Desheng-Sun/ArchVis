@@ -1,6 +1,6 @@
 import { Radio, Space } from 'antd';
 import React, { useState, useEffect }  from 'react';
-import { secondSelectIndicators } from '../../../apis/api'
+import { secondIndicators } from '../../../apis/api'
 import "./index.css"
 
 
@@ -18,7 +18,7 @@ export default function SecondIndicatorsNdSelect({ selectedIndustry, setSelected
   }, [selectedIndustry])
 
   useEffect(() => {
-    secondSelectIndicators(industry).then((res) =>{
+    secondIndicators(industry).then((res) =>{
       var tmp = [];
       for (let i in res) {
         if (res[i].level === 2) {

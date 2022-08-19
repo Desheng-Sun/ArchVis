@@ -284,8 +284,10 @@ export default function Layout() {
                                     setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
                             </div>
                             <div id="secondIndiRDExplane">
-                                <ChartHeader chartName={"三级指标解释栏"} />
+                                <ChartHeader chartName={"指标解释栏"} />
                                 <SecondIndicatorsRdExplain
+                                    selectedIndustry={selectedIndustry}
+                                    selectedIndicatorsNd={selectedIndicatorsNd}
                                     selectedIndicatorsRd={selectedIndicatorsRd} />
 
                             </div>
