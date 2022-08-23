@@ -1,7 +1,6 @@
 import { Form, Input } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { secondIndicators } from '../../../apis/api';
-import { secondExplain } from '../../../apis/api';
+// import { secondExplain } from '../../../apis/api';
 
 
 export default function SecondIndicatorsRdExplain({ selectedIndustry, selectedIndicatorsNd, selectedIndicatorsRd }) {
@@ -17,7 +16,7 @@ export default function SecondIndicatorsRdExplain({ selectedIndustry, selectedIn
   }, [selectedIndustry])
   useEffect(() => {
     if (selectedIndicatorsRd !== undefined) {
-      secondExplain(industry, selectedIndicatorsRd).then((res) => {
+      secondExplain(industry).then((res) => {
         console.log('explain');
         console.log(res);
         if (res[0].explanation != null) {
@@ -45,11 +44,6 @@ export default function SecondIndicatorsRdExplain({ selectedIndustry, selectedIn
   return (
     <div style={{height:"41vh", width:"100%", fontSize:"5vh"}}>
       <Form>
-        <ExlpainItem
-        // style={{fontSize:"15px"}}
-          labelName="指标公式"
-          // defaultValue={nowIndicatorsRdExplain[0]}
-        />
         <ExlpainItem
           labelName="指标解释"
           defaultValue={nowIndicatorsRdExplain}

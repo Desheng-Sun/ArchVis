@@ -11,8 +11,7 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: 'root',//密码
-  // password: '990921',//密码
+  password: '990921',//密码
   database: 'archindicators'//数据库名称
   // password: 'sds091',//密码
   // database: 'archsql'//数据库名称
@@ -158,9 +157,8 @@ app.post("/secondEnterprise", jsonParser, (req, res) => {
 // 指标值查询
 app.post("/secondProperty",jsonParser, (req, res) => {
   const industry = req.body.industry;
-  const enterprise = req.body.enterprise;
   const indicator = req.body.indicator;
-  let sql = 'select ' + indicator + ',年份 from ' + industry + '_property where 企业名称 = "' + enterprise + '" order by 年份';
+  let sql = 'select 企业名称,' + indicator + ',年份 from ' + industry + '_property order by 企业名称';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -172,27 +170,20 @@ app.post("/secondProperty",jsonParser, (req, res) => {
   })
 });
 
-// 指标解释查询
-app.post("/secondExplain",jsonParser, (req, res) => {
-  const industry = req.body.industry;
-  const indicator = req.body.indicator;
-  let sql = '';
-  if (isNaN(indicator)) {
-    sql = 'select * from ' + industry + '_structure where indi_name = "' + indicator + '"';
-  }
-  else {
-    sql = 'select * from ' + industry + '_structure where id = "' + indicator + '"';
-  }
-  let str = '';
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log('[SELECT ERROR]：', err.message);
-    }
-    str = JSON.stringify(result);
-    res.send(str)
-    res.end()
-  })
-});
+// // 指标解释查询
+// app.post("/secondExplain",jsonParser, (req, res) => {
+//   const industry = req.body.industry;
+//   let sql = 'select indi_name,explanation from ' + industry + '_structure';
+//   let str = '';
+//   connection.query(sql, function (err, result) {
+//     if (err) {
+//       console.log('[SELECT ERROR]：', err.message);
+//     }
+//     str = JSON.stringify(result);
+//     res.send(str)
+//     res.end()
+//   })
+// });
 
 
 /////////////第三屏检索栏

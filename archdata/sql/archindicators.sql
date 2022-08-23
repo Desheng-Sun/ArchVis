@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 18/08/2022 17:42:45
+ Date: 23/08/2022 17:54:20
 */
 
 SET NAMES utf8mb4;
@@ -443,11 +443,11 @@ CREATE TABLE `constru_structure`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `indi_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `parent_id` int(0) NULL DEFAULT NULL,
-  `level` int(0) NOT NULL,
+  `level` int(0) NULL DEFAULT NULL,
   `explanation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of constru_structure
@@ -472,11 +472,11 @@ INSERT INTO `constru_structure` VALUES (17, '智慧工地', 5, 2, '企业将数�
 INSERT INTO `constru_structure` VALUES (18, 'BIM应用', 5, 2, '反映企业运用BIM技术的状况以及BIM技术运用水平，BIM技术作为建筑领域数字化转型代表技术，运用程度可以反映数字化转型程度。');
 INSERT INTO `constru_structure` VALUES (19, '施工管理数字化', 5, 2, '反映施工管理过程中的电子化、信息化程度，电子化的工程档案、签章等能够大大提高施工管理的效率，是施工企业数字化程度的重要体现。');
 INSERT INTO `constru_structure` VALUES (20, '施工设施应用', 5, 2, '反映智能设备在施工过程中的应用情况，智能施工设施的应用是建筑业转型的重要体现，也是研发创新的成果体现，应用的智能设施越多，反映企业数字化程度越高。');
-INSERT INTO `constru_structure` VALUES (21, '股票代码', 6, 3, NULL);
-INSERT INTO `constru_structure` VALUES (22, '企业名称', 6, 3, NULL);
+INSERT INTO `constru_structure` VALUES (21, '股票代码', NULL, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (22, '企业名称', NULL, NULL, NULL);
 INSERT INTO `constru_structure` VALUES (23, '总资产', 6, 3, '企业总资产可以侧面反映企业规模以及企业资金实力，资金实力越雄厚的企业越有能力投入更多的资金运用数字化转型。');
 INSERT INTO `constru_structure` VALUES (24, '企业成立年限', 6, 3, '从成立年限方面反映企业规模状况，成立年限越长的企业代表企业经营更加稳定，更有潜力参与数字化转型。');
-INSERT INTO `constru_structure` VALUES (25, '成立年份', 6, 3, NULL);
+INSERT INTO `constru_structure` VALUES (25, '成立年份', NULL, NULL, NULL);
 INSERT INTO `constru_structure` VALUES (26, '员工总数', 6, 3, '从员工数量方面反映企业规模状况，员工数量越多反映企业资金实力越雄厚，能够反映企业在人力资源方面的配备以及是否为数字化转型做好人员储备。');
 INSERT INTO `constru_structure` VALUES (27, '资产负债率', 7, 3, '反映企业经营风险的大小，也反映企业利用债权人提供的资金从事经营活动的能力，可以衡量在数字化转型中企业调动资金的能力。');
 INSERT INTO `constru_structure` VALUES (28, '总资产周转率', 7, 3, '企业一定时期的销售收入净额与平均资产总额之比,它是衡量资产投资规模与销售水平之间配比情况的指标，可以衡量企业数字化资产投资规模。');
@@ -718,11 +718,11 @@ CREATE TABLE `design_structure`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `indi_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `parent_id` int(0) NULL DEFAULT NULL,
-  `level` int(0) NOT NULL,
+  `level` int(0) NULL DEFAULT NULL,
   `explanation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of design_structure
@@ -745,11 +745,11 @@ INSERT INTO `design_structure` VALUES (15, '战略影响因素', 4, 2, NULL);
 INSERT INTO `design_structure` VALUES (16, '设计合作', 5, 2, '设计领域的合作需要依靠数字化技术，与其他设计企业的合作越多，能够反映企业的视野越开阔，更容易接受数字化转型和创新。');
 INSERT INTO `design_structure` VALUES (17, '设计项目', 5, 2, '公共建筑、复杂性建筑、装配式建筑设计过程中往往需要用到一些先进的技术手段，很难通过传统的方式实现，此类项目可以体现设计企业数字化技术的应用情况。');
 INSERT INTO `design_structure` VALUES (18, '设计工具', 5, 2, '数字化的设计工具是设计企业经营效率的保证，协同一体化的设计平台和bim技术都能够大幅提高设计过程中信息传递效率，是设计企业数字化转型的重要体现。');
-INSERT INTO `design_structure` VALUES (19, '股票代码', 6, 3, NULL);
-INSERT INTO `design_structure` VALUES (20, '企业名称', 6, 3, NULL);
+INSERT INTO `design_structure` VALUES (19, '股票代码', NULL, NULL, NULL);
+INSERT INTO `design_structure` VALUES (20, '企业名称', NULL, NULL, NULL);
 INSERT INTO `design_structure` VALUES (21, '总资产', 6, 3, '企业总资产可以侧面反映企业规模以及企业资金实力，资金实力越雄厚的企业越有能力投入更多的资金运用数字化转型。');
 INSERT INTO `design_structure` VALUES (22, '企业成立年限', 6, 3, '从成立年限方面反映企业规模状况，成立年限越长的企业代表企业经营更加稳定，更有潜力参与数字化转型。');
-INSERT INTO `design_structure` VALUES (23, '成立年份', 6, 3, NULL);
+INSERT INTO `design_structure` VALUES (23, '成立年份', NULL, NULL, NULL);
 INSERT INTO `design_structure` VALUES (24, '员工总数', 6, 3, '从员工数量方面反映企业规模状况，员工数量越多反映企业资金实力越雄厚，能够反映企业在人力资源方面的配备以及是否为数字化转型做好人员储备。');
 INSERT INTO `design_structure` VALUES (25, '资产负债率', 7, 3, '反映企业经营风险的大小，也反映企业利用债权人提供的资金从事经营活动的能力，可以衡量在数字化转型中企业调动资金的能力。');
 INSERT INTO `design_structure` VALUES (26, '总资产周转率', 7, 3, '企业一定时期的销售收入净额与平均资产总额之比,它是衡量资产投资规模与销售水平之间配比情况的指标，可以衡量企业数字化资产投资规模。');

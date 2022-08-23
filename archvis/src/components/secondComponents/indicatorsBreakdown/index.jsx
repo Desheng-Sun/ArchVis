@@ -5,6 +5,7 @@ import { secondIndicators } from '../../../apis/api';
 export default function FirstIndicators({w, h, selectedIndustry}) {
   const [industry, setIndustry] = useState('constru');
   const [data, setData] = useState([]);
+  const [explain, setExplain] = useState();
   const chartRef = useRef(null);
   useEffect(() => {
     if (selectedIndustry === '施工行业') {
@@ -31,12 +32,14 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
       if (data[i].level === 2) {
         dataChildren.push({
           name: data[i].indi_name,
-          children: []
+          children: [],
+          explain: data[i].explanation
         })
       }
       else if (data[i].level === 3){
         dataChildren[data[i].parent_id - 6].children.push({
           name: data[i].indi_name,
+          explain: data[i].explanation,
           value: 1
         })
       }
@@ -46,7 +49,8 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
       if (data[i].level === 1) {
         drawdata.push({
           name: data[i].indi_name,
-          children: []
+          children: [],
+          explain: data[i].explanation
         })
       }
       else if (data[i].level === 2) {
@@ -70,6 +74,22 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
         "#1e9493",
         "#ff99c3"
       ],
+      tooltip: {
+        trigger: 'item',
+        confine: true,
+        formatter:function (params) {
+          if (params.data.explain != null) {
+            return `
+                  ${params.data.name}: ${params.data.explain}
+                 `;
+          }
+          else {
+            return `
+                  ${params.data.name}
+                 `;
+          }
+        },
+      },
       series: [
         {
           type: 'sunburst',
