@@ -5,6 +5,7 @@ import { secondProperty } from '../../../apis/api';
 export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd}) {
   const [data, setData] = useState([]);
   const [industry, setIndustry] = useState('constru');
+  const [enterpriseList, setEnterpriseList] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
     if (selectedIndustry === '施工行业') {
@@ -14,53 +15,48 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
       setIndustry('design');
     }
   }, [selectedIndustry])
+  // useEffect(() => {
+  //   console.log('nowEnterprise');
+  //   console.log(nowEnterprise);
+  //   let 
+  //   
+    
+  // }, [nowEnterprise])
   useEffect(() => {
-    var tmp = {};
-    console.log('nowEnterprise');
-    console.log(nowEnterprise);
-    for (let i in nowEnterprise) {
-      tmp[nowEnterprise[i]] = [];
-      if (selectedIndicatorsRd === null) {
-        // selectProperty(industry, nowEnterprise[i], selectedIndicatorsNd).then((res) => {
-        //   tmp[nowEnterprise[i]].push(res);
-        // })
-      }
-      else {
-        secondProperty(industry, nowEnterprise[i], selectedIndicatorsRd).then((res) => {
-          console.log('res');
-          console.log(res);
-          for (let j in res) {
-            if (res[j]['年份'] == 2019) {
-              tmp[nowEnterprise[i]][0] = res[j][selectedIndicatorsRd];
+    var tmp = [];
+    if (selectedIndicatorsRd === null) {}
+    else {
+      secondProperty(industry, selectedIndicatorsRd).then((res) => {
+        console.log('res');
+        console.log(res);
+        for (let i in nowEnterprise) {
+          tmp[i] = {
+                name: nowEnterprise[i],
+                type: 'line',
+                data: [null, null, null]
+              };
+        }
+        for (let i in res) {
+          for (let j = 0; j < tmp.length; j++) {
+            if ((tmp[j].name == res[i]['企业名称']) && (res[i]['年份'] == 2019)) {
+              tmp[j].data[0] = res[i][selectedIndicatorsRd];
             }
-            else if (res[j]['年份'] == 2020) {
-              tmp[nowEnterprise[i]][1] = res[j][selectedIndicatorsRd];
+            else if ((tmp[j].name == res[i]['企业名称']) && (res[i]['年份'] == 2020)) {
+              tmp[j].data[1] = res[i][selectedIndicatorsRd];
             }
-            else if (res[j]['年份'] == 2021) {
-              tmp[nowEnterprise[i]][2] = res[j][selectedIndicatorsRd];
+            else if ((tmp[j].name == res[i]['企业名称']) && (res[i]['年份'] == 2021)) {
+              tmp[j].data[2] = res[i][selectedIndicatorsRd];
             }
-            setData(tmp);
           }
-        })
-      }
+        }
+        setData(tmp);
+      })
     }
   }, [industry, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd])
   // 随系统缩放修改画布大小
   useEffect(() => {
     console.log('data');
     console.log(data);
-    var series = [];
-    var j = 0;
-    for (let i in data) {
-      series[j] = {
-        name: i,
-        type: 'line',
-        data: data[i]
-      }
-      j++;
-    }
-    console.log('series');
-    console.log(series);
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
@@ -83,7 +79,7 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
           },
           legend: {
             top: '5%',
-            data: nowEnterprise
+            data: data.name
           },
           grid: {
             left: '3%',
@@ -102,11 +98,12 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
                 return value.max
               }
           },
-          series: series
+          series: data
     };
     myChart.setOption(option);
+    console.log('redraw');
     myChart.resize();
-  }, [nowEnterprise, data, w, h]);
+  }, [data, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "47.2vh" }}>

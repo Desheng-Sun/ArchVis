@@ -59,20 +59,18 @@ export function secondEnterprise(industry) {
   });
 }
 
-export function secondProperty(industry, enterprise, indicator) {
+export function secondProperty(industry, indicator) {
   return post("/secondProperty", {
     industry: industry,
-    enterprise: enterprise,
     indicator: indicator
   });
 }
 
-export function secondExplain(industry, indicator) {
-  return post("/secondExplain", {
-    industry: industry,
-    indicator: indicator
-  });
-}
+// export function secondExplain(industry) {
+//   return post("/secondExplain", {
+//     industry: industry
+//   });
+// }
 
 
 //////// 第三屏检索栏

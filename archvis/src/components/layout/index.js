@@ -54,7 +54,7 @@ export default function Layout() {
     const [selectedYearFirst, setSelectedYearFirst] = useState(2019)
 
     // 第二屏，用户选择的行业
-    const [selectedIndustry, setSelectedIndustry] = useState("建筑业（施工与设计加总）");
+    const [selectedIndustry, setSelectedIndustry] = useState("施工行业");
     // 第二屏，用户选择的公司
     const [nowEnterprise, setNowEnterprise] = useState(["美丽生态"]);
     // 第二屏，用户选择的二级指标
@@ -297,11 +297,11 @@ export default function Layout() {
                                     setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
                             </div>
                             <div id="secondIndiRDExplane">
-                                <ChartHeader chartName={"指标解释栏"} />
+                                {/* <ChartHeader chartName={"指标解释栏"} />
                                 <SecondIndicatorsRdExplain
                                     selectedIndustry={selectedIndustry}
                                     selectedIndicatorsNd={selectedIndicatorsNd}
-                                    selectedIndicatorsRd={selectedIndicatorsRd} />
+                                    selectedIndicatorsRd={selectedIndicatorsRd} /> */}
 
                             </div>
                         </div>
