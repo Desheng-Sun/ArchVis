@@ -1,9 +1,32 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-
-export default function ThirdEPScoreIndiSD({ w, h }) {
+import { thirdScoreST } from '../../../apis/api';
+export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedIndustry}) {
   const [data, setData] = useState([]);
+  const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
+  useEffect(() => {
+    if (selectedIndustry === '施工行业') {
+      setIndustry('constru');
+    }
+    else if (selectedIndustry === '设计行业') {
+      setIndustry('design');
+    }
+  }, [selectedIndustry])
+
+  useEffect(() => {
+    thirdScoreST(industry, selectedEnterprise).then((res) => {
+      var tmp=[];    
+      console.log(res[0]['资产负债率']);
+      tmp[0] = res[0]['资产负债率'];
+      tmp[1] = res[0]['总资产周转率'];
+      tmp[2] = res[0]['研发投入占营业收入比例(%)'];
+      tmp[3] = res[0]['资产负债率'];
+      tmp[4] = res[0]['资产负债率'];
+      setData(tmp)
+    })
+  }, [industry, selectedEnterprise])
+
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
@@ -25,11 +48,7 @@ export default function ThirdEPScoreIndiSD({ w, h }) {
       legend: {
         bottom: 5,
         data: [{
-          name: '得分',
-          icon: "circle"
-        },
-        {
-          name: '得分2',
+          name: selectedEnterprise+'企业一级指标',
           icon: "circle"
         }],
         itemGap: 20,
@@ -39,26 +58,24 @@ export default function ThirdEPScoreIndiSD({ w, h }) {
         }
       },
       radar: {
-        indicator: [
-          { name: '基本指标', max: 65 },
-          { name: '数字化研发创新指标', max: 160 },
-          { name: '组织指标', max: 300 },
-          { name: '战略指标', max: 380 },
-          { name: '行业特色指标', max: 520 }
+        indicator: 
+        [
+          { name: '基本指标', max: 1 },
+          { name: '数字化研发创新指标', max: 1 },
+          { name: '组织指标', max: 1 },
+          { name: '战略指标', max: 1 },
+          { name: '行业特色指标', max: 1 }
         ]
       },
       series: [
         {
           name: 'score',
           type: 'radar',
-          data: [
+          data: 
+          [
             {
-              value: [50, 140, 280, 260, 420],
-              name: '得分'
-            },
-            {
-              value: [5, 14, 80, 20, 20],
-              name: '得分2'
+              value: data,
+              name: selectedEnterprise+"企业一级指标"
             }
           ]
         }
@@ -66,7 +83,7 @@ export default function ThirdEPScoreIndiSD({ w, h }) {
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [data, w, h]);
+  }, [data, w, h, selectedEnterprise]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>

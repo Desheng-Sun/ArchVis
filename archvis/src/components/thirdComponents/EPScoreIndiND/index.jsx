@@ -1,9 +1,31 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-
-export default function ThirdEPScoreIndiND({w, h}) {
+import { thirdScoreND } from '../../../apis/api';
+export default function ThirdEPScoreIndiND({w, h, selectedEnterprise, selectedIndustry}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
+  const [industry, setIndustry] = useState('constru');
+  useEffect(() => {
+    if (selectedIndustry === '施工行业') {
+      setIndustry('constru');
+    }
+    else if (selectedIndustry === '设计行业') {
+      setIndustry('design');
+    }
+  }, [selectedIndustry])
+  useEffect(() => {
+    thirdScoreND(industry, selectedEnterprise).then((res) => {
+      var tmp=[];    
+      console.log(res[0]['资产负债率']);
+      tmp[0] = res[0]['资产负债率'];
+      tmp[1] = res[0]['总资产周转率'];
+      tmp[2] = res[0]['研发投入占营业收入比例(%)'];
+      tmp[3] = res[0]['资产负债率'];
+      tmp[4] = res[0]['资产负债率'];
+      setData(tmp)
+    })
+  }, [industry, selectedEnterprise])
+
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
@@ -55,7 +77,7 @@ export default function ThirdEPScoreIndiND({w, h}) {
       ],
       series: [
         {
-          name: 'Line 1',
+          name: '某二级指标',
           type: 'bar',
           stack: 'Total',
           label:{
@@ -64,10 +86,11 @@ export default function ThirdEPScoreIndiND({w, h}) {
           emphasis: {
             focus: 'series'
           },
-          data: [140, 232, 101, 264, 90]
+          // data: [140, 232, 101, 264, 90]
+          data: data
         },
         {
-          name: 'Line 2',
+          name: '某二级指标 2',
           type: 'bar',
           stack: 'Total',
           label:{
@@ -76,10 +99,10 @@ export default function ThirdEPScoreIndiND({w, h}) {
           emphasis: {
             focus: 'series'
           },
-          data: [120, 282, 111, 234, 220]
+          data: [1.20, 2.82, 1.11, 2.34, 2.20]
         },
         {
-          name: 'Line 3',
+          name: '某二级指标 3',
           type: 'bar',
           stack: 'Total',
           label:{
@@ -88,10 +111,10 @@ export default function ThirdEPScoreIndiND({w, h}) {
           emphasis: {
             focus: 'series'
           },
-          data: [320, 132, 201, 334, 190]
+          data: [3.20, 0.132, 2.01, 3.34, 1.90]
         },
         {
-          name: 'Line 4',
+          name: '某二级指标 4',
           type: 'bar',
           stack: 'Total',
           label:{
@@ -100,10 +123,10 @@ export default function ThirdEPScoreIndiND({w, h}) {
           emphasis: {
             focus: 'series'
           },
-          data: [220, 402, 231, 134, 190]
+          data: [2.20, 4.02, 2.31, 1.34, 1.90]
         },
         {
-          name: 'Line 5',
+          name: '某二级指标 5',
           type: 'bar',
           stack: 'Total',
           label:{
@@ -112,7 +135,7 @@ export default function ThirdEPScoreIndiND({w, h}) {
           emphasis: {
             focus: 'series'
           },
-          data: [220, 302, 181, 234, 210]
+          data: [2.20, 3.02, 1.81, 2.34, 2.10]
         }
       ]
     };
