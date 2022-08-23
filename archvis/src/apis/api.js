@@ -75,10 +75,36 @@ export function secondExplain(industry, indicator) {
 }
 
 
+//////// 第三屏检索栏
+export function thirdEnterprise(industry){
+  return post("/thirdEnterprise",{
+    industry:industry
+  });
+}
 
-// 企业数字化程度对比
-export function thirdEPdight(name) {
+export function thirdScoreST(industry, enterprise){
+  return post("/thirdScoreST", {
+    industry: industry,
+    enterprise: enterprise
+  });
+}
+
+export function thirdScoreND(industry, enterprise){
+  return post("/thirdScoreND", {
+    industry: industry,
+    enterprise: enterprise
+  });
+}
+
+export function thirdEPPos(industry){
+  return post("/thirdEPPos", {
+    industry: industry
+  });
+}
+
+export function thirdEPdight(enterprise, industry) {
   return post("/thirdEPdight", {
-    name: name
+    enterprise: enterprise,
+    industry: industry
   });
 }

@@ -11,10 +11,11 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
+  password: 'root',//密码
   // password: '990921',//密码
-  // database: 'archindicators'//数据库名称
-  password: 'sds091',//密码
-  database: 'archsql'//数据库名称
+  database: 'archindicators'//数据库名称
+  // password: 'sds091',//密码
+  // database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -103,7 +104,6 @@ app.post("/firstArchList", jsonParser, (req, res) => {
 // 企业数字化程度排名
 app.post("/firstArchRank", jsonParser, (req, res) => {
   const region = req.body.region
-  // 暂时没有企业数字化得分数据，用资产负债率代替
   const date = req.body.date
   let useRegion = "("
   for (let i of region) {
@@ -195,14 +195,11 @@ app.post("/secondExplain",jsonParser, (req, res) => {
 });
 
 
-
-
-
-// 企业数字化程度对比
-app.post("/thirdEPDight", jsonParser, (req, res) => {
-  const name = req.body.name
-  // 查询某个企业的数据，根据年份升序排序
-  let sql = 'select * from constru_property where 企业名称 = "' + name + '" order by 年份 asc';
+/////////////第三屏检索栏
+//企业检索：检索某个行业的一个企业
+app.post("/thirdEnterprise", jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = `select distinct 企业名称 from ${industry}_property`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -212,4 +209,72 @@ app.post("/thirdEPDight", jsonParser, (req, res) => {
     res.send(str)
     res.end()
   })
-})
+});
+
+
+// 企业一级指标得分检索
+app.post("/thirdScoreST", jsonParser, (req,res) => {
+  const industry = req.body.industry
+  const enterprise = req.body.enterprise
+  //查询某个企业的一级指标得分值。用五个三级指标代替。只找2019年。
+  let sql = 'select * from '+industry+'_property where 企业名称 = "'+ enterprise +'" and 年份 = "2019" ';
+  let str = '';
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str);
+    res.end()
+  })
+});
+
+// 企业二级指标得分检索
+app.post("/thirdScoreND", jsonParser, (req,res) => {
+  const industry = req.body.industry
+  const enterprise = req.body.enterprise
+  //查询某个企业的一级指标下的二级指标得分值。用三级指标代替。只找2019年。
+  let sql = 'select * from '+industry+'_property where 企业名称 = "'+ enterprise +'" and 年份 = "2019" ';
+  let str = '';
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str);
+    res.end()
+  })
+});
+
+// 企业数字化程度散点图
+app.post("/thirdEPPos", jsonParser, (req,res) => {
+  const industry = req.body.industry
+  //查询某个行业的所有企业的数字化程度得分。用资产负债率代替。只找2019年。
+  let sql = 'select * from '+industry+'_property where 年份 = "2019" ';
+  let str = '';
+  connection.query(sql, function (err, result){
+    if(err){
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str);
+    res.end()
+  })
+});
+
+// 企业数字化程度得分检索
+app.post("/thirdEPDight", jsonParser, (req, res) => {
+  const enterprise = req.body.enterprise
+  const industry = req.body.industry
+  // 查询某个企业的数据。资产负债率代替。
+  let sql = 'select * from '+industry+'_property where 企业名称 = "'+ enterprise +'"';
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
+});

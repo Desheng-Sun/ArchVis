@@ -1,10 +1,7 @@
 // import "./index.css";
-
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { firstArchRank } from '../../../apis/api';
-
-
 export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearFirst }) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
@@ -12,8 +9,8 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
     firstArchRank(selectedRegionFirst, selectedYearFirst).then((res) => {
       setData(res)
     })
-
   }, [selectedRegionFirst, selectedYearFirst])
+  
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
@@ -49,31 +46,6 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
           type: 'shadow'
         }
       },
-
-      // dataset: [
-      //   {
-      //     dimensions: ['name', 'score', 'rank'],
-      //     // source: [
-      //     //   ['企业1', 41, 4],
-      //     //   ['企业2', 20, 8],
-      //     //   ['企业3', 52, 3],
-      //     //   ['企业4', 37, 6],
-      //     //   ['企业5', 25, 7],
-      //     //   ['企业6', 19, 9],
-      //     //   ['企业7', 71, 1],
-      //     //   ['企业8', 36, 5],
-      //     //   ['企业9', 67, 2],
-      //     //   ['企业10', 67, 2]
-      //     // ]
-      //     source: data
-      //   },
-      //   {
-      //     transform: {
-      //       type: 'sort',
-      //       config: { dimension: 'score', order: 'desc' }
-      //     }
-      //   }
-      // ],
       xAxis: {
         type: 'category',
         name: '企业简称',

@@ -2,29 +2,45 @@ import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { thirdEPdight } from '../../../apis/api';
 
-export default function ThirdEPdight({w, h}) {
+export default function ThirdEPdight({w, h, selectedEnterprise, selectedIndustry}) {
   const [data, setData] = useState([]);
+  const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
   useEffect(() => {
-    thirdEPdight("交建股份").then((res) => {
-      setData(res)
+    if (selectedIndustry === '施工行业') {
+      setIndustry('constru');
+    }
+    else if (selectedIndustry === '设计行业') {
+      setIndustry('design');
+    }
+    
+  }, [selectedIndustry])
+
+  useEffect(() => {
+    var scores=[];
+    // console.log('selectedEnterprise');
+    // console.log(selectedEnterprise);
+    thirdEPdight(selectedEnterprise, industry).then((res) => {
+      // console.log(res);
+      for(let i in res){
+        if(res[i]['年份'] == 2019){
+          scores[0] = res[i]['资产负债率'];
+        }
+        else if(res[i]['年份'] == 2020){
+          scores[1] = res[i]['资产负债率'];
+        }
+        else if(res[i]['年份'] == 2021){
+          scores[2] = res[i]['资产负债率'];
+        }
+      }
+      setData(scores)
     })
-  }, [])
+  }, [industry, selectedEnterprise])
 
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
-    }
-
-    //创建两个一维数组存储数据
-    var years=[];
-    var scores=[];
-    for(let index in data){
-      years.push(data[index].年份)
-    }
-    for(let index in data){
-      scores.push(data[index].资产负债率)
     }
 
     const option = {
@@ -56,9 +72,9 @@ export default function ThirdEPdight({w, h}) {
       },
       series: [
         {
-          name: '选中的企业',
+          name: selectedEnterprise,
           type: 'line',
-          data: scores,
+          data: data,
     
         },
         {
@@ -75,7 +91,7 @@ export default function ThirdEPdight({w, h}) {
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [data, w, h]);
+  }, [selectedEnterprise, data, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>
