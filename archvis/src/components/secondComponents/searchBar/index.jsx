@@ -80,8 +80,6 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, se
           ))}
         </Select>
       </div>
-
-
     </div>
   );
 }

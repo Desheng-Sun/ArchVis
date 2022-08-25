@@ -59,26 +59,50 @@ export function secondEnterprise(industry) {
   });
 }
 
-export function secondProperty(industry, enterprise, indicator) {
+export function secondProperty(industry, indicator) {
   return post("/secondProperty", {
     industry: industry,
-    enterprise: enterprise,
     indicator: indicator
   });
 }
 
-export function secondExplain(industry, indicator) {
-  return post("/secondExplain", {
+// export function secondExplain(industry) {
+//   return post("/secondExplain", {
+//     industry: industry
+//   });
+// }
+
+
+//////// 第三屏检索栏
+export function thirdEnterprise(industry){
+  return post("/thirdEnterprise",{
+    industry:industry
+  });
+}
+
+export function thirdScoreST(industry, enterprise){
+  return post("/thirdScoreST", {
     industry: industry,
-    indicator: indicator
+    enterprise: enterprise
   });
 }
 
+export function thirdScoreND(industry, enterprise){
+  return post("/thirdScoreND", {
+    industry: industry,
+    enterprise: enterprise
+  });
+}
 
+export function thirdEPPos(industry){
+  return post("/thirdEPPos", {
+    industry: industry
+  });
+}
 
-// 企业数字化程度对比
-export function thirdEPdight(name) {
+export function thirdEPdight(enterprise, industry) {
   return post("/thirdEPdight", {
-    name: name
+    enterprise: enterprise,
+    industry: industry
   });
 }

@@ -54,7 +54,7 @@ export default function Layout() {
     const [selectedYearFirst, setSelectedYearFirst] = useState(2019)
 
     // 第二屏，用户选择的行业
-    const [selectedIndustry, setSelectedIndustry] = useState("建筑业（施工与设计加总）");
+    const [selectedIndustry, setSelectedIndustry] = useState("施工行业");
     // 第二屏，用户选择的公司
     const [nowEnterprise, setNowEnterprise] = useState(["美丽生态"]);
     // 第二屏，用户选择的二级指标
@@ -62,6 +62,11 @@ export default function Layout() {
     // 第二屏，用户选择的三级指标
     const [selectedIndicatorsRd, setSelectedIndicatorsRd] = useState();
 
+    // 第三屏，用户选择的行业
+    const [selectedIndustryThird, setSelectedIndustryThird] = useState("施工行业");
+    // 第三屏，用户选择的公司
+    const [nowEnterpriseThird, setNowEnterpriseThird] = useState(["美丽生态"]);
+    
 
     // 当前页面所在第几屏
     const [nowPageIndex, setNowPageIndex] = useState("firstButton")
@@ -168,6 +173,13 @@ export default function Layout() {
             setThirdEPScoreIndiNDHeight(
                 document.getElementById("thirdEPScoreIndiND").getBoundingClientRect().height
             );
+            setThirdEPdightWidth(
+                document.getElementById("thirdEPdight").getBoundingClientRect().width
+            );
+            setThirdEPdightHeight(
+                document.getElementById("thirdEPdight").getBoundingClientRect().height
+            );
+            
         }
     }, [nowPageIndex, size])
 
@@ -285,11 +297,11 @@ export default function Layout() {
                                     setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
                             </div>
                             <div id="secondIndiRDExplane">
-                                <ChartHeader chartName={"指标解释栏"} />
+                                {/* <ChartHeader chartName={"指标解释栏"} />
                                 <SecondIndicatorsRdExplain
                                     selectedIndustry={selectedIndustry}
                                     selectedIndicatorsNd={selectedIndicatorsNd}
-                                    selectedIndicatorsRd={selectedIndicatorsRd} />
+                                    selectedIndicatorsRd={selectedIndicatorsRd} /> */}
 
                             </div>
                         </div>
@@ -313,13 +325,18 @@ export default function Layout() {
                     <div id="thirdILeft">
                         <div id="thirdSearchbar">
                             <ChartHeader chartName={"行业企业检索栏"} />
-                            <ThirdSearchBar />
+                            <ThirdSearchBar 
+                                nowEnterprise={nowEnterpriseThird}
+                                setSelectedIndustry={setSelectedIndustryThird}
+                                setNowEnterprise={setNowEnterpriseThird}
+                            />
                         </div>
                         <div id="thirdEPPosplashes">
                             <ChartHeader chartName={"全行业企业数字化散点图"} />
                             <ThirdEPPosplashes
                                 w={thirdEPPosplashesWidth}
                                 h={thirdEPPosplashesHeight}
+                                selectedIndustry={selectedIndustryThird}
                             />
                         </div>
 
@@ -331,6 +348,8 @@ export default function Layout() {
                                 <ThirdEPScoreIndiSD
                                     w={thirdEPScoreIndiSDWidth}
                                     h={thirdEPScoreIndiSDHeight}
+                                    selectedEnterprise={nowEnterpriseThird}
+                                    selectedIndustry={selectedIndustryThird}
                                 />
                             </div>
                             <div id="thirdEPScoreIndiND">
@@ -338,6 +357,8 @@ export default function Layout() {
                                 <ThirdEPScoreIndiND
                                     w={thirdEPScoreIndiNDWidth}
                                     h={thirdEPScoreIndiNDHeight}
+                                    selectedEnterprise={nowEnterpriseThird}
+                                    selectedIndustry={selectedIndustryThird}
                                 />
 
                             </div>
@@ -347,6 +368,8 @@ export default function Layout() {
                             <ThirdEPdight
                                 w={thirdEPdightWidth}
                                 h={thirdEPdightHeight}
+                                selectedEnterprise={nowEnterpriseThird}
+                                selectedIndustry={selectedIndustryThird}
                             />
 
                         </div>
