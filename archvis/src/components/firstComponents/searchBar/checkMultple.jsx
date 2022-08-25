@@ -12,6 +12,11 @@ const CheckMultipleComponent = ({ useData, dataName, setCheckData, setSelectedDa
     setCheckData(list)
     setIndeterminate(!!list.length && list.length < useData.length);
     setCheckAll(list.length == useData.length);
+    let useRegion = "("
+    for (let i of list) {
+      useRegion += '"' + i + '" ,'
+    }
+    setSelectedData(checkedList)
   };
 
   const onCheckAllChange = (e) => {
@@ -19,12 +24,17 @@ const CheckMultipleComponent = ({ useData, dataName, setCheckData, setSelectedDa
     setCheckData(e.target.checked ? useData : []);
     setIndeterminate(false);
     setCheckAll(e.target.checked);
+    let useRegion = "("
+    for (let i of list) {
+      useRegion += '"' + i + '" ,'
+    }
+    setSelectedData(checkedList)
   };
   return (<>
     <Checkbox indeterminate={indeterminate} onChange={onCheckAllChange} checked={checkAll}>
       {dataName}
     </Checkbox>
-    <Button onClick={() => {
+    {/* <Button onClick={() => {
         let useRegion = "("
         for(let i of checkedList){
           useRegion += '"' +  i + '" ,'
@@ -33,7 +43,7 @@ const CheckMultipleComponent = ({ useData, dataName, setCheckData, setSelectedDa
       setSelectedData(checkedList)
     }}>
       搜索
-    </Button>
+    </Button> */}
     <Divider />
     <CheckboxGroup options={useData} value={checkedList} onChange={onChange} />
   </>)
