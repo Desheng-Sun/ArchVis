@@ -155,6 +155,7 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
           type: 'sunburst',
           center: ['50%', '50%'],
           data: drawdata,
+          nodeClick: false,
           label: {
             rotate: 'radial'
           },
