@@ -4,7 +4,7 @@ import { secondIndicators } from '../../../apis/api'
 import "./index.css"
 
 
-export default function SecondIndicatorsNdSelect({ selectedIndustry, setSelectedIndicatorsNd }) {
+export default function SecondIndicatorsNdSelect({ selectedIndustry, selectedIndicatorsNd, selectedIndicatorsRd, setSelectedIndicatorsNd }) {
   const [industry, setIndustry] = useState('constru');
   const [indicatorsNd, setIndicatorsNd] = useState([]);
 
@@ -37,7 +37,7 @@ export default function SecondIndicatorsNdSelect({ selectedIndustry, setSelected
   };
   return (
     <div id ="secondIndicatorsNdSelect">
-      <Radio.Group onChange={onChange}>
+      <Radio.Group onChange={onChange} value={selectedIndicatorsNd}>
         <Space direction="vertical">
           {indicatorsNd.map((item, index) => (
             <Radio key={index} value={item} style = {{height: "5vh"}}>

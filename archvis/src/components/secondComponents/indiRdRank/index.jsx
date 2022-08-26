@@ -84,7 +84,7 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
           grid: {
             left: '3%',
             right: '4%',
-            bottom: '3%',
+            bottom: '5%',
             containLabel: true
           },
           xAxis: {
@@ -106,7 +106,7 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "47.2vh" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "61vh" }}>
     </div>
   )
 }
