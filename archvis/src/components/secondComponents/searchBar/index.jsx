@@ -48,14 +48,13 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, se
   const onNowEnterprise = (value) => {
     setNowEnterprise(value);
   };
-  console.log(nowEnterprise);
   return (
     <div style={{ height: "37.2vh", width: "100%" }}>
       <div 
-      style={{ 
-        // height: "40%", 
-        padding: "10%" 
-      }}
+        style={{ 
+          // height: "40%", 
+          padding: "10%" 
+        }}
       >
         <Select
           defaultValue={allIndustry[0]}
@@ -70,7 +69,6 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, se
           ))}
         </Select>
         <Select
-          allowClear
           showArrow
           showSearch
           mode="multiple"

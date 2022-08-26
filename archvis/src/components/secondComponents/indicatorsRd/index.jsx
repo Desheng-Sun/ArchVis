@@ -12,13 +12,13 @@ export default function SecondIndicatorsRdSelect({ selectedIndustry, selectedInd
     setSelectedIndicatorsRd(e.target.value)
   };
   useEffect(() => {
-    if (selectedIndustry === '施工行业') {
+    if (selectedIndustrySecond === '施工行业') {
       setIndustry('constru');
     }
-    else if (selectedIndustry === '设计行业') {
+    else if (selectedIndustrySecond === '设计行业') {
       setIndustry('design');
     }
-  }, [selectedIndustry])
+  }, [selectedIndustrySecond])
   useEffect(() => {
     secondIndicators(industry).then((res) =>{
       var tmp = {};

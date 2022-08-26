@@ -45,7 +45,6 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
-    // console.log(data)
     let indexList =
     {
       "基本指标": 1,
@@ -64,8 +63,6 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
     const colorTypeCon = '#fff7ba';
     const colorTypeDes = '#ffe369';
     if (useData) {
-      console.log('useData')
-      console.log(useData)
       let nowUseData = {}
       for (let i in useData) {
         if (useData[i].level === 1) {
@@ -85,8 +82,6 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
           }
         }
       }
-      console.log('nowUsedata')
-      console.log(nowUseData)
       for (let i in nowUseData) {
         if (useIndex.includes(parseInt(i))) {
           let addColor = nowUseData[i];
@@ -119,8 +114,6 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
           }
         }
       }
-      console.log('drawdata')
-      console.log(drawdata)
     }
     // for (let i in useData) {
     //   if (useDara[i].level === 1) {
