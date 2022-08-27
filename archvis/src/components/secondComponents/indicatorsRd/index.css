@@ -1,5 +1,6 @@
 #secondIndicatorsRdSelect{
-    height: 41vh;
+  height: 27.2vh;
+  /* height: 41vh; */
     width: 100%;
     padding-top: 5%;
     overflow-y: scroll;

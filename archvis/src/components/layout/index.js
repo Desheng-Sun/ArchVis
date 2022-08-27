@@ -284,6 +284,8 @@ export default function Layout() {
                                 w={secondIndicatorsWidth}
                                 h={secondIndicatorsHeight}
                                 selectedIndustry={selectedIndustry}
+                                setSelectedIndicatorsNd={setSelectedIndicatorsNd}
+                                setSelectedIndicatorsRd={setSelectedIndicatorsRd}
                             />
                         </div>
 
@@ -294,6 +296,8 @@ export default function Layout() {
                                 <ChartHeader chartName={"二级指标勾选栏"} />
                                 <SecondIndicatorsNdSelect
                                     selectedIndustry={selectedIndustry}
+                                    selectedIndicatorsNd={selectedIndicatorsNd}
+                                    selectedIndicatorsRd={selectedIndicatorsRd}
                                     setSelectedIndicatorsNd={setSelectedIndicatorsNd}
                                 />
                             </div>
@@ -302,16 +306,17 @@ export default function Layout() {
                                 <SecondIndicatorsRdSelect
                                     selectedIndustry={selectedIndustry}
                                     selectedIndicatorsNd={selectedIndicatorsNd}
+                                    selectedIndicatorsRd={selectedIndicatorsRd}
                                     setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
                             </div>
-                            <div id="secondIndiRDExplane">
-                                {/* <ChartHeader chartName={"指标解释栏"} />
+                            {/* <div id="secondIndiRDExplane">
+                                <ChartHeader chartName={"指标解释栏"} />
                                 <SecondIndicatorsRdExplain
                                     selectedIndustry={selectedIndustry}
                                     selectedIndicatorsNd={selectedIndicatorsNd}
-                                    selectedIndicatorsRd={selectedIndicatorsRd} /> */}
+                                    selectedIndicatorsRd={selectedIndicatorsRd} />
 
-                            </div>
+                            </div> */}
                         </div>
                         <div id="secondIndiRDRank">
                             <ChartHeader chartName={"二、三级指标企业对比"} />

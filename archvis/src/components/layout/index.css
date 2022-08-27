@@ -108,12 +108,14 @@
 
 #secondILeft{
     height: 94.1vh;
-    width: 30vw;
+    width: 40vw;
+    /* width: 30vw; */
     float: left;
 }
 #secondSearchbar {
     height: 30vh;
-    width: 30vw;
+    width: 40vw;
+    /* width: 30vw; */
     border-radius: 0.4vw;
     box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
     background-color: white;
@@ -121,7 +123,8 @@
 #secondIndicators {
     margin-top: 0.3vh;
     height: 63.8vh;
-    width: 30vw;
+    width: 40vw;
+    /* width: 30vw; */
     border-radius: 0.4vw;
     box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
     background-color: white;
@@ -129,16 +132,21 @@
 #secondIRight{
     margin-left: 0.2vw;
     height: 94.1vh;
-    width: 69.4vw;
+    width: 59.4vw;
+    /* width: 69.4vw; */
     float: left;
 }
 #secondIRightTop{
-    height: 43.8vh;
-    width: 69.4vw;
+    height: 30vh;
+    /* height: 43.8vh; */
+    width: 59.4vw;
+    /* width: 69.4vw; */
 }
 #secondSelectIndiND {
-    height: 43.8vh;
-    width: 19.9vw;
+    height: 30vh;
+    /* height: 43.8vh; */
+    width: 29.5vw;
+    /* width: 19.9vw; */
     border-radius: 0.4vw;
     box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
     background-color: white;
@@ -146,8 +154,10 @@
 }
 #secondSelectIndiRD {
     margin-left: 0.2vw;
-    height: 43.8vh;
-    width: 19.9vw;
+    height: 30vh;
+    /* height: 43.8vh; */
+    width: 29.5vw;
+    /* width: 19.9vw; */
     border-radius: 0.4vw;
     box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
     background-color: white;
@@ -164,8 +174,10 @@
 }
 #secondIndiRDRank {
     margin-top: 0.3vh;
-    height: 50vh;
-    width: 69.4vw;
+    height: 63.8vh;
+    /* height: 50vh; */
+    width: 59.4vw;
+    /* width: 69.4vw; */
     border-radius: 0.4vw;
     box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
     background-color: white;

@@ -2,7 +2,7 @@ import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { secondIndicators } from '../../../apis/api';
 
-export default function FirstIndicators({w, h, selectedIndustry}) {
+export default function FirstIndicators({w, h, selectedIndustry, setSelectedIndicatorsNd, setSelectedIndicatorsRd}) {
   const [industry, setIndustry] = useState('constru');
   const [data, setData] = useState([]);
   const [explain, setExplain] = useState();
@@ -40,6 +40,7 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
         dataChildren[data[i].parent_id - 6].children.push({
           name: data[i].indi_name,
           explain: data[i].explanation,
+          parent: dataChildren[data[i].parent_id - 6].name,
           value: 1
         })
       }
@@ -79,9 +80,7 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
         confine: true,
         formatter:function (params) {
           if (params.data.explain != null) {
-            return `
-                  ${params.data.name}: ${params.data.explain}
-                 `;
+            return '<span style="font-weight: bold;">' + params.data.name + '</span><br>' + params.data.explain;
           }
           else {
             return `
@@ -94,10 +93,11 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
         {
           type: 'sunburst',
           id: 'echarts-package-size',
-          radius: ['10%', '80%'],
+          radius: ['10%', '90%'],
           animationDurationUpdate: 1000,
           data: drawdata,
           universalTransition: true,
+          nodeClick: false,
           itemStyle: {
             borderWidth: 1,
             borderColor: 'rgba(255,255,255,.5)'
@@ -126,12 +126,13 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
             },
             {
               r0: '75%',
-              r: '80%',
+              r: '90%',
               label: {
-                position: 'outside',
-                width: '70',
-                color: 'inherit',
-                overflow: 'break'
+                show: false
+                // position: 'outside',
+                // width: '70',
+                // color: 'inherit',
+                // overflow: 'break'
               }
             }
           ]
@@ -139,6 +140,15 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
       ]
     };
     myChart.setOption(option);
+    myChart.on('click', function(params) {
+      if (params.data.value == 1) {
+        setSelectedIndicatorsNd(params.data.parent)
+        setSelectedIndicatorsRd(params.data.name)
+      }
+      else {
+        setSelectedIndicatorsNd(params.data.name)
+      }
+    });
     myChart.resize();
   }, [data, w, h]);
 

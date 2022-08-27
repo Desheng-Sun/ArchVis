@@ -37,7 +37,7 @@ export default function SecondIndicatorsNdSelect({ selectedIndustrySecond, setSe
   };
   return (
     <div id ="secondIndicatorsNdSelect">
-      <Radio.Group onChange={onChange}>
+      <Radio.Group onChange={onChange} value={selectedIndicatorsNd}>
         <Space direction="vertical">
           {indicatorsNd.map((item, index) => (
             <Radio key={index} value={item} style = {{height: "5vh"}}>

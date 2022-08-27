@@ -5,9 +5,8 @@ import { secondIndicators } from '../../../apis/api';
 import "./index.css"
 
 
-export default function SecondIndicatorsRdSelect({ selectedIndustrySecond, selectedIndicatorsNd, setSelectedIndicatorsRd }) {
+export default function SecondIndicatorsRdSelect({ selectedIndustry, selectedIndicatorsNd, selectedIndicatorsRd, setSelectedIndicatorsRd }) {
   const [industry, setIndustry] = useState('constru');
-  // const [indicatorsNd, setIndicatorsNd] = useState({});
   const [indicatorsRd, setIndicatorsRd] = useState([]);
   const onChange = (e) => {
     setSelectedIndicatorsRd(e.target.value)
@@ -39,7 +38,7 @@ export default function SecondIndicatorsRdSelect({ selectedIndustrySecond, selec
   }, [industry, selectedIndicatorsNd])
   return (
     <div id ="secondIndicatorsRdSelect" style={{ paddingTop: "5%" }}>
-      <Radio.Group onChange={onChange}>
+      <Radio.Group onChange={onChange} value={selectedIndicatorsRd}>
         <Space direction="vertical">
           {indicatorsRd.map((item, index) => (
             <Radio key={index} value={item} style={{ height: "5vh" }}>
