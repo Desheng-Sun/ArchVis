@@ -1,0 +1,17 @@
+#industryList{
+  height: 51vh;
+  width: 100%;
+}
+.ant-table-thead{
+  height: 2vh;
+}
+tr{
+  height: 2vh;
+}
+.ant-table-cell, .ant-table-cell-fix-left, .ant-table-cell-fix-left-last{
+  font-size: 1.2vh;
+  padding: 0.5vh !important
+}
+.ant-table-container{
+  height: 50vh;
+}

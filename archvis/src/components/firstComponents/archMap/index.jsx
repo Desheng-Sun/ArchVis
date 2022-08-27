@@ -3,10 +3,13 @@ import React, { useState, useEffect, useRef } from "react";
 import geoChina from "./geo.json";
 import { firstArchMap } from '../../../apis/api';
 
-export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFirst, setSelectedRegionFirst, setSelectedYearFirst }) {
-  const [data, setData] = useState([]);
+export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, setSelectedRegionFirst, setSelectedYearFirst }) {
+  const [construData, setConstruData] = useState({});
+  const [designData, setDesignData] = useState({});
   const [date, setDate] = useState([2019, 2020, 2021]);
   const chartRef = useRef(null);
+
+  // 各个地区包含的省份信息
   let regionCity = {
     "东北": ["辽宁", "吉林", "黑龙江"],
     "华北": ["北京", "天津", "河北", "山西", "内蒙古"],
@@ -18,74 +21,150 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
     "港澳台": ["香港", "澳门", "台湾"]
   }
   useEffect(() => {
-    firstArchMap(selectedYearFirst).then((res) => {
+    // 获取所有建筑行业的地区信息
+    firstArchMap(selectedYearFirst, "constru").then((res) => {
+      let useData = {}
+      let nowCityPosition = {}
+      for (let i of geoChina.features) {
+        nowCityPosition[i.properties.name.slice(0, 2)] = i.properties.center
+      }
+      for (let i of res) {
+        useData[i["省份"]] = {
+          name: i["省份"],
+          position: [nowCityPosition[i["省份"].slice(0, 2)][0], nowCityPosition[i["省份"].slice(0, 2)][1]],
+          constru: i["COUNT(*)"]
+        }
+      }
+      setConstruData(useData);
+    });
+    // 获取所有设计行业的地区信息
+    firstArchMap(selectedYearFirst, "design").then((res) => {
       let useData = []
       let nowCityPosition = {}
       for (let i of geoChina.features) {
         nowCityPosition[i.properties.name.slice(0, 2)] = i.properties.center
       }
       for (let i of res) {
-        useData.push({
+        useData[i["省份"]] = {
           name: i["省份"],
-          value: [nowCityPosition[i["省份"].slice(0, 2)][0], nowCityPosition[i["省份"].slice(0, 2)][1], i["COUNT(*)"]]
-        })
+          position: [nowCityPosition[i["省份"].slice(0, 2)][0], nowCityPosition[i["省份"].slice(0, 2)][1]],
+          design: i["COUNT(*)"]
+        }
       }
-      setData(useData);
+      setDesignData(useData);
     });
   }, [selectedYearFirst])
   // 随系统缩放修改画布大小
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
+    // 设置地图字体的大小
     let fontsizeNow = parseInt(14 * h / 698)
     let index = date.indexOf(selectedYearFirst)
     fontsizeNow = Math.max(10, fontsizeNow)
     let nowAllCity = []
+    // 获取当前选择的所有地区包含的省份
     for (let i of selectedRegionFirst) {
       nowAllCity = nowAllCity.concat(regionCity[i])
     }
+    if(nowAllCity[0] == undefined){
+      nowAllCity = selectedRegionFirst
+    }
+    // 获取所有省份的全程
+    let nowCityName = {}
+    for (let i of geoChina.features) {
+      nowCityName[i.properties.name.slice(0, 2)] = i.properties.name
+    }
     let useCityData = []
-    for (let i in regionCity) {
-      for (let j of regionCity[i]) {
-        if (nowAllCity.includes(j)) {
-          useCityData.push({
-            name: j,
-            value: 100
-          })
-        }
-        else {
-          useCityData.push({
-            name: j,
-            value: 0
-          })
+    // 创建地图热力图
+    if (nowAllCity.length > 0 ) {
+      for (let i in regionCity) {
+        for (let j of regionCity[i]) {
+          if (nowAllCity.includes(j)) {
+            useCityData.push({
+              name: nowCityName[j.slice(0, 2)],
+              value: 1
+            })
+          }
+          else {
+            useCityData.push({
+              name: nowCityName[j.slice(0, 2)],
+              value: 0
+            })
+          }
         }
       }
     }
-    console.log(useCityData)
+
+    // 获取各个地区的公司数量
+    let useCityIndustryNumDict = {}
+    // 全部公司
+    if (selectdIndustryFirst.length == 2) {
+      for (let i in construData) {
+        useCityIndustryNumDict[i] = {
+          name: construData[i].name,
+          value: [construData[i].position[0], construData[i].position[1], construData[i].constru]
+        }
+      }
+      for (let i in designData) {
+        if (useCityIndustryNumDict.hasOwnProperty(i)) {
+          useCityIndustryNumDict[i].value[2] += designData[i].design
+        }
+        else {
+          useCityIndustryNumDict[i] = {
+            name: designData[i].name,
+            value: [designData[i].position[0], designData[i].position[1], designData[i].design]
+          }
+        }
+
+      }
+    }
+    // 施工行业公司
+    else if (selectdIndustryFirst[0] === "施工行业") {
+      for (let i in construData) {
+        useCityIndustryNumDict[i] = {
+          name: construData[i].name,
+          value: [construData[i].position[0], construData[i].position[1], construData[i].constru]
+        }
+      }
+    }
+    // 设计行业公司
+    else if (selectdIndustryFirst[0] === "设计行业") {
+      for (let i in designData) {
+        useCityIndustryNumDict[i] = {
+          name: designData[i].name,
+          value: [designData[i].position[0], designData[i].position[1], designData[i].design]
+        }
+      }
+    }
+    let useCityIndustryNum = []
+    for (let i in useCityIndustryNumDict) {
+      useCityIndustryNum.push(useCityIndustryNumDict[i])
+    }
 
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
       echarts.registerMap('china', { geoJSON: geoChina });
     }
     const option = {
-      color: [
-        "#5b8ff9",
-        "#5ad8a6",
-        "#5d7092",
-        "#f6bd16",
-        "#e86452",
-        "#6dc8ec",
-        "#945fb9",
-        "#ff9845",
-        "#1e9493",
-        "#ff99c3"
-      ],
+      // color: [
+      //   "#5b8ff9",
+      //   "#5ad8a6",
+      //   "#5d7092",
+      //   "#f6bd16",
+      //   "#e86452",
+      //   "#6dc8ec",
+      //   "#945fb9",
+      //   "#ff9845",
+      //   "#1e9493",
+      //   "#ff99c3"
+      // ],
       title: {
         left: 'center'
       },
       tooltip: {
         trigger: 'item'
       },
-      visualMap: {
+      visualMap: [{
         top: 'bottom',
         min: 0,
         max: 20,
@@ -100,9 +179,23 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
           ]
         },
         text: ['High', 'Low'],
-        calculable: true
+        calculable: true,
+        seriesIndex: 1
       },
-
+      {
+        min: 0,
+        max: 1,
+        inRange: {
+          color: [
+            '#74add1',
+            '#87b3ff'
+          ]
+        },
+        calculable: true,
+        show: false,
+        seriesIndex: 0
+      },
+      ],
       timeline: {
         data: date,
         axisType: "category",
@@ -205,14 +298,13 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
               areaColor: "#01ADF2",
             },
           },
-          
           animation: true,
         },
         {
           name: "各地区建筑公司数量",
           type: "scatter",
           coordinateSystem: 'geo',
-          data: data,
+          data: useCityIndustryNum,
           geoIndex: 0,
           symbolSize: 25,
           showEffectOn: 'render',
@@ -250,12 +342,13 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
     };
     myChart.setOption(option, true);
     myChart.on('click', function (param) {
-      console.log(param)
       if (param.componentSubType === "map" || param.componentSubType === "scatter") {
-        for (let i of useCityData) {
-          if (param.name.includes(i["name"])) {
-            setSelectedRegionFirst([i["name"]])
-            break
+        for (let i in regionCity) {
+          for (let j of regionCity[i]) {
+            if (param.name.includes(j)) {
+              setSelectedRegionFirst([j])
+              break
+            }
           }
         }
       }
@@ -270,11 +363,12 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
       setSelectedYearFirst(date[timelineIndex.currentIndex])
     });
     if (myChart._$handlers.click) {
-      myChart._$handlers.click.length = 1;
+      myChart._zr.handler._$handlers.click.length = 3;
       myChart._$handlers.timelinechanged.length = 1;
+      myChart._$handlers.click.length = 1;
     }
     myChart.resize();
-  }, [data, w, h]);
+  }, [selectedRegionFirst, construData, designData, selectdIndustryFirst, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "51vh" }}>

@@ -2,44 +2,50 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { firstArchRank } from '../../../apis/api';
-export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearFirst }) {
-  const [data, setData] = useState([]);
+export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, selectedCompanyFirst }) {
+  const [construData, setConstruData] = useState([]);
+  const [designData, setDesignData] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
-    firstArchRank(selectedRegionFirst, selectedYearFirst).then((res) => {
-      setData(res)
+    firstArchRank(selectedRegionFirst, selectedYearFirst, 'constru').then((res) => {
+      setConstruData(res)
+    })
+    firstArchRank(selectedRegionFirst, selectedYearFirst, 'design').then((res) => {
+      setDesignData(res)
     })
   }, [selectedRegionFirst, selectedYearFirst])
-  
+
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
 
-    //创建两个一维数组存储数据
-    var names = [];
-    var scores = [];
-    for (let index in data) {
-      names.push(data[index].企业名称)
+    //存储数据的数组
+    let useData = []
+    // 获取当前需要展示的数据
+    if (selectdIndustryFirst.length === 2) {
+      for (let i of construData) {
+        useData.push([i.企业名称, i.资产负债率, 1])
+      }
+      for (let i of designData) {
+        useData.push([i.企业名称, i.资产负债率, 2])
+      }
     }
-    for (let index in data) {
-      scores.push(data[index].资产负债率)
+    else if (selectdIndustryFirst[0] === "施工行业") {
+
+      for (let i of construData) {
+        useData.push([i.企业名称, i.资产负债率, 1])
+      }
     }
+    else if (selectdIndustryFirst[0] === "设计行业") {
+      for (let i of designData) {
+        useData.push([i.企业名称, i.资产负债率, 2])
+      }
+    }
+    useData = useData.sort(function (a, b) { return a[0] > b[0] })
 
     const option = {
-      color: [
-        "#5b8ff9",
-        "#5ad8a6",
-        "#5d7092",
-        "#f6bd16",
-        "#e86452",
-        "#6dc8ec",
-        "#945fb9",
-        "#ff9845",
-        "#1e9493",
-        "#ff99c3"
-      ],
       tooltip: {
         trigger: 'axis',
         axisPointer: {
@@ -49,16 +55,14 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
       xAxis: {
         type: 'category',
         name: '企业简称',
-        data: names,
         axisLabel: {
-          interval: 0, 
+          interval: 0,
           rotate: 90
         }
       },
       yAxis: {
         type: 'value',
         name: '企业数字化综合得分'
-
       },
       dataZoom: [
         {
@@ -70,15 +74,31 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
       ],
       series: {
         name: '得分',
-        data: scores,
+        data: useData,
         type: 'bar',
         encode: { x: 'name', y: 'score' },
-        datasetIndex: 1
+        showBackground: true,
+        backgroundStyle: {
+          color: 'rgba(180, 180, 180, 0.2)'
+        },
+        itemStyle: {
+          color: function (param) {
+            if (param.value[0] === selectedCompanyFirst) {
+              return '#e86452'
+            }
+            else if (param.value[2] === 1) {
+              return '#5b8ff9'
+            }
+            else if (param.value[2] === 2) {
+              return '#6dc8ec'
+            }
+          }
+        }
       }
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [data, w, h]);
+  }, [construData, designData, selectdIndustryFirst, selectedCompanyFirst, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "37.2vh" }}>

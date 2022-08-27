@@ -52,6 +52,9 @@ export default function Layout() {
     const [selectedRegionFirst, setSelectedRegionFirst] = useState(["东北", "华北", "华东", "华中", "华南", "西北", "西南"])
     // 第一屏，用户选择的时间
     const [selectedYearFirst, setSelectedYearFirst] = useState(2019)
+    // 第一屏，用户当前点击的公司
+    const [selectedCompanyFirst, setSelectedCompanyFirst] = useState(2019)
+
 
     // 第二屏，用户选择的行业
     const [selectedIndustry, setSelectedIndustry] = useState("施工行业");
@@ -234,6 +237,7 @@ export default function Layout() {
                                     h={firstArchMapHeight}
                                     selectedRegionFirst={selectedRegionFirst}
                                     selectedYearFirst = {selectedYearFirst}
+                                    selectdIndustryFirst={selectdIndustryFirst}
                                     setSelectedRegionFirst={setSelectedRegionFirst}
                                     setSelectedYearFirst={setSelectedYearFirst}
                                 />
@@ -243,6 +247,8 @@ export default function Layout() {
                                 <FirstArchList
                                     selectedRegionFirst={selectedRegionFirst}
                                     selectedYearFirst={selectedYearFirst}
+                                    selectdIndustryFirst={selectdIndustryFirst}
+                                    setSelectedCompanyFirst = {setSelectedCompanyFirst}
                                 />
                             </div>
                         </div>
@@ -253,6 +259,8 @@ export default function Layout() {
                                 h={firstArchRankHeight}
                                 selectedRegionFirst={selectedRegionFirst}
                                 selectedYearFirst={selectedYearFirst}
+                                selectdIndustryFirst={selectdIndustryFirst}
+                                selectedCompanyFirst = {selectedCompanyFirst}
                             />
                         </div>
                     </div>

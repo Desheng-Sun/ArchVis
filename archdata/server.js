@@ -11,10 +11,10 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: '990921',//密码
-  database: 'archindicators'//数据库名称
-  // password: 'sds091',//密码
-  // database: 'archsql'//数据库名称
+  // password: '990921',//密码
+  // database: 'archindicators'//数据库名称
+  password: 'sds091',//密码
+  database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -63,7 +63,8 @@ app.post("/firstArchIndustry", jsonParser, (req, res) => {
 //地区检索
 app.post("/firstArchMap", jsonParser, (req, res) => {
   const date = req.body.date
-  let sql = `select 省份, COUNT(*) from constru_region where 企业名称 in (select 企业名称 from constru_property where 年份 = ${date}) group by 省份`;
+  const industry = req.body.industry
+  let sql = `select 省份, COUNT(*) from ${industry}_region where 企业名称 in (select 企业名称 from  ${industry}_property where 年份 = ${date}) group by 省份`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -82,12 +83,14 @@ app.post("/firstArchMap", jsonParser, (req, res) => {
 app.post("/firstArchList", jsonParser, (req, res) => {
   const region = req.body.region
   const date = req.body.date
+  const industry = req.body.industry
+  console.log(region)
   let useRegion = "("
   for (let i of region) {
     useRegion += '"' + i + '" ,'
   }
   useRegion = useRegion.slice(0, useRegion.length - 1) + ")"
-  let sql = `select * from constru_property where 企业名称 in (select 企业名称 from constru_region where 地区 in ${useRegion} or 省份 in ${useRegion} ) and 年份 = ${date}`;
+  let sql = `select * from ${industry}_property where 企业名称 in (select 企业名称 from ${industry}_region where 地区 in ${useRegion} or 省份 in ${useRegion} ) and 年份 = ${date}`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -104,12 +107,13 @@ app.post("/firstArchList", jsonParser, (req, res) => {
 app.post("/firstArchRank", jsonParser, (req, res) => {
   const region = req.body.region
   const date = req.body.date
+  const industry = req.body.industry
   let useRegion = "("
   for (let i of region) {
     useRegion += '"' + i + '" ,'
   }
   useRegion = useRegion.slice(0, useRegion.length - 1) + ")"
-  let sql = `select * from constru_property where 企业名称 in (select 企业名称 from constru_region where 地区 in ${useRegion} or 省份 in ${useRegion} )and 年份 = ${date}`;
+  let sql = `select * from ${industry}_property where 企业名称 in (select 企业名称 from ${industry}_region where 地区 in ${useRegion} or 省份 in ${useRegion} )and 年份 = ${date}`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -155,7 +159,7 @@ app.post("/secondEnterprise", jsonParser, (req, res) => {
 });
 
 // 指标值查询
-app.post("/secondProperty",jsonParser, (req, res) => {
+app.post("/secondProperty", jsonParser, (req, res) => {
   const industry = req.body.industry;
   const indicator = req.body.indicator;
   let sql = 'select 企业名称,' + indicator + ',年份 from ' + industry + '_property order by 企业名称';
@@ -204,14 +208,14 @@ app.post("/thirdEnterprise", jsonParser, (req, res) => {
 
 
 // 企业一级指标得分检索
-app.post("/thirdScoreST", jsonParser, (req,res) => {
+app.post("/thirdScoreST", jsonParser, (req, res) => {
   const industry = req.body.industry
   const enterprise = req.body.enterprise
   //查询某个企业的一级指标得分值。用五个三级指标代替。只找2019年。
-  let sql = 'select * from '+industry+'_property where 企业名称 = "'+ enterprise +'" and 年份 = "2019" ';
+  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '" and 年份 = "2019" ';
   let str = '';
-  connection.query(sql, function (err, result){
-    if(err){
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log('[SELECT ERROR]：', err.message);
     }
     str = JSON.stringify(result);
@@ -221,14 +225,14 @@ app.post("/thirdScoreST", jsonParser, (req,res) => {
 });
 
 // 企业二级指标得分检索
-app.post("/thirdScoreND", jsonParser, (req,res) => {
+app.post("/thirdScoreND", jsonParser, (req, res) => {
   const industry = req.body.industry
   const enterprise = req.body.enterprise
   //查询某个企业的一级指标下的二级指标得分值。用三级指标代替。只找2019年。
-  let sql = 'select * from '+industry+'_property where 企业名称 = "'+ enterprise +'" and 年份 = "2019" ';
+  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '" and 年份 = "2019" ';
   let str = '';
-  connection.query(sql, function (err, result){
-    if(err){
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log('[SELECT ERROR]：', err.message);
     }
     str = JSON.stringify(result);
@@ -238,13 +242,13 @@ app.post("/thirdScoreND", jsonParser, (req,res) => {
 });
 
 // 企业数字化程度散点图
-app.post("/thirdEPPos", jsonParser, (req,res) => {
+app.post("/thirdEPPos", jsonParser, (req, res) => {
   const industry = req.body.industry
   //查询某个行业的所有企业的数字化程度得分。用资产负债率代替。只找2019年。
-  let sql = 'select * from '+industry+'_property where 年份 = "2019" ';
+  let sql = 'select * from ' + industry + '_property where 年份 = "2019" ';
   let str = '';
-  connection.query(sql, function (err, result){
-    if(err){
+  connection.query(sql, function (err, result) {
+    if (err) {
       console.log('[SELECT ERROR]：', err.message);
     }
     str = JSON.stringify(result);
@@ -258,7 +262,7 @@ app.post("/thirdEPDight", jsonParser, (req, res) => {
   const enterprise = req.body.enterprise
   const industry = req.body.industry
   // 查询某个企业的数据。资产负债率代替。
-  let sql = 'select * from '+industry+'_property where 企业名称 = "'+ enterprise +'"';
+  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '"';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {

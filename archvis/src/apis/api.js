@@ -24,25 +24,28 @@ export function firstArchIndustry(industry) {
 
 }
 
-export function firstArchMap(date) {
+export function firstArchMap(date, industry) {
   return post("/firstArchMap", {
-    date: date
+    date: date,
+    industry: industry
   })
 }
 
 // 企业名单
-export function firstArchList(region, date) {
+export function firstArchList(region, date, industry) {
   return post("/firstArchList", {
     region: region,
-    date: date
+    date: date,
+    industry: industry
   })
 }
 
 // 企业数字化程度排名
-export function firstArchRank(region, date) {
+export function firstArchRank(region, date, industry) {
   return post("/firstArchRank", {
     region: region,
-    date: date
+    date: date,
+    industry: industry
   });
 }
 
@@ -74,27 +77,27 @@ export function secondProperty(industry, indicator) {
 
 
 //////// 第三屏检索栏
-export function thirdEnterprise(industry){
-  return post("/thirdEnterprise",{
-    industry:industry
+export function thirdEnterprise(industry) {
+  return post("/thirdEnterprise", {
+    industry: industry
   });
 }
 
-export function thirdScoreST(industry, enterprise){
+export function thirdScoreST(industry, enterprise) {
   return post("/thirdScoreST", {
     industry: industry,
     enterprise: enterprise
   });
 }
 
-export function thirdScoreND(industry, enterprise){
+export function thirdScoreND(industry, enterprise) {
   return post("/thirdScoreND", {
     industry: industry,
     enterprise: enterprise
   });
 }
 
-export function thirdEPPos(industry){
+export function thirdEPPos(industry) {
   return post("/thirdEPPos", {
     industry: industry
   });
