@@ -83,23 +83,26 @@ export function thirdEnterprise(industry) {
   });
 }
 
-export function thirdScoreST(industry, enterprise) {
+export function thirdScoreST(industry, enterprise, date) {
   return post("/thirdScoreST", {
     industry: industry,
-    enterprise: enterprise
+    enterprise: enterprise,
+    date: date
   });
 }
 
-export function thirdScoreND(industry, enterprise) {
+export function thirdScoreND(industry, enterprise, date) {
   return post("/thirdScoreND", {
     industry: industry,
-    enterprise: enterprise
+    enterprise: enterprise,
+    date: date
   });
 }
 
-export function thirdEPPos(industry) {
+export function thirdEPPos(industry, date) {
   return post("/thirdEPPos", {
-    industry: industry
+    industry: industry,
+    date: date
   });
 }
 
