@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { thirdEPPos } from '../../../apis/api';
-export default function ThirdEPPosplashes({w, h, selectedIndustry}) {
+export default function ThirdEPPosplashes({w, h, selectedIndustry, selectedYear}) {
   const [data, setData] = useState([]);
   const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
@@ -16,7 +16,7 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry}) {
   }, [selectedIndustry])
 
   useEffect(() => {
-    thirdEPPos(industry).then((res) => {
+    thirdEPPos(industry, selectedYear).then((res) => {
       var tmp=[];
       for(let i in res){
         tmp[i] = [];
@@ -26,7 +26,7 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry}) {
       }
       setData(tmp);      
     })
-  }, [industry])
+  }, [industry, selectedYear])
 
   // 随系统缩放修改画布大小
   useEffect(() => {

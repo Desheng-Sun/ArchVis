@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { thirdScoreST } from '../../../apis/api';
-export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedIndustry}) {
+export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedIndustry, selectedYear}) {
   const [data, setData] = useState([]);
   const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
@@ -15,7 +15,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
   }, [selectedIndustry])
 
   useEffect(() => {
-    thirdScoreST(industry, selectedEnterprise).then((res) => {
+    thirdScoreST(industry, selectedEnterprise, selectedYear).then((res) => {
       var tmp=[];    
       console.log(res[0]['资产负债率']);
       tmp[0] = res[0]['资产负债率'];
@@ -25,7 +25,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
       tmp[4] = res[0]['资产负债率'];
       setData(tmp)
     })
-  }, [industry, selectedEnterprise])
+  }, [industry, selectedEnterprise, selectedYear])
 
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
@@ -48,7 +48,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
       legend: {
         bottom: 5,
         data: [{
-          name: selectedEnterprise+'企业一级指标',
+          name: selectedEnterprise+selectedYear+"年一级指标",
           icon: "circle"
         }],
         itemGap: 20,
@@ -75,7 +75,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
           [
             {
               value: data,
-              name: selectedEnterprise+"企业一级指标"
+              name: selectedEnterprise+selectedYear+"年一级指标"
             }
           ]
         }
@@ -83,7 +83,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [data, w, h, selectedEnterprise]);
+  }, [data, w, h, selectedEnterprise, selectedYear]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>

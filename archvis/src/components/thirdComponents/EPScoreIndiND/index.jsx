@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { thirdScoreND } from '../../../apis/api';
-export default function ThirdEPScoreIndiND({w, h, selectedEnterprise, selectedIndustry}) {
+export default function ThirdEPScoreIndiND({w, h, selectedEnterprise, selectedIndustry, selectedYear}) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
   const [industry, setIndustry] = useState('constru');
@@ -14,7 +14,7 @@ export default function ThirdEPScoreIndiND({w, h, selectedEnterprise, selectedIn
     }
   }, [selectedIndustry])
   useEffect(() => {
-    thirdScoreND(industry, selectedEnterprise).then((res) => {
+    thirdScoreND(industry, selectedEnterprise, selectedYear).then((res) => {
       var tmp=[];    
       console.log(res[0]['资产负债率']);
       tmp[0] = res[0]['资产负债率'];
@@ -24,7 +24,7 @@ export default function ThirdEPScoreIndiND({w, h, selectedEnterprise, selectedIn
       tmp[4] = res[0]['资产负债率'];
       setData(tmp)
     })
-  }, [industry, selectedEnterprise])
+  }, [industry, selectedEnterprise, selectedYear])
 
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)

@@ -5,11 +5,13 @@ import { thirdEnterprise } from "../../../apis/api";
 
 const { Option } = Select;
  
-export default function ThirdSearchBar({ nowEnterprise, setSelectedIndustry, setNowEnterprise }) {
+export default function ThirdSearchBar({ nowEnterprise, setSelectedIndustry, setNowEnterprise, setSelectedYear }) {
   const allIndustry = ["施工行业", "设计行业"]
+  const allDate = ["2019年", "2020年", "2021年"]
   const [construEnterprise, setConstruEnterprise] = useState([]);
   const [designEnterprise, setDesignEnterprise] = useState([]);
   const [NowEnterpriseList, setNowEnterpriseList] = useState([]); 
+
   useEffect(() => {
     thirdEnterprise('constru').then((res) => {
       var tmp = [];
@@ -48,10 +50,23 @@ export default function ThirdSearchBar({ nowEnterprise, setSelectedIndustry, set
   const onNowEnterprise = (value) => {
     setNowEnterprise(value);
   };
-  console.log(nowEnterprise);
+
+  const onNowYear = (value) => {
+    if(value === "2019年"){
+      setSelectedYear(2019);
+    }
+    else if(value ==="2020年"){
+      setSelectedYear(2020);
+    }
+    else if(value ==="2021年"){
+      setSelectedYear(2021);
+    }
+  };
+
+  // console.log(nowEnterprise);
   return (
     <div style={{ height: "27.2vh", width: "100%" }}>
-      <div style={{ height: "40%", paddingTop: "5%" }}>
+      <div style={{ height: "30%", paddingTop: "5%" }}>
         <Select
           defaultValue={allIndustry[0]}
           style={{
@@ -65,7 +80,7 @@ export default function ThirdSearchBar({ nowEnterprise, setSelectedIndustry, set
         </Select>
       </div>
 
-      <div style={{ height: "40%", paddingTop: "5%" }}>
+      <div style={{ height: "30%", paddingTop: "5%" }}>
         <Select
           style={{
             width: "80%",
@@ -74,6 +89,20 @@ export default function ThirdSearchBar({ nowEnterprise, setSelectedIndustry, set
           onChange={onNowEnterprise}
         >
           {NowEnterpriseList.map((industry) => (
+            <Option key={industry}>{industry}</Option>
+          ))}
+        </Select>
+      </div>
+
+      <div style={{ height: "30%", paddingTop: "5%" }}>
+        <Select
+          defaultValue={allDate[0]}
+          style={{
+            width: "80%",
+          }}
+          onChange={onNowYear}
+        >
+          {allDate.map((industry) => (
             <Option key={industry}>{industry}</Option>
           ))}
         </Select>
