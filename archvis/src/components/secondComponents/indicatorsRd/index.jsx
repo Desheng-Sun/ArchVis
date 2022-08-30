@@ -5,7 +5,7 @@ import { secondIndicators } from '../../../apis/api';
 import "./index.css"
 
 
-export default function SecondIndicatorsRdSelect({ selectedIndustry, selectedIndicatorsNd, selectedIndicatorsRd, setSelectedIndicatorsRd }) {
+export default function SecondIndicatorsRdSelect({ selectedIndustrySecond, selectedIndicatorsNd, selectedIndicatorsRd, setSelectedIndicatorsRd }) {
   const [industry, setIndustry] = useState('constru');
   const [indicatorsRd, setIndicatorsRd] = useState([]);
   const onChange = (e) => {

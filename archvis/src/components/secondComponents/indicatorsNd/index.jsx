@@ -4,7 +4,7 @@ import { secondIndicators } from '../../../apis/api'
 import "./index.css"
 
 
-export default function SecondIndicatorsNdSelect({ selectedIndustrySecond, setSelectedIndicatorsNd }) {
+export default function SecondIndicatorsNdSelect({ selectedIndustrySecond, selectedIndicatorsNd, setSelectedIndicatorsNd }) {
   const [industry, setIndustry] = useState('constru');
   const [indicatorsNd, setIndicatorsNd] = useState([]);
 
