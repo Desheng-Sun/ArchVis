@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 30/08/2022 17:57:56
+ Date: 30/08/2022 18:02:03
 */
 
 SET NAMES utf8mb4;
@@ -540,7 +540,7 @@ CREATE TABLE `design_property`  (
   `净利润增长率` double NOT NULL,
   `营业净利润率` double NOT NULL,
   `研发投入费用` double NOT NULL,
-  `研发投入占营业收入比例(%)` double NOT NULL,
+  `研发投入占营业收入比例` double NOT NULL,
   `研发人员` int(0) NOT NULL,
   `研发项目个数` int(0) NOT NULL,
   `专利数` int(0) NOT NULL,
@@ -756,7 +756,7 @@ INSERT INTO `design_structure` VALUES (26, '总资产周转率', 7, 3, '企业�
 INSERT INTO `design_structure` VALUES (27, '净利润增长率', 7, 3, '反映企业持续盈利能力，企业持续盈利是实现数字化转型和投入的基础条件，成长较快的企业越有趋势运用数字化技术加速发展。');
 INSERT INTO `design_structure` VALUES (28, '营业净利润率', 7, 3, '反映企业经营效率，经营效率越高，企业数字化转型的支撑力就更强。');
 INSERT INTO `design_structure` VALUES (29, '研发投入费用', 8, 3, '直接反映了公司在研发上财务资源投入，研发投入可以直接助推企业运用数字化技术，促进数字化转型进程。');
-INSERT INTO `design_structure` VALUES (30, '研发投入占营业收入比例(%)', 8, 3, '指标用于刻画企业技术创新潜能，反映企业在研发上的投入强度，从而在数字化技术层面推动数字化转型。');
+INSERT INTO `design_structure` VALUES (30, '研发投入占营业收入比例', 8, 3, '指标用于刻画企业技术创新潜能，反映企业在研发上的投入强度，从而在数字化技术层面推动数字化转型。');
 INSERT INTO `design_structure` VALUES (31, '研发人员', 8, 3, '背后反映了公司隐性知识的数量,研发人员占比越高代表企业对于研发重视程度越高，从而有利于企业在技术层面进行数字化转型。');
 INSERT INTO `design_structure` VALUES (32, '研发项目个数', 8, 3, '反映企业研发所涉及的广度，项目数量越多代表企业投入越多，对于转型越重视。');
 INSERT INTO `design_structure` VALUES (33, '专利数', 8, 3, '专利可以被理解为企业所拥有的显性知识，专利数量越多，企业科技创新能力越强，从而推动企业转型。');
