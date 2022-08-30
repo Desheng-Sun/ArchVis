@@ -57,7 +57,7 @@ export default function Layout() {
 
 
     // 第二屏，用户选择的行业
-    const [selectedIndustry, setSelectedIndustry] = useState("施工行业");
+    const [selectedIndustrySecond, setSelectedIndustrySecond] = useState("施工行业");
     // 第二屏，用户选择的公司
     const [nowEnterprise, setNowEnterprise] = useState(["美丽生态"]);
     // 第二屏，用户选择的二级指标
@@ -275,7 +275,7 @@ export default function Layout() {
                             <ChartHeader chartName={"行业企业检索"} />
                             <SecondSearchBar
                                 nowEnterprise={nowEnterprise}
-                                setSelectedIndustry={setSelectedIndustry}
+                                setSelectedIndustrySecond={setSelectedIndustrySecond}
                                 setNowEnterprise={setNowEnterprise}
                             />
                         </div>
@@ -284,7 +284,7 @@ export default function Layout() {
                             <SecondIndicators
                                 w={secondIndicatorsWidth}
                                 h={secondIndicatorsHeight}
-                                selectedIndustry={selectedIndustry}
+                                selectedIndustrySecond={selectedIndustrySecond}
                                 setSelectedIndicatorsNd={setSelectedIndicatorsNd}
                                 setSelectedIndicatorsRd={setSelectedIndicatorsRd}
                             />
@@ -296,7 +296,7 @@ export default function Layout() {
                             <div id="secondSelectIndiND">
                                 <ChartHeader chartName={"二级指标勾选栏"} />
                                 <SecondIndicatorsNdSelect
-                                    selectedIndustry={selectedIndustry}
+                                    selectedIndustrySecond={selectedIndustrySecond}
                                     selectedIndicatorsNd={selectedIndicatorsNd}
                                     selectedIndicatorsRd={selectedIndicatorsRd}
                                     setSelectedIndicatorsNd={setSelectedIndicatorsNd}
@@ -305,7 +305,7 @@ export default function Layout() {
                             <div id="secondSelectIndiRD">
                                 <ChartHeader chartName={"三级指标勾选栏"} />
                                 <SecondIndicatorsRdSelect
-                                    selectedIndustry={selectedIndustry}
+                                    selectedIndustrySecond={selectedIndustrySecond}
                                     selectedIndicatorsNd={selectedIndicatorsNd}
                                     selectedIndicatorsRd={selectedIndicatorsRd}
                                     setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
@@ -324,7 +324,7 @@ export default function Layout() {
                             <SecondIndiRDRank
                                 w={secondIndiRDRankWidth}
                                 h={secondIndiRDRankHeight}
-                                selectedIndustry={selectedIndustry}
+                                selectedIndustrySecond={selectedIndustrySecond}
                                 nowEnterprise={nowEnterprise}
                                 selectedIndicatorsNd={selectedIndicatorsNd}
                                 selectedIndicatorsRd={selectedIndicatorsRd}

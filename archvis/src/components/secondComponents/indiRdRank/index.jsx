@@ -1,20 +1,21 @@
+import CheckableTag from 'antd/lib/tag/CheckableTag';
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { secondProperty } from '../../../apis/api';
 
-export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd}) {
+export default function FirstIndicators({w, h, selectedIndustrySecond, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd}) {
   const [data, setData] = useState([]);
   const [industry, setIndustry] = useState('constru');
   const [enterpriseList, setEnterpriseList] = useState([]);
   const chartRef = useRef(null);
   useEffect(() => {
-    if (selectedIndustry === '施工行业') {
+    if (selectedIndustrySecond === '施工行业') {
       setIndustry('constru');
     }
-    else if (selectedIndustry === '设计行业') {
+    else if (selectedIndustrySecond === '设计行业') {
       setIndustry('design');
     }
-  }, [selectedIndustry])
+  }, [selectedIndustrySecond])
   // useEffect(() => {
   //   console.log('nowEnterprise');
   //   console.log(nowEnterprise);
@@ -27,6 +28,7 @@ export default function FirstIndicators({w, h, selectedIndustry, nowEnterprise, 
     if (selectedIndicatorsRd === null) {}
     else {
       secondProperty(industry, selectedIndicatorsRd).then((res) => {
+        console.log(selectedIndicatorsRd);
         console.log('res');
         console.log(res);
         for (let i in nowEnterprise) {
