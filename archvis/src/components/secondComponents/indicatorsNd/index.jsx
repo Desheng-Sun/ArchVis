@@ -1,5 +1,5 @@
 import { Radio, Space } from 'antd';
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect } from 'react';
 import { secondIndicators } from '../../../apis/api'
 import "./index.css"
 
@@ -24,17 +24,17 @@ export default function SecondIndicatorsNdSelect({ selectedIndustrySecond, selec
   }, [selectedIndustrySecond])
 
   useEffect(() => {
-      var tmp = [];
-      for (let i in industry) {
-        if (industry[i].level === 2) {
-          tmp.push(industry[i].indi_name);
-        }
-        else if (industry[i].level === 3) {
-          break;
-        }
+    var tmp = [];
+    for (let i in industry) {
+      if (industry[i].level === 2) {
+        tmp.push(industry[i].indi_name);
       }
-      setIndicatorsNd(tmp);
-      setIsShow(false)
+      else if (industry[i].level === 3) {
+        break;
+      }
+    }
+    setIndicatorsNd(tmp);
+    setIsShow(false)
   }, [industry])
 
   useEffect(() => {
@@ -67,11 +67,11 @@ export default function SecondIndicatorsNdSelect({ selectedIndustrySecond, selec
     }
   };
   return (
-    <div id ="secondIndicatorsNdSelect">
+    <div id="secondIndicatorsNdSelect">
       <Radio.Group onChange={onChange} value={selectedIndicatorsNd}>
         <Space direction="vertical">
           {indicatorsNd.map((item, index) => (
-            <Radio key={index} value={item} style = {{height: "5vh"}}>
+            <Radio key={index} value={item} style={{ height: "5vh" }}>
               {item}
             </Radio>
           ))}
@@ -80,7 +80,12 @@ export default function SecondIndicatorsNdSelect({ selectedIndustrySecond, selec
       </Radio.Group>
       {
         isShow ? (
-          <div id="secondIndicatorsNdExplain">{nowIndicatorsExplain}</div>
+          <div id="secondIndicatorsNdExplain"></div>
+        ) : null
+      }      
+      {
+        isShow ? (
+          <div id="secondIndicatorsNdExplainText">{nowIndicatorsExplain}</div>
         ) : null
       }
     </div>
