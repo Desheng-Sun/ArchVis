@@ -45,6 +45,8 @@ app.listen(port, () => {
 });
 
 
+// 获取每个企业的数字化得分
+
 /////////////第一屏检索栏
 //指标检索
 app.post("/firstArchIndustry", jsonParser, (req, res) => {
