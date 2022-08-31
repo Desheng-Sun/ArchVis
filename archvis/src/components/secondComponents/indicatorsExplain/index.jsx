@@ -17,7 +17,6 @@ export default function SecondIndicatorsRdExplain({ selectedIndustry, selectedIn
   useEffect(() => {
     if (selectedIndicatorsRd !== undefined) {
       secondExplain(industry).then((res) => {
-        console.log('explain');
         console.log(res);
         if (res[0].explanation != null) {
           setNowIndicatorsRdExplain(res[0].explanation);

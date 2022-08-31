@@ -12,10 +12,10 @@ const connection = mysql.createConnection({
   port: '3306',//端口号
   user: 'root',//用户名
   // password: 'root',//密码
-  password: '990921',//密码
-  database: 'archindicators'//数据库名称
-  // password: 'sds091',//密码
-  // database: 'archsql'//数据库名称
+  // password: '990921',//密码
+  // database: 'archindicators'//数据库名称
+  password: 'sds091',//密码
+  database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -76,7 +76,6 @@ app.post("/firstArchMap", jsonParser, (req, res) => {
     res.send(str)
     res.end()
   })
-
 })
 
 
@@ -92,6 +91,7 @@ app.post("/firstArchList", jsonParser, (req, res) => {
   }
   useRegion = useRegion.slice(0, useRegion.length - 1) + ")"
   let sql = `select * from ${industry}_property where 企业名称 in (select 企业名称 from ${industry}_region where 地区 in ${useRegion} or 省份 in ${useRegion} ) and 年份 = ${date}`;
+  
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {

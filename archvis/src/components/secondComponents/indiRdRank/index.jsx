@@ -28,9 +28,6 @@ export default function FirstIndicators({w, h, selectedIndustrySecond, nowEnterp
     if (selectedIndicatorsRd === null) {}
     else {
       secondProperty(industry, selectedIndicatorsRd).then((res) => {
-        console.log(selectedIndicatorsRd);
-        console.log('res');
-        console.log(res);
         for (let i in nowEnterprise) {
           tmp[i] = {
                 name: nowEnterprise[i],
@@ -57,8 +54,6 @@ export default function FirstIndicators({w, h, selectedIndustrySecond, nowEnterp
   }, [industry, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd])
   // 随系统缩放修改画布大小
   useEffect(() => {
-    console.log('data');
-    console.log(data);
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
@@ -103,7 +98,6 @@ export default function FirstIndicators({w, h, selectedIndustrySecond, nowEnterp
           series: data
     };
     myChart.setOption(option);
-    console.log('redraw');
     myChart.resize();
   }, [data, w, h]);
 

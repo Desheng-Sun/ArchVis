@@ -6,7 +6,7 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
   const [construData, setConstruData] = useState([]);
   const [designData, setDesignData] = useState([]);
   const chartRef = useRef(null);
-  useEffect(() => {
+useEffect(() => {
     firstArchRank(selectedRegionFirst, selectedYearFirst, 'constru').then((res) => {
       setConstruData(res)
     })
@@ -57,7 +57,8 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
         name: '企业简称',
         axisLabel: {
           interval: 0,
-          rotate: 90
+          rotate: 90,
+          fontSize:"10px"
         }
       },
       yAxis: {

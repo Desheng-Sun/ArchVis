@@ -17,7 +17,6 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
   useEffect(() => {
     thirdScoreST(industry, selectedEnterprise, selectedYear).then((res) => {
       var tmp=[];    
-      console.log(res[0]['资产负债率']);
       tmp[0] = res[0]['资产负债率'];
       tmp[1] = res[0]['总资产周转率'];
       tmp[2] = res[0]['研发投入占营业收入比例(%)'];

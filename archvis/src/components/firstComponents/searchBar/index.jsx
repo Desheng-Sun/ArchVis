@@ -21,7 +21,6 @@ export default function FirstSearchBar({setSelectdIndustryFirst, setSelectedInde
   const [nowRegion, setNowRegion] = useState(allRegion2);
 
   const searchIndex = (value) => {
-    console.log(value)
     if (value.length === 0) {
       setNowIndex()
     }
@@ -53,12 +52,10 @@ export default function FirstSearchBar({setSelectdIndustryFirst, setSelectedInde
 
   const onChange = (value) => {
     setNowIndustry(value)
-    console.log(`selected ${value}`);
   };
 
   const onSearch = (value) => {
     // setNowIndustry(value)
-    console.log('search:', value);
   };
 
 

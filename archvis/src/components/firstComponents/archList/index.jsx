@@ -71,6 +71,7 @@ export default function FirstArchList({ selectedRegionFirst, selectedYearFirst, 
     title: '股票代码',
     dataIndex: '股票代码',
     key: '股票代码',
+
   },
 
   {

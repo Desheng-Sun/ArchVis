@@ -33,7 +33,6 @@ export default function SecondIndicatorsRdSelect({ selectedIndustrySecond, selec
         }
       }
       setIndicatorsRd(tmp[selectedIndicatorsNd])
-      console.log(tmp);
     });
   }, [industry, selectedIndicatorsNd])
   return (
