@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 30/08/2022 18:02:03
+ Date: 31/08/2022 16:35:54
 */
 
 SET NAMES utf8mb4;
@@ -355,7 +355,7 @@ INSERT INTO `constru_region` VALUES ('东华科技', '华东', '安徽', '合肥
 INSERT INTO `constru_region` VALUES ('东南网架', '华东', '浙江', '杭州市');
 INSERT INTO `constru_region` VALUES ('东方园林', '华北', '北京', '北京市');
 INSERT INTO `constru_region` VALUES ('东方铁塔', '华东', '山东', '青岛市');
-INSERT INTO `constru_region` VALUES ('东湖高新', '中南', '湖北', '武汉市');
+INSERT INTO `constru_region` VALUES ('东湖高新', '华中', '湖北', '武汉市');
 INSERT INTO `constru_region` VALUES ('东珠生态', '华东', '江苏', '无锡市');
 INSERT INTO `constru_region` VALUES ('中化岩土', '华北', '北京', '北京市');
 INSERT INTO `constru_region` VALUES ('中国中冶', '华北', '北京', '北京市');
@@ -377,7 +377,7 @@ INSERT INTO `constru_region` VALUES ('乾景园林', '华北', '北京', '北京
 INSERT INTO `constru_region` VALUES ('亚翔集成', '华东', '江苏', '苏州市');
 INSERT INTO `constru_region` VALUES ('交建股份', '华东', '安徽', '合肥市');
 INSERT INTO `constru_region` VALUES ('元成股份', '华东', '浙江', '杭州市');
-INSERT INTO `constru_region` VALUES ('农尚环境', '中南', '湖北', '武汉市');
+INSERT INTO `constru_region` VALUES ('农尚环境', '华中', '湖北', '武汉市');
 INSERT INTO `constru_region` VALUES ('冠中生态', '华东', '山东', '青岛市');
 INSERT INTO `constru_region` VALUES ('利柏特', '华东', '江苏', '苏州市');
 INSERT INTO `constru_region` VALUES ('北新路桥', '西北', '新疆', '乌鲁木齐市');
@@ -388,39 +388,39 @@ INSERT INTO `constru_region` VALUES ('四川路桥', '西南', '四川', '成都
 INSERT INTO `constru_region` VALUES ('园林股份', '华东', '浙江', '杭州市');
 INSERT INTO `constru_region` VALUES ('大千生态', '华东', '江苏', '南京市');
 INSERT INTO `constru_region` VALUES ('天域生态', '西南', '重庆', '重庆市');
-INSERT INTO `constru_region` VALUES ('奥雅设计', '中南', '广东', '深圳市');
+INSERT INTO `constru_region` VALUES ('奥雅设计', '华南', '广东', '深圳市');
 INSERT INTO `constru_region` VALUES ('宁波建工', '华东', '浙江', '宁波市');
 INSERT INTO `constru_region` VALUES ('安徽建工', '华东', '安徽', '蚌埠市');
 INSERT INTO `constru_region` VALUES ('宏润建设', '华东', '浙江', '宁波市');
 INSERT INTO `constru_region` VALUES ('富煌钢构', '华东', '安徽', '合肥市');
 INSERT INTO `constru_region` VALUES ('山东路桥', '华东', '山东', '济南市');
-INSERT INTO `constru_region` VALUES ('岭南股份', '中南', '广东', '东莞市');
+INSERT INTO `constru_region` VALUES ('岭南股份', '华南', '广东', '东莞市');
 INSERT INTO `constru_region` VALUES ('成都路桥', '西南', '四川', '成都市');
-INSERT INTO `constru_region` VALUES ('文科园林', '中南', '广东', '深圳市');
+INSERT INTO `constru_region` VALUES ('文科园林', '华南', '广东', '深圳市');
 INSERT INTO `constru_region` VALUES ('新疆交建', '西北', '新疆', '乌鲁木齐市');
 INSERT INTO `constru_region` VALUES ('日上集团', '华东', '福建', '厦门市');
-INSERT INTO `constru_region` VALUES ('普邦股份', '中南', '广东', '广州市');
+INSERT INTO `constru_region` VALUES ('普邦股份', '华南', '广东', '广州市');
 INSERT INTO `constru_region` VALUES ('杭州园林', '华东', '浙江', '杭州市');
 INSERT INTO `constru_region` VALUES ('杭萧钢构', '华东', '浙江', '杭州市');
-INSERT INTO `constru_region` VALUES ('棕榈股份', '中南', '河南', '郑州市');
+INSERT INTO `constru_region` VALUES ('棕榈股份', '华中', '河南', '郑州市');
 INSERT INTO `constru_region` VALUES ('森特股份', '华北', '北京', '北京市');
 INSERT INTO `constru_region` VALUES ('正平股份', '西北', '青海', '西宁市');
 INSERT INTO `constru_region` VALUES ('永福股份', '华东', '福建', '福州市');
-INSERT INTO `constru_region` VALUES ('汇绿生态', '中南', '湖北', '武汉市');
+INSERT INTO `constru_region` VALUES ('汇绿生态', '华中', '湖北', '武汉市');
 INSERT INTO `constru_region` VALUES ('汇通集团', '华北', '河北', '保定市');
 INSERT INTO `constru_region` VALUES ('浙江交科', '华东', '浙江', '衢州市');
 INSERT INTO `constru_region` VALUES ('浙江建投', '华东', '浙江', '杭州市');
 INSERT INTO `constru_region` VALUES ('浦东建设', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('海波重科', '中南', '湖北', '武汉市');
-INSERT INTO `constru_region` VALUES ('百利科技', '中南', '湖南', '岳阳市');
-INSERT INTO `constru_region` VALUES ('粤 水 电', '中南', '广东', '广州市');
+INSERT INTO `constru_region` VALUES ('海波重科', '华中', '湖北', '武汉市');
+INSERT INTO `constru_region` VALUES ('百利科技', '华中', '湖南', '岳阳市');
+INSERT INTO `constru_region` VALUES ('粤 水 电', '华南', '广东', '广州市');
 INSERT INTO `constru_region` VALUES ('精工钢构', '华东', '安徽', '六安市');
 INSERT INTO `constru_region` VALUES ('罗曼股份', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('美丽生态', '中南', '广东', '深圳市');
+INSERT INTO `constru_region` VALUES ('美丽生态', '华南', '广东', '深圳市');
 INSERT INTO `constru_region` VALUES ('美晨生态', '华东', '山东', '潍坊市');
 INSERT INTO `constru_region` VALUES ('能辉科技', '华东', '上海', '上海市');
 INSERT INTO `constru_region` VALUES ('腾达建设', '华东', '浙江', '台州市');
-INSERT INTO `constru_region` VALUES ('节能铁汉', '中南', '广东', '深圳市');
+INSERT INTO `constru_region` VALUES ('节能铁汉', '华南', '广东', '深圳市');
 INSERT INTO `constru_region` VALUES ('苏文电能', '华东', '江苏', '常州市');
 INSERT INTO `constru_region` VALUES ('蒙草生态', '华北', '内蒙古', '呼和浩特市');
 INSERT INTO `constru_region` VALUES ('诚邦股份', '华东', '浙江', '杭州市');
@@ -677,36 +677,36 @@ INSERT INTO `design_region` VALUES ('中粮工科', '华东', '江苏', '无锡�
 INSERT INTO `design_region` VALUES ('中衡设计', '华东', '江苏', '苏州市');
 INSERT INTO `design_region` VALUES ('中设咨询', '西南', '重庆', '重庆市');
 INSERT INTO `design_region` VALUES ('中设股份', '华东', '江苏', '无锡市');
-INSERT INTO `design_region` VALUES ('中达安', '中南', '广东', '广州市');
+INSERT INTO `design_region` VALUES ('中达安', '华南', '广东', '广州市');
 INSERT INTO `design_region` VALUES ('勘设股份', '西南', '贵州', '贵阳市');
 INSERT INTO `design_region` VALUES ('华图山鼎', '西南', '四川', '成都市');
 INSERT INTO `design_region` VALUES ('华建集团', '华东', '上海', '上海市');
 INSERT INTO `design_region` VALUES ('华维设计', '华东', '江西', '南昌市');
-INSERT INTO `design_region` VALUES ('华蓝集团', '中南', '广西', '南宁市');
+INSERT INTO `design_region` VALUES ('华蓝集团', '华南', '广西', '南宁市');
 INSERT INTO `design_region` VALUES ('华设集团', '华东', '江苏', '南京市');
-INSERT INTO `design_region` VALUES ('华阳国际', '中南', '广东', '深圳市');
+INSERT INTO `design_region` VALUES ('华阳国际', '华南', '广东', '深圳市');
 INSERT INTO `design_region` VALUES ('合诚股份', '华东', '福建', '厦门市');
 INSERT INTO `design_region` VALUES ('启迪设计', '华东', '江苏', '苏州市');
-INSERT INTO `design_region` VALUES ('地铁设计', '中南', '广东', '广州市');
+INSERT INTO `design_region` VALUES ('地铁设计', '华南', '广东', '广州市');
 INSERT INTO `design_region` VALUES ('尤安设计', '华东', '上海', '上海市');
-INSERT INTO `design_region` VALUES ('山水比德', '中南', '广东', '广州市');
-INSERT INTO `design_region` VALUES ('广咨国际', '中南', '广东', '广州市');
+INSERT INTO `design_region` VALUES ('山水比德', '华南', '广东', '广州市');
+INSERT INTO `design_region` VALUES ('广咨国际', '华南', '广东', '广州市');
 INSERT INTO `design_region` VALUES ('建研设计', '华东', '安徽', '合肥市');
-INSERT INTO `design_region` VALUES ('建科院', '中南', '广东', '深圳市');
+INSERT INTO `design_region` VALUES ('建科院', '华南', '广东', '深圳市');
 INSERT INTO `design_region` VALUES ('招标股份', '华东', '福建', '福州市');
-INSERT INTO `design_region` VALUES ('新城市', '中南', '广东', '深圳市');
+INSERT INTO `design_region` VALUES ('新城市', '华南', '广东', '深圳市');
 INSERT INTO `design_region` VALUES ('旭杰科技', '华东', '江苏', '苏州市');
-INSERT INTO `design_region` VALUES ('杰恩设计', '中南', '广东', '深圳市');
+INSERT INTO `design_region` VALUES ('杰恩设计', '华南', '广东', '深圳市');
 INSERT INTO `design_region` VALUES ('汉嘉设计', '华东', '浙江', '杭州市');
 INSERT INTO `design_region` VALUES ('测绘股份', '华东', '江苏', '南京市');
-INSERT INTO `design_region` VALUES ('深圳瑞捷', '中南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('深城交', '中南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('深水规院', '中南', '广东', '深圳市');
+INSERT INTO `design_region` VALUES ('深圳瑞捷', '华南', '广东', '深圳市');
+INSERT INTO `design_region` VALUES ('深城交', '华南', '广东', '深圳市');
+INSERT INTO `design_region` VALUES ('深水规院', '华南', '广东', '深圳市');
 INSERT INTO `design_region` VALUES ('甘咨询', '西北', '甘肃', '兰州市');
 INSERT INTO `design_region` VALUES ('筑博设计', '西南', '西藏', '拉萨市');
 INSERT INTO `design_region` VALUES ('苏交科', '华东', '江苏', '南京市');
-INSERT INTO `design_region` VALUES ('蕾奥规划', '中南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('设研院', '中南', '河南', '郑州市');
+INSERT INTO `design_region` VALUES ('蕾奥规划', '华南', '广东', '深圳市');
+INSERT INTO `design_region` VALUES ('设研院', '华中', '河南', '郑州市');
 INSERT INTO `design_region` VALUES ('设计总院', '华东', '安徽', '合肥市');
 INSERT INTO `design_region` VALUES ('霍普股份', '华东', '上海', '上海市');
 
