@@ -70,7 +70,7 @@ export default function Layout() {
     // 第三屏，用户选择的公司
     const [nowEnterpriseThird, setNowEnterpriseThird] = useState(["美丽生态"]);
     // 第三屏，用户选择的年份
-    const [selectedYearThird, setSelectedYearThird] = useState(["2019"]);
+    // const [selectedYearThird, setSelectedYearThird] = useState(["2019"]);
 
     // 当前页面所在第几屏上
     const [nowPageIndex, setNowPageIndex] = useState("firstButton")
@@ -343,7 +343,7 @@ export default function Layout() {
                                 nowEnterprise={nowEnterpriseThird}
                                 setSelectedIndustry={setSelectedIndustryThird}
                                 setNowEnterprise={setNowEnterpriseThird}
-                                setSelectedYear={setSelectedYearThird}
+                                // setSelectedYear={setSelectedYearThird}
                             />
                         </div>
                         <div id="thirdEPPosplashes">
@@ -352,7 +352,7 @@ export default function Layout() {
                                 w={thirdEPPosplashesWidth}
                                 h={thirdEPPosplashesHeight}
                                 selectedIndustry={selectedIndustryThird}
-                                selectedYear={selectedYearThird}
+                                // selectedYear={selectedYearThird}
                             />
                         </div>
 
@@ -366,7 +366,7 @@ export default function Layout() {
                                     h={thirdEPScoreIndiSDHeight}
                                     selectedEnterprise={nowEnterpriseThird}
                                     selectedIndustry={selectedIndustryThird}
-                                    selectedYear={selectedYearThird}
+                                    // selectedYear={selectedYearThird}
                                 />
                             </div>
                             <div id="thirdEPScoreIndiND">
@@ -376,7 +376,7 @@ export default function Layout() {
                                     h={thirdEPScoreIndiNDHeight}
                                     selectedEnterprise={nowEnterpriseThird}
                                     selectedIndustry={selectedIndustryThird}
-                                    selectedYear={selectedYearThird}
+                                    // selectedYear={selectedYearThird}
                                 />
 
                             </div>
