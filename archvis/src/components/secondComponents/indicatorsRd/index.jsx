@@ -6,37 +6,69 @@ import "./index.css"
 
 
 export default function SecondIndicatorsRdSelect({ selectedIndustrySecond, selectedIndicatorsNd, selectedIndicatorsRd, setSelectedIndicatorsRd }) {
-  const [industry, setIndustry] = useState('constru');
+  const [industry, setIndustry] = useState([]);
   const [indicatorsRd, setIndicatorsRd] = useState([]);
+  const [nowIndicatorsExplain, setNowIndicatorsExplain] = useState("")
+  const [isShow, setIsShow] = useState(false)
   const onChange = (e) => {
     setSelectedIndicatorsRd(e.target.value)
+    for (let i of industry) {
+      if (i.indi_name === e.target.value) {
+        setNowIndicatorsExplain(i.indi_name + "：" + i.explanation)
+        if (i.explanation !== null) {
+          setIsShow(true)
+        }
+        else {
+          setIsShow(false)
+        }
+      }
+    }
   };
   useEffect(() => {
     if (selectedIndustrySecond === '施工行业') {
-      setIndustry('constru');
+      secondIndicators('constru').then((res) => {
+        setIndustry(res)
+      })
     }
     else if (selectedIndustrySecond === '设计行业') {
-      setIndustry('design');
+      secondIndicators('design').then((res) => {
+        setIndustry(res)
+      })
     }
   }, [selectedIndustrySecond])
   useEffect(() => {
-    secondIndicators(industry).then((res) =>{
-      var tmp = {};
-      for (let i in res) {
-        if (res[i].level === 2) {
-          tmp[res[i].indi_name] = [];
-          for (let j in res) {
-            if (res[j].parent_id === res[i].id) {
-              tmp[res[i].indi_name].push(res[j].indi_name);
+    if (industry.length > 0) {
+      let tmp = {};
+      for (let i in industry) {
+        if (industry[i].level === 2) {
+          tmp[industry[i].indi_name] = [];
+          for (let j in industry) {
+            if (industry[j].parent_id === industry[i].id) {
+              tmp[industry[i].indi_name].push(industry[j].indi_name);
             }
           }
         }
       }
       setIndicatorsRd(tmp[selectedIndicatorsNd])
-    });
+      setIsShow(false)
+    }
   }, [industry, selectedIndicatorsNd])
+  useEffect(() => {
+    for (let i of industry) {
+      if (i.indi_name === selectedIndicatorsRd) {
+        setNowIndicatorsExplain(i.indi_name + "：" + i.explanation)
+        console.log(i.explanation)
+        if (i.explanation !== null) {
+          setIsShow(true)
+        }
+        else {
+          setIsShow(false)
+        }
+      }
+    }
+  }, [selectedIndicatorsRd])
   return (
-    <div id ="secondIndicatorsRdSelect" style={{ paddingTop: "5%" }}>
+    <div id="secondIndicatorsRdSelect" >
       <Radio.Group onChange={onChange} value={selectedIndicatorsRd}>
         <Space direction="vertical">
           {indicatorsRd.map((item, index) => (
@@ -46,6 +78,11 @@ export default function SecondIndicatorsRdSelect({ selectedIndustrySecond, selec
           ))}
         </Space>
       </Radio.Group>
+      {
+        isShow ? (
+          <div id="secondIndicatorsRdExplain">{nowIndicatorsExplain}</div>
+        ) : null
+      }
     </div>
   )
 }

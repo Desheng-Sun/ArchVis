@@ -7,33 +7,64 @@ import "./index.css"
 export default function SecondIndicatorsNdSelect({ selectedIndustrySecond, selectedIndicatorsNd, setSelectedIndicatorsNd }) {
   const [industry, setIndustry] = useState('constru');
   const [indicatorsNd, setIndicatorsNd] = useState([]);
+  const [nowIndicatorsExplain, setNowIndicatorsExplain] = useState("")
+  const [isShow, setIsShow] = useState(false)
 
   useEffect(() => {
     if (selectedIndustrySecond === '施工行业') {
-      setIndustry('constru');
+      secondIndicators('constru').then((res) => {
+        setIndustry(res)
+      })
     }
     else if (selectedIndustrySecond === '设计行业') {
-      setIndustry('design');
+      secondIndicators('design').then((res) => {
+        setIndustry(res)
+      })
     }
   }, [selectedIndustrySecond])
 
   useEffect(() => {
-    secondIndicators(industry).then((res) =>{
       var tmp = [];
-      for (let i in res) {
-        if (res[i].level === 2) {
-          tmp.push(res[i].indi_name);
+      for (let i in industry) {
+        if (industry[i].level === 2) {
+          tmp.push(industry[i].indi_name);
         }
-        else if (res[i].level === 3) {
+        else if (industry[i].level === 3) {
           break;
         }
       }
       setIndicatorsNd(tmp);
-    });
+      setIsShow(false)
   }, [industry])
 
+  useEffect(() => {
+    for (let i of industry) {
+      if (i.indi_name === selectedIndicatorsNd) {
+        setNowIndicatorsExplain(i.indi_name + "：" + i.explanation)
+        console.log(i.explanation)
+        if (i.explanation !== null) {
+          setIsShow(true)
+        }
+        else {
+          setIsShow(false)
+        }
+      }
+    }
+  }, [selectedIndicatorsNd])
   const onChange = (e) => {
     setSelectedIndicatorsNd(e.target.value)
+    for (let i of industry) {
+      if (i.indi_name === e.target.value) {
+        setNowIndicatorsExplain(i.indi_name + "：" + i.explanation)
+        console.log(i.explanation)
+        if (i.explanation !== null) {
+          setIsShow(true)
+        }
+        else {
+          setIsShow(false)
+        }
+      }
+    }
   };
   return (
     <div id ="secondIndicatorsNdSelect">
@@ -47,6 +78,11 @@ export default function SecondIndicatorsNdSelect({ selectedIndustrySecond, selec
 
         </Space>
       </Radio.Group>
+      {
+        isShow ? (
+          <div id="secondIndicatorsNdExplain">{nowIndicatorsExplain}</div>
+        ) : null
+      }
     </div>
   )
 }

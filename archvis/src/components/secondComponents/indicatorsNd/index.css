@@ -2,7 +2,6 @@
   height: 27.2vh;
   /* height: 41vh; */
   width: 100%;
-  padding-top: 5%;
   overflow-y: scroll;
   /* overflow: hidden; */
 }
@@ -22,4 +21,11 @@
   background-color: rgba(144, 147, 153, 0.3);
   -webkit-transition: 0.3s background-color;
   transition: 0.3s background-color;
+}
+#secondIndicatorsNdExplain{
+  height: 27.2vh;
+  width: 20%;
+  float: right;
+  font-size: 1.2vh;
+  text-align: left;
 }
