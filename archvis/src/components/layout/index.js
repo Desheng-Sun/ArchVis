@@ -49,7 +49,7 @@ export default function Layout() {
     // 第一屏 用户选择的指标
     const [selectedIndexFirst, setSelectedIndexFirst] = useState(["基本指标", "数字研发创新指标", "组织指标", "战略指标", "行业特色指标"])
     // 第一屏 用户选择的地区
-    const [selectedRegionFirst, setSelectedRegionFirst] = useState(["东北", "华北", "华东", "华中", "华南", "西北", "西南"])
+    const [selectedRegionFirst, setSelectedRegionFirst] = useState(["东北", "华北", "华东", "华中", "华南", "西北", "西南", "港澳台"])
     // 第一屏，用户选择的时间
     const [selectedYearFirst, setSelectedYearFirst] = useState(2019)
     // 第一屏，用户当前点击的公司

@@ -62,10 +62,11 @@ export function secondEnterprise(industry) {
   });
 }
 
-export function secondProperty(industry, indicator) {
+export function secondProperty(industry, indicator, nowEnterprise) {
   return post("/secondProperty", {
     industry: industry,
-    indicator: indicator
+    indicator: indicator,
+    nowEnterprise: nowEnterprise
   });
 }
 

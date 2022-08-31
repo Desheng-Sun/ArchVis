@@ -163,7 +163,14 @@ app.post("/secondEnterprise", jsonParser, (req, res) => {
 app.post("/secondProperty", jsonParser, (req, res) => {
   const industry = req.body.industry;
   const indicator = req.body.indicator;
-  let sql = 'select 企业名称,' + indicator + ',年份 from ' + industry + '_property order by 企业名称';
+  const nowEnterprise = req.body.nowEnterprise
+  let useEnterprise = "("
+  for (let i of nowEnterprise) {
+    useEnterprise += '"' + i + '" ,'
+  }
+  useEnterprise = useEnterprise.slice(0, useEnterprise.length - 1) + ")"
+
+  let sql = `select 企业名称, ${indicator}, 年份 from ${industry}_property where 企业名称 in ${useEnterprise}`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {

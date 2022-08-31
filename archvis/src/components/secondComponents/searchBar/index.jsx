@@ -5,7 +5,7 @@ import { secondEnterprise } from '../../../apis/api';
 
 const { Option } = Select;
 
-export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, setNowEnterprise }) {
+export default function SecondSearchBar({ nowEnterprise, setSelectedIndustrySecond, setNowEnterprise }) {
   const allIndustry = ["施工行业", "设计行业"]
   const [construEnterprise, setConstruEnterprise] = useState([]);
   const [designEnterprise, setDesignEnterprise] = useState([]);
@@ -34,20 +34,22 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustry, se
   }, [])
 
   const handleIndustryChange = (value) => {
-    setSelectedIndustry(value);
+    console.log(value)
+    setSelectedIndustrySecond(value);
     if (value === "施工行业") {
       setNowEnterpriseList(construEnterprise);
-      setNowEnterprise(construEnterprise[0]);
+      setNowEnterprise([construEnterprise[0]]);
     }
     else if (value === "设计行业") {
       setNowEnterpriseList(designEnterprise);
-      setNowEnterprise(designEnterprise[0]);
+      setNowEnterprise([designEnterprise[0]]);
     }
   };
 
   const onNowEnterprise = (value) => {
     setNowEnterprise(value);
   };
+
   return (
     <div style={{ height: "37.2vh", width: "100%" }}>
       <div 

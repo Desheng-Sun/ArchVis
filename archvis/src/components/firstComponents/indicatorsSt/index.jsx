@@ -191,7 +191,7 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
   }, [selectdIndustryFirst, selectedIndexFirst, w, h, useData]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "61vh" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "56vh" }}>
     </div>
   )
 }
