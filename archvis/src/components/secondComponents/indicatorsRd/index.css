@@ -28,7 +28,7 @@
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
   border-radius: inherit;
-  background-color: rgba(144, 147, 153, 0.3);
+  background-color: rgba(144, 147, 153, 0);
   -webkit-transition: 0.3s background-color;
   transition: 0.3s background-color;
 }
@@ -37,6 +37,14 @@
   height: 27.2vh;
   width: 20%;
   float: right;
+}
+#secondIndicatorsRdExplainText {
+  height: 27.2vh;
+  width: 6vw;
+  position: absolute;
   font-size: 1.2vh;
   text-align: left;
+  top: 8.5vh;
+  right: 0.3vw;
+  overflow-y: scroll;
 }

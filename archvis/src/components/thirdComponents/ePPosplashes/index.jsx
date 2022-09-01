@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { thirdEPPos } from '../../../apis/api';
-export default function ThirdEPPosplashes({w, h, selectedIndustry, selectedYear}) {
+export default function ThirdEPPosplashes({w, h, selectedIndustry}) {
   const [data, setData] = useState([]);
   const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
@@ -16,17 +16,31 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, selectedYear}
   }, [selectedIndustry])
 
   useEffect(() => {
-    thirdEPPos(industry, selectedYear).then((res) => {
-      var tmp=[];
-      for(let i in res){
-        tmp[i] = [];
-        tmp[i].push(res[i].总资产);
-        tmp[i].push(res[i].资产负债率);
-        tmp[i].push(res[i].企业名称);
+    var tmp=[];
+    tmp[0]=[];
+    tmp[1]=[];
+    tmp[2]=[];
+    thirdEPPos(industry).then((res) => {
+      console.log("res");
+
+      console.log(res);
+      for (let i of res){
+        if (i["年份"] ==2019){
+          tmp[0].push(i);
+        }
+        else if (i["年份"] ==2020){
+          tmp[1].push(i);
+        }
+        else if (i["年份"] ==2021){
+          tmp[2].push(i);
+        }
       }
-      setData(tmp);      
+      setData(tmp); 
+      console.log("12345324567");    
+ 
+      console.log(tmp);    
     })
-  }, [industry, selectedYear])
+  }, [industry])
 
   // 随系统缩放修改画布大小
   useEffect(() => {
@@ -34,7 +48,31 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, selectedYear}
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
-   
+    let data19=[];
+    let data20=[];
+    let data21=[];
+    for (let i in data[0]){
+      data19[i]=[];
+      data19[i].push(data[0][i].总资产)
+      data19[i].push(data[0][i].资产负债率)
+      data19[i].push(data[0][i].企业名称)
+    }
+    // console.log("data19");
+    // console.log(data19);
+    for (let i in data[1]){
+      data20[i]=[];
+      data20[i].push(data[1][i].总资产)
+      data20[i].push(data[1][i].资产负债率)
+      data20[i].push(data[1][i].企业名称)
+
+    }
+    for (let i in data[2]){
+      data21[i]=[];
+      data21[i].push(data[2][i].总资产)
+      data21[i].push(data[2][i].资产负债率)
+      data21[i].push(data[2][i].企业名称)
+
+    }
     // const data1 =[      
       // [1, 55, ''],
       // [2, 25, '企业2'],
@@ -153,7 +191,7 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, selectedYear}
       color: [
         "#5b8ff9",
         "#5ad8a6",
-        "#5d7092",
+        // "#5d7092",
         "#f6bd16",
         "#e86452",
         "#6dc8ec",
@@ -162,6 +200,13 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, selectedYear}
         "#1e9493",
         "#ff99c3"
       ],
+      legend: {
+        top: 10,
+        data: ['2019年', '2020年', '2021年'],
+        textStyle: {
+          fontSize: 16
+        }
+      },
   grid: {
     left: '10%',
     right: 150,
@@ -213,10 +258,10 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, selectedYear}
   },
   series: [
     {
-      name: selectedIndustry,
+      name: "2019年",
       type: 'scatter',
       itemStyle: itemStyle,
-      data: data,
+      data: data19,
       label: {
         show: true,
         position: 'top',
@@ -227,6 +272,36 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, selectedYear}
         }
       }
     },
+    {
+      name: "2020年",
+      type: 'scatter',
+      itemStyle: itemStyle,
+      data: data20,
+      label: {
+        show: true,
+        position: 'top',
+        color: '#000',
+        formatter: function (param) {
+          var value = param.value;
+          return value[2]
+        }
+      }
+    },
+    {
+      name: "2021年",
+      type: 'scatter',
+      itemStyle: itemStyle,
+      data: data21,
+      label: {
+        show: true,
+        position: 'top',
+        color: '#000',
+        formatter: function (param) {
+          var value = param.value;
+          return value[2]
+        }
+      }
+    }
     // {
     //   name: '二类企业',
     //   type: 'scatter',

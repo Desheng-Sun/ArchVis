@@ -11,8 +11,8 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  // password: 'root',//密码
-  password: '990921',//密码
+  password: 'root',//密码
+  // password: '990921',//密码
   database: 'archindicators'//数据库名称
   // password: 'sds091',//密码
   // database: 'archsql'//数据库名称
@@ -44,6 +44,8 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
+
+// 获取每个企业的数字化得分
 
 /////////////第一屏检索栏
 //指标检索
@@ -219,9 +221,8 @@ app.post("/thirdEnterprise", jsonParser, (req, res) => {
 app.post("/thirdScoreST", jsonParser, (req, res) => {
   const industry = req.body.industry
   const enterprise = req.body.enterprise
-  const date = req.body.date
   //查询某个企业的一级指标得分值。用五个三级指标代替。
-  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '" and 年份 = "' + date + '" ';
+  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '" ';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -237,9 +238,8 @@ app.post("/thirdScoreST", jsonParser, (req, res) => {
 app.post("/thirdScoreND", jsonParser, (req, res) => {
   const industry = req.body.industry
   const enterprise = req.body.enterprise
-  const date = req.body.date
   //查询某个企业的一级指标下的二级指标得分值。用三级指标代替。只找2019年。
-  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '" and 年份 = "' + date + '" ';
+  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '" ';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -254,9 +254,8 @@ app.post("/thirdScoreND", jsonParser, (req, res) => {
 // 企业数字化程度散点图
 app.post("/thirdEPPos", jsonParser, (req, res) => {
   const industry = req.body.industry
-  const date = req.body.date
   //查询某个行业的所有企业的数字化程度得分。用资产负债率代替。
-  let sql = 'select * from ' + industry + '_property where 年份 = "' + date + '" ';
+  let sql = 'select * from ' + industry + '_property';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {

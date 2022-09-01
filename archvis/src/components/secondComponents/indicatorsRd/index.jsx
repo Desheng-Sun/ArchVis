@@ -80,7 +80,12 @@ export default function SecondIndicatorsRdSelect({ selectedIndustrySecond, selec
       </Radio.Group>
       {
         isShow ? (
-          <div id="secondIndicatorsRdExplain">{nowIndicatorsExplain}</div>
+          <div id="secondIndicatorsRdExplain"></div>
+        ) : null
+      }
+      {
+        isShow ? (
+          <div id="secondIndicatorsRdExplainText">{nowIndicatorsExplain}</div>
         ) : null
       }
     </div>

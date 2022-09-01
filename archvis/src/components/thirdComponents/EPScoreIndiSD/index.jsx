@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { thirdScoreST } from '../../../apis/api';
-export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedIndustry, selectedYear}) {
+export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedIndustry}) {
   const [data, setData] = useState([]);
   const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
@@ -15,16 +15,37 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
   }, [selectedIndustry])
 
   useEffect(() => {
-    thirdScoreST(industry, selectedEnterprise, selectedYear).then((res) => {
-      var tmp=[];    
-      tmp[0] = res[0]['资产负债率'];
-      tmp[1] = res[0]['总资产周转率'];
-      tmp[2] = res[0]['研发投入占营业收入比例(%)'];
-      tmp[3] = res[0]['资产负债率'];
-      tmp[4] = res[0]['资产负债率'];
+    thirdScoreST(industry, selectedEnterprise).then((res) => {
+      var tmp=[];   
+      tmp[0]=[];
+      tmp[1]=[];
+      tmp[2]=[]; 
+      for (let i of res){
+        if (i["年份"] ==2019){
+          tmp[0].push(i["资产负债率"]);
+          tmp[0].push(i["总资产周转率"]);
+          tmp[0].push(i["总资产周转率"]);
+          tmp[0].push(i["资产负债率"]);
+          tmp[0].push(i["资产负债率"]);
+        }
+        else if (i["年份"] ==2020){
+          tmp[1].push(i['资产负债率']);
+          tmp[1].push(i['总资产周转率']);
+          tmp[1].push(i['总资产周转率']);
+          tmp[1].push(i['资产负债率']);
+          tmp[1].push(i['资产负债率']);
+        }
+        else if (i["年份"] ==2021){
+          tmp[2].push(i['资产负债率']);
+          tmp[2].push(i['总资产周转率']);
+          tmp[2].push(i['总资产周转率']);
+          tmp[2].push(i['资产负债率']);
+          tmp[2].push(i['资产负债率']);
+        }
+      }
       setData(tmp)
     })
-  }, [industry, selectedEnterprise, selectedYear])
+  }, [industry, selectedEnterprise])
 
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
@@ -47,9 +68,19 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
       legend: {
         bottom: 5,
         data: [{
-          name: selectedEnterprise+selectedYear+"年一级指标",
+          name: selectedEnterprise+"2019年一级指标",
           icon: "circle"
-        }],
+        },
+        {
+          name: selectedEnterprise+"2020年一级指标",
+          icon: "circle"
+        },
+        {
+          name: selectedEnterprise+"2021年一级指标",
+          icon: "circle"
+        },
+
+      ],
         itemGap: 20,
         textStyle: {
           color: '#aaa',
@@ -73,16 +104,24 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
           data: 
           [
             {
-              value: data,
-              name: selectedEnterprise+selectedYear+"年一级指标"
-            }
+              value: data[0],
+              name: selectedEnterprise+"2019年一级指标"
+            },
+            {
+              value: data[1],
+              name: selectedEnterprise+"2020年一级指标"
+            },
+            {
+              value: data[2],
+              name: selectedEnterprise+"2021年一级指标"
+            },
           ]
         }
       ]
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [data, w, h, selectedEnterprise, selectedYear]);
+  }, [data, w, h, selectedEnterprise]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>
