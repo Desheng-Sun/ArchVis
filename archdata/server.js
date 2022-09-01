@@ -12,10 +12,10 @@ const connection = mysql.createConnection({
   port: '3306',//端口号
   user: 'root',//用户名
   // password: 'root',//密码
-  // password: '990921',//密码
-  // database: 'archindicators'//数据库名称
-  password: 'sds091',//密码
-  database: 'archsql'//数据库名称
+  password: '990921',//密码
+  database: 'archindicators'//数据库名称
+  // password: 'sds091',//密码
+  // database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -65,7 +65,7 @@ app.post("/firstArchIndustry", jsonParser, (req, res) => {
 app.post("/firstArchMap", jsonParser, (req, res) => {
   const date = req.body.date
   const industry = req.body.industry
-  let sql = `select 省份, COUNT(*) from ${industry}_region where 企业名称 in (select 企业名称 from  ${industry}_property where 年份 = ${date}) group by 省份`;
+  let sql = `select 省份, COUNT(*) from ${industry}_enterprise where 企业名称 in (select 企业名称 from  ${industry}_property where 年份 = ${date}) group by 省份`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -90,7 +90,7 @@ app.post("/firstArchList", jsonParser, (req, res) => {
     useRegion += '"' + i + '" ,'
   }
   useRegion = useRegion.slice(0, useRegion.length - 1) + ")"
-  let sql = `select * from ${industry}_property where 企业名称 in (select 企业名称 from ${industry}_region where 地区 in ${useRegion} or 省份 in ${useRegion} ) and 年份 = ${date}`;
+  let sql = `select * from ${industry}_property where 企业名称 in (select 企业名称 from ${industry}_enterprise where 地区 in ${useRegion} or 省份 in ${useRegion} ) and 年份 = ${date}`;
   
   let str = '';
   connection.query(sql, function (err, result) {
@@ -114,7 +114,7 @@ app.post("/firstArchRank", jsonParser, (req, res) => {
     useRegion += '"' + i + '" ,'
   }
   useRegion = useRegion.slice(0, useRegion.length - 1) + ")"
-  let sql = `select * from ${industry}_property where 企业名称 in (select 企业名称 from ${industry}_region where 地区 in ${useRegion} or 省份 in ${useRegion} )and 年份 = ${date}`;
+  let sql = `select * from ${industry}_property where 企业名称 in (select 企业名称 from ${industry}_enterprise where 地区 in ${useRegion} or 省份 in ${useRegion} )and 年份 = ${date}`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
