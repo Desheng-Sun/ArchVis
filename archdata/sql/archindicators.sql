@@ -11,19 +11,127 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 31/08/2022 16:35:54
+ Date: 01/09/2022 13:08:52
 */
 
-SET NAMES utf8;
+SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for constru_enterprise
+-- ----------------------------
+DROP TABLE IF EXISTS `constru_enterprise`;
+CREATE TABLE `constru_enterprise`  (
+  `企业名称` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `地区` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `省份` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `城市` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `主营业务` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`企业名称`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of constru_enterprise
+-- ----------------------------
+INSERT INTO `constru_enterprise` VALUES ('*ST围海', '华东', '浙江', '宁波市', '生态环保工程、河道工程、水库工程、城市防洪工程及其他水利工程。');
+INSERT INTO `constru_enterprise` VALUES ('*ST美尚', '华东', '江苏', '无锡市', '生态景观建设。');
+INSERT INTO `constru_enterprise` VALUES ('ST云投', '西南', '云南', '昆明市', '绿化业务、市政公用建设、环境治理、生态修复，当前积极拓展相关领域内建设项目、的政府采购服务项目和PPP项目。');
+INSERT INTO `constru_enterprise` VALUES ('ST花王', '华东', '江苏', '镇江市', '“生态环境治理”和“旅游文体建设”。');
+INSERT INTO `constru_enterprise` VALUES ('三维化学', '华东', '山东', '淄博市', '主要服务于石油化工、煤化工行业，从事以炼油化工项目为主的工程设计和总承包业务。');
+INSERT INTO `constru_enterprise` VALUES ('三联虹普', '华北', '北京', '北京市', '为合成纤维及其原材料行业提供工程技术整体解决方案');
+INSERT INTO `constru_enterprise` VALUES ('上海建工', '华东', '上海', '上海市', '以建筑施工业务为基础，房产开发业务和城市建设投资业务为两翼，设计咨询业务和建筑工业业务为支撑。');
+INSERT INTO `constru_enterprise` VALUES ('上海港湾', '华东', '上海', '上海市', '地基处理、桩基工程等。');
+INSERT INTO `constru_enterprise` VALUES ('东华科技', '华东', '安徽', '合肥市', '以服务化工、石化行业为主的设计咨询与工程总承包业务，主营业务服务的具体行业主要集中于化肥、无机化学品、涂料以及新领域精细化工等领域。');
+INSERT INTO `constru_enterprise` VALUES ('东南网架', '华东', '浙江', '杭州市', '为钢结构建筑及围护系统的设计、制造、安装及装配式钢结构建筑总承包业务。');
+INSERT INTO `constru_enterprise` VALUES ('东方园林', '华北', '北京', '北京市', '水环境综合治理、市政园林和全域旅游等，工业危废处置业务，工业废弃物循环利用。');
+INSERT INTO `constru_enterprise` VALUES ('东方铁塔', '华东', '山东', '青岛市', '钢结构与钾肥业务');
+INSERT INTO `constru_enterprise` VALUES ('东湖高新', '华中', '湖北', '武汉市', '工程建设施工业务和工程投资业务；燃煤火力发电机组烟气综合治理业务和污水处理业务；开发运营主题型园区。');
+INSERT INTO `constru_enterprise` VALUES ('东珠生态', '华东', '江苏', '无锡市', '苗木种植、生态景观设计、生态修复与景观工程建设、景观养护等生态景观全产业链业务。');
+INSERT INTO `constru_enterprise` VALUES ('中化岩土', '华北', '北京', '北京市', '工程服务业务、通用航空业务、文化旅游业务、投资业务');
+INSERT INTO `constru_enterprise` VALUES ('中国中冶', '华北', '北京', '北京市', '工程承包、资源开发、装备制造及房地产开发。');
+INSERT INTO `constru_enterprise` VALUES ('中国中铁', '华北', '北京', '北京市', '基建建设、勘察设计与咨询服务、工程设备和零部件制造及房地产开发等');
+INSERT INTO `constru_enterprise` VALUES ('中国交建', '华北', '北京', '北京市', '基建设计、基建建设、疏浚及装备制造。');
+INSERT INTO `constru_enterprise` VALUES ('中国化学', '华北', '北京', '北京市', '工程承包，勘察、设计及服务');
+INSERT INTO `constru_enterprise` VALUES ('中国建筑', '华北', '北京', '北京市', '房屋建筑工程、房地产开发与投资、国际工程承包、基础设施建设与投资及设计勘察业务。');
+INSERT INTO `constru_enterprise` VALUES ('中国核建', '华东', '上海', '上海市', '军工工程、核电工程及工业与民用工程建设。');
+INSERT INTO `constru_enterprise` VALUES ('中国海诚', '华东', '上海', '上海市', '工程设计、工程咨询、工程监理和工程总承包');
+INSERT INTO `constru_enterprise` VALUES ('中国电建', '华北', '北京', '北京市', '工程承包、电力投资与运营、设备制造与租赁、房地产开发');
+INSERT INTO `constru_enterprise` VALUES ('中国能建', '华北', '北京', '北京市', '勘测设计及咨询、工程建设、工业制造、清洁能源及环保水务、投资及其他业务等。');
+INSERT INTO `constru_enterprise` VALUES ('中国铁建', '华北', '北京', '北京市', '工程承包、勘察设计咨询、工业制造、房地产开发、资本运营及物流等');
+INSERT INTO `constru_enterprise` VALUES ('中岩大地', '华北', '北京', '北京市', '提供岩土工程、环境修复等领域的包括设计、咨询、施工在内的一揽子解决方案服务。');
+INSERT INTO `constru_enterprise` VALUES ('中工国际', '华北', '北京', '北京市', '主营业务为国际工程承包，承包项目所需的设计、设备、材料与技术出口，核心业务为成套设备与技术的出口。');
+INSERT INTO `constru_enterprise` VALUES ('中材国际', '华东', '江苏', '南京市', '工程业务、装备制造业务、环保业务、生产运营管理业务、其他业务');
+INSERT INTO `constru_enterprise` VALUES ('中钢国际', '东北', '吉林', '吉林市', '以工程总承包为主的工程技术服务业务和以机电设备及备品备件贸易为主的设备集成及备品备件供应服务业务。');
+INSERT INTO `constru_enterprise` VALUES ('中铝国际', '华北', '北京', '北京市', '工程设计及咨询、工程及施工承包、及装备制造及贸易。');
+INSERT INTO `constru_enterprise` VALUES ('乾景园林', '华北', '北京', '北京市', '园林工程施工、园林景观设计、苗木种植和园林绿化养护。');
+INSERT INTO `constru_enterprise` VALUES ('亚翔集成', '华东', '江苏', '苏州市', '为IC半导体、光电等高科技电子产业及生物医药、精细化工、航空航天、食品制造等相关领域的建厂工程提供洁净室工程服务。');
+INSERT INTO `constru_enterprise` VALUES ('交建股份', '华东', '安徽', '合肥市', '从事公路、市政基础设施建设相关的工程施工、勘察设计、试验检测等业务。');
+INSERT INTO `constru_enterprise` VALUES ('元成股份', '华东', '浙江', '杭州市', '生态景观、绿色环保、休闲旅游');
+INSERT INTO `constru_enterprise` VALUES ('农尚环境', '华中', '湖北', '武汉市', '园林绿化工程设计、施工、养护及苗木培育业务。');
+INSERT INTO `constru_enterprise` VALUES ('冠中生态', '华东', '山东', '青岛市', '生态环境建设业务。');
+INSERT INTO `constru_enterprise` VALUES ('利柏特', '华东', '江苏', '苏州市', '工业模块的设计和制造。');
+INSERT INTO `constru_enterprise` VALUES ('北新路桥', '西北', '新疆', '乌鲁木齐市', '公路工程、桥梁工程、隧道工程和市政交通工程等公共交通基础设施的施工业务；房地产开发与经营业务');
+INSERT INTO `constru_enterprise` VALUES ('北方国际', '华北', '北京', '北京市', '国际工程承包、国内建筑工程、重型装备出口贸易、物流服务、物流自动化设备系统集成服务、太阳能产品贸易及新能源项目开发、大宗商品贸易和金属包装容器的生产和销售。');
+INSERT INTO `constru_enterprise` VALUES ('华电重工', '华北', '北京', '北京市', '物料输送系统工程、热能工程和高端钢结构工程。');
+INSERT INTO `constru_enterprise` VALUES ('嘉寓股份', '华北', '北京', '北京市', '节能门窗幕墙、太阳能光伏和高端智能装备。');
+INSERT INTO `constru_enterprise` VALUES ('四川路桥', '西南', '四川', '成都市', '各级公路工程和桥梁、隧道工程的施工。');
+INSERT INTO `constru_enterprise` VALUES ('园林股份', '华东', '浙江', '杭州市', '园林工程施工、园林景观设计、花卉种苗研发生产、园林养护等。');
+INSERT INTO `constru_enterprise` VALUES ('大千生态', '华东', '江苏', '南京市', '生态园林景观规划、设计、建设、运营，苗木培育、种植、销售等，并涉及文化旅游、生态环境修复与治理等业务。');
+INSERT INTO `constru_enterprise` VALUES ('天域生态', '西南', '重庆', '重庆市', '生态环境修复、景观规划、农林开发、文化旅游');
+INSERT INTO `constru_enterprise` VALUES ('奥雅设计', '华南', '广东', '深圳市', '景观设计及以创意设计为主导的EPC总承包业务。');
+INSERT INTO `constru_enterprise` VALUES ('宁波建工', '华东', '浙江', '宁波市', '房屋建筑工程勘察、设计、施工、安装，市政道路桥梁、园林绿化，建筑装修装饰、建筑幕墙的设计、施工及预拌商品混凝土、水泥预制构件、装配式建筑等的生产、销售。');
+INSERT INTO `constru_enterprise` VALUES ('安徽建工', '华东', '安徽', '蚌埠市', '房屋建筑工程、基础设施建设与投资和房地产开发经营');
+INSERT INTO `constru_enterprise` VALUES ('宏润建设', '华东', '浙江', '宁波市', '建筑施工、房地产开发、基础设施投资及新能源开发。');
+INSERT INTO `constru_enterprise` VALUES ('富煌钢构', '华东', '安徽', '合肥市', '专业从事钢结构产品的设计、制造与安装。');
+INSERT INTO `constru_enterprise` VALUES ('山东路桥', '华东', '山东', '济南市', '路桥工程施工和养护施工。');
+INSERT INTO `constru_enterprise` VALUES ('岭南股份', '华南', '广东', '东莞市', '生态环境建设与修复业务、水务水环境治理业务、文化旅游业务');
+INSERT INTO `constru_enterprise` VALUES ('成都路桥', '西南', '四川', '成都市', '公路工程、桥梁工程和隧道工程的施工');
+INSERT INTO `constru_enterprise` VALUES ('文科园林', '华南', '广东', '深圳市', '为景观、环境治理及市政工程施工、景观设计、园林养护、绿化苗木种植');
+INSERT INTO `constru_enterprise` VALUES ('新疆交建', '西北', '新疆', '乌鲁木齐市', '公路、桥梁、隧道、市政工程等基础设施的施工、勘察设计与试验检测，以及路桥工程施工主材料的贸易业务。');
+INSERT INTO `constru_enterprise` VALUES ('日上集团', '华东', '福建', '厦门市', '钢制品的设计、研发、生产与销售。');
+INSERT INTO `constru_enterprise` VALUES ('普邦股份', '华南', '广东', '广州市', '公司主要从事园林工程施工、园林景观设计、苗木种植以及园林养护业务，主要为住宅景观工程、旅游度假区园林工程、商业地产园林工程和公共园林工程等项目提供园林综合服务。');
+INSERT INTO `constru_enterprise` VALUES ('杭州园林', '华东', '浙江', '杭州市', '提供以整体性解决方案为核心的风景园林设计服务。');
+INSERT INTO `constru_enterprise` VALUES ('杭萧钢构', '华东', '浙江', '杭州市', '多高层钢结构、轻钢结构、空间钢结构、建材产品。');
+INSERT INTO `constru_enterprise` VALUES ('棕榈股份', '华中', '河南', '郑州市', '生态城镇业务、生态环境业务');
+INSERT INTO `constru_enterprise` VALUES ('森特股份', '华北', '北京', '北京市', '研发、生产、销售绿色、环保、节能新型建材并提供相关工程设计、生产、安装和售后等一体化服务。');
+INSERT INTO `constru_enterprise` VALUES ('正平股份', '西北', '青海', '西宁市', '主要从事交通、城镇、水利、电力等基础设施的投资、建设、运营、设施制造、综合开发等业务，可为客户提供投资融资、咨询规划、设计建造、运营管理等一站式综合服务。');
+INSERT INTO `constru_enterprise` VALUES ('永福股份', '华东', '福建', '福州市', '电力工程勘察设计（含规划咨询）、EPC工程总承包等电力工程技术服务。');
+INSERT INTO `constru_enterprise` VALUES ('汇绿生态', '华中', '湖北', '武汉市', '园林工程施工、园林景观设计及苗木种植等。');
+INSERT INTO `constru_enterprise` VALUES ('汇通集团', '华北', '河北', '保定市', '公路、市政、房屋建筑工程施工及相关建筑材料销售、勘察设计、试验检测等。');
+INSERT INTO `constru_enterprise` VALUES ('浙江交科', '华东', '浙江', '衢州市', '基建工程业务及化工业务。');
+INSERT INTO `constru_enterprise` VALUES ('浙江建投', '华东', '浙江', '杭州市', '建筑施工业务以及与建筑主业产业链相配套的工业制造、工程服务、基础设施投资运营等业务。');
+INSERT INTO `constru_enterprise` VALUES ('浦东建设', '华东', '上海', '上海市', '从事道路、桥梁、各类基础设施施工以及建材的研制开发和生产。');
+INSERT INTO `constru_enterprise` VALUES ('海波重科', '华中', '湖北', '武汉市', '桥梁钢结构工程业务');
+INSERT INTO `constru_enterprise` VALUES ('百利科技', '华中', '湖南', '岳阳市', '专业从事工程咨询、设计和工程总承包业务。');
+INSERT INTO `constru_enterprise` VALUES ('粤 水 电', '华南', '广东', '广州市', '水利水电及轨道交通等工程建设，水力、风力、太阳能光伏清洁能源发电。');
+INSERT INTO `constru_enterprise` VALUES ('精工钢构', '华东', '安徽', '六安市', '钢结构建筑、钢结构件的设计、生产制作、施工安装（凭资质经营）；经销：建筑材料、金属材料（贵稀金属除外）及相关零配件，经营本企业自产产品的出口业务和本企业所需的机械设备、零配件、原辅材料的进出口业务。');
+INSERT INTO `constru_enterprise` VALUES ('罗曼股份', '华东', '上海', '上海市', '景观照明整体规划和深化设计、景观照明工程的施工以及远程集控管理等景观照明其他服务。');
+INSERT INTO `constru_enterprise` VALUES ('美丽生态', '华南', '广东', '深圳市', '园林绿化。');
+INSERT INTO `constru_enterprise` VALUES ('美晨生态', '华东', '山东', '潍坊市', '车用非轮胎橡胶配件及园林工程施工');
+INSERT INTO `constru_enterprise` VALUES ('能辉科技', '华东', '上海', '上海市', '以光伏电站设计、系统集成及投资运营一站式服务为主体，并开展垃圾热解气化、储能等新兴技术研发和应用业务。');
+INSERT INTO `constru_enterprise` VALUES ('腾达建设', '华东', '浙江', '台州市', '各类建筑工程的施工总承包和专业承包');
+INSERT INTO `constru_enterprise` VALUES ('节能铁汉', '华南', '广东', '深圳市', '生态环保、生态景观、生态旅游、生态农业');
+INSERT INTO `constru_enterprise` VALUES ('苏文电能', '华东', '江苏', '常州市', '集电力咨询设计、电力工程建设、电力设备供应以及智能用电服务为一体的供用电品牌服务商。');
+INSERT INTO `constru_enterprise` VALUES ('蒙草生态', '华北', '内蒙古', '呼和浩特市', '在我国干旱半干旱地区运用蒙草进行节约型生态环境建设，主要包括工程设计施工与苗木培育。');
+INSERT INTO `constru_enterprise` VALUES ('诚邦股份', '华东', '浙江', '杭州市', '设计、环境建设、生态治理、文化旅游及投资');
+INSERT INTO `constru_enterprise` VALUES ('重庆建工', '西南', '重庆', '重庆市', '房屋建筑工程、基础设施建设与投资及其他相关业务。');
+INSERT INTO `constru_enterprise` VALUES ('金埔园林', '华东', '江苏', '南京市', '园林绿化建设项目的设计、施工以及苗木花卉种植与销售。');
+INSERT INTO `constru_enterprise` VALUES ('金诚信', '华北', '北京', '北京市', '集有色金属矿山、黑色金属矿山及化工矿山工程建设与采矿运营管理、矿山设计与技术研发等业务为一体的专业性管理服务企业。');
+INSERT INTO `constru_enterprise` VALUES ('镇海股份', '华东', '浙江', '宁波市', '向客户提供从工程前期的规划咨询到设计、采购、施工管理、开车、结算审核直到运营服务的一站式解决方案。');
+INSERT INTO `constru_enterprise` VALUES ('陕西建工', '西北', '陕西', '西安市', '工程承包业务。');
+INSERT INTO `constru_enterprise` VALUES ('隧道股份', '华东', '上海', '上海市', '隧道、路桥、轨道交通、水务、能源和地下空间等城市基础设施的设计、施工、投资和运营业务，以及部分盾构设备的制造业务');
+INSERT INTO `constru_enterprise` VALUES ('高新发展', '西南', '四川', '成都市', '建筑业，并兼营期货业务、厨柜制造及旅游酒店业务。');
+INSERT INTO `constru_enterprise` VALUES ('鸿路钢构', '华东', '安徽', '合肥市', '钢结构及相关围护产品的制造和销售，以钢结构生产制造为主、工程承包业务为辅。');
+INSERT INTO `constru_enterprise` VALUES ('龙元建设', '华东', '浙江', '宁波市', '工业与民用建筑及公共设施的施工。');
+INSERT INTO `constru_enterprise` VALUES ('龙建股份', '东北', '黑龙江', '哈尔滨市', '公路与桥梁工程施工。');
 
 -- ----------------------------
 -- Table structure for constru_property
 -- ----------------------------
 DROP TABLE IF EXISTS `constru_property`;
 CREATE TABLE `constru_property`  (
-  `股票代码` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `股票代码` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `企业名称` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `总资产` double NOT NULL,
   `企业成立年限` int(0) NOT NULL,
   `成立年份` int(0) NOT NULL,
@@ -57,7 +165,7 @@ CREATE TABLE `constru_property`  (
   `企业年报中是否有专项数字化转型报告` tinyint(0) NOT NULL,
   `企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语` tinyint(0) NOT NULL,
   `企业战略职能中是否具有专门数字化业务部门` tinyint(0) NOT NULL,
-  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语` int(0) NOT NULL,
   `企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语` int(0) NOT NULL,
   `装配式建筑项目数` int(0) NOT NULL,
@@ -71,13 +179,13 @@ CREATE TABLE `constru_property`  (
   `智能建造平台数量` int(0) NOT NULL,
   `采用电子签名/签章项目占比` int(0) NOT NULL,
   `拥有电子化工程档案项目占比` int(0) NOT NULL,
-  `A、智能塔吊` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `A、智能塔吊` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `施工设施应用个数` int(0) NOT NULL,
   `企业业务中是否运用信息化技术系统个数` int(0) NOT NULL,
   `年份` int(0) NOT NULL,
   PRIMARY KEY (`股票代码`, `年份`) USING BTREE,
   UNIQUE INDEX `property_UNIQUE`(`股票代码`, `年份`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of constru_property
@@ -329,125 +437,18 @@ INSERT INTO `constru_property` VALUES ('605303', '园林股份', 3362257275.46, 
 INSERT INTO `constru_property` VALUES ('605598', '上海港湾', 1667280714.17, 29, 1992, 583, 0.157546, 0.440549, -1.330334, 0.083509, 11806900, 0.0161, 20, 6, 13, 5, 1, 0, 1, 1, 0, 2, 0, 23, 2, 0, 4, NULL, 1, 1, 1, 0, 0, 1, 1, 'ABCD', 1, 9, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 'ACFG', 4, 4, 2021);
 
 -- ----------------------------
--- Table structure for constru_region
--- ----------------------------
-DROP TABLE IF EXISTS `constru_region`;
-CREATE TABLE `constru_region`  (
-  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `地区` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `省份` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `城市` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`企业名称`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of constru_region
--- ----------------------------
-INSERT INTO `constru_region` VALUES ('*ST围海', '华东', '浙江', '宁波市');
-INSERT INTO `constru_region` VALUES ('*ST美尚', '华东', '江苏', '无锡市');
-INSERT INTO `constru_region` VALUES ('ST云投', '西南', '云南', '昆明市');
-INSERT INTO `constru_region` VALUES ('ST花王', '华东', '江苏', '镇江市');
-INSERT INTO `constru_region` VALUES ('三维化学', '华东', '山东', '淄博市');
-INSERT INTO `constru_region` VALUES ('三联虹普', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('上海建工', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('上海港湾', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('东华科技', '华东', '安徽', '合肥市');
-INSERT INTO `constru_region` VALUES ('东南网架', '华东', '浙江', '杭州市');
-INSERT INTO `constru_region` VALUES ('东方园林', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('东方铁塔', '华东', '山东', '青岛市');
-INSERT INTO `constru_region` VALUES ('东湖高新', '华中', '湖北', '武汉市');
-INSERT INTO `constru_region` VALUES ('东珠生态', '华东', '江苏', '无锡市');
-INSERT INTO `constru_region` VALUES ('中化岩土', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中国中冶', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中国中铁', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中国交建', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中国化学', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中国建筑', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中国核建', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('中国海诚', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('中国电建', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中国能建', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中国铁建', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中岩大地', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中工国际', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('中材国际', '华东', '江苏', '南京市');
-INSERT INTO `constru_region` VALUES ('中钢国际', '东北', '吉林', '吉林市');
-INSERT INTO `constru_region` VALUES ('中铝国际', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('乾景园林', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('亚翔集成', '华东', '江苏', '苏州市');
-INSERT INTO `constru_region` VALUES ('交建股份', '华东', '安徽', '合肥市');
-INSERT INTO `constru_region` VALUES ('元成股份', '华东', '浙江', '杭州市');
-INSERT INTO `constru_region` VALUES ('农尚环境', '华中', '湖北', '武汉市');
-INSERT INTO `constru_region` VALUES ('冠中生态', '华东', '山东', '青岛市');
-INSERT INTO `constru_region` VALUES ('利柏特', '华东', '江苏', '苏州市');
-INSERT INTO `constru_region` VALUES ('北新路桥', '西北', '新疆', '乌鲁木齐市');
-INSERT INTO `constru_region` VALUES ('北方国际', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('华电重工', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('嘉寓股份', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('四川路桥', '西南', '四川', '成都市');
-INSERT INTO `constru_region` VALUES ('园林股份', '华东', '浙江', '杭州市');
-INSERT INTO `constru_region` VALUES ('大千生态', '华东', '江苏', '南京市');
-INSERT INTO `constru_region` VALUES ('天域生态', '西南', '重庆', '重庆市');
-INSERT INTO `constru_region` VALUES ('奥雅设计', '华南', '广东', '深圳市');
-INSERT INTO `constru_region` VALUES ('宁波建工', '华东', '浙江', '宁波市');
-INSERT INTO `constru_region` VALUES ('安徽建工', '华东', '安徽', '蚌埠市');
-INSERT INTO `constru_region` VALUES ('宏润建设', '华东', '浙江', '宁波市');
-INSERT INTO `constru_region` VALUES ('富煌钢构', '华东', '安徽', '合肥市');
-INSERT INTO `constru_region` VALUES ('山东路桥', '华东', '山东', '济南市');
-INSERT INTO `constru_region` VALUES ('岭南股份', '华南', '广东', '东莞市');
-INSERT INTO `constru_region` VALUES ('成都路桥', '西南', '四川', '成都市');
-INSERT INTO `constru_region` VALUES ('文科园林', '华南', '广东', '深圳市');
-INSERT INTO `constru_region` VALUES ('新疆交建', '西北', '新疆', '乌鲁木齐市');
-INSERT INTO `constru_region` VALUES ('日上集团', '华东', '福建', '厦门市');
-INSERT INTO `constru_region` VALUES ('普邦股份', '华南', '广东', '广州市');
-INSERT INTO `constru_region` VALUES ('杭州园林', '华东', '浙江', '杭州市');
-INSERT INTO `constru_region` VALUES ('杭萧钢构', '华东', '浙江', '杭州市');
-INSERT INTO `constru_region` VALUES ('棕榈股份', '华中', '河南', '郑州市');
-INSERT INTO `constru_region` VALUES ('森特股份', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('正平股份', '西北', '青海', '西宁市');
-INSERT INTO `constru_region` VALUES ('永福股份', '华东', '福建', '福州市');
-INSERT INTO `constru_region` VALUES ('汇绿生态', '华中', '湖北', '武汉市');
-INSERT INTO `constru_region` VALUES ('汇通集团', '华北', '河北', '保定市');
-INSERT INTO `constru_region` VALUES ('浙江交科', '华东', '浙江', '衢州市');
-INSERT INTO `constru_region` VALUES ('浙江建投', '华东', '浙江', '杭州市');
-INSERT INTO `constru_region` VALUES ('浦东建设', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('海波重科', '华中', '湖北', '武汉市');
-INSERT INTO `constru_region` VALUES ('百利科技', '华中', '湖南', '岳阳市');
-INSERT INTO `constru_region` VALUES ('粤 水 电', '华南', '广东', '广州市');
-INSERT INTO `constru_region` VALUES ('精工钢构', '华东', '安徽', '六安市');
-INSERT INTO `constru_region` VALUES ('罗曼股份', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('美丽生态', '华南', '广东', '深圳市');
-INSERT INTO `constru_region` VALUES ('美晨生态', '华东', '山东', '潍坊市');
-INSERT INTO `constru_region` VALUES ('能辉科技', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('腾达建设', '华东', '浙江', '台州市');
-INSERT INTO `constru_region` VALUES ('节能铁汉', '华南', '广东', '深圳市');
-INSERT INTO `constru_region` VALUES ('苏文电能', '华东', '江苏', '常州市');
-INSERT INTO `constru_region` VALUES ('蒙草生态', '华北', '内蒙古', '呼和浩特市');
-INSERT INTO `constru_region` VALUES ('诚邦股份', '华东', '浙江', '杭州市');
-INSERT INTO `constru_region` VALUES ('重庆建工', '西南', '重庆', '重庆市');
-INSERT INTO `constru_region` VALUES ('金埔园林', '华东', '江苏', '南京市');
-INSERT INTO `constru_region` VALUES ('金诚信', '华北', '北京', '北京市');
-INSERT INTO `constru_region` VALUES ('镇海股份', '华东', '浙江', '宁波市');
-INSERT INTO `constru_region` VALUES ('陕西建工', '西北', '陕西', '西安市');
-INSERT INTO `constru_region` VALUES ('隧道股份', '华东', '上海', '上海市');
-INSERT INTO `constru_region` VALUES ('高新发展', '西南', '四川', '成都市');
-INSERT INTO `constru_region` VALUES ('鸿路钢构', '华东', '安徽', '合肥市');
-INSERT INTO `constru_region` VALUES ('龙元建设', '华东', '浙江', '宁波市');
-INSERT INTO `constru_region` VALUES ('龙建股份', '东北', '黑龙江', '哈尔滨市');
-
--- ----------------------------
 -- Table structure for constru_structure
 -- ----------------------------
 DROP TABLE IF EXISTS `constru_structure`;
 CREATE TABLE `constru_structure`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `indi_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `indi_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `parent_id` int(0) NULL DEFAULT NULL,
   `level` int(0) NULL DEFAULT NULL,
-  `explanation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `explanation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of constru_structure
@@ -525,12 +526,66 @@ INSERT INTO `constru_structure` VALUES (70, '拥有电子化工程档案项目�
 INSERT INTO `constru_structure` VALUES (71, 'A、智能塔吊', 20, 3, NULL);
 
 -- ----------------------------
+-- Table structure for design_enterprise
+-- ----------------------------
+DROP TABLE IF EXISTS `design_enterprise`;
+CREATE TABLE `design_enterprise`  (
+  `企业名称` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `地区` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `省份` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `城市` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `主营业务` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`企业名称`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of design_enterprise
+-- ----------------------------
+INSERT INTO `design_enterprise` VALUES ('中公高科', '华北', '北京', '北京市', '路况快速检测设备生产与销售、公路养护信息系统开发与销售、公路养护决策咨询服务。');
+INSERT INTO `design_enterprise` VALUES ('中粮工科', '华东', '江苏', '无锡市', '设计咨询、机电工程系统交付和工程承包等专业工程服务业务板块以及设备制造业务板块。');
+INSERT INTO `design_enterprise` VALUES ('中衡设计', '华东', '江苏', '苏州市', '建筑领域的工程设计、工程总承包、工程监理及项目管理业务。');
+INSERT INTO `design_enterprise` VALUES ('中设咨询', '西南', '重庆', '重庆市', '工程勘察设计、工程检测及其他相关工程咨询服务。');
+INSERT INTO `design_enterprise` VALUES ('中设股份', '华东', '江苏', '无锡市', '中国城市建设和交通建设领域的规划咨询及勘察设计、工程监理、项目管理等');
+INSERT INTO `design_enterprise` VALUES ('中达安', '华南', '广东', '广州市', '以工程监理业务为主的项目管理服务。');
+INSERT INTO `design_enterprise` VALUES ('勘设股份', '西南', '贵州', '贵阳市', '工程咨询与工程承包业务');
+INSERT INTO `design_enterprise` VALUES ('华图山鼎', '西南', '四川', '成都市', '提供建筑工程设计及相关咨询服务。');
+INSERT INTO `design_enterprise` VALUES ('华建集团', '华东', '上海', '上海市', '工程勘察、规划设计、工程设计、市政设计、水利工程设计、风景园林设计、建设装饰设计、历史建筑保护和利用设计、建筑声学设计、全过程项目管理、建设工程承包(EPC)、工程监理、建设工程投资控制、科技咨询、项目策划等业务。');
+INSERT INTO `design_enterprise` VALUES ('华维设计', '华东', '江西', '南昌市', '公司主要从事工程设计及咨询业务');
+INSERT INTO `design_enterprise` VALUES ('华蓝集团', '华南', '广西', '南宁市', '工程设计、国土空间规划、工程总承包管理及工程咨询服务。');
+INSERT INTO `design_enterprise` VALUES ('华设集团', '华东', '江苏', '南京市', '公路、水运、市政、建筑等领域建设工程提供勘察设计、规划研究、试验检测、工程管理等专业工程咨询服务。');
+INSERT INTO `design_enterprise` VALUES ('华阳国际', '华南', '广东', '深圳市', '建筑设计和研发及其延伸业务。');
+INSERT INTO `design_enterprise` VALUES ('合诚股份', '华东', '福建', '厦门市', '设计咨询、工程监理、试验检测、综合管养、工程新材料研发与应用等业务。');
+INSERT INTO `design_enterprise` VALUES ('启迪设计', '华东', '江苏', '苏州市', '设计业务、绿色建筑节能整体技术服务、工程总承包、工程检测');
+INSERT INTO `design_enterprise` VALUES ('地铁设计', '华南', '广东', '广州市', '城市轨道交通、市政、建筑等领域的勘察设计、规划咨询、工程总承包等。');
+INSERT INTO `design_enterprise` VALUES ('尤安设计', '华东', '上海', '上海市', '建筑设计业务的研发、咨询与技术服务。');
+INSERT INTO `design_enterprise` VALUES ('山水比德', '华南', '广东', '广州市', '社区景观、文化旅游、商业空间、市政公共等领域提供整体性解决方案。');
+INSERT INTO `design_enterprise` VALUES ('广咨国际', '华南', '广东', '广州市', '咨询服务；工程造价服务；招标代理服务；项目管理和工程监理服务；进口销售；进口代理服务。');
+INSERT INTO `design_enterprise` VALUES ('建研设计', '华东', '安徽', '合肥市', '建筑设计、咨询、研发及其延伸业务。');
+INSERT INTO `design_enterprise` VALUES ('建科院', '华南', '广东', '深圳市', '建筑设计、绿色建筑咨询、生态城市规划、公信服务等业务');
+INSERT INTO `design_enterprise` VALUES ('招标股份', '华东', '福建', '福州市', '工程监理、试验检测、招标服务、测绘与地理信息服务、勘察设计以及其他技术服务。');
+INSERT INTO `design_enterprise` VALUES ('新城市', '华南', '广东', '深圳市', '为各级政府部门、知名企业和城乡社区提供城乡规划、工程设计、工程咨询等专业服务。');
+INSERT INTO `design_enterprise` VALUES ('旭杰科技', '华东', '江苏', '苏州市', '新型装配式墙体（所用主材为蒸压轻质加气混凝土ALC板材及砌块）特种专业工程的专业承包，包括前期深化设计、现场施工安装以及售后保养维护。');
+INSERT INTO `design_enterprise` VALUES ('杰恩设计', '华南', '广东', '深圳市', '建筑室内设计服务。');
+INSERT INTO `design_enterprise` VALUES ('汉嘉设计', '华东', '浙江', '杭州市', '建筑设计、装饰景观市政设计及EPC总承包等。');
+INSERT INTO `design_enterprise` VALUES ('测绘股份', '华东', '江苏', '南京市', '从事地理信息产业中的测绘地理信息服务业务。');
+INSERT INTO `design_enterprise` VALUES ('深圳瑞捷', '华南', '广东', '深圳市', '建设工程第三方评估、管理和咨询服务。');
+INSERT INTO `design_enterprise` VALUES ('深城交', '华南', '广东', '深圳市', '规划咨询、工程设计和检测、大数据软件及智慧交通等。');
+INSERT INTO `design_enterprise` VALUES ('深水规院', '华南', '广东', '深圳市', '为水务建设工程提供勘测设计规划咨询等专业技术服务。');
+INSERT INTO `design_enterprise` VALUES ('甘咨询', '西北', '甘肃', '兰州市', '工程咨询服务业。');
+INSERT INTO `design_enterprise` VALUES ('筑博设计', '西南', '西藏', '拉萨市', '建筑设计及相关业务的设计与咨询。');
+INSERT INTO `design_enterprise` VALUES ('苏交科', '华东', '江苏', '南京市', '交通工程咨询与工程承包业务，主要提供交通项目前期咨询及科研，道路、桥梁、铁路与轨道交通、岩土与隧道工程、水运工程与市政工程的勘察、设计、咨询、试验检测、监理、相关技术服务，工程总承包及其他承包业务等服务，为交通工程提供综合解决方案。');
+INSERT INTO `design_enterprise` VALUES ('蕾奥规划', '华南', '广东', '深圳市', '规划设计业务和工程设计业务。');
+INSERT INTO `design_enterprise` VALUES ('设研院', '华中', '河南', '郑州市', '咨询、规划、勘察、设计、测绘、试验、检测、监测、监理、项目管理等工程咨询服务。');
+INSERT INTO `design_enterprise` VALUES ('设计总院', '华东', '安徽', '合肥市', '为公路、水运、市政等领域的工程建设提供勘察设计、咨询研发、试验检测、工程管理等专业工程咨询服务。');
+INSERT INTO `design_enterprise` VALUES ('霍普股份', '华东', '上海', '上海市', '为客户提供建筑专业领域内的概念规划设计、方案设计、初步设计等咨询顾问服务。');
+
+-- ----------------------------
 -- Table structure for design_property
 -- ----------------------------
 DROP TABLE IF EXISTS `design_property`;
 CREATE TABLE `design_property`  (
-  `股票代码` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `股票代码` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `企业名称` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `总资产` double NOT NULL,
   `企业成立年限` int(0) NOT NULL,
   `成立年份` int(0) NOT NULL,
@@ -564,7 +619,7 @@ CREATE TABLE `design_property`  (
   `企业年报中是否有专项数字化转型报告` tinyint(0) NOT NULL,
   `企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语` int(0) NOT NULL,
   `企业战略职能中是否具有专门数字化业务部门` tinyint(0) NOT NULL,
-  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语` int(0) NOT NULL,
   `企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语` int(0) NOT NULL,
   `企业业务中是否运用信息化技术系统个数` int(0) NULL DEFAULT NULL,
@@ -579,7 +634,7 @@ CREATE TABLE `design_property`  (
   `年份` int(0) NOT NULL,
   PRIMARY KEY (`股票代码`, `年份`) USING BTREE,
   UNIQUE INDEX `property_UNIQUE`(`股票代码`, `年份`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of design_property
@@ -658,71 +713,18 @@ INSERT INTO `design_property` VALUES ('836149', '旭杰科技', 702468229.32, 19
 INSERT INTO `design_property` VALUES ('836892', '广咨国际', 678659828.63, 29, 1992, 852, 0.502965, 0.655103, 5.354544, 0.154819, 19580378.53, 0.044, 73, 17, 4, 39, 0, 0, 4, 5, 3, 24, 10, 70, 9, 37, 12, NULL, 1, 1, 1, 1, 1, 1, 1, 'ABCD', 16, 40, 4, 1, 0, 0, 0, 1, 1, 1, 1, 2021);
 
 -- ----------------------------
--- Table structure for design_region
--- ----------------------------
-DROP TABLE IF EXISTS `design_region`;
-CREATE TABLE `design_region`  (
-  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `地区` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `省份` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `城市` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  PRIMARY KEY (`企业名称`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of design_region
--- ----------------------------
-INSERT INTO `design_region` VALUES ('中公高科', '华北', '北京', '北京市');
-INSERT INTO `design_region` VALUES ('中粮工科', '华东', '江苏', '无锡市');
-INSERT INTO `design_region` VALUES ('中衡设计', '华东', '江苏', '苏州市');
-INSERT INTO `design_region` VALUES ('中设咨询', '西南', '重庆', '重庆市');
-INSERT INTO `design_region` VALUES ('中设股份', '华东', '江苏', '无锡市');
-INSERT INTO `design_region` VALUES ('中达安', '华南', '广东', '广州市');
-INSERT INTO `design_region` VALUES ('勘设股份', '西南', '贵州', '贵阳市');
-INSERT INTO `design_region` VALUES ('华图山鼎', '西南', '四川', '成都市');
-INSERT INTO `design_region` VALUES ('华建集团', '华东', '上海', '上海市');
-INSERT INTO `design_region` VALUES ('华维设计', '华东', '江西', '南昌市');
-INSERT INTO `design_region` VALUES ('华蓝集团', '华南', '广西', '南宁市');
-INSERT INTO `design_region` VALUES ('华设集团', '华东', '江苏', '南京市');
-INSERT INTO `design_region` VALUES ('华阳国际', '华南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('合诚股份', '华东', '福建', '厦门市');
-INSERT INTO `design_region` VALUES ('启迪设计', '华东', '江苏', '苏州市');
-INSERT INTO `design_region` VALUES ('地铁设计', '华南', '广东', '广州市');
-INSERT INTO `design_region` VALUES ('尤安设计', '华东', '上海', '上海市');
-INSERT INTO `design_region` VALUES ('山水比德', '华南', '广东', '广州市');
-INSERT INTO `design_region` VALUES ('广咨国际', '华南', '广东', '广州市');
-INSERT INTO `design_region` VALUES ('建研设计', '华东', '安徽', '合肥市');
-INSERT INTO `design_region` VALUES ('建科院', '华南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('招标股份', '华东', '福建', '福州市');
-INSERT INTO `design_region` VALUES ('新城市', '华南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('旭杰科技', '华东', '江苏', '苏州市');
-INSERT INTO `design_region` VALUES ('杰恩设计', '华南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('汉嘉设计', '华东', '浙江', '杭州市');
-INSERT INTO `design_region` VALUES ('测绘股份', '华东', '江苏', '南京市');
-INSERT INTO `design_region` VALUES ('深圳瑞捷', '华南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('深城交', '华南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('深水规院', '华南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('甘咨询', '西北', '甘肃', '兰州市');
-INSERT INTO `design_region` VALUES ('筑博设计', '西南', '西藏', '拉萨市');
-INSERT INTO `design_region` VALUES ('苏交科', '华东', '江苏', '南京市');
-INSERT INTO `design_region` VALUES ('蕾奥规划', '华南', '广东', '深圳市');
-INSERT INTO `design_region` VALUES ('设研院', '华中', '河南', '郑州市');
-INSERT INTO `design_region` VALUES ('设计总院', '华东', '安徽', '合肥市');
-INSERT INTO `design_region` VALUES ('霍普股份', '华东', '上海', '上海市');
-
--- ----------------------------
 -- Table structure for design_structure
 -- ----------------------------
 DROP TABLE IF EXISTS `design_structure`;
 CREATE TABLE `design_structure`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `indi_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `indi_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `parent_id` int(0) NULL DEFAULT NULL,
   `level` int(0) NULL DEFAULT NULL,
-  `explanation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `explanation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of design_structure
