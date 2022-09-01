@@ -352,7 +352,8 @@ export default function Layout() {
                                 w={thirdEPPosplashesWidth}
                                 h={thirdEPPosplashesHeight}
                                 selectedIndustry={selectedIndustryThird}
-                                // selectedYear={selectedYearThird}
+                                // selectedEnterprise={nowEnterpriseThird}
+                                setNowEnterpriseThird={setNowEnterpriseThird}
                             />
                         </div>
 
