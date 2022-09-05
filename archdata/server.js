@@ -11,11 +11,11 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: 'root',//密码
+  // password: 'root',//密码
   // password: '990921',//密码
-  database: 'archindicators'//数据库名称
-  // password: 'sds091',//密码
-  // database: 'archsql'//数据库名称
+  // database: 'archindicators'//数据库名称
+  password: 'sds091',//密码
+  database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -44,8 +44,126 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
+function getArchScore(nowData) {
+  let useData = {}
+  for (let i in nowData[0]) {
+    if (!useData.hasOwnProperty(i)) {
+      useData[i] = []
+    }
+  }
+  for (let i of nowData) {
+    for (let j in useData) {
+      if (j == "企业业务中是否运用信息化技术系统") {
+        useData[j].push(i[j].replace(/[^a-zA-Z]/g, '').length / 4)
+      }
+      else if (j == "A、智能塔吊") {
+        useData[j].push(i[j].replace(/[^a-zA-Z]/g, '').length / 7)
+      }
+
+      else {
+        useData[j].push(i[j])
+      }
+    }
+  }
+  // 数据标准化处理
+  for (let i in useData) {
+    if (i == "企业名称" || i == "股票代码") {
+      continue
+    }
+    let max = Math.max(...useData[i])
+    let min = Math.min(...useData[i])
+    
+    for (let j in useData[i]) {
+      if(min == max){
+        useData[i][j] = 0
+      }
+      else{
+        useData[i][j] = (useData[i][j] - min) / (max - min)
+      }
+    }
+  }
+  // 定义标准化
+  for (let i in useData) {
+    if (i == "企业名称" || i == "股票代码") {
+      continue
+    }
+    let sum = 0
+    for (let j of useData[i]) {
+      sum += j
+    }
+    for (let j in useData[i]) {
+      if(sum == 0){
+        useData[i][j] = 0
+      }
+      else{
+        useData[i][j] = useData[i][j] / sum
+      }
+    }
+  }
+  // 信息效用值
+  let dUseData = {}
+  for (let i in useData) {
+    if (i == "企业名称" || i == "股票代码") {
+      continue
+    }
+    let sum = 0
+    for (let j of useData[i]) {
+      sum += j
+    }
+    if(sum == 0){
+      dUseData[i] = 1
+    }
+    else{
+      dUseData[i] = (1 + sum * Math.log(sum) / Math.log(useData[i].length))
+    }
+  }
+  // 指标评价权重  
+  let sumD = 0
+  for (let i in dUseData) {
+    sumD += dUseData[i]
+  }
+  for (let i in dUseData) {
+    dUseData[i] /= sumD
+  }
+  let finalData = {}
+  for (let i in useData["企业名称"]) {
+    let nowEnterpriseName = useData["企业名称"][i]
+    finalData[nowEnterpriseName] = 0
+    for (let j in useData) {
+      if (j == "企业名称" || j == "股票代码") {
+        continue
+      }
+      finalData[nowEnterpriseName] += useData[j][i] * dUseData[j] * 100
+    }
+  }
+  return finalData
+}
 
 // 获取每个企业的数字化得分
+app.post("/getArchScore", jsonParser, (req, res) => {
+  const industry = req.body.industry
+  let sql = `select * from ${industry}_property`;
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    let useData = {}
+    for (let i of result) {
+      if (!useData.hasOwnProperty(i["年份"])) {
+        useData[i["年份"]] = []
+      }
+      useData[i["年份"]].push(i)
+    }
+    let finalData = {}
+    for (let i in useData) {
+      finalData[i] = getArchScore(useData[i])
+    }
+    res.send(finalData)
+    res.end()
+  })
+})
 
 /////////////第一屏检索栏
 //指标检索
@@ -83,17 +201,9 @@ app.post("/firstArchMap", jsonParser, (req, res) => {
 
 // 企业名单
 app.post("/firstArchList", jsonParser, (req, res) => {
-  const region = req.body.region
-  const date = req.body.date
   const industry = req.body.industry
-  // console.log(region)
-  let useRegion = "("
-  for (let i of region) {
-    useRegion += '"' + i + '" ,'
-  }
-  useRegion = useRegion.slice(0, useRegion.length - 1) + ")"
-  let sql = `select * from ${industry}_property where 企业名称 in (select 企业名称 from ${industry}_enterprise where 地区 in ${useRegion} or 省份 in ${useRegion} ) and 年份 = ${date}`;
-  
+  let sql = `select * from ${industry}_enterprise`;
+
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -123,7 +233,6 @@ app.post("/firstArchRank", jsonParser, (req, res) => {
       console.log('[SELECT ERROR]：', err.message);
     }
     str = JSON.stringify(result);
-    // console.log(result);
     res.send(str)
     res.end()
   })

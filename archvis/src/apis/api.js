@@ -12,6 +12,12 @@ export function helloworld() {
 // export function firstIndicatorsSt() {
 //   return post("/firstIndicatorsSt");
 // }
+export function getArchScore(industry) {
+  return post("/getArchScore", {
+    industry: industry,
+  })
+
+}
 
 
 
@@ -32,10 +38,8 @@ export function firstArchMap(date, industry) {
 }
 
 // 企业名单
-export function firstArchList(region, date, industry) {
+export function firstArchList(industry) {
   return post("/firstArchList", {
-    region: region,
-    date: date,
     industry: industry
   })
 }

@@ -1,17 +1,37 @@
 // import "./index.css";
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { firstArchRank } from '../../../apis/api';
+import { firstArchRank, getArchScore } from '../../../apis/api';
 export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, selectedCompanyFirst }) {
   const [construData, setConstruData] = useState([]);
   const [designData, setDesignData] = useState([]);
+  const [construScore, setConstruScore] = useState([]);
+  const [designScore, setDesignScore] = useState([]);
   const chartRef = useRef(null);
-useEffect(() => {
+
+  useEffect(() => {
+    getArchScore('constru').then((res) => {
+      setConstruScore(res)
+    })
+    getArchScore('design').then((res) => {
+      setDesignScore(res)
+    })
+  }, [])
+
+  useEffect(() => {
     firstArchRank(selectedRegionFirst, selectedYearFirst, 'constru').then((res) => {
-      setConstruData(res)
+      let useData = []
+      for (let i of res) {
+        useData.push(i["企业名称"])
+      }
+      setConstruData(useData)
     })
     firstArchRank(selectedRegionFirst, selectedYearFirst, 'design').then((res) => {
-      setDesignData(res)
+      let useData = []
+      for (let i of res) {
+        useData.push(i["企业名称"])
+      }
+      setDesignData(useData)
     })
   }, [selectedRegionFirst, selectedYearFirst])
 
@@ -25,25 +45,31 @@ useEffect(() => {
     let useData = []
     // 获取当前需要展示的数据
     if (selectdIndustryFirst.length === 2) {
-      for (let i of construData) {
-        useData.push([i.企业名称, i.资产负债率, 1])
+      for (let i in construScore[selectedYearFirst]) {
+        if (construData.includes(i)) {
+          useData.push([i, construScore[selectedYearFirst][i], 1])
+        }
       }
-      for (let i of designData) {
-        useData.push([i.企业名称, i.资产负债率, 2])
+      for (let i in designScore[selectedYearFirst]) {
+        if (designData.includes(i)) {
+          useData.push([i, designScore[selectedYearFirst][i], 2])
+        }
       }
     }
     else if (selectdIndustryFirst[0] === "施工行业") {
-
-      for (let i of construData) {
-        useData.push([i.企业名称, i.资产负债率, 1])
+      for (let i in construScore[selectedYearFirst]) {
+        if (construData.includes(i)) {
+          useData.push([i, construScore[selectedYearFirst][i], 1])
+        }
       }
     }
     else if (selectdIndustryFirst[0] === "设计行业") {
-      for (let i of designData) {
-        useData.push([i.企业名称, i.资产负债率, 2])
+      for (let i in designScore[selectedYearFirst]) {
+        if (designData.includes(i)) {
+          useData.push([i, designScore[selectedYearFirst][i], 2])
+        }
       }
     }
-    useData = useData.sort(function (a, b) { return a[0] > b[0] })
 
     const option = {
       tooltip: {
@@ -58,7 +84,7 @@ useEffect(() => {
         axisLabel: {
           interval: 0,
           rotate: 90,
-          fontSize:"10px"
+          fontSize: "10px"
         }
       },
       yAxis: {
@@ -99,7 +125,7 @@ useEffect(() => {
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [construData, designData, selectdIndustryFirst, selectedCompanyFirst, w, h]);
+  }, [construData, designData, construScore, designScore, selectdIndustryFirst, selectedCompanyFirst, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "37.2vh" }}>
