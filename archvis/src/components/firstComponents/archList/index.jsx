@@ -84,19 +84,16 @@ export default function FirstArchList({ selectedRegionFirst, selectedYearFirst, 
   {
     title: '股票代码',
     dataIndex: '股票代码',
-    key: '股票代码',
     width:"15%"
   },
 
   {
     title: '主营业务',
     dataIndex: '主营业务',
-    key: '主营业务',
   },
   {
     title: '成立年份',
     dataIndex: '成立年份',
-    key: '成立年份',
     width:"15%"
   }
   ];

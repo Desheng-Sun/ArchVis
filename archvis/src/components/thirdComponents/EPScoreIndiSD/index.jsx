@@ -116,7 +116,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
               name: selectedEnterprise+"2021年一级指标"
             },
           ]
-        }
+        },
       ]
     };
     myChart.setOption(option);
