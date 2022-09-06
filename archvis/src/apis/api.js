@@ -88,8 +88,14 @@ export function thirdEnterprise(industry) {
   });
 }
 
-export function thirdScoreST(industry, enterprise) {
-  return post("/thirdScoreST", {
+export function thirdIndicators(industry) {
+  return post("/thirdIndicators", {
+    industry: industry,
+  });
+}
+
+export function getThirdScore(industry, enterprise) {
+  return post("/getThirdScore", {
     industry: industry,
     enterprise: enterprise
   });
@@ -108,9 +114,9 @@ export function thirdEPPos(industry) {
   });
 }
 
-export function thirdEPdight(enterprise, industry) {
-  return post("/thirdEPdight", {
-    enterprise: enterprise,
-    industry: industry
-  });
-}
+// export function thirdEPdight(enterprise, industry) {
+//   return post("/thirdEPdight", {
+//     enterprise: enterprise,
+//     industry: industry
+//   });
+// }

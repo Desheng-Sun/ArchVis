@@ -33,6 +33,7 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
       }
       setDesignData(useData)
     })
+    
   }, [selectedRegionFirst, selectedYearFirst])
 
   useEffect(() => {

@@ -11,11 +11,11 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  // password: 'root',//密码
+  password: 'root',//密码
   // password: '990921',//密码
-  // database: 'archindicators'//数据库名称
-  password: 'sds091',//密码
-  database: 'archsql'//数据库名称
+  database: 'archindicators'//数据库名称
+  // password: 'sds091',//密码
+  // database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -44,6 +44,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
+
 function getArchScore(nowData) {
   let useData = {}
   for (let i in nowData[0]) {
@@ -67,7 +68,7 @@ function getArchScore(nowData) {
   }
   // 数据标准化处理
   for (let i in useData) {
-    if (i == "企业名称" || i == "股票代码") {
+    if (i == "企业名称" || i == "股票代码" || i == "年份" || i == "成立年份") {
       continue
     }
     let max = Math.max(...useData[i])
@@ -84,7 +85,7 @@ function getArchScore(nowData) {
   }
   // 定义标准化
   for (let i in useData) {
-    if (i == "企业名称" || i == "股票代码") {
+    if (i == "企业名称" || i == "股票代码" || i == "年份" || i == "成立年份") {
       continue
     }
     let sum = 0
@@ -103,7 +104,7 @@ function getArchScore(nowData) {
   // 信息效用值
   let dUseData = {}
   for (let i in useData) {
-    if (i == "企业名称" || i == "股票代码") {
+    if (i == "企业名称" || i == "股票代码" || i == "年份" || i == "成立年份") {
       continue
     }
     let sum = 0
@@ -130,7 +131,7 @@ function getArchScore(nowData) {
     let nowEnterpriseName = useData["企业名称"][i]
     finalData[nowEnterpriseName] = 0
     for (let j in useData) {
-      if (j == "企业名称" || j == "股票代码") {
+      if (j == "企业名称" || j == "股票代码" || j == "年份" || j == "成立年份") {
         continue
       }
       finalData[nowEnterpriseName] += useData[j][i] * dUseData[j] * 100
@@ -138,6 +139,137 @@ function getArchScore(nowData) {
   }
   return finalData
 }
+
+// 计算某个企业的各个三级指标得分
+function getScore(nowData, nowEnterpriseName) {
+  let useData = {}
+  for (let i in nowData[0]) {
+    if (!useData.hasOwnProperty(i)) {
+      useData[i] = []
+    }
+  }
+  for (let i of nowData) {
+    for (let j in useData) {
+      if (j == "企业业务中是否运用信息化技术系统") {
+        useData[j].push(i[j].replace(/[^a-zA-Z]/g, '').length / 4)
+      }
+      else if (j == "A、智能塔吊") {
+        useData[j].push(i[j].replace(/[^a-zA-Z]/g, '').length / 7)
+      }
+
+      else {
+        useData[j].push(i[j])
+      }
+    }
+  }
+  // 数据标准化处理
+  for (let i in useData) {
+    if (i == "企业名称" || i == "股票代码" || i == "年份" || i == "成立年份") {
+      continue
+    }
+    let max = Math.max(...useData[i])
+    let min = Math.min(...useData[i])
+    
+    for (let j in useData[i]) {
+      if(min == max){
+        useData[i][j] = 0
+      }
+      else{
+        useData[i][j] = (useData[i][j] - min) / (max - min)
+      }
+    }
+  }
+  // 定义标准化
+  for (let i in useData) {
+    if (i == "企业名称" || i == "股票代码" || i == "年份" || i == "成立年份") {
+      continue
+    }
+    let sum = 0
+    for (let j of useData[i]) {
+      sum += j
+    }
+    for (let j in useData[i]) {
+      if(sum == 0){
+        useData[i][j] = 0
+      }
+      else{
+        useData[i][j] = useData[i][j] / sum
+      }
+    }
+  }
+  // 信息效用值
+  let dUseData = {}
+  for (let i in useData) {
+    if (i == "企业名称" || i == "股票代码" || i == "年份" || i == "成立年份") {
+      continue
+    }
+    let sum = 0
+    for (let j of useData[i]) {
+      sum += j
+    }
+    if(sum == 0){
+      dUseData[i] = 1
+    }
+    else{
+      dUseData[i] = (1 + sum * Math.log(sum) / Math.log(useData[i].length))
+    }
+  }
+  // 指标评价权重  
+  let sumD = 0
+  for (let i in dUseData) {
+    sumD += dUseData[i]
+  }
+  for (let i in dUseData) {
+    dUseData[i] /= sumD
+  }
+  // 三级指标得分
+  let finalData = {}
+  for (let i in useData["企业名称"]) {
+    if(useData["企业名称"][i] == nowEnterpriseName){
+      for (let j in useData) {        
+        if (j == "企业名称" || j == "股票代码" || j == "年份" || j == "成立年份") {
+          continue
+        }
+        finalData[j] = 0
+        finalData[j] = useData[j][i] * dUseData[j] * 100
+        console.log(useData[j][i])      
+      }
+    }    
+  }  
+  return finalData
+}
+
+// 获取某个企业的三级指标得分
+app.post("/getThirdScore", jsonParser, (req, res) => {
+  const industry = req.body.industry
+  const enterprise = req.body.enterprise
+  let sql = 'select * from ' + industry + '_property ';
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    let useData = {}
+    for (let i of result) {
+      if (!useData.hasOwnProperty(i["年份"])) {
+        useData[i["年份"]] = []
+      }
+      useData[i["年份"]].push(i)
+    }
+    // console.log(useData)
+
+    // 所有三级指标的数字化得分
+    let finalData = {}
+    for (let i in useData) {
+      finalData[i] = []
+      finalData[i] = getScore(useData[i], enterprise)      
+    }
+    res.send(finalData)
+    res.end()
+  })
+})
+
 
 // 获取每个企业的数字化得分
 app.post("/getArchScore", jsonParser, (req, res) => {
@@ -164,6 +296,8 @@ app.post("/getArchScore", jsonParser, (req, res) => {
     res.end()
   })
 })
+
+
 
 /////////////第一屏检索栏
 //指标检索
@@ -326,12 +460,11 @@ app.post("/thirdEnterprise", jsonParser, (req, res) => {
 });
 
 
-// 企业一级指标得分检索
-app.post("/thirdScoreST", jsonParser, (req, res) => {
+
+// 指标检索
+app.post("/thirdIndicators", jsonParser, (req, res) => {
   const industry = req.body.industry
-  const enterprise = req.body.enterprise
-  //查询某个企业的一级指标得分值。用五个三级指标代替。
-  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '" ';
+  let sql = 'select * from ' + industry + '_structure';
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {
@@ -363,7 +496,7 @@ app.post("/thirdScoreND", jsonParser, (req, res) => {
 // 企业数字化程度散点图
 app.post("/thirdEPPos", jsonParser, (req, res) => {
   const industry = req.body.industry
-  //查询某个行业的所有企业的数字化程度得分。用资产负债率代替。
+  //查询某个行业的所有企业。
   let sql = 'select * from ' + industry + '_property';
   let str = '';
   connection.query(sql, function (err, result) {
@@ -377,18 +510,18 @@ app.post("/thirdEPPos", jsonParser, (req, res) => {
 });
 
 // 企业数字化程度得分检索
-app.post("/thirdEPDight", jsonParser, (req, res) => {
-  const enterprise = req.body.enterprise
-  const industry = req.body.industry
-  // 查询某个企业的数据。资产负债率代替。
-  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '"';
-  let str = '';
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log('[SELECT ERROR]：', err.message);
-    }
-    str = JSON.stringify(result);
-    res.send(str)
-    res.end()
-  })
-});
+// app.post("/thirdEPDight", jsonParser, (req, res) => {
+//   const enterprise = req.body.enterprise
+//   const industry = req.body.industry
+//   // 查询某个企业的数据。
+//   let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '"';
+//   let str = '';
+//   connection.query(sql, function (err, result) {
+//     if (err) {
+//       console.log('[SELECT ERROR]：', err.message);
+//     }
+//     str = JSON.stringify(result);
+//     res.send(str)
+//     res.end()
+//   })
+// });
