@@ -1,9 +1,11 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { thirdEPdight } from '../../../apis/api';
+import { getArchScore } from '../../../apis/api';
 
 export default function ThirdEPdight({w, h, selectedEnterprise, selectedIndustry}) {
   const [data, setData] = useState([]);
+  const [max, setMax] = useState([]);
+  const [min, setMin] = useState([]);
   const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
   useEffect(() => {
@@ -16,25 +18,70 @@ export default function ThirdEPdight({w, h, selectedEnterprise, selectedIndustry
     
   }, [selectedIndustry])
 
-  useEffect(() => {
-    var scores=[];
-    // console.log('selectedEnterprise');
-    // console.log(selectedEnterprise);
-    thirdEPdight(selectedEnterprise, industry).then((res) => {
-      // console.log(res);
+  useEffect(() => {   
+    getArchScore(industry).then((res) => {
+
+      // 计算选中企业的数字化得分
+      let scores = [];
       for(let i in res){
-        if(res[i]['年份'] == 2019){
-          scores[0] = res[i]['资产负债率'];
-        }
-        else if(res[i]['年份'] == 2020){
-          scores[1] = res[i]['资产负债率'];
-        }
-        else if(res[i]['年份'] == 2021){
-          scores[2] = res[i]['资产负债率'];
-        }
+        for(let j in res[i]){
+          if(j == selectedEnterprise){
+            scores.push(res[i][j])
+          }           
+        }        
       }
       setData(scores)
+
+      // 计算数字化得分最大值和最小值
+      let tmp = {}
+      let min = {}
+      let max = {}
+      let maxScore = [];
+      let minScore = [];
+      let maxName = [];
+      let minName = [];
+      for(let i in res){
+        tmp[i] = []
+        for(let j in res[i]){
+          tmp[i].push(res[i][j])
+        }
+      }      
+      for(let i in tmp){
+        maxScore.push(Math.max(...tmp[i]))
+        minScore.push(Math.min(...tmp[i]))
+      }
+      for(let i in res){
+        for(let j in res[i]){
+          if(maxScore[0] == res[i][j]){
+            maxName[0] = j
+          }
+          else if(maxScore[1] == res[i][j]){
+            maxName[1] = j
+          }
+          else if(maxScore[2] == res[i][j]){
+            maxName[2] = j
+          }
+
+          if(minScore[0] == res[i][j]){
+            minName[0] = j
+          }
+          else if(minScore[1] == res[i][j]){
+            minName[1] = j
+          }
+          else if(minScore[2] == res[i][j]){
+            minName[2] = j
+          }
+
+        }        
+      }      
+      max["name"] = maxName
+      max["scores"] = maxScore
+      min["name"] = minName
+      min["scores"] = minScore
+      setMax(max)
+      setMin(min)    
     })
+
   }, [industry, selectedEnterprise])
 
   useEffect(() => {
@@ -45,12 +92,10 @@ export default function ThirdEPdight({w, h, selectedEnterprise, selectedIndustry
 
     const option = {
       color: [
-        "#5b8ff9",
-        "#5ad8a6",
-        "#5d7092",
         "#f6bd16",
-        "#e86452",
+        "#5b8ff9",
         "#6dc8ec",
+        "#5ad8a6",        
         "#945fb9",
         "#ff9845",
         "#1e9493",
@@ -78,20 +123,20 @@ export default function ThirdEPdight({w, h, selectedEnterprise, selectedIndustry
     
         },
         {
-          name: '数字化程度最高企业',
+          name: '数字化程度最高值',
           type: 'line',
-          data: [0.9, 0.9, 1],
+          data: max["scores"],
         },
         {
-          name: '数字化程度最低企业',
+          name: '数字化程度最低值',
           type: 'line',
-          data: [0.1, 0, 0.1],
+          data: min["scores"],
         }
       ]
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [selectedEnterprise, data, w, h]);
+  }, [selectedEnterprise, data, max, min, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>
