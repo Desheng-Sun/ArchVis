@@ -1,25 +1,23 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { secondIndicators } from '../../../apis/api';
+import { firstArchIndustry } from '../../../apis/api';
 
-export default function FirstIndicators({w, h, selectedIndustry, setSelectedIndicatorsNd, setSelectedIndicatorsRd}) {
-  const [industry, setIndustry] = useState('constru');
+export default function FirstIndicators({ w, h, selectedIndustrySecond, setSelectedIndicatorsNd, setSelectedIndicatorsRd }) {
   const [data, setData] = useState([]);
-  const [explain, setExplain] = useState();
   const chartRef = useRef(null);
+
   useEffect(() => {
-    if (selectedIndustry === '施工行业') {
-      setIndustry('constru');
+    let industry = ""
+    if (selectedIndustrySecond === '施工行业') {
+      industry = 'constru';
     }
-    else if (selectedIndustry === '设计行业') {
-      setIndustry('design');
+    else if (selectedIndustrySecond === '设计行业') {
+      industry = 'design';
     }
-  }, [selectedIndustry])
-  useEffect(() => {
-    secondIndicators(industry).then((res) =>{
+    firstArchIndustry(industry).then((res) => {
       setData(res)
     })
-  }, [industry])
+  }, [selectedIndustrySecond])
   // 随系统缩放修改画布大小
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
@@ -36,7 +34,7 @@ export default function FirstIndicators({w, h, selectedIndustry, setSelectedIndi
           explain: data[i].explanation
         })
       }
-      else if (data[i].level === 3){
+      else if (data[i].level === 3) {
         dataChildren[data[i].parent_id - 6].children.push({
           name: data[i].indi_name,
           explain: data[i].explanation,
@@ -78,14 +76,12 @@ export default function FirstIndicators({w, h, selectedIndustry, setSelectedIndi
       tooltip: {
         trigger: 'item',
         confine: true,
-        formatter:function (params) {
+        formatter: function (params) {
           if (params.data.explain != null) {
             return '<span style="font-weight: bold;">' + params.data.name + '</span><br>' + params.data.explain;
           }
           else {
-            return `
-                  ${params.data.name}
-                 `;
+            return params.data.name;
           }
         },
       },
@@ -140,7 +136,7 @@ export default function FirstIndicators({w, h, selectedIndustry, setSelectedIndi
       ]
     };
     myChart.setOption(option);
-    myChart.on('click', function(params) {
+    myChart.on('click', function (params) {
       if (params.data.value == 1) {
         setSelectedIndicatorsNd(params.data.parent)
         setSelectedIndicatorsRd(params.data.name)

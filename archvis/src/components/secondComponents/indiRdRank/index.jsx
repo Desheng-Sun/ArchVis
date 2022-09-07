@@ -3,7 +3,7 @@ import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { secondProperty } from '../../../apis/api';
 
-export default function SecondIndiRDRank({ w, h, selectedIndustrySecond, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd }) {
+export default function SecondIndiRDRank({ w, h, selectedIndustrySecond, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd, allDate }) {
   const [data, setData] = useState([]);
   const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
@@ -21,6 +21,7 @@ export default function SecondIndiRDRank({ w, h, selectedIndustrySecond, nowEnte
     }
     secondProperty(industry, selectedIndicatorsRd, nowEnterprise).then((res) => {
       let useDataTemp = {}
+      console.log(res)
       for (let i of res) {
         if (!useDataTemp.hasOwnProperty(i["企业名称"])) {
           useDataTemp[i["企业名称"]] = {}
@@ -29,10 +30,14 @@ export default function SecondIndiRDRank({ w, h, selectedIndustrySecond, nowEnte
       }
       let nowUseData = []
       for (let i in useDataTemp) {
+        let nowData = []
+        for(let j of allDate){
+          nowData.push(useDataTemp[i][j])
+        }
         nowUseData.push({
           name: i,
           type: "line",
-          data: [useDataTemp[i]["2019"], useDataTemp[i]["2020"], useDataTemp[i]["2021"]]
+          data: nowData
         })
       }
 
@@ -62,7 +67,7 @@ export default function SecondIndiRDRank({ w, h, selectedIndustrySecond, nowEnte
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['2019年', '2020年', '2021年']
+        data: allDate
       },
       yAxis: {
         type: 'value',

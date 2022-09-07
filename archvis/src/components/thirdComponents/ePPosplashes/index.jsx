@@ -1,42 +1,92 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { thirdEPPos, getArchScore } from '../../../apis/api';
-export default function ThirdEPPosplashes({w, h, selectedIndustry, setNowEnterpriseThird}) {
+
+export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterpriseThird, construScore, designScore, allDate }) {
   const [data, setData] = useState([]);
-  const [industry, setIndustry] = useState('constru');
-  const [score, setScore] = useState([]);
+  const [allScore, setAllScore] = useState()
   const chartRef = useRef(null);
-
-  // 选择的行业
+  const itemStyle = {
+    opacity: 0.8,
+    shadowBlur: 10,
+    shadowOffsetX: 0,
+    shadowOffsetY: 0,
+    shadowColor: 'rgba(0,0,0,0.3)'
+  };
   useEffect(() => {
-    if (selectedIndustry === '施工行业') {
-      setIndustry('constru');
-    }
-    else if (selectedIndustry === '设计行业') {
-      setIndustry('design');
-    }
-  }, [selectedIndustry])
+    if (construScore && designScore) {
+      let finalData = {}
+      for (let i in construScore) {
+        let nowFinalData = {}
+        for (let index = 0; index < 2; index++) {
+          let nowConstruData = []
+          let nowConstruDData = []
+          if (index === 0) {
+            nowConstruData = construScore[i][0]
+            nowConstruDData = construScore[i][1]
+          }
+          else {
+            nowConstruData = designScore[i][0]
+            nowConstruDData = designScore[i][1]
+          }
 
-  // 获取数字化得分
-  useEffect(() => {
-    getArchScore(industry).then((res) => {
-      setScore(res)
-    })
-  }, [industry])
+          for (let j in nowConstruData["企业名称"]) {
+            let nowEnterpriseName = nowConstruData["企业名称"][j]
+            nowFinalData[nowEnterpriseName] = 0
+            for (let k in nowConstruData) {
+              if (k == "企业名称" || k == "股票代码" || k == "年份" || k == "成立年份") {
+                continue
+              }
+              nowFinalData[nowEnterpriseName] += nowConstruData[k][j] * nowConstruDData[k] * 100
+            }
+          }
+        }
+        finalData[i] = nowFinalData
+      }
+      setAllScore(finalData)
+    }
+  }, [construScore, designScore])
 
   // 获取数据
   useEffect(() => {
-    let useData = {};
-    thirdEPPos(industry).then((res) => {
-      for (let i of res) {
-        if (!useData.hasOwnProperty(i["年份"])) {
-          useData[i["年份"]] = []
-        }
-        useData[i["年份"]].push([i["总资产"], score[i["年份"]][i["企业名称"]], i["企业名称"]])
+    if (allScore) {
+      let useData = {};
+      let useIndusrty = ''
+      if (selectedIndustry == "施工行业") {
+        useIndusrty = 'constru'
       }
-      setData(useData); 
-    })
-  }, [industry, score])
+      else if (selectedIndustry == "设计行业") {
+        useIndusrty = 'design'
+      }
+      thirdEPPos(useIndusrty).then((res) => {
+        for (let i of res) {
+          if (!useData.hasOwnProperty(i["年份"])) {
+            useData[i["年份"]] = []
+          }
+          useData[i["年份"]].push([i["总资产"] / 100000000, allScore[i["年份"]][i["企业名称"]], i["企业名称"]])
+        }
+        let finalUseData = []
+        for (let i of allDate) {
+          finalUseData.push(
+            {
+              name: i,
+              type: 'scatter',
+              itemStyle: itemStyle,
+              data: useData[i],
+              label: {
+                show: true,
+                position: 'top',
+                color: '#000',
+                formatter: function (param) {
+                  return param.value[2]
+                }
+              }
+            })
+        }
+        setData(finalUseData);
+      })
+    }
+  }, [selectedIndustry, allScore])
 
   // 随系统缩放修改画布大小
   useEffect(() => {
@@ -45,17 +95,7 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, setNowEnterpr
       myChart = echarts.init(chartRef.current);
     }
 
-    const schema = [
-      { name: 'date', index: 0, text: '数字化程度' },
-      { name: 'AQIindex', index: 1, text: '规模' }
-    ];
-    const itemStyle = {
-      opacity: 0.8,
-      shadowBlur: 10,
-      shadowOffsetX: 0,
-      shadowOffsetY: 0,
-      shadowColor: 'rgba(0,0,0,0.3)'
-    };
+    const schema = ['规模', '数字化程度']
     const option = {
       color: [
         "#5b8ff9",
@@ -70,16 +110,16 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, setNowEnterpr
         "#ff99c3"
       ],
       legend: {
-        top: 10,
-        data: ['2019年', '2020年', '2021年'],
+        top: "1%",
+        data: allDate,
         textStyle: {
           fontSize: 16
         }
       },
       grid: {
-        left: '10%',
-        right: 150,
-        top: '18%',
+        left: '7%',
+        right: '15%',
+        top: '10%',
         bottom: '10%'
       },
       toolbox: {
@@ -95,45 +135,37 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, setNowEnterpr
           var value = param.value;
           // prettier-ignore
           return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
-                    // param.seriesName
-                    + param.seriesName+ "：" + value[2]
-                    + '</div>'
-                    + schema[0].text + '：' + value[0] + '<br>'
-                    + schema[1].text + '：' + value[1] + '<br>';
+            // param.seriesName
+            + param.seriesName + "：" + value[2]
+            + '</div>'
+            + schema[0] + '：' + value[0] + '<br>'
+            + schema[1] + '：' + value[1] + '<br>';
         }
       },
       xAxis: {
         type: 'value',
-        name: '企业规模（总资产）',
-        min: 'dataMin',
-        max: 'dataMax',
-        nameGap: 16,
+        name: '企业规模/亿',
         nameTextStyle: {
-          fontSize: 16,
-          formatter: '{a} <br/>{b}: {c} ({d}%)'
+          fontSize: 15,
         },
         splitLine: {
-          show: true,
-          min: 'dataMin',
-          max: 'dataMax',
           lineStyle: {
             type: 'dashed'
+          }
         }
-        }
+
       },
       yAxis: {
         type: 'value',
         name: '数字化程度\n（最终得分）',
-        nameLocation: 'end',
-        nameGap: 20,
         nameTextStyle: {
-          fontSize: 16
+          fontSize: 15
         },
         splitLine: {
           show: true,
           lineStyle: {
             type: 'dashed'
-        }
+          }
         }
       },
       dataZoom: [
@@ -148,7 +180,9 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, setNowEnterpr
           type: 'slider',
           show: true,
           yAxisIndex: [0],
-          left: '93%',
+          right: '5%',
+          bottom: '15%',
+          top: '10%',
           start: 5,
           end: 30
         },
@@ -165,62 +199,14 @@ export default function ThirdEPPosplashes({w, h, selectedIndustry, setNowEnterpr
           end: 30
         }
       ],
-      series: [
-        {
-          name: "2019年",
-          type: 'scatter',
-          itemStyle: itemStyle,
-          data: data[2019],
-          label: {
-            show: true,
-            position: 'top',
-            color: '#000',
-            formatter: function (param) {
-              var value = param.value;
-              return value[2]
-            }
-          }
-        },
-        {
-          name: "2020年",
-          type: 'scatter',
-          itemStyle: itemStyle,
-          data: data[2020],
-          label: {
-            show: true,
-            position: 'top',
-            color: '#000',
-            formatter: function (param) {
-              var value = param.value;
-              return value[2]
-            }
-          }
-        },
-        {
-          name: "2021年",
-          type: 'scatter',
-          itemStyle: itemStyle,
-          data: data[2021],
-          label: {
-            show: true,
-            position: 'top',
-            color: '#000',
-            formatter: function (param) {
-              var value = param.value;
-              return value[2]
-            }
-          }
-        }
-      ]
+      series: data
     };
     option && myChart.setOption(option, true);
 
     // 鼠标点击获取企业名称
     myChart.on('click', function (param) {
       if (param.componentType === "series") {
-        console.log("param");
-        console.log(param.data[2]);
-        setNowEnterpriseThird(param.data[2]);       
+        setNowEnterpriseThird(param.data[2]);
       }
     })
 

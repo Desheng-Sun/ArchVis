@@ -19,7 +19,6 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustrySeco
       setConstruEnterprise(tmp);
       setNowEnterpriseList(tmp);
       setNowEnterprise([tmp[0]]);
-      // console.log(tmp);
     });
 
     secondEnterprise('design').then((res) => {
@@ -28,13 +27,11 @@ export default function SecondSearchBar({ nowEnterprise, setSelectedIndustrySeco
         tmp.push(res[i].企业名称);
       }
       setDesignEnterprise(tmp);
-      // console.log(tmp);
     });
 
   }, [])
 
   const handleIndustryChange = (value) => {
-    console.log(value)
     setSelectedIndustrySecond(value);
     if (value === "施工行业") {
       setNowEnterpriseList(construEnterprise);

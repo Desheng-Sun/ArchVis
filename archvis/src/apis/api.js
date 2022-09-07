@@ -18,11 +18,8 @@ export function getArchScore(industry) {
   })
 
 }
-
-
-
 //////// 第一屏检索栏
-// 行业检索
+//指标检索
 export function firstArchIndustry(industry) {
   return post("/firstArchIndustry", {
     industry: industry,
@@ -30,6 +27,7 @@ export function firstArchIndustry(industry) {
 
 }
 
+// 地区检索
 export function firstArchMap(date, industry) {
   return post("/firstArchMap", {
     date: date,
@@ -54,18 +52,13 @@ export function firstArchRank(region, date, industry) {
 }
 
 //////// 第二屏检索栏
-export function secondIndicators(industry) {
-  return post("/secondIndicators", {
-    industry: industry
-  });
-}
-
+//企业检索
 export function secondEnterprise(industry) {
   return post("/secondEnterprise", {
     industry: industry
   });
 }
-
+// 指标值查询
 export function secondProperty(industry, indicator, nowEnterprise) {
   return post("/secondProperty", {
     industry: industry,
@@ -74,49 +67,12 @@ export function secondProperty(industry, indicator, nowEnterprise) {
   });
 }
 
-// export function secondExplain(industry) {
-//   return post("/secondExplain", {
-//     industry: industry
-//   });
-// }
 
 
 //////// 第三屏检索栏
-export function thirdEnterprise(industry) {
-  return post("/thirdEnterprise", {
-    industry: industry
-  });
-}
-
-export function thirdIndicators(industry) {
-  return post("/thirdIndicators", {
-    industry: industry,
-  });
-}
-
-export function getThirdScore(industry, enterprise) {
-  return post("/getThirdScore", {
-    industry: industry,
-    enterprise: enterprise
-  });
-}
-
-// export function thirdScoreND(industry, enterprise) {
-//   return post("/thirdScoreND", {
-//     industry: industry,
-//     enterprise: enterprise
-//   });
-// }
-
 export function thirdEPPos(industry) {
   return post("/thirdEPPos", {
     industry: industry
   });
 }
 
-// export function thirdEPdight(enterprise, industry) {
-//   return post("/thirdEPdight", {
-//     enterprise: enterprise,
-//     industry: industry
-//   });
-// }

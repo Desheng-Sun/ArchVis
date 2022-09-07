@@ -3,8 +3,9 @@ import "./index.css"
 import { Table } from 'antd';
 import { useState, useEffect } from 'react';
 import { firstArchList, firstArchRank } from '../../../apis/api';
+import { use } from "echarts";
 
-export default function FirstArchList({ selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, setSelectedCompanyFirst }) {
+export default function FirstArchList({ selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, setSelectedCompanyFirst}) {
   const [construData, setConstruData] = useState({});
   const [designData, setDesignData] = useState({});
   const [construInfo, setConstruInfo] = useState({});
@@ -50,10 +51,12 @@ export default function FirstArchList({ selectedRegionFirst, selectedYearFirst, 
       if (selectdIndustryFirst.length === 2) {
         for (let i in construData) {
           construData[i]["主营业务"] = construInfo[i]["主营业务"]
+          construData[i]["key"] = construData[i]["股票代码"]
           useData.push(construData[i])
         }
         for (let i in designData) {
           designData[i]["主营业务"] = designInfo[i]["主营业务"]
+          designData[i]["key"] = designData[i]["股票代码"]
           useData.push(designData[i])
         }
 
@@ -61,12 +64,14 @@ export default function FirstArchList({ selectedRegionFirst, selectedYearFirst, 
       else if (selectdIndustryFirst[0] === "施工行业") {
         for (let i in construData) {
           construData[i]["主营业务"] = construInfo[i]["主营业务"]
+          construData[i]["key"] = construData[i]["股票代码"]
           useData.push(construData[i])
         }
       }
       else if (selectdIndustryFirst[0] === "设计行业") {
         for (let i in designData) {
           designData[i]["主营业务"] = designInfo[i]["主营业务"]
+          designData[i]["key"] = designData[i]["股票代码"]
           useData.push(designData[i])
         }
       }
@@ -75,25 +80,28 @@ export default function FirstArchList({ selectedRegionFirst, selectedYearFirst, 
 
   }, [construData, designData, construInfo, designInfo, selectdIndustryFirst])
 
-  const columns = [{
+  const columns = [
+  {
+    title: '股票代码',
+    dataIndex: '股票代码',
+    key:'股票代码',
+    width:"15%"
+  },
+  {
     title: '企业名称',
     dataIndex: '企业名称',
     key: '企业名称',
     width:"15%"
   },
   {
-    title: '股票代码',
-    dataIndex: '股票代码',
-    width:"15%"
-  },
-
-  {
     title: '主营业务',
     dataIndex: '主营业务',
+    key: '企业名称',
   },
   {
     title: '成立年份',
     dataIndex: '成立年份',
+    key: '企业名称',
     width:"15%"
   }
   ];

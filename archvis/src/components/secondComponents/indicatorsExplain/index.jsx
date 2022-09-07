@@ -4,20 +4,18 @@ import React, { useEffect, useState } from 'react';
 
 
 export default function SecondIndicatorsRdExplain({ selectedIndustry, selectedIndicatorsNd, selectedIndicatorsRd }) {
-  const [industry, setIndustry] = useState('constru');
   const [nowIndicatorsRdExplain, setNowIndicatorsRdExplain] = useState();
+
   useEffect(() => {
-    if (selectedIndustry === '施工行业') {
-      setIndustry('constru');
+    let industry = ""
+    if (firstArchIndustry === '施工行业') {
+      industry = 'constru';
     }
-    else if (selectedIndustry === '设计行业') {
-      setIndustry('design');
+    else if (firstArchIndustry === '设计行业') {
+      industry = 'design';
     }
-  }, [selectedIndustry])
-  useEffect(() => {
     if (selectedIndicatorsRd !== undefined) {
       secondExplain(industry).then((res) => {
-        console.log(res);
         if (res[0].explanation != null) {
           setNowIndicatorsRdExplain(res[0].explanation);
         }
@@ -28,7 +26,7 @@ export default function SecondIndicatorsRdExplain({ selectedIndustry, selectedIn
         }
       });
     }
-  }, [industry, selectedIndicatorsNd, selectedIndicatorsRd])
+  }, [selectedIndustry, selectedIndicatorsNd, selectedIndicatorsRd])
   function ExlpainItem({ labelName, defaultValue }) {
     return (
       <div style={{ paddingTop: "5vh", height: "15vh" }}>
@@ -41,7 +39,7 @@ export default function SecondIndicatorsRdExplain({ selectedIndustry, selectedIn
     )
   }
   return (
-    <div style={{height:"41vh", width:"100%", fontSize:"5vh"}}>
+    <div style={{ height: "41vh", width: "100%", fontSize: "5vh" }}>
       <Form>
         <ExlpainItem
           labelName="指标解释"

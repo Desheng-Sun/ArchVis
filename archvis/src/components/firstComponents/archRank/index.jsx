@@ -1,22 +1,12 @@
 // import "./index.css";
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { firstArchRank, getArchScore } from '../../../apis/api';
-export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, selectedCompanyFirst }) {
+import { firstArchRank } from '../../../apis/api';
+export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, selectedCompanyFirst, construScore, designScore }) {
   const [construData, setConstruData] = useState([]);
   const [designData, setDesignData] = useState([]);
-  const [construScore, setConstruScore] = useState([]);
-  const [designScore, setDesignScore] = useState([]);
+  const [allScore, setAllScore] = useState()
   const chartRef = useRef(null);
-
-  useEffect(() => {
-    getArchScore('constru').then((res) => {
-      setConstruScore(res)
-    })
-    getArchScore('design').then((res) => {
-      setDesignScore(res)
-    })
-  }, [])
 
   useEffect(() => {
     firstArchRank(selectedRegionFirst, selectedYearFirst, 'constru').then((res) => {
@@ -33,8 +23,45 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
       }
       setDesignData(useData)
     })
-    
+
   }, [selectedRegionFirst, selectedYearFirst])
+
+  useEffect(() => {
+    if (construScore && designScore) {
+      console.log(construScore, designScore)
+      let finalData = {}
+      for (let i in construScore) {
+        let nowFinalData = {}
+        for (let index = 0; index < 2; index++) {
+          let nowConstruData = []
+          let nowConstruDData = []
+          if (index === 0) {
+            nowConstruData = construScore[i][0]
+            nowConstruDData = construScore[i][1]
+          }
+          else {
+            nowConstruData = designScore[i][0]
+            nowConstruDData = designScore[i][1]
+          }
+
+          for (let j in nowConstruData["企业名称"]) {
+            let nowEnterpriseName = nowConstruData["企业名称"][j]
+            nowFinalData[nowEnterpriseName] = 0
+            for (let k in nowConstruData) {
+              if (k == "企业名称" || k == "股票代码" || k == "年份" || k == "成立年份") {
+                continue
+              }
+              nowFinalData[nowEnterpriseName] += nowConstruData[k][j] * nowConstruDData[k] * 100
+            }
+          }
+        }
+        finalData[i] = nowFinalData
+      }
+      setAllScore(finalData)
+    }
+
+  }, [construScore, designScore])
+
 
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
@@ -44,31 +71,24 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
 
     //存储数据的数组
     let useData = []
-    // 获取当前需要展示的数据
-    if (selectdIndustryFirst.length === 2) {
-      for (let i in construScore[selectedYearFirst]) {
-        if (construData.includes(i)) {
-          useData.push([i, construScore[selectedYearFirst][i], 1])
+    if (allScore) {
+      console.log(allScore)
+      // 获取当前需要展示的数据
+      if (selectdIndustryFirst.length === 2) {
+        for (let i of construData) {
+          useData.push([i, allScore[selectedYearFirst][i], 1])
+        }
+        for (let i of designData) {
+          useData.push([i, allScore[selectedYearFirst][i], 2])
         }
       }
-      for (let i in designScore[selectedYearFirst]) {
-        if (designData.includes(i)) {
-          useData.push([i, designScore[selectedYearFirst][i], 2])
+      else if (selectdIndustryFirst[0] === "施工行业") {
+        for (let i of construData) {
+          useData.push([i, allScore[selectedYearFirst][i], 1])
         }
       }
-    }
-    else if (selectdIndustryFirst[0] === "施工行业") {
-      for (let i in construScore[selectedYearFirst]) {
-        if (construData.includes(i)) {
-          useData.push([i, construScore[selectedYearFirst][i], 1])
-        }
-      }
-    }
-    else if (selectdIndustryFirst[0] === "设计行业") {
-      for (let i in designScore[selectedYearFirst]) {
-        if (designData.includes(i)) {
-          useData.push([i, designScore[selectedYearFirst][i], 2])
-        }
+      else if (selectdIndustryFirst[0] === "设计行业") {
+        useData.push([i, allScore[selectedYearFirst][i], 2])
       }
     }
 
@@ -126,7 +146,7 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [construData, designData, construScore, designScore, selectdIndustryFirst, selectedCompanyFirst, w, h]);
+  }, [construData, designData, allScore, selectdIndustryFirst, selectedCompanyFirst, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "37.2vh" }}>

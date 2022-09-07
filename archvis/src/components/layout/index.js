@@ -12,7 +12,7 @@ import FirstArchRank from "../firstComponents/archRank";
 import SecondSearchBar from "../secondComponents/searchBar";
 import SecondIndicatorsNdSelect from "../secondComponents/indicatorsNd";
 import SecondIndicatorsRdSelect from "../secondComponents/indicatorsRd";
-import SecondIndicatorsRdExplain from "../secondComponents/indicatorsExplain";
+// import SecondIndicatorsRdExplain from "../secondComponents/indicatorsExplain";
 import SecondIndicators from "../secondComponents/indicatorsBreakdown";
 import SecondIndiRDRank from "../secondComponents/indiRdRank";
 
@@ -23,6 +23,7 @@ import ThirdEPScoreIndiSD from "../thirdComponents/EPScoreIndiSD";
 import ThirdEPScoreIndiND from "../thirdComponents/EPScoreIndiND";
 import ThirdEPdight from "../thirdComponents/EPDight";
 
+import { getArchScore } from '../../apis/api';
 
 export default function Layout() {
     // 获取当前整个页面的长宽
@@ -44,6 +45,12 @@ export default function Layout() {
             window.removeEventListener('resize', onResize)
         })
     })
+    // 获取每一个企业的每一项指标得分和每一项指标的当前权重
+    const [construScore, setConstruScore] = useState()
+    const [designScore, setDesignScore] = useState()
+    // 获取所有的年份
+    const [allDate, setAllDate] = useState([])
+
     // 第一屏 用户选择的行业
     const [selectdIndustryFirst, setSelectdIndustryFirst] = useState(["施工行业", "设计行业"])
     // 第一屏 用户选择的指标
@@ -68,20 +75,18 @@ export default function Layout() {
     // 第三屏，用户选择的行业
     const [selectedIndustryThird, setSelectedIndustryThird] = useState("施工行业");
     // 第三屏，用户选择的公司
-    const [nowEnterpriseThird, setNowEnterpriseThird] = useState(["美丽生态"]);
+    const [nowEnterpriseThird, setNowEnterpriseThird] = useState("美丽生态");
     // 第三屏，用户选择的年份
     // const [selectedYearThird, setSelectedYearThird] = useState(["2019"]);
 
     // 当前页面所在第几屏上
-    const [nowPageIndex, setNowPageIndex] = useState("firstButton")
+    const [nowPageIndex, setNowPageIndex] = useState("thirdButton")
 
     // 第一屏各个组件的长宽
     const [firstIndicatorsWidth, setFirstIndicatorsWidth] = useState(0);
     const [firstIndicatorsHeight, setFirstIndicatorsHeight] = useState(0);
     const [firstArchMapWidth, setFirstArchMapWidth] = useState(0);
     const [firstArchMapHeight, setFirstArchMapHeight] = useState(0);
-    const [firstArchListWidth, setFirstArchListWidth] = useState(0);
-    const [firstArchListHeight, setFirstArchListHeight] = useState(0);
     const [firstArchRankWidth, setFirstArchRankWidth] = useState(0);
     const [firstArchRankHeight, setFirstArchRankHeight] = useState(0);
 
@@ -131,12 +136,6 @@ export default function Layout() {
             setFirstArchMapHeight(
                 document.getElementById("firstArchMap").getBoundingClientRect().height
             );
-            setFirstArchListWidth(
-                document.getElementById("firstArchList").getBoundingClientRect().width
-            );
-            setFirstArchListHeight(
-                document.getElementById("firstArchList").getBoundingClientRect().height
-            );
             setFirstArchRankWidth(
                 document.getElementById("firstArchRank").getBoundingClientRect().width
             );
@@ -183,10 +182,23 @@ export default function Layout() {
             setThirdEPdightHeight(
                 document.getElementById("thirdEPdight").getBoundingClientRect().height
             );
-            
+
         }
     }, [nowPageIndex, size])
 
+    useEffect(() => {
+        getArchScore('constru').then((res) => {
+            setConstruScore(res)
+            let useDate = []
+            for (let i in res) {
+                useDate.push(i)
+            }
+            setAllDate(useDate)
+        })
+        getArchScore('design').then((res) => {
+            setDesignScore(res)
+        })
+    }, [])
 
     return (
         <div id="layout">
@@ -237,10 +249,11 @@ export default function Layout() {
                                     w={firstArchMapWidth}
                                     h={firstArchMapHeight}
                                     selectedRegionFirst={selectedRegionFirst}
-                                    selectedYearFirst = {selectedYearFirst}
+                                    selectedYearFirst={selectedYearFirst}
                                     selectdIndustryFirst={selectdIndustryFirst}
                                     setSelectedRegionFirst={setSelectedRegionFirst}
                                     setSelectedYearFirst={setSelectedYearFirst}
+                                    allDate={allDate}
                                 />
                             </div>
                             <div id="firstArchList">
@@ -249,7 +262,7 @@ export default function Layout() {
                                     selectedRegionFirst={selectedRegionFirst}
                                     selectedYearFirst={selectedYearFirst}
                                     selectdIndustryFirst={selectdIndustryFirst}
-                                    setSelectedCompanyFirst = {setSelectedCompanyFirst}
+                                    setSelectedCompanyFirst={setSelectedCompanyFirst}
                                 />
                             </div>
                         </div>
@@ -261,7 +274,9 @@ export default function Layout() {
                                 selectedRegionFirst={selectedRegionFirst}
                                 selectedYearFirst={selectedYearFirst}
                                 selectdIndustryFirst={selectdIndustryFirst}
-                                selectedCompanyFirst = {selectedCompanyFirst}
+                                selectedCompanyFirst={selectedCompanyFirst}
+                                construScore={construScore}
+                                designScore={designScore}
                             />
                         </div>
                     </div>
@@ -328,6 +343,7 @@ export default function Layout() {
                                 nowEnterprise={nowEnterprise}
                                 selectedIndicatorsNd={selectedIndicatorsNd}
                                 selectedIndicatorsRd={selectedIndicatorsRd}
+                                allDate={allDate}
                             />
                         </div>
                     </div>
@@ -339,11 +355,11 @@ export default function Layout() {
                     <div id="thirdILeft">
                         <div id="thirdSearchbar">
                             <ChartHeader chartName={"行业企业检索栏"} />
-                            <ThirdSearchBar 
+                            <ThirdSearchBar
                                 nowEnterprise={nowEnterpriseThird}
                                 setSelectedIndustry={setSelectedIndustryThird}
                                 setNowEnterprise={setNowEnterpriseThird}
-                                // setSelectedYear={setSelectedYearThird}
+                            // setSelectedYear={setSelectedYearThird}
                             />
                         </div>
                         <div id="thirdEPPosplashes">
@@ -354,6 +370,9 @@ export default function Layout() {
                                 selectedIndustry={selectedIndustryThird}
                                 // selectedEnterprise={nowEnterpriseThird}
                                 setNowEnterpriseThird={setNowEnterpriseThird}
+                                construScore={construScore}
+                                designScore={designScore}
+                                allDate={allDate}
                             />
                         </div>
 
@@ -367,7 +386,10 @@ export default function Layout() {
                                     h={thirdEPScoreIndiSDHeight}
                                     selectedEnterprise={nowEnterpriseThird}
                                     selectedIndustry={selectedIndustryThird}
-                                    // selectedYear={selectedYearThird}
+                                    construScore={construScore}
+                                    designScore={designScore}
+                                    allDate={allDate}
+                                // selectedYear={selectedYearThird}
                                 />
                             </div>
                             <div id="thirdEPScoreIndiND">
@@ -378,6 +400,9 @@ export default function Layout() {
                                     selectedEnterprise={nowEnterpriseThird}
                                     selectedIndustry={selectedIndustryThird}
                                     // selectedYear={selectedYearThird}
+                                    construScore={construScore}
+                                    designScore={designScore}
+                                    allDate={allDate}
                                 />
 
                             </div>
@@ -387,8 +412,11 @@ export default function Layout() {
                             <ThirdEPdight
                                 w={thirdEPdightWidth}
                                 h={thirdEPdightHeight}
-                                selectedEnterprise={nowEnterpriseThird}
                                 selectedIndustry={selectedIndustryThird}
+                                selectedEnterprise={nowEnterpriseThird}
+                                construScore={construScore}
+                                designScore={designScore}
+                                allDate = {allDate}
                             />
 
                         </div>

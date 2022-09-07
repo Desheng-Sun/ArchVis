@@ -3,10 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import geoChina from "./geo.json";
 import { firstArchMap } from '../../../apis/api';
 
-export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, setSelectedRegionFirst, setSelectedYearFirst }) {
+export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, setSelectedRegionFirst, setSelectedYearFirst, allDate }) {
   const [construData, setConstruData] = useState({});
   const [designData, setDesignData] = useState({});
-  const [date, setDate] = useState([2019, 2020, 2021]);
   const chartRef = useRef(null);
 
   // 各个地区包含的省份信息
@@ -59,7 +58,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
     let myChart = echarts.getInstanceByDom(chartRef.current)
     // 设置地图字体的大小
     let fontsizeNow = parseInt(14 * h / 698)
-    let index = date.indexOf(selectedYearFirst)
+    let index = allDate.indexOf(selectedYearFirst)
     fontsizeNow = Math.max(10, fontsizeNow)
     let nowAllCity = []
     // 获取当前选择的所有地区包含的省份
@@ -197,7 +196,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
       },
       ],
       timeline: {
-        data: date,
+        data: allDate,
         axisType: "category",
         autoPlay: false,
         realtime: false,
@@ -360,7 +359,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
     });
 
     myChart.on("timelinechanged", (timelineIndex) => {
-      setSelectedYearFirst(date[timelineIndex.currentIndex])
+      setSelectedYearFirst(allDate[timelineIndex.currentIndex])
     });
     if (myChart._$handlers.click) {
       myChart._zr.handler._$handlers.click.length = 3;

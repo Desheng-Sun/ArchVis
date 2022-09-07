@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import React, { useState, useEffect } from "react";
 import '../../../App';
-import { thirdEnterprise } from "../../../apis/api";
+import { secondEnterprise } from "../../../apis/api";
 
 const { Option } = Select;
  
@@ -12,24 +12,22 @@ export default function ThirdSearchBar({ nowEnterprise, setSelectedIndustry, set
   const [NowEnterpriseList, setNowEnterpriseList] = useState([]); 
 
   useEffect(() => {
-    thirdEnterprise('constru').then((res) => {
+    secondEnterprise('constru').then((res) => {
       var tmp = [];
-      for (let i in res) {
-        tmp.push(res[i].企业名称);
+      for (let i of res) {
+        tmp.push(i.企业名称);
       }
       setConstruEnterprise(tmp);
       setNowEnterpriseList(tmp);
-      setNowEnterprise([tmp[0]]);
-      // console.log(tmp);
+      setNowEnterprise(tmp[0])
     });
     
-    thirdEnterprise('design').then((res) => {
+    secondEnterprise('design').then((res) => {
       var tmp = [];
-      for (let i in res) {
-        tmp.push(res[i].企业名称);
+      for (let i of res) {
+        tmp.push(i.企业名称);
       }
       setDesignEnterprise(tmp);
-      // console.log(tmp);
     });
 
   }, [])

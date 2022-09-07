@@ -1,7 +1,7 @@
 import { Radio, Space } from 'antd';
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { secondIndicators } from '../../../apis/api';
+import { firstArchIndustry } from '../../../apis/api';
 import "./index.css"
 
 
@@ -26,12 +26,12 @@ export default function SecondIndicatorsRdSelect({ selectedIndustrySecond, selec
   };
   useEffect(() => {
     if (selectedIndustrySecond === '施工行业') {
-      secondIndicators('constru').then((res) => {
+      firstArchIndustry('constru').then((res) => {
         setIndustry(res)
       })
     }
     else if (selectedIndustrySecond === '设计行业') {
-      secondIndicators('design').then((res) => {
+      firstArchIndustry('design').then((res) => {
         setIndustry(res)
       })
     }
@@ -57,7 +57,6 @@ export default function SecondIndicatorsRdSelect({ selectedIndustrySecond, selec
     for (let i of industry) {
       if (i.indi_name === selectedIndicatorsRd) {
         setNowIndicatorsExplain(i.indi_name + "：" + i.explanation)
-        console.log(i.explanation)
         if (i.explanation !== null) {
           setIsShow(true)
         }
