@@ -101,12 +101,12 @@ export function getThirdScore(industry, enterprise) {
   });
 }
 
-export function thirdScoreND(industry, enterprise) {
-  return post("/thirdScoreND", {
-    industry: industry,
-    enterprise: enterprise
-  });
-}
+// export function thirdScoreND(industry, enterprise) {
+//   return post("/thirdScoreND", {
+//     industry: industry,
+//     enterprise: enterprise
+//   });
+// }
 
 export function thirdEPPos(industry) {
   return post("/thirdEPPos", {
