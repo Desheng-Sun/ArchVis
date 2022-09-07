@@ -133,11 +133,11 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
       radar: {
         indicator: 
         [
-          { name: '基本指标', max: 0.2 },
-          { name: '数字化研发创新指标', max: 0.2 },
-          { name: '组织指标', max: 0.2 },
-          { name: '战略指标', max: 0.2 },
-          { name: '行业特色指标', max: 0.2}
+          { name: '基本指标', max: 0.3 },
+          { name: '数字化研发创新指标', max: 0.3},
+          { name: '组织指标', max: 0.3 },
+          { name: '战略指标', max: 0.3 },
+          { name: '行业特色指标', max: 0.3}
         ]
       },
       series: [

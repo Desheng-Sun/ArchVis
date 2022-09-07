@@ -125,8 +125,7 @@ export default function ThirdEPScoreIndiND({w, h, selectedEnterprise, selectedIn
     }
 
     // 赋值
-    let datatt={}
-    
+    let datatt={} 
 
     for(let i in datatmp){
       datatt[i]=[]
@@ -141,9 +140,7 @@ export default function ThirdEPScoreIndiND({w, h, selectedEnterprise, selectedIn
     for(let i in datatt){      
       for(let j in datatt[i]){ 
         for(let n in data[i]){
-          // if(data[i][n]==datatt[i][j]){
             data[i][n][j]=datatt[i][j][n]
-          // }
         }          
         
       }
@@ -169,7 +166,7 @@ export default function ThirdEPScoreIndiND({w, h, selectedEnterprise, selectedIn
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
-    console.log("dat11a")
+    console.log("data11")
     console.log(data[2019]['BIM应用'])
 
     
@@ -198,9 +195,8 @@ export default function ThirdEPScoreIndiND({w, h, selectedEnterprise, selectedIn
           let list=[];
           let listItem = ''
           for(var i=0; i<params.length;i++){
-    
             if(params[i].value !== '-' ){
-              list.push('<i style="display: inline-block;width: 10px;height: 10px;background: ' +
+              list.push('<i ' +
                      params[i].color +';margin-right: 5px;border-radius: 50%;}"></i><span style=" display:inline-block;">'+params[i].seriesName+ ' : ' + params[i].value)
             }
           }

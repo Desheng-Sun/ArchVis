@@ -477,21 +477,20 @@ app.post("/thirdIndicators", jsonParser, (req, res) => {
 });
 
 // 企业二级指标得分检索
-app.post("/thirdScoreND", jsonParser, (req, res) => {
-  const industry = req.body.industry
-  const enterprise = req.body.enterprise
-  //查询某个企业的一级指标下的二级指标得分值。用三级指标代替。只找2019年。
-  let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '" ';
-  let str = '';
-  connection.query(sql, function (err, result) {
-    if (err) {
-      console.log('[SELECT ERROR]：', err.message);
-    }
-    str = JSON.stringify(result);
-    res.send(str);
-    res.end()
-  })
-});
+// app.post("/thirdScoreND", jsonParser, (req, res) => {
+//   const industry = req.body.industry
+//   const enterprise = req.body.enterprise
+//   let sql = 'select * from ' + industry + '_property where 企业名称 = "' + enterprise + '" ';
+//   let str = '';
+//   connection.query(sql, function (err, result) {
+//     if (err) {
+//       console.log('[SELECT ERROR]：', err.message);
+//     }
+//     str = JSON.stringify(result);
+//     res.send(str);
+//     res.end()
+//   })
+// });
 
 // 企业数字化程度散点图
 app.post("/thirdEPPos", jsonParser, (req, res) => {
