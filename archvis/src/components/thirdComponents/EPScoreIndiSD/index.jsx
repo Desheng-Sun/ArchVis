@@ -4,7 +4,7 @@ import { firstArchIndustry } from '../../../apis/api';
 
 export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedIndustry, construScore, designScore, allDate }) {
   const [data, setData] = useState();
-  const [indicators, setIndicators] = useState([]);
+  const [indicators, setIndicators] = useState();
   const [nowIndusrtyData, setNowIndusrtyData] = useState()
   const chartRef = useRef(null);
 
@@ -60,7 +60,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
   }, [construScore, designScore, selectedEnterprise])
 
   useEffect(() => {
-    if (nowIndusrtyData) {
+    if (nowIndusrtyData && indicators) {
       for (let i in indicators) {
         let nowIndicators = indicators[i]
         if (nowIndicators["level"] === 3) {
