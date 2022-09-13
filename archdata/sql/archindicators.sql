@@ -11,10 +11,10 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 09/09/2022 14:35:06
+ Date: 13/09/2022 16:10:49
 */
 
-SET NAMES utf8;
+SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -22,13 +22,13 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `constru_enterprise`;
 CREATE TABLE `constru_enterprise`  (
-  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `地区` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `省份` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `城市` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `主营业务` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `企业名称` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `地区` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `省份` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `城市` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `主营业务` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`企业名称`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of constru_enterprise
@@ -130,8 +130,8 @@ INSERT INTO `constru_enterprise` VALUES ('龙建股份', '东北', '黑龙江', 
 -- ----------------------------
 DROP TABLE IF EXISTS `constru_property`;
 CREATE TABLE `constru_property`  (
-  `股票代码` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `股票代码` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `企业名称` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `总资产` double NOT NULL,
   `企业成立年限` int(0) NOT NULL,
   `成立年份` int(0) NOT NULL,
@@ -165,7 +165,7 @@ CREATE TABLE `constru_property`  (
   `企业年报中是否有专项数字化转型报告` tinyint(0) NOT NULL,
   `企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语` tinyint(0) NOT NULL,
   `企业战略职能中是否具有专门数字化业务部门` tinyint(0) NOT NULL,
-  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语` int(0) NOT NULL,
   `企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语` int(0) NOT NULL,
   `装配式建筑项目数` int(0) NOT NULL,
@@ -179,13 +179,13 @@ CREATE TABLE `constru_property`  (
   `智能建造平台数量` int(0) NOT NULL,
   `采用电子签名/签章项目占比` int(0) NOT NULL,
   `拥有电子化工程档案项目占比` int(0) NOT NULL,
-  `A、智能塔吊` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `A、智能塔吊` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `施工设施应用个数` int(0) NOT NULL,
   `企业业务中是否运用信息化技术系统个数` int(0) NOT NULL,
   `年份` int(0) NOT NULL,
   PRIMARY KEY (`股票代码`, `年份`) USING BTREE,
   UNIQUE INDEX `property_UNIQUE`(`股票代码`, `年份`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of constru_property
@@ -442,101 +442,102 @@ INSERT INTO `constru_property` VALUES ('605598', '上海港湾', 1667280714.17, 
 DROP TABLE IF EXISTS `constru_structure`;
 CREATE TABLE `constru_structure`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `indi_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `indi_name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `parent_id` int(0) NULL DEFAULT NULL,
   `level` int(0) NULL DEFAULT NULL,
-  `explanation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `explanation` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `unit` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of constru_structure
 -- ----------------------------
-INSERT INTO `constru_structure` VALUES (1, '基本指标', NULL, 1, NULL);
-INSERT INTO `constru_structure` VALUES (2, '数字化研发创新指标', NULL, 1, NULL);
-INSERT INTO `constru_structure` VALUES (3, '组织指标', NULL, 1, NULL);
-INSERT INTO `constru_structure` VALUES (4, '战略指标', NULL, 1, NULL);
-INSERT INTO `constru_structure` VALUES (5, '特色指标', NULL, 1, NULL);
-INSERT INTO `constru_structure` VALUES (6, '规模状况', 1, 2, NULL);
-INSERT INTO `constru_structure` VALUES (7, '财务状况', 1, 2, NULL);
-INSERT INTO `constru_structure` VALUES (8, '研发状况', 2, 2, NULL);
-INSERT INTO `constru_structure` VALUES (9, '数字化创新成果状况', 2, 2, NULL);
-INSERT INTO `constru_structure` VALUES (10, '数字化技术应用状况', 2, 2, '年报中的词汇能够侧面反映出企业的发展规划，很大程度能够体现企业经营理念指导下的转型方式，反映企业对于数字应用的重视程度。');
-INSERT INTO `constru_structure` VALUES (11, '组织结构', 3, 2, NULL);
-INSERT INTO `constru_structure` VALUES (12, '承包联合体模式', 3, 2, NULL);
-INSERT INTO `constru_structure` VALUES (13, '企业战略规划', 4, 2, NULL);
-INSERT INTO `constru_structure` VALUES (14, '企业战略部门', 4, 2, NULL);
-INSERT INTO `constru_structure` VALUES (15, '战略影响因素', 4, 2, NULL);
-INSERT INTO `constru_structure` VALUES (16, '装配式建筑', 5, 2, '反映施工企业装配式建筑的应用情况，装配式建筑由于标准化设计、工厂化生产、信息化管理等特点，因此是施工企业数字化程度的直接体现。');
-INSERT INTO `constru_structure` VALUES (17, '智慧工地', 5, 2, '企业将数字化技术应用在施工场景中，施工单位高质量智慧工地数量越多说明企业在施工安全、效率等问题上重视程度越高，越有趋势运用数字化技术保障施工安全和效率。');
-INSERT INTO `constru_structure` VALUES (18, 'BIM应用', 5, 2, '反映企业运用BIM技术的状况以及BIM技术运用水平，BIM技术作为建筑领域数字化转型代表技术，运用程度可以反映数字化转型程度。');
-INSERT INTO `constru_structure` VALUES (19, '施工管理数字化', 5, 2, '反映施工管理过程中的电子化、信息化程度，电子化的工程档案、签章等能够大大提高施工管理的效率，是施工企业数字化程度的重要体现。');
-INSERT INTO `constru_structure` VALUES (20, '施工设施应用', 5, 2, '反映智能设备在施工过程中的应用情况，智能施工设施的应用是建筑业转型的重要体现，也是研发创新的成果体现，应用的智能设施越多，反映企业数字化程度越高。');
-INSERT INTO `constru_structure` VALUES (21, '股票代码', NULL, NULL, NULL);
-INSERT INTO `constru_structure` VALUES (22, '企业名称', NULL, NULL, NULL);
-INSERT INTO `constru_structure` VALUES (23, '总资产', 6, 3, '企业总资产可以侧面反映企业规模以及企业资金实力，资金实力越雄厚的企业越有能力投入更多的资金运用数字化转型。');
-INSERT INTO `constru_structure` VALUES (24, '企业成立年限', 6, 3, '从成立年限方面反映企业规模状况，成立年限越长的企业代表企业经营更加稳定，更有潜力参与数字化转型。');
-INSERT INTO `constru_structure` VALUES (25, '成立年份', NULL, NULL, NULL);
-INSERT INTO `constru_structure` VALUES (26, '员工总数', 6, 3, '从员工数量方面反映企业规模状况，员工数量越多反映企业资金实力越雄厚，能够反映企业在人力资源方面的配备以及是否为数字化转型做好人员储备。');
-INSERT INTO `constru_structure` VALUES (27, '资产负债率', 7, 3, '反映企业经营风险的大小，也反映企业利用债权人提供的资金从事经营活动的能力，可以衡量在数字化转型中企业调动资金的能力。');
-INSERT INTO `constru_structure` VALUES (28, '总资产周转率', 7, 3, '企业一定时期的销售收入净额与平均资产总额之比,它是衡量资产投资规模与销售水平之间配比情况的指标，可以衡量企业数字化资产投资规模。');
-INSERT INTO `constru_structure` VALUES (29, '净利润增长率', 7, 3, '反映企业持续盈利能力，企业持续盈利是实现数字化转型和投入的基础条件，成长较快的企业越有趋势运用数字化技术加速发展。');
-INSERT INTO `constru_structure` VALUES (30, '营业净利润率', 7, 3, '反映企业经营效率，经营效率越高，企业数字化转型的支撑力就更强。');
-INSERT INTO `constru_structure` VALUES (31, '研发投入费用', 8, 3, '直接反映了公司在研发上财务资源投入，研发投入可以直接助推企业运用数字化技术，促进数字化转型进程。');
-INSERT INTO `constru_structure` VALUES (32, '研发投入占营业收入比例', 8, 3, '指标用于刻画企业技术创新潜能，反映企业在研发上的投入强度，从而在数字化技术层面推动数字化转型。');
-INSERT INTO `constru_structure` VALUES (33, '研发人员', 8, 3, '背后反映了公司隐性知识的数量,研发人员占比越高代表企业对于研发重视程度越高，从而有利于企业在技术层面进行数字化转型。');
-INSERT INTO `constru_structure` VALUES (34, '研发项目个数', 8, 3, '反映企业研发所涉及的广度，项目数量越多代表企业投入越多，对于转型越重视。');
-INSERT INTO `constru_structure` VALUES (35, '专利数', 8, 3, '专利可以被理解为企业所拥有的显性知识，专利数量越多，企业科技创新能力越强，从而推动企业转型。');
-INSERT INTO `constru_structure` VALUES (36, '硕士及以上人员数量', 8, 3, '反映建筑公司人员学历结构，硕士学历及以上的人员数量越多，代表企业员工知识层次越高，越有可能推动企业创新，促进数字化转型。');
-INSERT INTO `constru_structure` VALUES (37, '国家级获奖', 8, 3, '反映企业高水平创新产出数量，数量越多代表企业在科技创新领域实力越强，具有领袖作用，越有可能推动数字化转型。');
-INSERT INTO `constru_structure` VALUES (38, '研发中心数量', 8, 3, '反映企业开设的研发机构数量，形成集聚性的研发创新力，从而推动数字化转型。');
-INSERT INTO `constru_structure` VALUES (39, '数字化创新平台数', 9, 3, '反映企业依托科研单位进行产学研的程度，程度越高代表企业与高校联系越来密切，越可能依托高校科研实力完成数字化转型。');
-INSERT INTO `constru_structure` VALUES (40, '互联网云平台运用数量', 9, 3, '反映企业数字化互联网平台运用状况，互联网平台也是企业运用数字化技术的表现之一，因此通过运用互联网平台反映企业数字化程度。');
-INSERT INTO `constru_structure` VALUES (41, '数字化业务板块数', 9, 3, '反映企业其所含业务板块中数字化应用程度，业务板块数量越多，说明企业涵盖数字化业务范围越广。');
-INSERT INTO `constru_structure` VALUES (42, '联合高等院校课题研发数', 9, 3, '反映企业与科研单位合作研发的状况，程度越高代表企业与研发单位联系越来密切，越可能率先完成数字化转型。');
-INSERT INTO `constru_structure` VALUES (43, '成果转化数', 9, 3, '反映企业将数字化技术转化成成果的程度，程度越高说明数字化技术应用越广泛。');
-INSERT INTO `constru_structure` VALUES (44, '一级技术词频数', 10, 3, NULL);
-INSERT INTO `constru_structure` VALUES (45, '二级技术词频数', 10, 3, NULL);
-INSERT INTO `constru_structure` VALUES (46, '三级技术词频数', 10, 3, NULL);
-INSERT INTO `constru_structure` VALUES (47, '业务板块数量（多元化情况）', 11, 3, '通过企业业务板块数量来反映企业发展的多元化情况，企业业务多元化程度越高，企业探索新领域、推进数字化转型的意愿越强。');
-INSERT INTO `constru_structure` VALUES (48, '组织结构中是否有专门的数字化部门', 11, 3, NULL);
-INSERT INTO `constru_structure` VALUES (49, '组织内部是否具有专门的项目管理系统', 11, 3, '组织内部的项目管理系统是集成了项目信息、业务数据的数字化系统或平台，能够从组织结构层面体现企业的数字化程度。');
-INSERT INTO `constru_structure` VALUES (50, '是否与数字化类型的企业有合作、收购、投资关系（从年报中获取）', 12, 3, '反映企业对数字化相关业务、企业的重视，是开启数字化转型的有益尝试。');
-INSERT INTO `constru_structure` VALUES (51, '是否为国家认定高新技术企业', 12, 3, '反映企业的研发创新能力被国家认可，并受到国家和政府的政策支持，为进一步研发创新，实现数字化转型提供强大推力。');
-INSERT INTO `constru_structure` VALUES (52, '企业年报中是否有提及数字化战略的相关内容？', 13, 3, '反映了企业未来经营计划中对数字化的思考，为未来实现数字化提供战略指引。');
-INSERT INTO `constru_structure` VALUES (53, '企业年报中是否有专项数字化转型报告', 13, 3, '年报中有单独的小节、段落来介绍企业的数字化情况能够反映企业数字化成果丰富，且重视企业数字化的发展。');
-INSERT INTO `constru_structure` VALUES (54, '企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语', 13, 3, '反映企业对数字化相关战略的重视程度，数字化战略在企业远景规划中扮演的角色与地位。');
-INSERT INTO `constru_structure` VALUES (55, '企业战略职能中是否具有专门数字化业务部门', 14, 3, '专门的数字化业务部门能够统筹安排企业的数字化相关工作，为企业的数字化转型提供业务支持。');
-INSERT INTO `constru_structure` VALUES (56, '企业业务中是否运用信息化技术系统', 14, 3, '应用信息化技术系统越多，反映企业的信息化程度越高，为数字化转型提供良好的技术基础。');
-INSERT INTO `constru_structure` VALUES (57, ' 企业业务中是否运用信息化技术系统个数', 14, 3, '应用信息化技术系统越多，反映企业的信息化程度越高，为数字化转型提供良好的技术基础。');
-INSERT INTO `constru_structure` VALUES (58, '企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语', 15, 3, '政府的相关政策为企业进行数字化转型提供保障和推动力。');
-INSERT INTO `constru_structure` VALUES (59, '企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语', 15, 3, '行业、市场等外部需求能够推动企业加速进行数字化转型。');
-INSERT INTO `constru_structure` VALUES (60, '装配式建筑项目数', 16, 3, NULL);
-INSERT INTO `constru_structure` VALUES (61, '完成装配式建筑面积', 16, 3, NULL);
-INSERT INTO `constru_structure` VALUES (62, '装配式建筑产业基地数量', 16, 3, NULL);
-INSERT INTO `constru_structure` VALUES (63, '拥有建筑机器人数量', 17, 3, NULL);
-INSERT INTO `constru_structure` VALUES (64, '智慧工地数量占比', 17, 3, NULL);
-INSERT INTO `constru_structure` VALUES (65, '5G技术应用工地数量', 17, 3, NULL);
-INSERT INTO `constru_structure` VALUES (66, '运用BIM技术合同额', 18, 3, NULL);
-INSERT INTO `constru_structure` VALUES (67, '采用BIM技术项目个数', 18, 3, NULL);
-INSERT INTO `constru_structure` VALUES (68, '智能建造平台数量', 19, 3, NULL);
-INSERT INTO `constru_structure` VALUES (69, '采用电子签名/签章项目占比', 19, 3, NULL);
-INSERT INTO `constru_structure` VALUES (70, '拥有电子化工程档案项目占比', 19, 3, NULL);
-INSERT INTO `constru_structure` VALUES (71, 'A、智能塔吊', 20, 3, NULL);
+INSERT INTO `constru_structure` VALUES (1, '基本指标', NULL, 1, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (2, '数字化研发创新指标', NULL, 1, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (3, '组织指标', NULL, 1, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (4, '战略指标', NULL, 1, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (5, '特色指标', NULL, 1, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (6, '规模状况', 1, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (7, '财务状况', 1, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (8, '研发状况', 2, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (9, '数字化创新成果状况', 2, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (10, '数字化技术应用状况', 2, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (11, '组织结构', 3, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (12, '承包联合体模式', 3, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (13, '企业战略规划', 4, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (14, '企业战略部门', 4, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (15, '战略影响因素', 4, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (16, '装配式建筑', 5, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (17, '智慧工地', 5, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (18, 'BIM应用', 5, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (19, '施工管理数字化', 5, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (20, '施工设施应用', 5, 2, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (21, '股票代码', NULL, NULL, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (22, '企业名称', NULL, NULL, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (23, '总资产', 6, 3, '企业总资产可以侧面反映企业规模以及企业资金实力，资金实力越雄厚的企业越有能力投入更多的资金运用数字化转型。', '元');
+INSERT INTO `constru_structure` VALUES (24, '企业成立年限', 6, 3, '从成立年限方面反映企业规模状况，成立年限越长的企业代表企业经营更加稳定，更有潜力参与数字化转型。', '年');
+INSERT INTO `constru_structure` VALUES (25, '成立年份', NULL, NULL, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (26, '员工总数', 6, 3, '从员工数量方面反映企业规模状况，员工数量越多反映企业资金实力越雄厚，能够反映企业在人力资源方面的配备以及是否为数字化转型做好人员储备。', '人');
+INSERT INTO `constru_structure` VALUES (27, '资产负债率', 7, 3, '反映企业经营风险的大小，也反映企业利用债权人提供的资金从事经营活动的能力，可以衡量在数字化转型中企业调动资金的能力。', '人');
+INSERT INTO `constru_structure` VALUES (28, '总资产周转率', 7, 3, '企业一定时期的销售收入净额与平均资产总额之比,它是衡量资产投资规模与销售水平之间配比情况的指标，可以衡量企业数字化资产投资规模。', '%');
+INSERT INTO `constru_structure` VALUES (29, '净利润增长率', 7, 3, '反映企业持续盈利能力，企业持续盈利是实现数字化转型和投入的基础条件，成长较快的企业越有趋势运用数字化技术加速发展。', '%');
+INSERT INTO `constru_structure` VALUES (30, '营业净利润率', 7, 3, '反映企业经营效率，经营效率越高，企业数字化转型的支撑力就更强。', '%');
+INSERT INTO `constru_structure` VALUES (31, '研发投入费用', 8, 3, '直接反映了公司在研发上财务资源投入，研发投入可以直接助推企业运用数字化技术，促进数字化转型进程。', '%');
+INSERT INTO `constru_structure` VALUES (32, '研发投入占营业收入比例', 8, 3, '指标用于刻画企业技术创新潜能，反映企业在研发上的投入强度，从而在数字化技术层面推动数字化转型。', '元');
+INSERT INTO `constru_structure` VALUES (33, '研发人员', 8, 3, '背后反映了公司隐性知识的数量,研发人员占比越高代表企业对于研发重视程度越高，从而有利于企业在技术层面进行数字化转型。', '%');
+INSERT INTO `constru_structure` VALUES (34, '研发项目个数', 8, 3, '反映企业研发所涉及的广度，项目数量越多代表企业投入越多，对于转型越重视。', '人');
+INSERT INTO `constru_structure` VALUES (35, '专利数', 8, 3, '专利可以被理解为企业所拥有的显性知识，专利数量越多，企业科技创新能力越强，从而推动企业转型。', '个');
+INSERT INTO `constru_structure` VALUES (36, '硕士及以上人员数量', 8, 3, '反映建筑公司人员学历结构，硕士学历及以上的人员数量越多，代表企业员工知识层次越高，越有可能推动企业创新，促进数字化转型。', '个');
+INSERT INTO `constru_structure` VALUES (37, '国家级获奖', 8, 3, '反映企业高水平创新产出数量，数量越多代表企业在科技创新领域实力越强，具有领袖作用，越有可能推动数字化转型。', '人');
+INSERT INTO `constru_structure` VALUES (38, '研发中心数量', 8, 3, '反映企业开设的研发机构数量，形成集聚性的研发创新力，从而推动数字化转型。', '个');
+INSERT INTO `constru_structure` VALUES (39, '数字化创新平台数', 9, 3, '反映企业依托科研单位进行产学研的程度，程度越高代表企业与高校联系越来密切，越可能依托高校科研实力完成数字化转型。', '个');
+INSERT INTO `constru_structure` VALUES (40, '互联网云平台运用数量', 9, 3, '反映企业数字化互联网平台运用状况，互联网平台也是企业运用数字化技术的表现之一，因此通过运用互联网平台反映企业数字化程度。', '个');
+INSERT INTO `constru_structure` VALUES (41, '数字化业务板块数', 9, 3, '反映企业其所含业务板块中数字化应用程度，业务板块数量越多，说明企业涵盖数字化业务范围越广。', '个');
+INSERT INTO `constru_structure` VALUES (42, '联合高等院校课题研发数', 9, 3, '反映企业与科研单位合作研发的状况，程度越高代表企业与研发单位联系越来密切，越可能率先完成数字化转型。', '个');
+INSERT INTO `constru_structure` VALUES (43, '成果转化数', 9, 3, '反映企业将数字化技术转化成成果的程度，程度越高说明数字化技术应用越广泛。', '个');
+INSERT INTO `constru_structure` VALUES (44, '一级技术词频数', 10, 3, '年报中的词汇能够侧面反映出企业的发展规划，很大程度能够体现企业经营理念指导下的转型方式，反映企业对于数字应用的重视程度。', '个');
+INSERT INTO `constru_structure` VALUES (45, '二级技术词频数', 10, 3, '年报中的词汇能够侧面反映出企业的发展规划，很大程度能够体现企业经营理念指导下的转型方式，反映企业对于数字应用的重视程度。', '次');
+INSERT INTO `constru_structure` VALUES (46, '三级技术词频数', 10, 3, '年报中的词汇能够侧面反映出企业的发展规划，很大程度能够体现企业经营理念指导下的转型方式，反映企业对于数字应用的重视程度。', '次');
+INSERT INTO `constru_structure` VALUES (47, '业务板块数量（多元化情况）', 11, 3, '通过企业业务板块数量来反映企业发展的多元化情况，企业业务多元化程度越高，企业探索新领域、推进数字化转型的意愿越强。', '次');
+INSERT INTO `constru_structure` VALUES (48, '组织结构中是否有专门的数字化部门', 11, 3, NULL, NULL);
+INSERT INTO `constru_structure` VALUES (49, '组织内部是否具有专门的项目管理系统', 11, 3, '组织内部的项目管理系统是集成了项目信息、业务数据的数字化系统或平台，能够从组织结构层面体现企业的数字化程度。', '个');
+INSERT INTO `constru_structure` VALUES (50, '是否与数字化类型的企业有合作、收购、投资关系（从年报中获取）', 12, 3, '反映企业对数字化相关业务、企业的重视，是开启数字化转型的有益尝试。', '/');
+INSERT INTO `constru_structure` VALUES (51, '是否为国家认定高新技术企业', 12, 3, '反映企业的研发创新能力被国家认可，并受到国家和政府的政策支持，为进一步研发创新，实现数字化转型提供强大推力。', '/');
+INSERT INTO `constru_structure` VALUES (52, '企业年报中是否有提及数字化战略的相关内容？', 13, 3, '反映了企业未来经营计划中对数字化的思考，为未来实现数字化提供战略指引。', '/');
+INSERT INTO `constru_structure` VALUES (53, '企业年报中是否有专项数字化转型报告', 13, 3, '年报中有单独的小节、段落来介绍企业的数字化情况能够反映企业数字化成果丰富，且重视企业数字化的发展。', '/');
+INSERT INTO `constru_structure` VALUES (54, '企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语', 13, 3, '反映企业对数字化相关战略的重视程度，数字化战略在企业远景规划中扮演的角色与地位。', '/');
+INSERT INTO `constru_structure` VALUES (55, '企业战略职能中是否具有专门数字化业务部门', 14, 3, '专门的数字化业务部门能够统筹安排企业的数字化相关工作，为企业的数字化转型提供业务支持。', '/');
+INSERT INTO `constru_structure` VALUES (56, '企业业务中是否运用信息化技术系统', 14, 3, '应用信息化技术系统越多，反映企业的信息化程度越高，为数字化转型提供良好的技术基础。', '/');
+INSERT INTO `constru_structure` VALUES (57, ' 企业业务中是否运用信息化技术系统个数', 14, 3, '应用信息化技术系统越多，反映企业的信息化程度越高，为数字化转型提供良好的技术基础。', '/');
+INSERT INTO `constru_structure` VALUES (58, '企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语', 15, 3, '政府的相关政策为企业进行数字化转型提供保障和推动力。', '/');
+INSERT INTO `constru_structure` VALUES (59, '企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语', 15, 3, '行业、市场等外部需求能够推动企业加速进行数字化转型。', '次');
+INSERT INTO `constru_structure` VALUES (60, '装配式建筑项目数', 16, 3, '反映施工企业装配式建筑的应用情况，装配式建筑由于标准化设计、工厂化生产、信息化管理等特点，因此是施工企业数字化程度的直接体现。', '次');
+INSERT INTO `constru_structure` VALUES (61, '完成装配式建筑面积', 16, 3, '反映施工企业装配式建筑的应用情况，装配式建筑由于标准化设计、工厂化生产、信息化管理等特点，因此是施工企业数字化程度的直接体现。', '个');
+INSERT INTO `constru_structure` VALUES (62, '装配式建筑产业基地数量', 16, 3, '反映施工企业装配式建筑的应用情况，装配式建筑由于标准化设计、工厂化生产、信息化管理等特点，因此是施工企业数字化程度的直接体现。', '平方米');
+INSERT INTO `constru_structure` VALUES (63, '拥有建筑机器人数量', 17, 3, '企业将数字化技术应用在施工场景中，施工单位高质量智慧工地数量越多说明企业在施工安全、效率等问题上重视程度越高，越有趋势运用数字化技术保障施工安全和效率。', '个');
+INSERT INTO `constru_structure` VALUES (64, '智慧工地数量占比', 17, 3, '企业将数字化技术应用在施工场景中，施工单位高质量智慧工地数量越多说明企业在施工安全、效率等问题上重视程度越高，越有趋势运用数字化技术保障施工安全和效率。', '个');
+INSERT INTO `constru_structure` VALUES (65, '5G技术应用工地数量', 17, 3, '企业将数字化技术应用在施工场景中，施工单位高质量智慧工地数量越多说明企业在施工安全、效率等问题上重视程度越高，越有趋势运用数字化技术保障施工安全和效率。', '%');
+INSERT INTO `constru_structure` VALUES (66, '运用BIM技术合同额', 18, 3, '反映企业运用BIM技术的状况以及BIM技术运用水平，BIM技术作为建筑领域数字化转型代表技术，运用程度可以反映数字化转型程度。', '个');
+INSERT INTO `constru_structure` VALUES (67, '采用BIM技术项目个数', 18, 3, '反映企业运用BIM技术的状况以及BIM技术运用水平，BIM技术作为建筑领域数字化转型代表技术，运用程度可以反映数字化转型程度。', '元');
+INSERT INTO `constru_structure` VALUES (68, '智能建造平台数量', 19, 3, '反映施工管理过程中的电子化、信息化程度，电子化的工程档案、签章等能够大大提高施工管理的效率，是施工企业数字化程度的重要体现。', '个');
+INSERT INTO `constru_structure` VALUES (69, '采用电子签名/签章项目占比', 19, 3, '反映施工管理过程中的电子化、信息化程度，电子化的工程档案、签章等能够大大提高施工管理的效率，是施工企业数字化程度的重要体现。', '个');
+INSERT INTO `constru_structure` VALUES (70, '拥有电子化工程档案项目占比', 19, 3, '反映施工管理过程中的电子化、信息化程度，电子化的工程档案、签章等能够大大提高施工管理的效率，是施工企业数字化程度的重要体现。', '%');
+INSERT INTO `constru_structure` VALUES (71, 'A、智能塔吊', 20, 3, '反映智能设备在施工过程中的应用情况，智能施工设施的应用是建筑业转型的重要体现，也是研发创新的成果体现，应用的智能设施越多，反映企业数字化程度越高。', '%');
 
 -- ----------------------------
 -- Table structure for design_enterprise
 -- ----------------------------
 DROP TABLE IF EXISTS `design_enterprise`;
 CREATE TABLE `design_enterprise`  (
-  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `地区` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `省份` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `城市` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `主营业务` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `企业名称` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `地区` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `省份` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `城市` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `主营业务` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`企业名称`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of design_enterprise
@@ -584,8 +585,8 @@ INSERT INTO `design_enterprise` VALUES ('霍普股份', '华东', '上海', '上
 -- ----------------------------
 DROP TABLE IF EXISTS `design_property`;
 CREATE TABLE `design_property`  (
-  `股票代码` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `企业名称` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `股票代码` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `企业名称` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `总资产` double NOT NULL,
   `企业成立年限` int(0) NOT NULL,
   `成立年份` int(0) NOT NULL,
@@ -619,7 +620,7 @@ CREATE TABLE `design_property`  (
   `企业年报中是否有专项数字化转型报告` tinyint(0) NOT NULL,
   `企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语` int(0) NOT NULL,
   `企业战略职能中是否具有专门数字化业务部门` tinyint(0) NOT NULL,
-  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `企业业务中是否运用信息化技术系统` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语` int(0) NOT NULL,
   `企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语` int(0) NOT NULL,
   `企业业务中是否运用信息化技术系统个数` int(0) NULL DEFAULT NULL,
@@ -634,7 +635,7 @@ CREATE TABLE `design_property`  (
   `年份` int(0) NOT NULL,
   PRIMARY KEY (`股票代码`, `年份`) USING BTREE,
   UNIQUE INDEX `property_UNIQUE`(`股票代码`, `年份`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of design_property
@@ -718,81 +719,82 @@ INSERT INTO `design_property` VALUES ('836892', '广咨国际', 678659828.63, 29
 DROP TABLE IF EXISTS `design_structure`;
 CREATE TABLE `design_structure`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `indi_name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `indi_name` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `parent_id` int(0) NULL DEFAULT NULL,
   `level` int(0) NULL DEFAULT NULL,
-  `explanation` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `explanation` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `unit` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_UNIQUE`(`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 66 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of design_structure
 -- ----------------------------
-INSERT INTO `design_structure` VALUES (1, '基本指标', NULL, 1, NULL);
-INSERT INTO `design_structure` VALUES (2, '数字化研发创新指标', NULL, 1, NULL);
-INSERT INTO `design_structure` VALUES (3, '组织指标', NULL, 1, NULL);
-INSERT INTO `design_structure` VALUES (4, '战略指标', NULL, 1, NULL);
-INSERT INTO `design_structure` VALUES (5, '特色指标', NULL, 1, NULL);
-INSERT INTO `design_structure` VALUES (6, '规模状况', 1, 2, NULL);
-INSERT INTO `design_structure` VALUES (7, '财务状况', 1, 2, NULL);
-INSERT INTO `design_structure` VALUES (8, '研发状况', 2, 2, NULL);
-INSERT INTO `design_structure` VALUES (9, '数字化创新成果状况', 2, 2, NULL);
-INSERT INTO `design_structure` VALUES (10, '数字化技术应用状况', 2, 2, '年报中的词汇能够侧面反映出企业的发展规划，很大程度能够体现企业经营理念指导下的转型方式，反映企业对于数字应用的重视程度。');
-INSERT INTO `design_structure` VALUES (11, '组织结构', 3, 2, NULL);
-INSERT INTO `design_structure` VALUES (12, '承包联合体模式', 3, 2, NULL);
-INSERT INTO `design_structure` VALUES (13, '企业战略规划', 4, 2, NULL);
-INSERT INTO `design_structure` VALUES (14, '企业战略部门', 4, 2, NULL);
-INSERT INTO `design_structure` VALUES (15, '战略影响因素', 4, 2, NULL);
-INSERT INTO `design_structure` VALUES (16, '设计合作', 5, 2, '设计领域的合作需要依靠数字化技术，与其他设计企业的合作越多，能够反映企业的视野越开阔，更容易接受数字化转型和创新。');
-INSERT INTO `design_structure` VALUES (17, '设计项目', 5, 2, '公共建筑、复杂性建筑、装配式建筑设计过程中往往需要用到一些先进的技术手段，很难通过传统的方式实现，此类项目可以体现设计企业数字化技术的应用情况。');
-INSERT INTO `design_structure` VALUES (18, '设计工具', 5, 2, '数字化的设计工具是设计企业经营效率的保证，协同一体化的设计平台和bim技术都能够大幅提高设计过程中信息传递效率，是设计企业数字化转型的重要体现。');
-INSERT INTO `design_structure` VALUES (19, '股票代码', NULL, NULL, NULL);
-INSERT INTO `design_structure` VALUES (20, '企业名称', NULL, NULL, NULL);
-INSERT INTO `design_structure` VALUES (21, '总资产', 6, 3, '企业总资产可以侧面反映企业规模以及企业资金实力，资金实力越雄厚的企业越有能力投入更多的资金运用数字化转型。');
-INSERT INTO `design_structure` VALUES (22, '企业成立年限', 6, 3, '从成立年限方面反映企业规模状况，成立年限越长的企业代表企业经营更加稳定，更有潜力参与数字化转型。');
-INSERT INTO `design_structure` VALUES (23, '成立年份', NULL, NULL, NULL);
-INSERT INTO `design_structure` VALUES (24, '员工总数', 6, 3, '从员工数量方面反映企业规模状况，员工数量越多反映企业资金实力越雄厚，能够反映企业在人力资源方面的配备以及是否为数字化转型做好人员储备。');
-INSERT INTO `design_structure` VALUES (25, '资产负债率', 7, 3, '反映企业经营风险的大小，也反映企业利用债权人提供的资金从事经营活动的能力，可以衡量在数字化转型中企业调动资金的能力。');
-INSERT INTO `design_structure` VALUES (26, '总资产周转率', 7, 3, '企业一定时期的销售收入净额与平均资产总额之比,它是衡量资产投资规模与销售水平之间配比情况的指标，可以衡量企业数字化资产投资规模。');
-INSERT INTO `design_structure` VALUES (27, '净利润增长率', 7, 3, '反映企业持续盈利能力，企业持续盈利是实现数字化转型和投入的基础条件，成长较快的企业越有趋势运用数字化技术加速发展。');
-INSERT INTO `design_structure` VALUES (28, '营业净利润率', 7, 3, '反映企业经营效率，经营效率越高，企业数字化转型的支撑力就更强。');
-INSERT INTO `design_structure` VALUES (29, '研发投入费用', 8, 3, '直接反映了公司在研发上财务资源投入，研发投入可以直接助推企业运用数字化技术，促进数字化转型进程。');
-INSERT INTO `design_structure` VALUES (30, '研发投入占营业收入比例', 8, 3, '指标用于刻画企业技术创新潜能，反映企业在研发上的投入强度，从而在数字化技术层面推动数字化转型。');
-INSERT INTO `design_structure` VALUES (31, '研发人员', 8, 3, '背后反映了公司隐性知识的数量,研发人员占比越高代表企业对于研发重视程度越高，从而有利于企业在技术层面进行数字化转型。');
-INSERT INTO `design_structure` VALUES (32, '研发项目个数', 8, 3, '反映企业研发所涉及的广度，项目数量越多代表企业投入越多，对于转型越重视。');
-INSERT INTO `design_structure` VALUES (33, '专利数', 8, 3, '专利可以被理解为企业所拥有的显性知识，专利数量越多，企业科技创新能力越强，从而推动企业转型。');
-INSERT INTO `design_structure` VALUES (34, '硕士及以上人员数量', 8, 3, '反映建筑公司人员学历结构，硕士学历及以上的人员数量越多，代表企业员工知识层次越高，越有可能推动企业创新，促进数字化转型。');
-INSERT INTO `design_structure` VALUES (35, '国家级获奖', 8, 3, '反映企业高水平创新产出数量，数量越多代表企业在科技创新领域实力越强，具有领袖作用，越有可能推动数字化转型。');
-INSERT INTO `design_structure` VALUES (36, '研发中心数量', 8, 3, '反映企业开设的研发机构数量，形成集聚性的研发创新力，从而推动数字化转型。');
-INSERT INTO `design_structure` VALUES (37, '数字化创新平台数', 9, 3, '反映企业依托科研单位进行产学研的程度，程度越高代表企业与高校联系越来密切，越可能依托高校科研实力完成数字化转型。');
-INSERT INTO `design_structure` VALUES (38, '互联网云平台运用数量', 9, 3, '反映企业数字化互联网平台运用状况，互联网平台也是企业运用数字化技术的表现之一，因此通过运用互联网平台反映企业数字化程度。');
-INSERT INTO `design_structure` VALUES (39, '数字化业务板块数', 9, 3, '反映企业其所含业务板块中数字化应用程度，业务板块数量越多，说明企业涵盖数字化业务范围越广。');
-INSERT INTO `design_structure` VALUES (40, '联合高等院校课题研发数', 9, 3, '反映企业与科研单位合作研发的状况，程度越高代表企业与研发单位联系越来密切，越可能率先完成数字化转型。');
-INSERT INTO `design_structure` VALUES (41, '成果转化数', 9, 3, '反映企业将数字化技术转化成成果的程度，程度越高说明数字化技术应用越广泛。');
-INSERT INTO `design_structure` VALUES (42, '一级技术词频数', 10, 3, NULL);
-INSERT INTO `design_structure` VALUES (43, '二级技术词频数', 10, 3, NULL);
-INSERT INTO `design_structure` VALUES (44, '三级技术词频数', 10, 3, NULL);
-INSERT INTO `design_structure` VALUES (45, '业务板块数量（多元化情况）', 11, 3, '通过企业业务板块数量来反映企业发展的多元化情况，企业业务多元化程度越高，企业探索新领域、推进数字化转型的意愿越强。');
-INSERT INTO `design_structure` VALUES (46, '组织结构中是否有专门的数字化部门', 11, 3, NULL);
-INSERT INTO `design_structure` VALUES (47, '组织内部是否具有专门的项目管理系统', 11, 3, '组织内部的项目管理系统是集成了项目信息、业务数据的数字化系统或平台，能够从组织结构层面体现企业的数字化程度。');
-INSERT INTO `design_structure` VALUES (48, '是否与数字化类型的企业有合作、收购、投资关系（从年报中获取）', 12, 3, '反映企业对数字化相关业务、企业的重视，是开启数字化转型的有益尝试。');
-INSERT INTO `design_structure` VALUES (49, '是否为国家认定高新技术企业', 12, 3, '反映企业的研发创新能力被国家认可，并受到国家和政府的政策支持，为进一步研发创新，实现数字化转型提供强大推力。');
-INSERT INTO `design_structure` VALUES (50, '企业年报中是否有提及数字化战略的相关内容？', 13, 3, '反映了企业未来经营计划中对数字化的思考，为未来实现数字化提供战略指引。');
-INSERT INTO `design_structure` VALUES (51, '企业年报中是否有专项数字化转型报告', 13, 3, '年报中有单独的小节、段落来介绍企业的数字化情况能够反映企业数字化成果丰富，且重视企业数字化的发展。');
-INSERT INTO `design_structure` VALUES (52, '企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语', 13, 3, '反映企业对数字化相关战略的重视程度，数字化战略在企业远景规划中扮演的角色与地位。');
-INSERT INTO `design_structure` VALUES (53, '企业战略职能中是否具有专门数字化业务部门', 14, 3, '专门的数字化业务部门能够统筹安排企业的数字化相关工作，为企业的数字化转型提供业务支持。');
-INSERT INTO `design_structure` VALUES (54, '企业业务中是否运用信息化技术系统', 14, 3, '应用信息化技术系统越多，反映企业的信息化程度越高，为数字化转型提供良好的技术基础。');
-INSERT INTO `design_structure` VALUES (55, '企业业务中是否运用信息化技术系统个数', 14, 3, '应用信息化技术系统越多，反映企业的信息化程度越高，为数字化转型提供良好的技术基础。');
-INSERT INTO `design_structure` VALUES (56, '企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语', 15, 3, '政府的相关政策为企业进行数字化转型提供保障和推动力。');
-INSERT INTO `design_structure` VALUES (57, '企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语', 15, 3, '行业、市场等外部需求能够推动企业加速进行数字化转型。');
-INSERT INTO `design_structure` VALUES (58, '是否收购设计公司或与设计公司合作？', 16, 3, NULL);
-INSERT INTO `design_structure` VALUES (59, '是否有公共建筑设计项目？', 17, 3, NULL);
-INSERT INTO `design_structure` VALUES (60, '是否有超高层建筑设计项目或复杂性建筑设计项目？', 17, 3, NULL);
-INSERT INTO `design_structure` VALUES (61, '是否有装配式建筑设计项目？', 17, 3, NULL);
-INSERT INTO `design_structure` VALUES (62, '是否有EPC(工程总承包)项目？', 17, 3, NULL);
-INSERT INTO `design_structure` VALUES (63, '是否有协同设计平台？', 18, 3, NULL);
-INSERT INTO `design_structure` VALUES (64, '是否为全过程咨询', 18, 3, NULL);
-INSERT INTO `design_structure` VALUES (65, '在设计过程中是否使用BIM技术', 18, 3, NULL);
+INSERT INTO `design_structure` VALUES (1, '基本指标', NULL, 1, NULL, NULL);
+INSERT INTO `design_structure` VALUES (2, '数字化研发创新指标', NULL, 1, NULL, NULL);
+INSERT INTO `design_structure` VALUES (3, '组织指标', NULL, 1, NULL, NULL);
+INSERT INTO `design_structure` VALUES (4, '战略指标', NULL, 1, NULL, NULL);
+INSERT INTO `design_structure` VALUES (5, '特色指标', NULL, 1, NULL, NULL);
+INSERT INTO `design_structure` VALUES (6, '规模状况', 1, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (7, '财务状况', 1, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (8, '研发状况', 2, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (9, '数字化创新成果状况', 2, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (10, '数字化技术应用状况', 2, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (11, '组织结构', 3, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (12, '承包联合体模式', 3, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (13, '企业战略规划', 4, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (14, '企业战略部门', 4, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (15, '战略影响因素', 4, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (16, '设计合作', 5, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (17, '设计项目', 5, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (18, '设计工具', 5, 2, NULL, NULL);
+INSERT INTO `design_structure` VALUES (19, '股票代码', NULL, NULL, NULL, NULL);
+INSERT INTO `design_structure` VALUES (20, '企业名称', NULL, NULL, NULL, NULL);
+INSERT INTO `design_structure` VALUES (21, '总资产', 6, 3, '企业总资产可以侧面反映企业规模以及企业资金实力，资金实力越雄厚的企业越有能力投入更多的资金运用数字化转型。', '元');
+INSERT INTO `design_structure` VALUES (22, '企业成立年限', 6, 3, '从成立年限方面反映企业规模状况，成立年限越长的企业代表企业经营更加稳定，更有潜力参与数字化转型。', '年');
+INSERT INTO `design_structure` VALUES (23, '成立年份', NULL, NULL, NULL, NULL);
+INSERT INTO `design_structure` VALUES (24, '员工总数', 6, 3, '从员工数量方面反映企业规模状况，员工数量越多反映企业资金实力越雄厚，能够反映企业在人力资源方面的配备以及是否为数字化转型做好人员储备。', '人');
+INSERT INTO `design_structure` VALUES (25, '资产负债率', 7, 3, '反映企业经营风险的大小，也反映企业利用债权人提供的资金从事经营活动的能力，可以衡量在数字化转型中企业调动资金的能力。', '人');
+INSERT INTO `design_structure` VALUES (26, '总资产周转率', 7, 3, '企业一定时期的销售收入净额与平均资产总额之比,它是衡量资产投资规模与销售水平之间配比情况的指标，可以衡量企业数字化资产投资规模。', '%');
+INSERT INTO `design_structure` VALUES (27, '净利润增长率', 7, 3, '反映企业持续盈利能力，企业持续盈利是实现数字化转型和投入的基础条件，成长较快的企业越有趋势运用数字化技术加速发展。', '%');
+INSERT INTO `design_structure` VALUES (28, '营业净利润率', 7, 3, '反映企业经营效率，经营效率越高，企业数字化转型的支撑力就更强。', '%');
+INSERT INTO `design_structure` VALUES (29, '研发投入费用', 8, 3, '直接反映了公司在研发上财务资源投入，研发投入可以直接助推企业运用数字化技术，促进数字化转型进程。', '%');
+INSERT INTO `design_structure` VALUES (30, '研发投入占营业收入比例', 8, 3, '指标用于刻画企业技术创新潜能，反映企业在研发上的投入强度，从而在数字化技术层面推动数字化转型。', NULL);
+INSERT INTO `design_structure` VALUES (31, '研发人员', 8, 3, '背后反映了公司隐性知识的数量,研发人员占比越高代表企业对于研发重视程度越高，从而有利于企业在技术层面进行数字化转型。', '%');
+INSERT INTO `design_structure` VALUES (32, '研发项目个数', 8, 3, '反映企业研发所涉及的广度，项目数量越多代表企业投入越多，对于转型越重视。', '人');
+INSERT INTO `design_structure` VALUES (33, '专利数', 8, 3, '专利可以被理解为企业所拥有的显性知识，专利数量越多，企业科技创新能力越强，从而推动企业转型。', '个');
+INSERT INTO `design_structure` VALUES (34, '硕士及以上人员数量', 8, 3, '反映建筑公司人员学历结构，硕士学历及以上的人员数量越多，代表企业员工知识层次越高，越有可能推动企业创新，促进数字化转型。', '个');
+INSERT INTO `design_structure` VALUES (35, '国家级获奖', 8, 3, '反映企业高水平创新产出数量，数量越多代表企业在科技创新领域实力越强，具有领袖作用，越有可能推动数字化转型。', '人');
+INSERT INTO `design_structure` VALUES (36, '研发中心数量', 8, 3, '反映企业开设的研发机构数量，形成集聚性的研发创新力，从而推动数字化转型。', '个');
+INSERT INTO `design_structure` VALUES (37, '数字化创新平台数', 9, 3, '反映企业依托科研单位进行产学研的程度，程度越高代表企业与高校联系越来密切，越可能依托高校科研实力完成数字化转型。', '个');
+INSERT INTO `design_structure` VALUES (38, '互联网云平台运用数量', 9, 3, '反映企业数字化互联网平台运用状况，互联网平台也是企业运用数字化技术的表现之一，因此通过运用互联网平台反映企业数字化程度。', '个');
+INSERT INTO `design_structure` VALUES (39, '数字化业务板块数', 9, 3, '反映企业其所含业务板块中数字化应用程度，业务板块数量越多，说明企业涵盖数字化业务范围越广。', '个');
+INSERT INTO `design_structure` VALUES (40, '联合高等院校课题研发数', 9, 3, '反映企业与科研单位合作研发的状况，程度越高代表企业与研发单位联系越来密切，越可能率先完成数字化转型。', '个');
+INSERT INTO `design_structure` VALUES (41, '成果转化数', 9, 3, '反映企业将数字化技术转化成成果的程度，程度越高说明数字化技术应用越广泛。', '个');
+INSERT INTO `design_structure` VALUES (42, '一级技术词频数', 10, 3, '年报中的词汇能够侧面反映出企业的发展规划，很大程度能够体现企业经营理念指导下的转型方式，反映企业对于数字应用的重视程度。', '个');
+INSERT INTO `design_structure` VALUES (43, '二级技术词频数', 10, 3, '年报中的词汇能够侧面反映出企业的发展规划，很大程度能够体现企业经营理念指导下的转型方式，反映企业对于数字应用的重视程度。', '次');
+INSERT INTO `design_structure` VALUES (44, '三级技术词频数', 10, 3, '年报中的词汇能够侧面反映出企业的发展规划，很大程度能够体现企业经营理念指导下的转型方式，反映企业对于数字应用的重视程度。', '次');
+INSERT INTO `design_structure` VALUES (45, '业务板块数量（多元化情况）', 11, 3, '通过企业业务板块数量来反映企业发展的多元化情况，企业业务多元化程度越高，企业探索新领域、推进数字化转型的意愿越强。', '次');
+INSERT INTO `design_structure` VALUES (46, '组织结构中是否有专门的数字化部门', 11, 3, NULL, NULL);
+INSERT INTO `design_structure` VALUES (47, '组织内部是否具有专门的项目管理系统', 11, 3, '组织内部的项目管理系统是集成了项目信息、业务数据的数字化系统或平台，能够从组织结构层面体现企业的数字化程度。', '个');
+INSERT INTO `design_structure` VALUES (48, '是否与数字化类型的企业有合作、收购、投资关系（从年报中获取）', 12, 3, '反映企业对数字化相关业务、企业的重视，是开启数字化转型的有益尝试。', '/');
+INSERT INTO `design_structure` VALUES (49, '是否为国家认定高新技术企业', 12, 3, '反映企业的研发创新能力被国家认可，并受到国家和政府的政策支持，为进一步研发创新，实现数字化转型提供强大推力。', '/');
+INSERT INTO `design_structure` VALUES (50, '企业年报中是否有提及数字化战略的相关内容？', 13, 3, '反映了企业未来经营计划中对数字化的思考，为未来实现数字化提供战略指引。', '/');
+INSERT INTO `design_structure` VALUES (51, '企业年报中是否有专项数字化转型报告', 13, 3, '年报中有单独的小节、段落来介绍企业的数字化情况能够反映企业数字化成果丰富，且重视企业数字化的发展。', '/');
+INSERT INTO `design_structure` VALUES (52, '企业远景、目标、定位中是否具有数字化、大数据、智能化、信息化等词语', 13, 3, '反映企业对数字化相关战略的重视程度，数字化战略在企业远景规划中扮演的角色与地位。', '/');
+INSERT INTO `design_structure` VALUES (53, '企业战略职能中是否具有专门数字化业务部门', 14, 3, '专门的数字化业务部门能够统筹安排企业的数字化相关工作，为企业的数字化转型提供业务支持。', '/');
+INSERT INTO `design_structure` VALUES (54, '企业业务中是否运用信息化技术系统', 14, 3, '应用信息化技术系统越多，反映企业的信息化程度越高，为数字化转型提供良好的技术基础。', '/');
+INSERT INTO `design_structure` VALUES (55, '企业业务中是否运用信息化技术系统个数', 14, 3, '应用信息化技术系统越多，反映企业的信息化程度越高，为数字化转型提供良好的技术基础。', '/');
+INSERT INTO `design_structure` VALUES (56, '企业年报中是否有提及“政策”或相关对于数字化转型政策支持的词语', 15, 3, '政府的相关政策为企业进行数字化转型提供保障和推动力。', '/');
+INSERT INTO `design_structure` VALUES (57, '企业年报中是否有提及“行业”、“市场”、“需求”或相关对于数字化转型外部驱动的词语', 15, 3, '行业、市场等外部需求能够推动企业加速进行数字化转型。', '次');
+INSERT INTO `design_structure` VALUES (58, '是否收购设计公司或与设计公司合作？', 16, 3, '设计领域的合作需要依靠数字化技术，与其他设计企业的合作越多，能够反映企业的视野越开阔，更容易接受数字化转型和创新。', '/');
+INSERT INTO `design_structure` VALUES (59, '是否有公共建筑设计项目？', 17, 3, '公共建筑、复杂性建筑、装配式建筑设计过程中往往需要用到一些先进的技术手段，很难通过传统的方式实现，此类项目可以体现设计企业数字化技术的应用情况。', '/');
+INSERT INTO `design_structure` VALUES (60, '是否有超高层建筑设计项目或复杂性建筑设计项目？', 17, 3, '公共建筑、复杂性建筑、装配式建筑设计过程中往往需要用到一些先进的技术手段，很难通过传统的方式实现，此类项目可以体现设计企业数字化技术的应用情况。', '/');
+INSERT INTO `design_structure` VALUES (61, '是否有装配式建筑设计项目？', 17, 3, '公共建筑、复杂性建筑、装配式建筑设计过程中往往需要用到一些先进的技术手段，很难通过传统的方式实现，此类项目可以体现设计企业数字化技术的应用情况。', '/');
+INSERT INTO `design_structure` VALUES (62, '是否有EPC(工程总承包)项目？', 17, 3, '公共建筑、复杂性建筑、装配式建筑设计过程中往往需要用到一些先进的技术手段，很难通过传统的方式实现，此类项目可以体现设计企业数字化技术的应用情况。', '/');
+INSERT INTO `design_structure` VALUES (63, '是否有协同设计平台？', 18, 3, '数字化的设计工具是设计企业经营效率的保证，协同一体化的设计平台和bim技术都能够大幅提高设计过程中信息传递效率，是设计企业数字化转型的重要体现。', '/');
+INSERT INTO `design_structure` VALUES (64, '是否为全过程咨询', 18, 3, '数字化的设计工具是设计企业经营效率的保证，协同一体化的设计平台和bim技术都能够大幅提高设计过程中信息传递效率，是设计企业数字化转型的重要体现。', '/');
+INSERT INTO `design_structure` VALUES (65, '在设计过程中是否使用BIM技术', 18, 3, '数字化的设计工具是设计企业经营效率的保证，协同一体化的设计平台和bim技术都能够大幅提高设计过程中信息传递效率，是设计企业数字化转型的重要体现。', '/');
 
 SET FOREIGN_KEY_CHECKS = 1;
