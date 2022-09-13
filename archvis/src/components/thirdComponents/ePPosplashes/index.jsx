@@ -67,21 +67,20 @@ export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterp
         }
         let finalUseData = []
         for (let i of allDate) {
-          finalUseData.push(
-            {
-              name: i,
-              type: 'scatter',
-              itemStyle: itemStyle,
-              data: useData[i],
-              label: {
-                show: true,
-                position: 'top',
-                color: '#000',
-                formatter: function (param) {
-                  return param.value[2]
-                }
+          finalUseData.push({
+            name: i,
+            type: 'scatter',
+            itemStyle: itemStyle,
+            data: useData[i],
+            label: {
+              show: true,
+              position: 'top',
+              color: '#000',
+              formatter: function (param) {
+                return param.value[2]
               }
-            })
+            }
+          })
         }
         setData(finalUseData);
       })
@@ -90,11 +89,17 @@ export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterp
 
   // 随系统缩放修改画布大小
   useEffect(() => {
+    if(data.length == 0){
+      return 
+    }
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
-
+    let useDate = []
+    for(let i of allDate){
+      useDate.push(i.toString())
+    }
     const schema = ['规模', '数字化程度']
     const option = {
       color: [
@@ -111,7 +116,7 @@ export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterp
       ],
       legend: {
         top: "1%",
-        data: allDate,
+        data: useDate,
         textStyle: {
           fontSize: 16
         }
@@ -211,7 +216,7 @@ export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterp
     })
 
     myChart.resize();
-  }, [data, w, h, selectedIndustry]);
+  }, [data, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "61vh" }}>

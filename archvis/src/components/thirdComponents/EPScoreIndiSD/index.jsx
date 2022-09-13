@@ -18,15 +18,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
     }
     firstArchIndustry(industry).then((res) => {
       // 所有的指标名
-      let useData = {}
-      for (let i of res) {
-        useData[i.id] = i
-        useData[i.id]["score"] = {}
-        for (let j of allDate) {
-          useData[i.id]["score"][j] = 0
-        }
-      }
-      setIndicators(useData)
+      setIndicators(res)
     })
   }, [selectedIndustry, allDate])
 
@@ -61,19 +53,27 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
 
   useEffect(() => {
     if (nowIndusrtyData && indicators) {
-      for (let i in indicators) {
-        let nowIndicators = indicators[i]
+      let useData = {}
+      for (let i of indicators) {
+        useData[i.id] = i
+        useData[i.id]["score"] = {}
+        for (let j of allDate) {
+          useData[i.id]["score"][j] = 0
+        }
+      }
+      for (let i in useData) {
+        let nowIndicators = useData[i]
         if (nowIndicators["level"] === 3) {
           let nowIndusrtyName = nowIndicators["indi_name"].trim()
           for (let j of allDate) {
-            indicators[i]["score"][j] = nowIndusrtyData[j][0][nowIndusrtyName] * nowIndusrtyData[j][1][nowIndusrtyName] * 100
-            indicators[nowIndicators["parent_id"]]["score"][j] += indicators[i]["score"][j]
-            let firtParentId = indicators[nowIndicators["parent_id"]]["parent_id"]
-            indicators[firtParentId]["score"][j] += indicators[nowIndicators["parent_id"]]["score"][j]
+            useData[i]["score"][j] = nowIndusrtyData[j][0][nowIndusrtyName] * nowIndusrtyData[j][1][nowIndusrtyName] * 100
+            useData[nowIndicators["parent_id"]]["score"][j] += useData[i]["score"][j]
+            let firtParentId = useData[nowIndicators["parent_id"]]["parent_id"]
+            useData[firtParentId]["score"][j] += useData[nowIndicators["parent_id"]]["score"][j]
           }
         }
       }
-      setData(indicators)
+      setData(useData)
     }
   }, [nowIndusrtyData, indicators])
 
@@ -90,7 +90,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
     let indicatorData = []
     for (let i of allDate) {
       legendData.push({
-        name: i,
+        name: i.toString(),
         icon: "circle"
       })
       seriseData.push({
@@ -148,7 +148,7 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
     };
     myChart.setOption(option);
     myChart.resize();
-  }, [data, w, h, selectedEnterprise]);
+  }, [data, w, h]);
 
   return (
     <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>

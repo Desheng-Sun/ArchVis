@@ -55,7 +55,9 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
     });
   }, [selectedYearFirst])
   useEffect(() => {
-    setSelectedYearFirst(allDate[selectDateIndex])
+    if(allDate.length > 0){
+      setSelectedYearFirst(allDate[selectDateIndex])
+    }
   }, [selectDateIndex])
   // 随系统缩放修改画布大小
   useEffect(() => {

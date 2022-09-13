@@ -80,7 +80,7 @@ export default function Layout() {
     // const [selectedYearThird, setSelectedYearThird] = useState(["2019"]);
 
     // 当前页面所在第几屏上
-    const [nowPageIndex, setNowPageIndex] = useState("firstButton")
+    const [nowPageIndex, setNowPageIndex] = useState("thirdButton")
 
     // 第一屏各个组件的长宽
     const [firstIndicatorsWidth, setFirstIndicatorsWidth] = useState(0);
