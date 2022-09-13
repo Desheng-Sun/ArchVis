@@ -60,7 +60,7 @@ export default function Layout() {
     // 第一屏，用户选择的时间
     const [selectedYearFirst, setSelectedYearFirst] = useState(2019)
     // 第一屏，用户当前点击的公司
-    const [selectedCompanyFirst, setSelectedCompanyFirst] = useState(2019)
+    const [selectedCompanyFirst, setSelectedCompanyFirst] = useState()
 
 
     // 第二屏，用户选择的行业
@@ -80,7 +80,7 @@ export default function Layout() {
     // const [selectedYearThird, setSelectedYearThird] = useState(["2019"]);
 
     // 当前页面所在第几屏上
-    const [nowPageIndex, setNowPageIndex] = useState("thirdButton")
+    const [nowPageIndex, setNowPageIndex] = useState("firstButton")
 
     // 第一屏各个组件的长宽
     const [firstIndicatorsWidth, setFirstIndicatorsWidth] = useState(0);
@@ -191,7 +191,7 @@ export default function Layout() {
             setConstruScore(res)
             let useDate = []
             for (let i in res) {
-                useDate.push(i)
+                useDate.push(parseInt(i))
             }
             setAllDate(useDate)
         })

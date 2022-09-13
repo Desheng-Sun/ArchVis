@@ -6,6 +6,7 @@ import { firstArchMap } from '../../../apis/api';
 export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, setSelectedRegionFirst, setSelectedYearFirst, allDate }) {
   const [construData, setConstruData] = useState({});
   const [designData, setDesignData] = useState({});
+  const [selectDateIndex, setSelectDateIndex] = useState(0)
   const chartRef = useRef(null);
 
   // 各个地区包含的省份信息
@@ -53,9 +54,11 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
       setDesignData(useData);
     });
   }, [selectedYearFirst])
+  useEffect(() => {
+    setSelectedYearFirst(allDate[selectDateIndex])
+  }, [selectDateIndex])
   // 随系统缩放修改画布大小
   useEffect(() => {
-    let myChart = echarts.getInstanceByDom(chartRef.current)
     // 设置地图字体的大小
     let fontsizeNow = parseInt(14 * h / 698)
     let index = allDate.indexOf(selectedYearFirst)
@@ -65,7 +68,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
     for (let i of selectedRegionFirst) {
       nowAllCity = nowAllCity.concat(regionCity[i])
     }
-    if(nowAllCity[0] == undefined){
+    if (nowAllCity[0] == undefined) {
       nowAllCity = selectedRegionFirst
     }
     // 获取所有省份的全程
@@ -75,7 +78,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
     }
     let useCityData = []
     // 创建地图热力图
-    if (nowAllCity.length > 0 ) {
+    if (nowAllCity.length > 0) {
       for (let i in regionCity) {
         for (let j of regionCity[i]) {
           if (nowAllCity.includes(j)) {
@@ -140,6 +143,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
       useCityIndustryNum.push(useCityIndustryNumDict[i])
     }
 
+    let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
       echarts.registerMap('china', { geoJSON: geoChina });
@@ -297,7 +301,9 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
               areaColor: "#01ADF2",
             },
           },
-          animation: true,
+          tooltip: {
+            show: false
+          }
         },
         {
           name: "各地区建筑公司数量",
@@ -357,12 +363,10 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
       // 时间点的 index
       currentIndex: index,
     });
-
     myChart.on("timelinechanged", (timelineIndex) => {
-      setSelectedYearFirst(allDate[timelineIndex.currentIndex])
+      setSelectDateIndex(timelineIndex.currentIndex)
     });
     if (myChart._$handlers.click) {
-      myChart._zr.handler._$handlers.click.length = 3;
       myChart._$handlers.timelinechanged.length = 1;
       myChart._$handlers.click.length = 1;
     }

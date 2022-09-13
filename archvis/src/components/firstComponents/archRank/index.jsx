@@ -28,7 +28,6 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
 
   useEffect(() => {
     if (construScore && designScore) {
-      console.log(construScore, designScore)
       let finalData = {}
       for (let i in construScore) {
         let nowFinalData = {}
@@ -72,7 +71,6 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
     //存储数据的数组
     let useData = []
     if (allScore) {
-      console.log(allScore)
       // 获取当前需要展示的数据
       if (selectdIndustryFirst.length === 2) {
         for (let i of construData) {
@@ -88,7 +86,9 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
         }
       }
       else if (selectdIndustryFirst[0] === "设计行业") {
-        useData.push([i, allScore[selectedYearFirst][i], 2])
+        for (let i of designData) {
+          useData.push([i, allScore[selectedYearFirst][i], 2])
+        }
       }
     }
 
