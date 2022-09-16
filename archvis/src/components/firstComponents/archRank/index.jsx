@@ -52,7 +52,9 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
               }
               nowFinalData[nowEnterpriseName] += nowConstruData[k][j] * nowConstruDData[k] * 100
             }
+            nowFinalData[nowEnterpriseName] = nowFinalData[nowEnterpriseName].toFixed(3)
           }
+
         }
         finalData[i] = nowFinalData
       }
@@ -103,9 +105,11 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
         type: 'category',
         name: '企业简称',
         axisLabel: {
-          interval: 0,
-          rotate: 90,
-          fontSize: "10px"
+          interval:0,
+          fontSize: "10px",
+          formatter: function(param){
+            return param.split('').join('\n')
+          }
         }
       },
       yAxis: {

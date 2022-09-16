@@ -29,11 +29,16 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
         nowCityPosition[i.properties.name.slice(0, 2)] = i.properties.center
       }
       for (let i of res) {
-        useData[i["省份"]] = {
-          name: i["省份"],
-          position: [nowCityPosition[i["省份"].slice(0, 2)][0], nowCityPosition[i["省份"].slice(0, 2)][1]],
-          constru: i["COUNT(*)"]
+        if (!useData.hasOwnProperty(i["省份"])) {
+          useData[i["省份"]] = {
+            name: i["省份"],
+            position: [nowCityPosition[i["省份"].slice(0, 2)][0], nowCityPosition[i["省份"].slice(0, 2)][1]],
+            archNum: 0,
+            archList: []
+          }
         }
+        useData[i["省份"]]["archNum"] += 1
+        useData[i["省份"]]["archList"].push(i["企业名称"])
       }
       setConstruData(useData);
     });
@@ -45,17 +50,22 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
         nowCityPosition[i.properties.name.slice(0, 2)] = i.properties.center
       }
       for (let i of res) {
-        useData[i["省份"]] = {
-          name: i["省份"],
-          position: [nowCityPosition[i["省份"].slice(0, 2)][0], nowCityPosition[i["省份"].slice(0, 2)][1]],
-          design: i["COUNT(*)"]
+        if (!useData.hasOwnProperty(i["省份"])) {
+          useData[i["省份"]] = {
+            name: i["省份"],
+            position: [nowCityPosition[i["省份"].slice(0, 2)][0], nowCityPosition[i["省份"].slice(0, 2)][1]],
+            archNum: 0,
+            archList: []
+          }
         }
+        useData[i["省份"]]["archNum"] += 1
+        useData[i["省份"]]["archList"].push(i["企业名称"])
       }
       setDesignData(useData);
     });
   }, [selectedYearFirst])
   useEffect(() => {
-    if(allDate.length > 0){
+    if (allDate.length > 0) {
       setSelectedYearFirst(allDate[selectDateIndex])
     }
   }, [selectDateIndex])
@@ -106,20 +116,22 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
       for (let i in construData) {
         useCityIndustryNumDict[i] = {
           name: construData[i].name,
-          value: [construData[i].position[0], construData[i].position[1], construData[i].constru]
+          value: [construData[i].position[0], construData[i].position[1], construData[i].archNum],
+          archList: construData[i].archList
         }
       }
       for (let i in designData) {
         if (useCityIndustryNumDict.hasOwnProperty(i)) {
-          useCityIndustryNumDict[i].value[2] += designData[i].design
+          useCityIndustryNumDict[i].value[2] += designData[i].archNum
+          useCityIndustryNumDict[i].archList = useCityIndustryNumDict[i].archList.concat(designData[i].archList)
         }
         else {
           useCityIndustryNumDict[i] = {
             name: designData[i].name,
-            value: [designData[i].position[0], designData[i].position[1], designData[i].design]
+            value: [designData[i].position[0], designData[i].position[1], designData[i].archNum],
+            archList: designData[i].archList
           }
         }
-
       }
     }
     // 施工行业公司
@@ -127,7 +139,8 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
       for (let i in construData) {
         useCityIndustryNumDict[i] = {
           name: construData[i].name,
-          value: [construData[i].position[0], construData[i].position[1], construData[i].constru]
+          value: [construData[i].position[0], construData[i].position[1], construData[i].archNum],
+          archList: construData[i].archList
         }
       }
     }
@@ -136,7 +149,8 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
       for (let i in designData) {
         useCityIndustryNumDict[i] = {
           name: designData[i].name,
-          value: [designData[i].position[0], designData[i].position[1], designData[i].design]
+          value: [designData[i].position[0], designData[i].position[1], designData[i].archNum],
+          archList: designData[i].archList
         }
       }
     }
@@ -258,7 +272,6 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
           show: true,
           color: '#333',  //字体颜色
           fontSize: fontsizeNow + "px"
-
         },
         itemStyle: {
           areaColor: '#87b3ff',
@@ -278,33 +291,47 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
           data: useCityData,
           label: {
             // 默认文本标签样式
-            normal: {
-              color: "white",
-              show: true,
-            },
-            // 高亮文本标签样式
-            emphasis: {
-              color: "yellow",
-              fontSize: 22,
-              fontWeight: "bold",
-            },
+            color: "white",
+            show: true,
           },
           itemStyle: {
-            // 默认区域样式
-            normal: {
-              // 区域背景透明
-              areaColor: "transparent",
-              borderColor: "rgba(39,211,233, 1)",
-              borderWidth: 1,
-            },
-            // 高亮区域样式
-            emphasis: {
+            // 区域背景透明
+            areaColor: "transparent",
+            borderColor: "rgba(39,211,233, 1)",
+            borderWidth: 1,
+
+          },
+          // 高亮区域样式
+          emphasis: {
+            itemStyle: {
               // 高亮区域背景色
               areaColor: "#01ADF2",
             },
+            label: {
+              color: "yellow",
+              fontSize: 22,
+              fontWeight: "bold",
+            }
           },
           tooltip: {
-            show: false
+            formatter: function (val) {
+              let str = []
+              for(let i in useCityIndustryNumDict){
+                if(i.slice(0, 2) === val.data.name.slice(0, 2)){
+                  str.push(i + '企业名单：<hr size=1 style="margin: 3px 0">')
+                  for (let j of useCityIndustryNumDict[i]["archList"]) {
+                    str.push(j + '<br/>')
+                  }
+                  break
+                }
+              }
+              str = str.join('')
+              return str
+            },
+            position: function (point) {
+              // 固定在顶部
+              return [point[0], point[1]];
+            }
           }
         },
         {
@@ -326,7 +353,6 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
               return val.value[2]
             },
           },
-
           // 鼠标悬浮上去的样式
           emphasis: {
             label: {
@@ -340,13 +366,23 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
           },
           tooltip: {
             formatter: function (val) {
-              return val.data.name + ":  " + val.data.value[2]
+              let str = [val.data.name + '企业名单：<hr size=1 style="margin: 3px 0">']
+              for (let i of useCityIndustryNumDict[val.data.name]["archList"]) {
+                str.push(i + '<br/>')
+              }
+              str = str.join('')
+              return str
+            },
+            position: function (point) {
+              // 固定在顶部
+              return [point[0], point[1]];
             }
           },
           zlevel: 3
         }
       ]
     };
+
     myChart.setOption(option, true);
     myChart.on('click', function (param) {
       if (param.componentSubType === "map" || param.componentSubType === "scatter") {
@@ -360,6 +396,21 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
         }
       }
     })
+    myChart.getZr().on('click', function (param) {
+      console.log(1)
+      let x = param.offsetX; //当前点相对于echart dom的左上角的像素偏移
+      let y = param.offsetY;
+      let isIn = myChart.containPixel(
+        {
+          geoIndex: 0,
+        },
+        [x, y]
+      );
+      console.log(isIn)
+      if (!isIn) {
+        setSelectedRegionFirst(["东北", "华北", "华东", "华中", "华南", "西北", "西南", "港澳台"])
+      }
+    })
     myChart.dispatchAction({
       type: "timelineChange",
       // 时间点的 index
@@ -371,6 +422,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
     if (myChart._$handlers.click) {
       myChart._$handlers.timelinechanged.length = 1;
       myChart._$handlers.click.length = 1;
+      myChart._zr.handler._$handlers.click = myChart._zr.handler._$handlers.click.slice(myChart._zr.handler._$handlers.click.length - 2, myChart._zr.handler._$handlers.click.lengt)
     }
     myChart.resize();
   }, [selectedRegionFirst, construData, designData, selectdIndustryFirst, w, h]);
