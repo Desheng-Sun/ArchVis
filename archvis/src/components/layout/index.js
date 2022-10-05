@@ -80,7 +80,7 @@ export default function Layout() {
     // const [selectedYearThird, setSelectedYearThird] = useState(["2019"]);
 
     // 当前页面所在第几屏上
-    const [nowPageIndex, setNowPageIndex] = useState("firstButton")
+    const [nowPageIndex, setNowPageIndex] = useState("thirdButton")
 
     // 第一屏各个组件的长宽
     const [firstIndicatorsWidth, setFirstIndicatorsWidth] = useState(0);
@@ -393,32 +393,30 @@ export default function Layout() {
                                 />
                             </div>
                             <div id="thirdEPScoreIndiND">
-                                <ChartHeader chartName={"企业二级指标得分堆叠图"} />
-                                <ThirdEPScoreIndiND
-                                    w={thirdEPScoreIndiNDWidth}
-                                    h={thirdEPScoreIndiNDHeight}
-                                    selectedEnterprise={nowEnterpriseThird}
+                                <ChartHeader chartName={"企业数字化程度对比图"} />
+                                <ThirdEPdight
+                                    w={thirdEPdightWidth}
+                                    h={thirdEPdightHeight}
                                     selectedIndustry={selectedIndustryThird}
-                                    // selectedYear={selectedYearThird}
+                                    selectedEnterprise={nowEnterpriseThird}
                                     construScore={construScore}
                                     designScore={designScore}
                                     allDate={allDate}
                                 />
-
                             </div>
                         </div>
                         <div id="thirdEPdight">
-                            <ChartHeader chartName={"企业数字化程度对比图"} />
-                            <ThirdEPdight
-                                w={thirdEPdightWidth}
-                                h={thirdEPdightHeight}
-                                selectedIndustry={selectedIndustryThird}
+                            <ChartHeader chartName={"企业二级指标得分堆叠图"} />
+                            <ThirdEPScoreIndiND
+                                w={thirdEPScoreIndiNDWidth}
+                                h={thirdEPScoreIndiNDHeight}
                                 selectedEnterprise={nowEnterpriseThird}
+                                selectedIndustry={selectedIndustryThird}
+                                // selectedYear={selectedYearThird}
                                 construScore={construScore}
                                 designScore={designScore}
-                                allDate = {allDate}
+                                allDate={allDate}
                             />
-
                         </div>
                     </div>
                 </div>

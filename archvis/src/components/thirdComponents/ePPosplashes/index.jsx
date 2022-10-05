@@ -1,6 +1,6 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { thirdEPPos, getArchScore } from '../../../apis/api';
+import { thirdEPPos} from '../../../apis/api';
 
 export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterpriseThird, construScore, designScore, allDate }) {
   const [data, setData] = useState([]);
@@ -100,6 +100,7 @@ export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterp
     for(let i of allDate){
       useDate.push(i.toString())
     }
+    <svg t="1663577285466" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4406" width="200" height="200"><path d="M436.992 735.04l45.312 45.248 361.984-361.984-90.496-90.56-271.488 271.552-135.808-135.744L256 554.048l180.992 180.992zM192 64h640a128 128 0 0 1 128 128v640a128 128 0 0 1-128 128H192a128 128 0 0 1-128-128V192a128 128 0 0 1 128-128z" p-id="4407" fill="#1296db"></path></svg>
     const schema = ['规模', '数字化程度']
     const option = {
       color: [
@@ -119,7 +120,14 @@ export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterp
         data: useDate,
         textStyle: {
           fontSize: 16
-        }
+        },
+        icon:"path://M436.992 735.04l45.312 45.248 361.984-361.984-90.496-90.56-271.488 271.552-135.808-135.744L256 554.048l180.992 180.992zM192 64h640a128 128 0 0 1 128 128v640a128 128 0 0 1-128 128H192a128 128 0 0 1-128-128V192a128 128 0 0 1 128-128z",
+        selected: {
+          // 选中'系列1'
+          "2019": false,
+          "2020": false,
+          "2021": true,
+      }
       },
       grid: {
         left: '7%',

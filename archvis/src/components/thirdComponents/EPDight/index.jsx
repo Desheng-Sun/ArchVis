@@ -2,7 +2,6 @@ import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 
 export default function ThirdEPdight({ w, h, selectedIndustry, selectedEnterprise, construScore, designScore, allDate }) {
-  const [data, setData] = useState([]);
   const [allScore, setAllScore] = useState()
   const [maxScore, setMaxScore] = useState()
   const [minScore, setMinScore] = useState()
@@ -61,16 +60,16 @@ export default function ThirdEPdight({ w, h, selectedIndustry, selectedEnterpris
       return
     }
     let industryIndex = 0
-    if(selectedIndustry == "施工行业"){
+    if (selectedIndustry == "施工行业") {
       industryIndex = 0
     }
-    else if(selectedIndustry == "设计行业"){
+    else if (selectedIndustry == "设计行业") {
       industryIndex = 1
     }
     let nowData = []
     let maxData = []
     let minData = []
-    for(let i of allDate){
+    for (let i of allDate) {
       nowData.push(allScore[i][selectedEnterprise])
       maxData.push(maxScore[i][industryIndex * 2])
       minData.push(minScore[i][industryIndex * 2])
@@ -100,27 +99,67 @@ export default function ThirdEPdight({ w, h, selectedIndustry, selectedEnterpris
       xAxis: {
         type: 'category',
         boundaryGap: false,
+        name: '年份',
         data: allDate
       },
       yAxis: {
         type: 'value',
+        name: '数字化程度\n(最终得分)',
       },
       series: [
         {
           name: selectedEnterprise,
           type: 'line',
           data: nowData,
-
+          areaStyle: {
+            opacity: 0.5,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(255, 158, 68)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(255, 70, 131)'
+              }
+            ])
+          },
         },
         {
           name: '数字化程度最高值',
           type: 'line',
           data: maxData,
+          opacity: 0.5,
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(128, 255, 165)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(1, 191, 236)'
+              }
+            ])
+          },
         },
         {
           name: '数字化程度最低值',
           type: 'line',
           data: minData,
+          opacity: 0.5,
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(0, 221, 255)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(77, 119, 255)'
+              }
+            ])
+          },
         }
       ]
     };

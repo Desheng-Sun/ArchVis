@@ -95,7 +95,9 @@ export default function ThirdEPScoreIndiSD({ w, h, selectedEnterprise, selectedI
       })
       seriseData.push({
         value: [],
-        name: i
+        name: i,
+
+
       })
     }
     for (let i in data) {

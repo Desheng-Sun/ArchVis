@@ -16,15 +16,6 @@ export default function ThirdEPScoreIndiND({ w, h, selectedEnterprise, selectedI
       industry = 'design';
     }
     firstArchIndustry(industry).then((res) => {
-      // 所有的指标名
-      // let useData = {}
-      // for (let i of res) {
-      //   useData[i.id] = i
-      //   useData[i.id]["score"] = {}
-      //   for (let j of allDate) {
-      //     useData[i.id]["score"][j] = 0
-      //   }
-      // }
       setIndicators(res)
     })
   }, [selectedIndustry, allDate])
@@ -111,11 +102,19 @@ export default function ThirdEPScoreIndiND({ w, h, selectedEnterprise, selectedI
           emphasis: {
             focus: 'series'
           },
-          data: nowData
+          data: nowData,
+          label:{
+            show:true,
+            formatter:(params) => {
+              if(params.value === 0){
+                return ""
+              }
+              return params.seriesName
+            }
+          }
         })
       }
     }
-
 
     const option = {
       color: [
@@ -131,13 +130,20 @@ export default function ThirdEPScoreIndiND({ w, h, selectedEnterprise, selectedI
         "#ff99c3"
       ],
       tooltip: {
-        trigger: 'axis',
+        trigger: 'item',
         axisPointer: {
           type: 'shadow'
         },
         position: function (point) {
           // 固定在顶部
           return [point[0], '10%'];
+        },
+        formatter: (params) => {
+          let res = params.marker + params.seriesName + "<br/>"
+          for (let i in seriseData[params.seriesIndex]["data"]) {
+            res += allDate[i] + ": " + seriseData[params.seriesIndex]["data"][i] + "<br/>"
+          }
+          return res
         }
       },
       legend: legendData,
@@ -156,15 +162,16 @@ export default function ThirdEPScoreIndiND({ w, h, selectedEnterprise, selectedI
         {
           type: 'category',
           // boundaryGap: false,
-          data: allDate
-
-        }
+          data: allDate,
+        },
       ],
       series: seriseData
     };
     myChart.setOption(option, true);
     myChart.resize();
+
   }, [data, w, h]);
+
   return (
     <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>
     </div>
