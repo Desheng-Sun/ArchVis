@@ -203,21 +203,24 @@ export default function Layout() {
     return (
         <div id="layout">
             <div id="ititle">
-                <div>
-                    <ChangePageButton
-                        id="firstButton"
-                        text="第一屏"
-                    ></ChangePageButton>
-                    <ChangePageButton
-                        id="secondButton"
-                        text="第二屏"
-                    ></ChangePageButton>
-                    <ChangePageButton
-                        id="thirdButton"
-                        text="第三屏"
-                    ></ChangePageButton>
+                <div id="title">中国上市建筑企业数字化转型可视化动态监测平台</div>
+                <div id="systemIntroduction">
+                    总体介绍：在数字经济的背景下，为衡量全国建筑行业各上市企业数字化程度及其特征，本项目以万科、深振业等128家国内建筑业上市企业（包含设计、施工）为主体，以2019-2021年为时间区间，构建了一套针对建筑行业数字化转型水平的评价指标体系，该指标体系囊括财务、科创、规模等方面，包含6个一级指标，18个二级指标，63个三级指标。根据来自CSMAR数据库、wind数据库的相关数据，本项目采用熵权法客观评价全国建筑企业数字化水平，从多个方面分析处理数据，并将分析结果通过可交互的可视化图表进行展示，即“中国上市建筑企业数字化转型可视化动态监测平台”。
                 </div>
-                <div id="title">建筑企业数字化转型</div>
+            </div>
+            <div id="changeButton">
+                <ChangePageButton
+                    id="firstButton"
+                    text="建筑行业数字化情况总览————宏观"
+                ></ChangePageButton>
+                <ChangePageButton
+                    id="secondButton"
+                    text="建筑企业间数字化指标对比————中观"
+                ></ChangePageButton>
+                <ChangePageButton
+                    id="thirdButton"
+                    text="单个企业数字化指标详情————微观"
+                ></ChangePageButton>
             </div>
             {
                 nowPageIndex === "firstButton" &&
@@ -421,6 +424,11 @@ export default function Layout() {
                     </div>
                 </div>
             }
+            <div id = "patentDescription">
+            版权说明 <br/>
+            重庆大学中国上市建筑企业数字化转型可视化动态监测平台<br/>
+            重庆大学管理科学与房地产学院毛超教授项目团队版权所有
+            </div>
         </div>
     )
 }

@@ -1,34 +1,35 @@
+/* 页面整体布局*/
 #layout {
-    height: 100vh;
-    width: 100vw;
     padding-top: 0.3vh;
     padding-bottom: 0.3vh;
     padding-left: 0.2vw;
     padding-right: 0.2vw;
-    background-color: rgb(240, 239, 239);
     overflow: hidden;
+    /* background-color: rgb(240, 239, 239); */
 }
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: inherit;
+  background-color: rgba(144, 147, 153, 0.5);
+  -webkit-transition: 0.3s background-color;
+  transition: 0.3s background-color;
+} 
+/* 标题布局 */
 #ititle {
-    border-color: rgb(240, 239, 239) ;
-    height: 5vh;
+    /* border-color: rgb(240, 239, 239) ; */
+    height: 15vh;
     width: 99.6vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
-    background-color: white;
-}
-.changePageButton {
-    height: 2.5vh;
-    width: 5vw;
-    margin-top: 2.5vh;
-    margin-right: 0.1vw;
-    border: 0;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.4vw rgb(0 0 0 / 28%);
-    float: left;
-    font-size: 1.5vh;
-    font-family: "微软雅黑";
-    text-align: center;
-    vertical-align: middle;
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #title {
@@ -38,12 +39,47 @@
     font-family: "微软雅黑";
     text-align: center;
 }
+#systemIntroduction{
+    margin: 2vh 15vw 0vh 15vw;
+    height: 8vh;
+    font-size: 1.5vh;
+    overflow-y: auto;
+}
+/* 滚动条滑块 */
+#systemIntroduction::-webkit-scrollbar-thumb {
+    border-radius: inherit;
+    background-color: rgba(144, 147, 153, 0);
+    -webkit-transition: 0.3s background-color;
+    transition: 0.3s background-color;
+  } 
+/* 切换菜单布局*/
+#changeButton{
+    margin-top: 1.5vh;
+    height: 2.5vh;
+    width: 99.6vw;
+}
+.changePageButton {
+    height: 2.5vh;
+    width: 20vw;
+    margin-right: 0.1vw;
+    border: 0;
+    border-radius: 0.4vw;
+    /* box-shadow: 0 0px 0.4vw rgb(0 0 0 / 28%); */
+    float: left;
+    font-size: 1.5vh;
+    font-family: "微软雅黑";
+    text-align: center;
+    vertical-align: middle;
+    background-color: white;
+    
+}
+
 #viewList {
     margin-top: 0.3vh;
     height: 94.1vh;
     width: 99.6vw;
+    overflow: hidden;
 }
-
 
 
 
@@ -55,16 +91,16 @@
 #firstSearchbar {
     height: 35vh;
     width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #firstIndicators {
     margin-top: 0.3vh;
     height: 58.8vh;
     width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #firstIRight{
@@ -80,8 +116,8 @@
 #firstArchMap {
     height: 53.8vh;
     width: 40vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
@@ -89,8 +125,8 @@
     margin-left: 0.2vw;
     height: 53.8vh;
     width: 29.2vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
@@ -98,8 +134,8 @@
     margin-top: 0.3vh;
     height: 40vh;
     width: 69.4vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 
@@ -116,8 +152,8 @@
     height: 30vh;
     width: 40vw;
     /* width: 30vw; */
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #secondIndicators {
@@ -125,8 +161,8 @@
     height: 63.8vh;
     width: 40vw;
     /* width: 30vw; */
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #secondIRight{
@@ -147,8 +183,8 @@
     /* height: 43.8vh; */
     width: 29.6vw;
     /* width: 19.9vw; */
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
@@ -158,8 +194,8 @@
     /* height: 43.8vh; */
     width: 29.6vw;
     /* width: 19.9vw; */
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
@@ -167,8 +203,8 @@
     margin-left: 0.2vw;
     height: 43.8vh;
     width: 29.2vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
@@ -178,8 +214,8 @@
     /* height: 50vh; */
     width: 59.4vw;
     /* width: 69.4vw; */
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 
@@ -193,16 +229,16 @@
 #thirdSearchbar {
     height: 30vh;
     width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #thirdEPPosplashes {
     margin-top: 0.3vh;
     height: 63.8vh;
     width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #thirdIRight{
@@ -218,8 +254,8 @@
 #thirdEPScoreIndiSD {
     height: 46.9vh;
     width: 34.6vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
@@ -227,8 +263,8 @@
     margin-left: 0.2vw;
     height: 46.9vh;
     width: 34.6vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
@@ -236,7 +272,12 @@
     margin-top: 0.3vh;
     height: 46.9vh;
     width: 69.4vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
+}
+
+#patentDescription{
+    height: 5vh;
+    
 }

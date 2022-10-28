@@ -60,7 +60,6 @@ function getArchScore(nowData) {
       else if (j == "A、智能塔吊") {
         useData[j].push(i[j].replace(/[^a-zA-Z]/g, '').length / 7)
       }
-
       else {
         useData[j].push(i[j])
       }
@@ -116,7 +115,7 @@ function getArchScore(nowData) {
       dUseData[i] = 1
     }
     else{
-      dUseData[i] = (1 + sum * Math.log(sum) / Math.log(useData[i].length))
+      dUseData[i] = (1 - sum * Math.log(sum) / Math.log(useData[i].length))
     }
   }
   // 指标评价权重  
