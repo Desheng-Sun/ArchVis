@@ -58,10 +58,10 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
       useIndex.push(indexList[i])
     }
     let drawdata = [];
-    const color = ["#5b8ff9", "#5ad8a6", "#5d7092", "#e86452", "#f6bd16"];
-    const colorChildren = ["#87b3ff", "#b3f2d5", "#a1a5ab", "#f58f7d", "#ffe369"];
-    const colorTypeCon = '#fff7ba';
-    const colorTypeDes = '#ffe369';
+    const color = ["#008080", "#70a494", "#b4c8a8", "#edbb8a", "#f6edbd"];
+    const colorChildren = ["#00a0a0", "#91c3b4", "#cce3be", "#ffd9b4", "#fffae2"];
+    const colorTypeCon = '#f5efce';
+    const colorTypeDes = '#fffae2';
     if (useData) {
       let nowUseData = {}
       for (let i in useData) {
@@ -135,16 +135,16 @@ export default function FirstIndicators({ w, h, selectdIndustryFirst, selectedIn
     
     const option = {
       color: [
-        "#5b8ff9",
-        "#5ad8a6",
-        "#5d7092",
-        "#f6bd16",
-        "#e86452",
-        "#6dc8ec",
-        "#945fb9",
-        "#ff9845",
-        "#1e9493",
-        "#ff99c3"
+        "#008080",
+        "#70a494",
+        "#b4c8a8",
+        "#f6edbd",
+        "#edbb8a",
+        "#de8a5a",
+        "#ca562c",
+        "#39b185",
+        "#bd925a",
+        "#42b7b9"
       ],
       tooltip: {
         trigger: 'item',
