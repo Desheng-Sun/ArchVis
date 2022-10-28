@@ -104,16 +104,16 @@ export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterp
     const schema = ['规模', '数字化程度']
     const option = {
       color: [
-        "#5b8ff9",
-        "#5ad8a6",
-        // "#5d7092",
-        "#f6bd16",
-        "#e86452",
-        "#6dc8ec",
-        "#945fb9",
-        "#ff9845",
-        "#1e9493",
-        "#ff99c3"
+        "#008080",
+        "#70a494",
+        "#b4c8a8",
+        "#f6edbd",
+        "#edbb8a",
+        "#de8a5a",
+        "#ca562c",
+        "#39b185",
+        "#bd925a",
+        "#42b7b9"
       ],
       legend: {
         top: "1%",
