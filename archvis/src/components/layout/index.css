@@ -34,7 +34,7 @@
 }
 #title {
     height: 5vh;
-    width: 84.6vw;
+    width: 99.6vw;
     font-size: 3.5vh;
     font-family: "微软雅黑";
     text-align: center;
@@ -42,7 +42,7 @@
 #systemIntroduction{
     margin: 2vh 15vw 0vh 15vw;
     height: 8vh;
-    font-size: 1.5vh;
+    font-size: 1.5vh; 
     overflow-y: auto;
 }
 /* 滚动条滑块 */
@@ -275,9 +275,4 @@
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
-}
-
-#patentDescription{
-    height: 5vh;
-    
 }

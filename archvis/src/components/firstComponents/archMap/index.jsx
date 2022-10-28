@@ -406,7 +406,6 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
         },
         [x, y]
       );
-      console.log(isIn)
       if (!isIn) {
         setSelectedRegionFirst(["东北", "华北", "华东", "华中", "华南", "西北", "西南", "港澳台"])
       }

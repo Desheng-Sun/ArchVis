@@ -427,7 +427,7 @@ export default function Layout() {
             <div id = "patentDescription">
             版权说明 <br/>
             重庆大学中国上市建筑企业数字化转型可视化动态监测平台<br/>
-            重庆大学管理科学与房地产学院毛超教授项目团队版权所有
+            重庆大学管理科学与房地产学院毛超教授项目团队版权所有©
             </div>
         </div>
     )
