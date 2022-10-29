@@ -11,11 +11,11 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: 'password',//密码
+  // password: 'password',//密码
   // password: '990921',//密码
-  database: 'archindicators'//数据库名称
-  // password: 'sds091',//密码
-  // database: 'archsql'//数据库名称
+  // database: 'archindicators'//数据库名称
+  password: 'sds091',//密码
+  database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
@@ -271,6 +271,21 @@ app.post("/secondProperty", jsonParser, (req, res) => {
   useEnterprise = useEnterprise.slice(0, useEnterprise.length - 1) + ")"
 
   let sql = `select 企业名称, ${indicator}, 年份 from ${industry}_property where 企业名称 in ${useEnterprise}`;
+  let str = '';
+  connection.query(sql, function (err, result) {
+    if (err) {
+      console.log('[SELECT ERROR]：', err.message);
+    }
+    str = JSON.stringify(result);
+    res.send(str)
+    res.end()
+  })
+});
+
+// 词频查询
+app.post("/secondWord", jsonParser, (req, res) => {
+  const industry = req.body.industry;
+  let sql = `select 单词, ${industry}频数 from wordfrequency`;
   let str = '';
   connection.query(sql, function (err, result) {
     if (err) {

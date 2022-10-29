@@ -51,28 +51,60 @@
     background-color: rgba(144, 147, 153, 0);
     -webkit-transition: 0.3s background-color;
     transition: 0.3s background-color;
-  } 
+  }
 /* 切换菜单布局*/
 #changeButton{
-    margin-top: 1.5vh;
+    margin: 0.7vh 0;
     height: 2.5vh;
     width: 99.3vw;
 }
-.changePageButton {
+/* .changePageButton {
     height: 2.5vh;
     width: 20vw;
     margin-right: 0.1vw;
     border: 0;
     border-radius: 0.4vw;
-    /* box-shadow: 0 0px 0.4vw rgb(0 0 0 / 28%); */
     float: left;
     font-size: 1.5vh;
     font-family: "微软雅黑";
     text-align: center;
     vertical-align: middle;
     background-color: white;
-    
-}
+} */
+.changePageButton {
+    height: 2.6vh;
+    width: 18vw;
+    margin-right: 0.5vw;
+    background: #69c0ff;
+    border: none;
+    border-radius: 5px;
+    position: relative;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.5vh;
+    font-family: "微软雅黑";
+    text-align: center;
+    text-indent: 5px;
+    cursor: pointer;
+  }
+  button:active {
+    box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
+    top: 1px;
+  }
+  button:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 1.3vh solid #eee;
+    border-bottom: 1.3vh solid #eee;
+    border-left: 1.04vh solid transparent;
+    border-right: 1.3vh solid #eee;
+    position: absolute;
+    opacity: 0.6; 
+    right: 0;
+    top: 0;
+    border-radius: 0 5px 5px 0;  
+  }
 
 #viewList {
     margin-top: 0.3vh;
@@ -181,7 +213,7 @@
 #secondSelectIndiND {
     height: 30vh;
     /* height: 43.8vh; */
-    width: 29.4vw;
+    width: 15vw;
     /* width: 19.9vw; */
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
@@ -192,17 +224,17 @@
     margin-left: 0.2vw;
     height: 30vh;
     /* height: 43.8vh; */
-    width: 29.4vw;
+    width: 15vw;
     /* width: 19.9vw; */
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
-#secondIndiRDExplane {
+#secondWordCloud {
     margin-left: 0.2vw;
-    height: 43.8vh;
-    width: 29.2vw;
+    height: 30vh;
+    width: 28.7vw;
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
@@ -275,4 +307,7 @@
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
+}
+#patentDescription{
+    height: 5vh;
 }

@@ -12,7 +12,7 @@ import FirstArchRank from "../firstComponents/archRank";
 import SecondSearchBar from "../secondComponents/searchBar";
 import SecondIndicatorsNdSelect from "../secondComponents/indicatorsNd";
 import SecondIndicatorsRdSelect from "../secondComponents/indicatorsRd";
-// import SecondIndicatorsRdExplain from "../secondComponents/indicatorsExplain";
+import SecondWordCloud from "../secondComponents/wordCloud";
 import SecondIndicators from "../secondComponents/indicatorsBreakdown";
 import SecondIndiRDRank from "../secondComponents/indiRdRank";
 
@@ -95,6 +95,8 @@ export default function Layout() {
     const [secondIndicatorsHeight, setSecondIndicatorsHeight] = useState(0);
     const [secondIndiRDRankWidth, setSecondIndiRDRankWidth] = useState(0);
     const [secondIndiRDRankHeight, setSecondIndiRDRankHeight] = useState(0);
+    const [secondWordCloudWidth, setSecondWordCloudWidth] = useState(0);
+    const [secondWordCloudHeight, setSecondWordCloudHeight] = useState(0);
 
     // 第三屏各个组件的长宽
     const [thirdEPPosplashesWidth, setThirdEPPosplashesWidth] = useState(0);
@@ -113,7 +115,7 @@ export default function Layout() {
             <button
                 id={id}
                 className="changePageButton"
-                style={{ background: (id === nowPageIndex && "rgb(240, 239, 239)") }}
+                style={{ background: (id === nowPageIndex && "#1890ff") }}
                 onClick={() => {
                     setNowPageIndex(id)
                 }}
@@ -144,6 +146,12 @@ export default function Layout() {
             );
         };
         if (nowPageIndex === "secondButton") {
+            setSecondWordCloudWidth(
+                document.getElementById("secondWordCloud").getBoundingClientRect().width
+            );
+            setSecondWordCloudHeight(
+                document.getElementById("secondWordCloud").getBoundingClientRect().height
+            );
             setSecondIndicatorsWidth(
                 document.getElementById("secondIndicators").getBoundingClientRect().width
             );
@@ -221,6 +229,7 @@ export default function Layout() {
                     id="thirdButton"
                     text="单个企业数字化指标详情————微观"
                 ></ChangePageButton>
+                <div class="animation"></div>
             </div>
             {
                 nowPageIndex === "firstButton" &&
@@ -328,14 +337,13 @@ export default function Layout() {
                                     selectedIndicatorsRd={selectedIndicatorsRd}
                                     setSelectedIndicatorsRd={setSelectedIndicatorsRd} />
                             </div>
-                            {/* <div id="secondIndiRDExplane">
-                                <ChartHeader chartName={"指标解释栏"} />
-                                <SecondIndicatorsRdExplain
-                                    selectedIndustry={selectedIndustry}
-                                    selectedIndicatorsNd={selectedIndicatorsNd}
-                                    selectedIndicatorsRd={selectedIndicatorsRd} />
+                            <div id="secondWordCloud">
+                                <ChartHeader chartName={"行业数字化词云图"} />
+                                <SecondWordCloud
+                                    w={secondIndiRDRankWidth}
+                                    h={secondIndiRDRankHeight} />
 
-                            </div> */}
+                            </div>
                         </div>
                         <div id="secondIndiRDRank">
                             <ChartHeader chartName={"二、三级指标企业对比"} />

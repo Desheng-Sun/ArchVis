@@ -40,7 +40,6 @@ export default function SecondIndiRDRank({ w, h, selectedIndustrySecond, nowEnte
           data: nowData
         })
       }
-
       setData(nowUseData);
     })
   }, [industry, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd])

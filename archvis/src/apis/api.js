@@ -66,8 +66,12 @@ export function secondProperty(industry, indicator, nowEnterprise) {
     nowEnterprise: nowEnterprise
   });
 }
-
-
+// 词频检索
+export function secondWord(industry) {
+  return post("/secondWord", {
+    industry: industry
+  });
+}
 
 //////// 第三屏检索栏
 export function thirdEPPos(industry) {

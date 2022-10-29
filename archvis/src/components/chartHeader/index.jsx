@@ -1,5 +1,10 @@
 import "./index.css";
 
 export default function ChartHeader({ chartName }) {
-  return <div className="chartheader">{chartName}</div>;
+  return (
+    <ul className="chartheader">
+        <li class="item active">{chartName}</li>
+        <li class="item"></li>
+    </ul>
+  );
 }
