@@ -1,3 +1,4 @@
+import { Radio, Space } from 'antd';
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { secondWord } from '../../../apis/api';
@@ -6,7 +7,11 @@ import 'echarts-wordcloud';
 export default function SecondWordCloud({w, h}) {
     const [data, setData] = useState([]);
     const [industry, setIndustry] = useState('全行业');
+    const industryList = ['全行业', '施工', '设计'];
     const chartRef = useRef(null);
+    const onChange = (e) => {
+        setIndustry(e.target.value);
+      };
     useEffect(() => {
         secondWord(industry).then((res) => {
             setData(res);
@@ -59,7 +64,18 @@ export default function SecondWordCloud({w, h}) {
         myChart.resize();
       }, [data, w, h]);    
     return (
-        <div ref={chartRef} style={{ width: "95%", height: "28vh" }}>
+        <div>
+            <Radio.Group onChange={onChange} value={industry} style={{ padding: "0.1vh 0"}}>
+        <Space>
+          {industryList.map((item, index) => (
+            <Radio key={index} value={item} style={{ height: "2vh" }}>
+              {item}
+            </Radio>
+          ))}
+        </Space>
+      </Radio.Group>
+            <div ref={chartRef} style={{ width: "95%", height: "22vh" }}>
+            </div>
         </div>
     )
 }
