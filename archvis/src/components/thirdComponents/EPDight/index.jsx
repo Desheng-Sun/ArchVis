@@ -81,14 +81,14 @@ export default function ThirdEPdight({ w, h, selectedIndustry, selectedEnterpris
 
     const option = {
       color: [
-        "#f6bd16",
-        "#5b8ff9",
-        "#6dc8ec",
-        "#5ad8a6",
-        "#945fb9",
-        "#ff9845",
-        "#1e9493",
-        "#ff99c3"
+        "#f6edbd",
+        "#008080",
+        "#de8a5a",
+        "#70a494",
+        "#ca562c",
+        "#39b185",
+        "#bd925a",
+        "#42b7b9"
       ],
       tooltip: {
         trigger: 'axis',
@@ -117,10 +117,14 @@ export default function ThirdEPdight({ w, h, selectedIndustry, selectedEnterpris
               {
                 offset: 0,
                 color: 'rgb(255, 158, 68)'
+                // color: 'rgb(255, 255, 255)'
+
               },
               {
                 offset: 1,
                 color: 'rgb(255, 70, 131)'
+                // color: 'rgb(255, 255, 255)'
+
               }
             ])
           },
@@ -134,7 +138,9 @@ export default function ThirdEPdight({ w, h, selectedIndustry, selectedEnterpris
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
               {
                 offset: 0,
-                color: 'rgb(128, 255, 165)'
+                // color: 'rgb(128, 255, 165)'
+                color: 'rgb(66, 164, 168)'
+
               },
               {
                 offset: 1,

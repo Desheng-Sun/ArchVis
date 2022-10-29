@@ -161,16 +161,16 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
     }
     const option = {
       // color: [
-      //   "#5b8ff9",
+      //   "#008080",
       //   "#5ad8a6",
-      //   "#5d7092",
-      //   "#f6bd16",
-      //   "#e86452",
-      //   "#6dc8ec",
-      //   "#945fb9",
-      //   "#ff9845",
-      //   "#1e9493",
-      //   "#ff99c3"
+      //   "#b4c8a8",
+      //   "#f6edbd",
+      //   "#edbb8a",
+      //   "#de8a5a",
+      //   "#ca562c",
+      //   "#39b185",
+      //   "#bd925a",
+      //   "#42b7b9"
       // ],
       title: {
         left: 'center'
@@ -202,7 +202,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
         inRange: {
           color: [
             '#74add1',
-            '#87b3ff'
+            '#00a0a0'
           ]
         },
         calculable: true,
@@ -220,7 +220,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
         zoom: 1.4,  //地图的比例
         emphasis: {
           itemStyle: {
-            areaColor: '#5b8ff9',
+            areaColor: '#008080',
           },
           label: {
             color: '#fff',  //选中后的字体颜色
@@ -234,7 +234,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
           fontSize: fontsizeNow + "px"
         },
         itemStyle: {
-          areaColor: '#87b3ff',
+          areaColor: '#00a0a0',
           borderColor: 'white',
           // borderWidth: 2,
           // shadowColor: 'rgba(63,218,255,0.3)',

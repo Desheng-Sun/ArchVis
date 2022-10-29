@@ -180,13 +180,13 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
         itemStyle: {
           color: function (param) {
             if (param.value[0] === selectedCompanyFirst) {
-              return '#e86452'
+              return '#edbb8a'
             }
             else if (param.value[2] === 1) {
-              return '#5b8ff9'
+              return '#008080'
             }
             else if (param.value[2] === 2) {
-              return '#6dc8ec'
+              return '#de8a5a'
             }
           }
         }
