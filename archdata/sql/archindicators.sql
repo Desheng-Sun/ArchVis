@@ -11,7 +11,7 @@
  Target Server Version : 80030
  File Encoding         : 65001
 
- Date: 28/10/2022 14:24:28
+ Date: 29/10/2022 19:06:00
 */
 
 SET NAMES utf8mb4;
@@ -831,7 +831,7 @@ CREATE TABLE `wordfrequency`  (
   `单词` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `施工频数` int(0) NULL DEFAULT NULL,
   `设计频数` int(0) NULL DEFAULT NULL,
-  `频数合计` int(0) NULL DEFAULT NULL,
+  `全行业频数` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`单词`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 

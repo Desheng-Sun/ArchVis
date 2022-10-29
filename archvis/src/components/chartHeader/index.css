@@ -1,14 +1,4 @@
-.chartheader {
-  width: 100%;
-  height: 2.8vh;
-  text-align: left;
-  text-indent: 0.4vh;
-  font-weight: bold;
-  font-size: 1.6vh;
-  border-top-left-radius: 0.4vw;
-  border-top-right-radius: 0.4vw;
-}
-.nav{
+.chartheader{
   display: flex;
   width: 100%;
   margin: 0;
@@ -18,7 +8,7 @@
   font-weight: bold;
   font-size: 1.6vh;
 }
-.nav .item{
+.chartheader .item{
   flex: 1;
   height: 2.5vh;
   background: #eee;
@@ -26,16 +16,16 @@
   position: relative;
   list-style: none;
 }
-.nav .item.active{
+.chartheader .item.active{
   height: 2.8vh;
-  background: rgb(39, 137, 249);
+  background: #1890ff;
 }
-.nav .item:first-child:before{
+.chartheader .item:first-child:before{
   content: '';
   display: none;
   width: 17%;
   height: 100%;
-  background: rgb(39, 137, 249);
+  background: #1890ff;
   position: absolute;
   right: -12.5%;
   top: 0;
@@ -43,6 +33,6 @@
   border-radius: 0 5px 0 0;
   transform: skew(10deg);
 }
-.nav .item:first-child.active:before{
+.chartheader .item:first-child.active:before{
   display: block;
 }
