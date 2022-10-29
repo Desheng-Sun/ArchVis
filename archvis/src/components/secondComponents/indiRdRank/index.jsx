@@ -50,6 +50,18 @@ export default function SecondIndiRDRank({ w, h, selectedIndustrySecond, nowEnte
       myChart = echarts.init(chartRef.current);
     }
     const option = {
+      color: [
+        "#008080",
+        "#70a494",
+        "#b4c8a8",
+        "#f6edbd",
+        "#edbb8a",
+        "#de8a5a",
+        "#ca562c",
+        "#39b185",
+        "#bd925a",
+        "#42b7b9"
+      ],
       tooltip: {
         trigger: 'axis'
       },

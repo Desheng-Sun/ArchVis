@@ -3,7 +3,7 @@
     padding-top: 0.3vh;
     padding-bottom: 0.3vh;
     padding-left: 0.2vw;
-    padding-right: 0.2vw;
+    padding-right: 0.5vw;
     overflow: hidden;
     /* background-color: rgb(240, 239, 239); */
 }
@@ -28,13 +28,13 @@
 #ititle {
     /* border-color: rgb(240, 239, 239) ; */
     height: 15vh;
-    width: 99.6vw;
+    width: 99.3vw;
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #title {
     height: 5vh;
-    width: 84.6vw;
+    width: 99.3vw;
     font-size: 3.5vh;
     font-family: "微软雅黑";
     text-align: center;
@@ -42,7 +42,7 @@
 #systemIntroduction{
     margin: 2vh 15vw 0vh 15vw;
     height: 8vh;
-    font-size: 1.5vh;
+    font-size: 1.5vh; 
     overflow-y: auto;
 }
 /* 滚动条滑块 */
@@ -56,7 +56,7 @@
 #changeButton{
     margin: 0.7vh 0;
     height: 2.5vh;
-    width: 99.6vw;
+    width: 99.3vw;
 }
 /* .changePageButton {
     height: 2.5vh;
@@ -109,7 +109,7 @@
 #viewList {
     margin-top: 0.3vh;
     height: 94.1vh;
-    width: 99.6vw;
+    width: 99.3vw;
     overflow: hidden;
 }
 
@@ -122,7 +122,7 @@
 }
 #firstSearchbar {
     height: 35vh;
-    width: 30vw;
+    width: 100%;
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
@@ -130,7 +130,7 @@
 #firstIndicators {
     margin-top: 0.3vh;
     height: 58.8vh;
-    width: 30vw;
+    width: 100%;
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
@@ -138,12 +138,12 @@
 #firstIRight{
     margin-left: 0.2vw;
     height: 94.1vh;
-    width: 69.4vw;
+    width: 69.1vw;
     float: left;
 }
 #firstIRightTop{
     height: 53.8vh;
-    width: 69.4vw;
+    width: 100%;
 }
 #firstArchMap {
     height: 53.8vh;
@@ -156,7 +156,7 @@
 #firstArchList {
     margin-left: 0.2vw;
     height: 53.8vh;
-    width: 29.2vw;
+    width: 28.9vw;
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
@@ -165,7 +165,7 @@
 #firstArchRank {
     margin-top: 0.3vh;
     height: 40vh;
-    width: 69.4vw;
+    width: 69.1vw;
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
@@ -200,14 +200,14 @@
 #secondIRight{
     margin-left: 0.2vw;
     height: 94.1vh;
-    width: 59.4vw;
+    width: 59.1vw;
     /* width: 69.4vw; */
     float: left;
 }
 #secondIRightTop{
     height: 30vh;
     /* height: 43.8vh; */
-    width: 59.4vw;
+    width: 59.1vw;
     /* width: 69.4vw; */
 }
 #secondSelectIndiND {
@@ -244,7 +244,7 @@
     margin-top: 0.3vh;
     height: 63.8vh;
     /* height: 50vh; */
-    width: 59.4vw;
+    width: 59.1vw;
     /* width: 69.4vw; */
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
@@ -276,16 +276,16 @@
 #thirdIRight{
     margin-left: 0.2vw;
     height: 94.1vh;
-    width: 69.4vw;
+    width: 69.1vw;
     float: left;
 }
 #thirdIRightTop{
     height: 46.9vh;
-    width: 69.4vw;
+    width: 69.1vw;
 }
 #thirdEPScoreIndiSD {
     height: 46.9vh;
-    width: 34.6vw;
+    width: 34.4vw;
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
@@ -294,7 +294,7 @@
 #thirdEPScoreIndiND {
     margin-left: 0.2vw;
     height: 46.9vh;
-    width: 34.6vw;
+    width: 34.4vw;
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
@@ -303,12 +303,11 @@
 #thirdEPdight {
     margin-top: 0.3vh;
     height: 46.9vh;
-    width: 69.4vw;
+    width: 69.1vw;
     /*border-radius: 0.4vw;*/
     /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
-
 #patentDescription{
     height: 5vh;
 }
