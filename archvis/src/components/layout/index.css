@@ -51,7 +51,7 @@
     background-color: rgba(144, 147, 153, 0);
     -webkit-transition: 0.3s background-color;
     transition: 0.3s background-color;
-  } 
+  }
 /* 切换菜单布局*/
 #changeButton{
     margin-top: 1.5vh;
@@ -71,7 +71,6 @@
     text-align: center;
     vertical-align: middle;
     background-color: white;
-    
 }
 
 #viewList {
@@ -279,5 +278,4 @@
 
 #patentDescription{
     height: 5vh;
-    
 }
