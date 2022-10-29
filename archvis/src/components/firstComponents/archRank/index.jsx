@@ -2,12 +2,12 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
 import { firstArchRank } from '../../../apis/api';
-export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, selectedCompanyFirst, construScore, designScore }) {
+export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, selectedCompanyFirst, construScore, designScore, setSelectedYearFirst, allDate }) {
   const [construData, setConstruData] = useState([]);
   const [designData, setDesignData] = useState([]);
   const [allScore, setAllScore] = useState()
   const chartRef = useRef(null);
-
+  const [selectDateIndex, setSelectDateIndex] = useState(0)
   useEffect(() => {
     firstArchRank(selectedRegionFirst, selectedYearFirst, 'constru').then((res) => {
       let useData = []
@@ -63,6 +63,11 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
 
   }, [construScore, designScore])
 
+  useEffect(() => {
+    if (allDate.length > 0) {
+      setSelectedYearFirst(allDate[selectDateIndex])
+    }
+  }, [selectDateIndex])
 
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
@@ -70,6 +75,7 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
       myChart = echarts.init(chartRef.current);
     }
 
+    let index = allDate.indexOf(selectedYearFirst)
     //存储数据的数组
     let useData = []
     if (allScore) {
@@ -101,13 +107,16 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
           type: 'shadow'
         }
       },
+      grid:{
+        bottom:"30%"
+      },
       xAxis: {
         type: 'category',
         name: '企业简称',
         axisLabel: {
-          interval:0,
+          interval: 0,
           fontSize: "10px",
-          formatter: function(param){
+          formatter: function (param) {
             return param.split('').join('\n')
           }
         }
@@ -115,6 +124,41 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
       yAxis: {
         type: 'value',
         name: '企业数字化综合得分'
+      },
+      timeline: {
+        data: allDate,
+        axisType: "category",
+        autoPlay: false,
+        realtime: false,
+        left: "5%",
+        right: "5%",
+        bottom: "0%",
+        symbolSize: 10,
+        //  height: null,
+        label: {
+          show: true,
+          color: "rgb(92, 151, 191)",
+        },
+        lineStyle: {
+          show: true,
+          color: "rgb(92, 151, 191)",
+        },
+        itemStyle: {
+          show: true,
+          color: "rgb(92, 151, 191)",
+        },
+        controlStyle: {
+          show: true,
+          showPlayBtn: false,
+          color: "rgb(92, 151, 191)",
+          borderColor: "rgb(92, 151, 191)",
+        },
+        checkpointStyle: {
+          symbolSize: 13,
+          color: "rgb(115, 192, 222)",
+          borderWidth: 2,
+          borderColor: "rgb(255, 255, 138)",
+        },
       },
       dataZoom: [
         {
@@ -150,6 +194,17 @@ export default function FirstArchRank({ w, h, selectedRegionFirst, selectedYearF
     };
     myChart.setOption(option);
     myChart.resize();
+    myChart.dispatchAction({
+      type: "timelineChange",
+      // 时间点的 index
+      currentIndex: index,
+    });
+    myChart.on("timelinechanged", (timelineIndex) => {
+      setSelectDateIndex(timelineIndex.currentIndex)
+    });
+    if (myChart._$handlers.timelinechanged) {
+      myChart._$handlers.timelinechanged.length = 1;
+    }
   }, [construData, designData, allScore, selectdIndustryFirst, selectedCompanyFirst, w, h]);
 
   return (

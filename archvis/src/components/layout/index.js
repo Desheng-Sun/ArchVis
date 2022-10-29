@@ -255,8 +255,6 @@ export default function Layout() {
                                     selectedYearFirst={selectedYearFirst}
                                     selectdIndustryFirst={selectdIndustryFirst}
                                     setSelectedRegionFirst={setSelectedRegionFirst}
-                                    setSelectedYearFirst={setSelectedYearFirst}
-                                    allDate={allDate}
                                 />
                             </div>
                             <div id="firstArchList">
@@ -280,6 +278,8 @@ export default function Layout() {
                                 selectedCompanyFirst={selectedCompanyFirst}
                                 construScore={construScore}
                                 designScore={designScore}
+                                setSelectedYearFirst={setSelectedYearFirst}
+                                allDate={allDate}
                             />
                         </div>
                     </div>

@@ -3,10 +3,9 @@ import React, { useState, useEffect, useRef } from "react";
 import geoChina from "./geo.json";
 import { firstArchMap } from '../../../apis/api';
 
-export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, setSelectedRegionFirst, setSelectedYearFirst, allDate }) {
+export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFirst, selectdIndustryFirst, setSelectedRegionFirst,  }) {
   const [construData, setConstruData] = useState({});
   const [designData, setDesignData] = useState({});
-  const [selectDateIndex, setSelectDateIndex] = useState(0)
   const chartRef = useRef(null);
 
   // 各个地区包含的省份信息
@@ -64,16 +63,12 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
       setDesignData(useData);
     });
   }, [selectedYearFirst])
-  useEffect(() => {
-    if (allDate.length > 0) {
-      setSelectedYearFirst(allDate[selectDateIndex])
-    }
-  }, [selectDateIndex])
+
+
   // 随系统缩放修改画布大小
   useEffect(() => {
     // 设置地图字体的大小
     let fontsizeNow = parseInt(14 * h / 698)
-    let index = allDate.indexOf(selectedYearFirst)
     fontsizeNow = Math.max(10, fontsizeNow)
     let nowAllCity = []
     // 获取当前选择的所有地区包含的省份
@@ -215,42 +210,7 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
         seriesIndex: 0
       },
       ],
-      timeline: {
-        data: allDate,
-        axisType: "category",
-        autoPlay: false,
-        realtime: false,
-        left: "15%",
-        right: "5%",
-        bottom: "0%",
-        width: "80%",
-        symbolSize: 10,
-        //  height: null,
-        label: {
-          show: true,
-          color: "rgb(92, 151, 191)",
-        },
-        lineStyle: {
-          show: true,
-          color: "rgb(92, 151, 191)",
-        },
-        itemStyle: {
-          show: true,
-          color: "rgb(92, 151, 191)",
-        },
-        controlStyle: {
-          show: true,
-          showPlayBtn: false,
-          color: "rgb(92, 151, 191)",
-          borderColor: "rgb(92, 151, 191)",
-        },
-        checkpointStyle: {
-          symbolSize: 13,
-          color: "rgb(115, 192, 222)",
-          borderWidth: 2,
-          borderColor: "rgb(255, 255, 138)",
-        },
-      },
+
       geo: {
         type: 'map',
         map: 'china',
@@ -410,16 +370,9 @@ export default function FirstArchMap({ w, h, selectedRegionFirst, selectedYearFi
         setSelectedRegionFirst(["东北", "华北", "华东", "华中", "华南", "西北", "西南", "港澳台"])
       }
     })
-    myChart.dispatchAction({
-      type: "timelineChange",
-      // 时间点的 index
-      currentIndex: index,
-    });
-    myChart.on("timelinechanged", (timelineIndex) => {
-      setSelectDateIndex(timelineIndex.currentIndex)
-    });
+
+
     if (myChart._$handlers.click) {
-      myChart._$handlers.timelinechanged.length = 1;
       myChart._$handlers.click.length = 1;
       myChart._zr.handler._$handlers.click = myChart._zr.handler._$handlers.click.slice(myChart._zr.handler._$handlers.click.length - 2, myChart._zr.handler._$handlers.click.lengt)
     }
