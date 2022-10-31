@@ -39,7 +39,7 @@ export default function SecondWordCloud({w, h}) {
                     gridSize: 8,
                     shape: 'pentagon',
                     width: '100%',
-                    height: '95%',
+                    height: '100%',
                      textStyle: {
                         normal: {
                             color: function () {
@@ -62,10 +62,10 @@ export default function SecondWordCloud({w, h}) {
             };
         myChart.setOption(option, true);
         myChart.resize();
-      }, [data, w, h]);    
+      }, [data, w, h]);
     return (
         <div>
-            <Radio.Group onChange={onChange} value={industry} style={{ padding: "0.1vh 0"}}>
+            <Radio.Group onChange={onChange} value={industry} style={{ padding: "0.2vh 0"}}>
         <Space>
           {industryList.map((item, index) => (
             <Radio key={index} value={item} style={{ height: "2vh" }}>
@@ -74,7 +74,7 @@ export default function SecondWordCloud({w, h}) {
           ))}
         </Space>
       </Radio.Group>
-            <div ref={chartRef} style={{ width: "95%", height: "22vh" }}>
+            <div ref={chartRef} style={{ width: "100%", height: "25vh" }}>
             </div>
         </div>
     )
