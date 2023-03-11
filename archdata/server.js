@@ -11,8 +11,8 @@ const connection = mysql.createConnection({
   host: 'localhost', //数据库地址
   port: '3306',//端口号
   user: 'root',//用户名
-  password: 'root',//密码
-  database: 'archindicators'//数据库名称
+  password: 'sds0917..',//密码
+  database: 'archsql'//数据库名称
 });
 connection.connect();//用参数与数据库进行连接
 
