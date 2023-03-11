@@ -8,48 +8,75 @@ export function helloworld() {
 
 // 获取视图的初始数据：node信息改为json文件
 
-export function selectIndicators(industry) {
-  return post("/selectIndicators", {
-    industry: industry
-  });
-}
+
 // export function firstIndicatorsSt() {
 //   return post("/firstIndicatorsSt");
 // }
+export function getArchScore(industry) {
+  return post("/getArchScore", {
+    industry: industry,
+  })
 
-
-
+}
 //////// 第一屏检索栏
-// 行业检索
-export function firstArchIndustry(industry){
+//指标检索
+export function firstArchIndustry(industry) {
   return post("/firstArchIndustry", {
-    industry: industry
+    industry: industry,
   })
 
 }
 
+// 地区检索
+export function firstArchMap(date, industry) {
+  return post("/firstArchMap", {
+    date: date,
+    industry: industry
+  })
+}
+
 // 企业名单
-export function firstArchList(region) {
+export function firstArchList(industry) {
   return post("/firstArchList", {
-    region : region
+    industry: industry
   })
 }
 
 // 企业数字化程度排名
-export function firstArchRank(region) {
+export function firstArchRank(region, date, industry) {
   return post("/firstArchRank", {
-    region : region
+    region: region,
+    date: date,
+    industry: industry
   });
 }
 
-export function selectEnterprise(industry) {
-  return post("/selectEnterprise", {
+//////// 第二屏检索栏
+//企业检索
+export function secondEnterprise(industry) {
+  return post("/secondEnterprise", {
     industry: industry
-    });
-}
-// 企业数字化程度对比
-export function thirdEPdight(name) {
-  return post("/thirdEPdight", {
-    name : name
   });
 }
+// 指标值查询
+export function secondProperty(industry, indicator, nowEnterprise) {
+  return post("/secondProperty", {
+    industry: industry,
+    indicator: indicator,
+    nowEnterprise: nowEnterprise
+  });
+}
+// 词频检索
+export function secondWord(industry) {
+  return post("/secondWord", {
+    industry: industry
+  });
+}
+
+//////// 第三屏检索栏
+export function thirdEPPos(industry) {
+  return post("/thirdEPPos", {
+    industry: industry
+  });
+}
+

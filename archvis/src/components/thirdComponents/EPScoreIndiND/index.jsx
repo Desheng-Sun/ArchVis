@@ -1,39 +1,152 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-
-export default function ThirdEPScoreIndiND({w, h}) {
-  const [data, setData] = useState([]);
+import { firstArchIndustry } from '../../../apis/api';
+export default function ThirdEPScoreIndiND({ w, h, selectedEnterprise, selectedIndustry, construScore, designScore, allDate }) {
+  const [data, setData] = useState();
+  const [indicators, setIndicators] = useState([]);
+  const [nowIndusrtyData, setNowIndusrtyData] = useState()
   const chartRef = useRef(null);
+
   useEffect(() => {
+    let industry = ''
+    if (selectedIndustry === '施工行业') {
+      industry = 'constru';
+    }
+    else if (selectedIndustry === '设计行业') {
+      industry = 'design';
+    }
+    firstArchIndustry(industry).then((res) => {
+      setIndicators(res)
+    })
+  }, [selectedIndustry, allDate])
+
+  useEffect(() => {
+    if (construScore && designScore) {
+      let useData = {}
+      for (let i in construScore) {
+        let nowUseScore = {}
+        let nowUseDScore = {}
+        if (selectedIndustry === '施工行业') {
+          nowUseScore = construScore[i][0];
+          nowUseDScore = construScore[i][1]
+        }
+        else if (selectedIndustry === '设计行业') {
+          nowUseScore = designScore[i][0];
+          nowUseDScore = designScore[i][1]
+        }
+        useData[i] = []
+        let useDataYear = {}
+        for (let j in nowUseScore["企业名称"]) {
+          if (nowUseScore["企业名称"][j] == selectedEnterprise) {
+            for (let k in nowUseScore) {
+              useDataYear[k] = nowUseScore[k][j]
+            }
+          }
+        }
+        useData[i] = [useDataYear, nowUseDScore]
+      }
+      setNowIndusrtyData(useData)
+    }
+  }, [construScore, designScore, selectedEnterprise])
+
+  useEffect(() => {
+    if (nowIndusrtyData && indicators) {
+      let useData = {}
+      for (let i of indicators) {
+        useData[i.id] = i
+        useData[i.id]["score"] = {}
+        for (let j of allDate) {
+          useData[i.id]["score"][j] = 0
+        }
+      }
+      for (let i in useData) {
+        let nowIndicators = useData[i]
+        if (nowIndicators["level"] === 3) {
+          let nowIndusrtyName = nowIndicators["indi_name"].trim()
+          for (let j of allDate) {
+            useData[i]["score"][j] = nowIndusrtyData[j][0][nowIndusrtyName] * nowIndusrtyData[j][1][nowIndusrtyName] * 100
+            useData[nowIndicators["parent_id"]]["score"][j] += useData[i]["score"][j]
+            let firtParentId = useData[nowIndicators["parent_id"]]["parent_id"]
+            useData[firtParentId]["score"][j] += useData[nowIndicators["parent_id"]]["score"][j]
+          }
+        }
+      }
+      setData(useData)
+    }
+  }, [nowIndusrtyData, indicators])
+
+
+  useEffect(() => {
+    if (!data) {
+      return
+    }
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
+    let legendData = []
+    let seriseData = []
+    for (let i in data) {
+      if (data[i]["level"] === 2) {
+        legendData.push({
+          name: data[i]["indi_name"]
+        })
+        let nowData = []
+        for (let j of allDate) {
+          nowData.push(data[i]["score"][j])
+        }
+        seriseData.push({
+          name: data[i]["indi_name"],
+          type: 'bar',
+          stack: data[i]["parent_id"],
+          emphasis: {
+            focus: 'series'
+          },
+          data: nowData,
+          label:{
+            show:true,
+            formatter:(params) => {
+              if(params.value === 0){
+                return ""
+              }
+              return params.seriesName
+            }
+          }
+        })
+      }
+    }
+
     const option = {
       color: [
-        "#5b8ff9",
-        "#5ad8a6",
-        "#5d7092",
-        "#f6bd16",
-        "#e86452",
-        "#6dc8ec",
-        "#945fb9",
-        "#ff9845",
-        "#1e9493",
-        "#ff99c3"
+        "#008080",
+        "#70a494",
+        "#b4c8a8",
+        "#f6edbd",
+        "#edbb8a",
+        "#de8a5a",
+        "#ca562c",
+        "#39b185",
+        "#bd925a",
+        "#42b7b9"
       ],
       tooltip: {
-        trigger: 'axis',
+        trigger: 'item',
         axisPointer: {
-          axisPointer: {
-            // Use axis to trigger tooltip
-            type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+          type: 'shadow'
+        },
+        position: function (point) {
+          // 固定在顶部
+          return [point[0], '10%'];
+        },
+        formatter: (params) => {
+          let res = params.marker + params.seriesName + "<br/>"
+          for (let i in seriseData[params.seriesIndex]["data"]) {
+            res += allDate[i] + ": " + seriseData[params.seriesIndex]["data"][i] + "<br/>"
           }
+          return res
         }
       },
-      legend: {
-        top: 25,
-      },
+      legend: legendData,
       grid: {
         left: '3%',
         right: '4%',
@@ -49,76 +162,16 @@ export default function ThirdEPScoreIndiND({w, h}) {
         {
           type: 'category',
           // boundaryGap: false,
-          data: ['基本指标', '数字化研发创新指标', '组织指标', '战略指标', '特色指标']
-        
-        }
+          data: allDate,
+        },
       ],
-      series: [
-        {
-          name: 'Line 1',
-          type: 'bar',
-          stack: 'Total',
-          label:{
-            show: true
-          },
-          emphasis: {
-            focus: 'series'
-          },
-          data: [140, 232, 101, 264, 90]
-        },
-        {
-          name: 'Line 2',
-          type: 'bar',
-          stack: 'Total',
-          label:{
-            show: true
-          },
-          emphasis: {
-            focus: 'series'
-          },
-          data: [120, 282, 111, 234, 220]
-        },
-        {
-          name: 'Line 3',
-          type: 'bar',
-          stack: 'Total',
-          label:{
-            show: true
-          },
-          emphasis: {
-            focus: 'series'
-          },
-          data: [320, 132, 201, 334, 190]
-        },
-        {
-          name: 'Line 4',
-          type: 'bar',
-          stack: 'Total',
-          label:{
-            show: true
-          },
-          emphasis: {
-            focus: 'series'
-          },
-          data: [220, 402, 231, 134, 190]
-        },
-        {
-          name: 'Line 5',
-          type: 'bar',
-          stack: 'Total',
-          label:{
-            show: true
-          },
-          emphasis: {
-            focus: 'series'
-          },
-          data: [220, 302, 181, 234, 210]
-        }
-      ]
+      series: seriseData
     };
-    myChart.setOption(option);
+    myChart.setOption(option, true);
     myChart.resize();
+
   }, [data, w, h]);
+
   return (
     <div ref={chartRef} style={{ width: "100%", height: "44.1vh" }}>
     </div>

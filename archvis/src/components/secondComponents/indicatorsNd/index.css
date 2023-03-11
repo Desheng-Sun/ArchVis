@@ -1,0 +1,41 @@
+#secondIndicatorsNdSelect {
+  height: 27.2vh;
+  /* height: 41vh; */
+  width: 100%;
+  overflow-y: scroll;
+  /* overflow: hidden; */
+}
+
+/* ::-webkit-scrollbar {
+  width: 6px;
+} */
+
+/* 滚动槽 */
+/* ::-webkit-scrollbar-track {
+  border-radius: 10px;
+} */
+
+/* 滚动条滑块 */
+/* ::-webkit-scrollbar-thumb {
+  border-radius: inherit;
+  background-color: rgba(144, 147, 153, 0);
+  -webkit-transition: 0.3s background-color;
+  transition: 0.3s background-color;
+} */
+
+#secondIndicatorsNdExplain {
+  height: 27.2vh;
+  width: 8vw;
+  float: right;
+}
+
+#secondIndicatorsNdExplainText {
+  height: 27.2vh;
+  width: 8vw;
+  position: absolute;
+  font-size: 1.2vh;
+  text-align: left;
+  top: 8.5vh;
+  right: 30.2vw;
+  overflow-y: scroll;
+}

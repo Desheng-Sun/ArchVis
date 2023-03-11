@@ -1,3 +1,23 @@
-.ant-select {
-  margin: 100px;
+.ant-divider,
+.ant-divider-horizontal {
+  margin: 0.2vh !important
+}
+
+.multipleCheck {
+  padding-top: 2%;
+  height: 37.5%;
+}
+
+.ant-select-selection-item {
+  font-size: 1.1vh;
+
+}
+
+.ant-btn,
+.ant-btn-default {
+  font-size: 1.1vh;
+  height: 2.4vh;
+}
+.ant-checkbox-wrapper{
+  font-size: 1.2vh;
 }

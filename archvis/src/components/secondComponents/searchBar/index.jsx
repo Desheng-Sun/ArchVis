@@ -1,50 +1,45 @@
 import { Select } from "antd";
 import React, { useState, useEffect } from "react";
 import '../../../App';
-import { selectEnterprise } from '../../../apis/api';
+import { secondEnterprise } from '../../../apis/api';
 
 const { Option } = Select;
 
-export default function SecondSearchBar({setSelectedIndustry}) {
+export default function SecondSearchBar({ nowEnterprise, setSelectedIndustrySecond, setNowEnterprise }) {
   const allIndustry = ["施工行业", "设计行业"]
   const [construEnterprise, setConstruEnterprise] = useState([]);
   const [designEnterprise, setDesignEnterprise] = useState([]);
-
   const [NowEnterpriseList, setNowEnterpriseList] = useState([]);
-  const [nowEnterprise, setNowEnterprise] = useState();
   useEffect(() => {
-
-    selectEnterprise('constru').then((res) =>{
+    secondEnterprise('constru').then((res) => {
       var tmp = [];
       for (let i in res) {
         tmp.push(res[i].企业名称);
       }
       setConstruEnterprise(tmp);
       setNowEnterpriseList(tmp);
-      setNowEnterprise(tmp[0]);
-      // console.log(tmp);
+      setNowEnterprise([tmp[0]]);
     });
-    
-    selectEnterprise('design').then((res) =>{
+
+    secondEnterprise('design').then((res) => {
       var tmp = [];
       for (let i in res) {
         tmp.push(res[i].企业名称);
       }
       setDesignEnterprise(tmp);
-      // console.log(tmp);
     });
 
   }, [])
 
   const handleIndustryChange = (value) => {
-    setSelectedIndustry(value);
-    if(value == "施工行业"){
+    setSelectedIndustrySecond(value);
+    if (value === "施工行业") {
       setNowEnterpriseList(construEnterprise);
-      setNowEnterprise(construEnterprise[0]);
+      setNowEnterprise([construEnterprise[0]]);
     }
-    else if(value == "设计行业"){
+    else if (value === "设计行业") {
       setNowEnterpriseList(designEnterprise);
-      setNowEnterprise(designEnterprise[0]);
+      setNowEnterprise([designEnterprise[0]]);
     }
   };
 
@@ -53,12 +48,18 @@ export default function SecondSearchBar({setSelectedIndustry}) {
   };
 
   return (
-    <div style={{ height: "27.2vh", width: "100%" }}>
-      <div style={{ height: "40%", paddingTop: "5%" }}>
+    <div style={{ height: "37.2vh", width: "100%" }}>
+      <div 
+        style={{ 
+          // height: "40%", 
+          padding: "10%" 
+        }}
+      >
         <Select
           defaultValue={allIndustry[0]}
           style={{
-            width: "80%",
+            width: "20%",
+            // width: "80%",
           }}
           onChange={handleIndustryChange}
         >
@@ -66,16 +67,14 @@ export default function SecondSearchBar({setSelectedIndustry}) {
             <Option key={industry}>{industry}</Option>
           ))}
         </Select>
-      </div>
-
-      <div style={{ height: "40%", paddingTop: "5%" }}>
         <Select
-          allowClear
           showArrow
           showSearch
           mode="multiple"
           style={{
-            width: "80%",
+            width: "70%",
+            paddingLeft: "5%"
+            // width: "80%",
           }}
           value={nowEnterprise}
           onChange={onNowEnterprise}
@@ -85,8 +84,24 @@ export default function SecondSearchBar({setSelectedIndustry}) {
           ))}
         </Select>
       </div>
-
-
+      {/* <div style={{ height: "40%", paddingTop: "5%" }}>
+        <Select
+          allowClear
+          showArrow
+          showSearch
+          mode="multiple"
+          style={{
+            width: "40%",
+            // width: "80%",
+          }}
+          value={nowEnterprise}
+          onChange={onNowEnterprise}
+        >
+          {NowEnterpriseList.map((industry) => (
+            <Option key={industry}>{industry}</Option>
+          ))}
+        </Select>
+      </div> */}
     </div>
   );
 }

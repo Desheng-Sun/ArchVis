@@ -1,49 +1,117 @@
+/* 页面整体布局*/
 #layout {
-    height: 100vh;
-    width: 100vw;
     padding-top: 0.3vh;
     padding-bottom: 0.3vh;
     padding-left: 0.2vw;
-    padding-right: 0.2vw;
-    background-color: rgb(240, 239, 239);
+    padding-right: 0.5vw;
     overflow: hidden;
+    /* background-color: rgb(240, 239, 239); */
 }
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: inherit;
+  background-color: rgba(144, 147, 153, 0.5);
+  -webkit-transition: 0.3s background-color;
+  transition: 0.3s background-color;
+} 
+/* 标题布局 */
 #ititle {
-    border-color: rgb(240, 239, 239) ;
-    height: 5vh;
-    width: 99.6vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /* border-color: rgb(240, 239, 239) ; */
+    height: 15vh;
+    width: 99.3vw;
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
-.changePageButton {
+#title {
+    height: 5vh;
+    width: 99.3vw;
+    font-size: 3.5vh;
+    font-family: "微软雅黑";
+    text-align: center;
+}
+#systemIntroduction{
+    margin: 2vh 15vw 0vh 15vw;
+    height: 8vh;
+    font-size: 1.5vh; 
+    overflow-y: auto;
+}
+/* 滚动条滑块 */
+#systemIntroduction::-webkit-scrollbar-thumb {
+    border-radius: inherit;
+    background-color: rgba(144, 147, 153, 0);
+    -webkit-transition: 0.3s background-color;
+    transition: 0.3s background-color;
+  }
+/* 切换菜单布局*/
+#changeButton{
+    margin: 0.7vh 0;
     height: 2.5vh;
-    width: 5vw;
-    margin-top: 2.5vh;
+    width: 99.3vw;
+}
+/* .changePageButton {
+    height: 2.5vh;
+    width: 20vw;
     margin-right: 0.1vw;
     border: 0;
     border-radius: 0.4vw;
-    box-shadow: 0 0px 0.4vw rgb(0 0 0 / 28%);
     float: left;
     font-size: 1.5vh;
     font-family: "微软雅黑";
     text-align: center;
     vertical-align: middle;
     background-color: white;
-}
-#title {
-    height: 5vh;
-    width: 84.6vw;
-    font-size: 3.5vh;
+} */
+.changePageButton {
+    height: 2.6vh;
+    width: 18vw;
+    margin-right: 0.5vw;
+    background: #69c0ff;
+    border: none;
+    border-radius: 5px;
+    position: relative;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.5vh;
     font-family: "微软雅黑";
     text-align: center;
-}
+    text-indent: 5px;
+    cursor: pointer;
+  }
+  button:active {
+    box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2);
+    top: 1px;
+  }
+  button:after {
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 1.3vh solid #eee;
+    border-bottom: 1.3vh solid #eee;
+    border-left: 1.04vh solid transparent;
+    border-right: 1.3vh solid #eee;
+    position: absolute;
+    opacity: 0.6; 
+    right: 0;
+    top: 0;
+    border-radius: 0 5px 5px 0;  
+  }
+
 #viewList {
     margin-top: 0.3vh;
     height: 94.1vh;
-    width: 99.6vw;
+    width: 99.3vw;
+    overflow: hidden;
 }
-
 
 
 
@@ -53,53 +121,53 @@
     float: left;
 }
 #firstSearchbar {
-    height: 30vh;
-    width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    height: 35vh;
+    width: 100%;
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #firstIndicators {
     margin-top: 0.3vh;
-    height: 63.8vh;
-    width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    height: 58.8vh;
+    width: 100%;
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #firstIRight{
     margin-left: 0.2vw;
     height: 94.1vh;
-    width: 69.4vw;
+    width: 69.1vw;
     float: left;
 }
 #firstIRightTop{
     height: 53.8vh;
-    width: 69.4vw;
+    width: 100%;
 }
 #firstArchMap {
     height: 53.8vh;
     width: 40vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
 #firstArchList {
     margin-left: 0.2vw;
     height: 53.8vh;
-    width: 29.2vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    width: 28.9vw;
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
 #firstArchRank {
     margin-top: 0.3vh;
     height: 40vh;
-    width: 69.4vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    width: 69.1vw;
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 
@@ -108,66 +176,78 @@
 
 #secondILeft{
     height: 94.1vh;
-    width: 30vw;
+    width: 40vw;
+    /* width: 30vw; */
     float: left;
 }
 #secondSearchbar {
     height: 30vh;
-    width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    width: 40vw;
+    /* width: 30vw; */
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #secondIndicators {
     margin-top: 0.3vh;
     height: 63.8vh;
-    width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    width: 40vw;
+    /* width: 30vw; */
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #secondIRight{
     margin-left: 0.2vw;
     height: 94.1vh;
-    width: 69.4vw;
+    width: 59.1vw;
+    /* width: 69.4vw; */
     float: left;
 }
 #secondIRightTop{
-    height: 43.8vh;
-    width: 69.4vw;
+    height: 30vh;
+    /* height: 43.8vh; */
+    width: 59.1vw;
+    /* width: 69.4vw; */
 }
 #secondSelectIndiND {
-    height: 43.8vh;
-    width: 19.9vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    height: 30vh;
+    /* height: 43.8vh; */
+    width: 15vw;
+    /* width: 19.9vw; */
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
 #secondSelectIndiRD {
     margin-left: 0.2vw;
-    height: 43.8vh;
-    width: 19.9vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    height: 30vh;
+    /* height: 43.8vh; */
+    width: 15vw;
+    /* width: 19.9vw; */
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
-#secondIndiRDExplane {
+#secondWordCloud {
     margin-left: 0.2vw;
-    height: 43.8vh;
-    width: 29.2vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    height: 30vh;
+    width: 28.7vw;
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
 #secondIndiRDRank {
     margin-top: 0.3vh;
-    height: 50vh;
-    width: 69.4vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    height: 63.8vh;
+    /* height: 50vh; */
+    width: 59.1vw;
+    /* width: 69.4vw; */
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 
@@ -181,50 +261,53 @@
 #thirdSearchbar {
     height: 30vh;
     width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #thirdEPPosplashes {
     margin-top: 0.3vh;
     height: 63.8vh;
     width: 30vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
 }
 #thirdIRight{
     margin-left: 0.2vw;
     height: 94.1vh;
-    width: 69.4vw;
+    width: 69.1vw;
     float: left;
 }
 #thirdIRightTop{
     height: 46.9vh;
-    width: 69.4vw;
+    width: 69.1vw;
 }
 #thirdEPScoreIndiSD {
     height: 46.9vh;
-    width: 34.6vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    width: 34.4vw;
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
 #thirdEPScoreIndiND {
     margin-left: 0.2vw;
     height: 46.9vh;
-    width: 34.6vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    width: 34.4vw;
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
     float: left;
 }
 #thirdEPdight {
     margin-top: 0.3vh;
     height: 46.9vh;
-    width: 69.4vw;
-    border-radius: 0.4vw;
-    box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%);
+    width: 69.1vw;
+    /*border-radius: 0.4vw;*/
+    /* box-shadow: 0 0px 0.6vw rgb(0 0 0 / 28%); */
     background-color: white;
+}
+#patentDescription{
+    height: 5vh;
 }

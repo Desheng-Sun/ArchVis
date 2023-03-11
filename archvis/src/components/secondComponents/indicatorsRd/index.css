@@ -1,0 +1,42 @@
+#secondIndicatorsRdSelect {
+  height: 27.2vh;
+  /* height: 41vh; */
+  width: 100%;
+  overflow-y: scroll;
+  position: inherit;
+  /* overflow: hidden; */
+}
+
+.ant-radio-group,
+.ant-radio-group-outline {
+  padding-top: 5%;
+}
+
+.ant-radio-wrapper,
+.ant-radio-wrapper-checked {
+  font-size: 1.2vh;
+}
+
+#secondIndicatorsRdExplain {
+  height: 25vh;
+  width: 20%;
+  float: right;
+  margin-top: 17vh;
+}
+#secondIndicatorsRdExplainText {
+  height: 25vh;
+  width: 6vw;
+  position: absolute;
+  font-size: 1.2vh;
+  text-align: left;
+  top: 8.5vh;
+  right: 29vw;
+  overflow-y: scroll;
+  margin-top: 17vh;
+}
+#secondIndicatorsRdExplainText::-webkit-scrollbar-thumb {
+  border-radius: inherit;
+  background-color: rgba(144, 147, 153, 0);
+  -webkit-transition: 0.3s background-color;
+  transition: 0.3s background-color;
+}

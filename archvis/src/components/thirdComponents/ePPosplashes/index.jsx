@@ -1,255 +1,228 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
+import { thirdEPPos} from '../../../apis/api';
 
-export default function FirstIndicators({w, h}) {
+export default function ThirdEPPosplashes({ w, h, selectedIndustry, setNowEnterpriseThird, construScore, designScore, allDate }) {
   const [data, setData] = useState([]);
+  const [allScore, setAllScore] = useState()
   const chartRef = useRef(null);
+  const itemStyle = {
+    opacity: 0.8,
+    shadowBlur: 10,
+    shadowOffsetX: 0,
+    shadowOffsetY: 0,
+    shadowColor: 'rgba(0,0,0,0.3)'
+  };
   useEffect(() => {
+    if (construScore && designScore) {
+      let finalData = {}
+      for (let i in construScore) {
+        let nowFinalData = {}
+        for (let index = 0; index < 2; index++) {
+          let nowConstruData = []
+          let nowConstruDData = []
+          if (index === 0) {
+            nowConstruData = construScore[i][0]
+            nowConstruDData = construScore[i][1]
+          }
+          else {
+            nowConstruData = designScore[i][0]
+            nowConstruDData = designScore[i][1]
+          }
 
-  }, [data])
+          for (let j in nowConstruData["企业名称"]) {
+            let nowEnterpriseName = nowConstruData["企业名称"][j]
+            nowFinalData[nowEnterpriseName] = 0
+            for (let k in nowConstruData) {
+              if (k == "企业名称" || k == "股票代码" || k == "年份" || k == "成立年份") {
+                continue
+              }
+              nowFinalData[nowEnterpriseName] += nowConstruData[k][j] * nowConstruDData[k] * 100
+            }
+          }
+        }
+        finalData[i] = nowFinalData
+      }
+      setAllScore(finalData)
+    }
+  }, [construScore, designScore])
+
+  // 获取数据
+  useEffect(() => {
+    if (allScore) {
+      let useData = {};
+      let useIndusrty = ''
+      if (selectedIndustry == "施工行业") {
+        useIndusrty = 'constru'
+      }
+      else if (selectedIndustry == "设计行业") {
+        useIndusrty = 'design'
+      }
+      thirdEPPos(useIndusrty).then((res) => {
+        for (let i of res) {
+          if (!useData.hasOwnProperty(i["年份"])) {
+            useData[i["年份"]] = []
+          }
+          useData[i["年份"]].push([i["总资产"] / 100000000, allScore[i["年份"]][i["企业名称"]], i["企业名称"]])
+        }
+        let finalUseData = []
+        for (let i of allDate) {
+          finalUseData.push({
+            name: i,
+            type: 'scatter',
+            itemStyle: itemStyle,
+            data: useData[i],
+            label: {
+              show: true,
+              position: 'top',
+              color: '#000',
+              formatter: function (param) {
+                return param.value[2]
+              }
+            }
+          })
+        }
+        setData(finalUseData);
+      })
+    }
+  }, [selectedIndustry, allScore])
+
   // 随系统缩放修改画布大小
   useEffect(() => {
+    if(data.length == 0){
+      return 
+    }
     let myChart = echarts.getInstanceByDom(chartRef.current)
     if (myChart == null) {
       myChart = echarts.init(chartRef.current);
     }
-    const data1 = [
-      [1, 55, '', 56, 0.46, 18, 6, '良'],
-      [2, 25, '企业2', 21, 0.65, 34, 9, '优'],
-      [3, 56, '', 63, 0.3, 14, 5, '良'],
-      [4, 33, '企业4', 29, 0.33, 16, 6, '优'],
-      [5, 42, '', 44, 0.76, 40, 16, '优'],
-      [6, 82, '企业6', 90, 1.77, 68, 33, '良'],
-      [7, 74, '', 77, 1.46, 48, 27, '良'],
-      [8, 78, '', 80, 1.29, 59, 29, '良'],
-      [9, 267, '企业3', 280, 4.8, 108, 64, '重度污染'],
-      [10, 185, '', 216, 2.52, 61, 27, '中度污染'],
-      [11, 39, '', 38, 0.57, 31, 15, '优'],
-      
-    ];
-    const data2 = [
-      [12, 41, '', 40, 0.43, 21, 7, '优'],
-      [13, 64, '', 74, 1.04, 46, 22, '良'],
-      [14, 108, '', 120, 1.7, 75, 41, '轻度污染'],
-      [15, 108, '企业5', 116, 1.48, 44, 26, '轻度污染'],
-      [16, 33, '', 29, 0.34, 13, 5, '优'],
-      [17, 94, '', 110, 1.54, 62, 31, '良'],
-      [18, 186, '', 192, 3.88, 93, 79, '中度污染'],
-      [19, 57, '', 54, 0.96, 32, 14, '良'],
-      [20, 22, '', 17, 0.48, 23, 10, '优'],
-      [21, 39, '', 36, 0.61, 29, 13, '优'],
-      [22, 94, '', 114, 2.08, 73, 39, '良'],
-    ];
-    const data3 = [
-      [23, 99, '企业1', 110, 2.43, 76, 48, '良'],
-      [24, 31, '', 30, 0.5, 32, 16, '优'],
-      [25, 42, '', 43, 1, 53, 22, '优'],
-      [26, 154, '', 157, 3.05, 92, 58, '中度污染'],
-      [27, 234, '', 230, 4.09, 123, 69, '重度污染'],
-      [28, 160, '', 186, 2.77, 91, 50, '中度污染'],
-      [29, 134, '', 165, 2.76, 83, 41, '轻度污染'],
-      [30, 52, '', 60, 1.03, 50, 21, '良'],
-      [31, 46, '', 49, 0.28, 10, 6, '优']
-    ];
-    const dataGZ = [
-      [1, 26, 37, 27, 1.163, 27, 13, '优'],
-      [2, 85, 62, 71, 1.195, 60, 8, '良'],
-      [3, 78, 38, 74, 1.363, 37, 7, '良'],
-      [4, 21, 21, 36, 0.634, 40, 9, '优'],
-      [5, 41, 42, 46, 0.915, 81, 13, '优'],
-      [6, 56, 52, 69, 1.067, 92, 16, '良'],
-      [7, 64, 30, 28, 0.924, 51, 2, '良'],
-      [8, 55, 48, 74, 1.236, 75, 26, '良'],
-      [9, 76, 85, 113, 1.237, 114, 27, '良'],
-      [10, 91, 81, 104, 1.041, 56, 40, '良'],
-      [11, 84, 39, 60, 0.964, 25, 11, '良'],
-      [12, 64, 51, 101, 0.862, 58, 23, '良'],
-      [13, 70, 69, 120, 1.198, 65, 36, '良'],
-      [14, 77, 105, 178, 2.549, 64, 16, '良'],
-      [15, 109, 68, 87, 0.996, 74, 29, '轻度污染'],
-      [16, 73, 68, 97, 0.905, 51, 34, '良'],
-      [17, 54, 27, 47, 0.592, 53, 12, '良'],
-      [18, 51, 61, 97, 0.811, 65, 19, '良'],
-      [19, 91, 71, 121, 1.374, 43, 18, '良'],
-      [20, 73, 102, 182, 2.787, 44, 19, '良'],
-      [21, 73, 50, 76, 0.717, 31, 20, '良'],
-      [22, 84, 94, 140, 2.238, 68, 18, '良'],
-      [23, 93, 77, 104, 1.165, 53, 7, '良'],
-      [24, 99, 130, 227, 3.97, 55, 15, '良'],
-      [25, 146, 84, 139, 1.094, 40, 17, '轻度污染'],
-      [26, 113, 108, 137, 1.481, 48, 15, '轻度污染'],
-      [27, 81, 48, 62, 1.619, 26, 3, '良'],
-      [28, 56, 48, 68, 1.336, 37, 9, '良'],
-      [29, 82, 92, 174, 3.29, 0, 13, '良'],
-      [30, 106, 116, 188, 3.628, 101, 16, '轻度污染'],
-      [31, 118, 50, 0, 1.383, 76, 11, '轻度污染']
-    ];
-    const dataSH = [
-      [1, 91, 45, 125, 0.82, 34, 23, '良'],
-      [2, 65, 27, 78, 0.86, 45, 29, '良'],
-      [3, 83, 60, 84, 1.09, 73, 27, '良'],
-      [4, 109, 81, 121, 1.28, 68, 51, '轻度污染'],
-      [5, 106, 77, 114, 1.07, 55, 51, '轻度污染'],
-      [6, 109, 81, 121, 1.28, 68, 51, '轻度污染'],
-      [7, 106, 77, 114, 1.07, 55, 51, '轻度污染'],
-      [8, 89, 65, 78, 0.86, 51, 26, '良'],
-      [9, 53, 33, 47, 0.64, 50, 17, '良'],
-      [10, 80, 55, 80, 1.01, 75, 24, '良'],
-      [11, 117, 81, 124, 1.03, 45, 24, '轻度污染'],
-      [12, 99, 71, 142, 1.1, 62, 42, '良'],
-      [13, 95, 69, 130, 1.28, 74, 50, '良'],
-      [14, 116, 87, 131, 1.47, 84, 40, '轻度污染'],
-      [15, 108, 80, 121, 1.3, 85, 37, '轻度污染'],
-      [16, 134, 83, 167, 1.16, 57, 43, '轻度污染'],
-      [17, 79, 43, 107, 1.05, 59, 37, '良'],
-      [18, 71, 46, 89, 0.86, 64, 25, '良'],
-      [19, 97, 71, 113, 1.17, 88, 31, '良'],
-      [20, 84, 57, 91, 0.85, 55, 31, '良'],
-      [21, 87, 63, 101, 0.9, 56, 41, '良'],
-      [22, 104, 77, 119, 1.09, 73, 48, '轻度污染'],
-      [23, 87, 62, 100, 1, 72, 28, '良'],
-      [24, 168, 128, 172, 1.49, 97, 56, '中度污染'],
-      [25, 65, 45, 51, 0.74, 39, 17, '良'],
-      [26, 39, 24, 38, 0.61, 47, 17, '优'],
-      [27, 39, 24, 39, 0.59, 50, 19, '优'],
-      [28, 93, 68, 96, 1.05, 79, 29, '良'],
-      [29, 188, 143, 197, 1.66, 99, 51, '中度污染'],
-      [30, 174, 131, 174, 1.55, 108, 50, '中度污染'],
-      [31, 187, 143, 201, 1.39, 89, 53, '中度污染']
-    ];
-    const schema = [
-      { name: 'date', index: 0, text: '数字化程度' },
-      { name: 'AQIindex', index: 1, text: '规模' }
-    ];
-    const itemStyle = {
-      opacity: 0.8,
-      shadowBlur: 10,
-      shadowOffsetX: 0,
-      shadowOffsetY: 0,
-      shadowColor: 'rgba(0,0,0,0.3)'
-    };
+    let useDate = []
+    for(let i of allDate){
+      useDate.push(i.toString())
+    }
+    <svg t="1663577285466" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4406" width="200" height="200"><path d="M436.992 735.04l45.312 45.248 361.984-361.984-90.496-90.56-271.488 271.552-135.808-135.744L256 554.048l180.992 180.992zM192 64h640a128 128 0 0 1 128 128v640a128 128 0 0 1-128 128H192a128 128 0 0 1-128-128V192a128 128 0 0 1 128-128z" p-id="4407" fill="#1296db"></path></svg>
+    const schema = ['规模', '数字化程度']
     const option = {
       color: [
-        "#5b8ff9",
-        "#5ad8a6",
-        "#5d7092",
-        "#f6bd16",
-        "#e86452",
-        "#6dc8ec",
-        "#945fb9",
-        "#ff9845",
-        "#1e9493",
-        "#ff99c3"
+        "#008080",
+        "#70a494",
+        "#b4c8a8",
+        "#f6edbd",
+        "#edbb8a",
+        "#de8a5a",
+        "#ca562c",
+        "#39b185",
+        "#bd925a",
+        "#42b7b9"
       ],
-  grid: {
-    left: '10%',
-    right: 150,
-    top: '18%',
-    bottom: '10%'
-  },
-  tooltip: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    formatter: function (param) {
-      var value = param.value;
-      // prettier-ignore
-      return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
-                + param.seriesName
-                + '</div>'
-                + schema[0].text + '：' + value[0] + '<br>'
-                + schema[1].text + '：' + value[1] + '<br>';
-    }
-  },
-  xAxis: {
-    type: 'value',
-    name: '企业规模（总资产）',
-    nameGap: 16,
-    nameTextStyle: {
-      fontSize: 16,
-      formatter: '{a} <br/>{b}: {c} ({d}%)'
-    },
-    splitLine: {
-      show: true,
-      lineStyle: {
-        type: 'dashed'
-    }
-    }
-  },
-  yAxis: {
-    type: 'value',
-    name: '数字化程度\n（最终得分）',
-    nameLocation: 'end',
-    nameGap: 20,
-    nameTextStyle: {
-      fontSize: 16
-    },
-    splitLine: {
-      show: true,
-      lineStyle: {
-        type: 'dashed'
-    }
-    }
-  },
-  series: [
-    {
-      name: '一类企业',
-      type: 'scatter',
-      itemStyle: itemStyle,
-      data: data1,
-      label: {
+      legend: {
+        top: "1%",
+        data: useDate,
+        textStyle: {
+          fontSize: 16
+        },
+        icon:"path://M436.992 735.04l45.312 45.248 361.984-361.984-90.496-90.56-271.488 271.552-135.808-135.744L256 554.048l180.992 180.992zM192 64h640a128 128 0 0 1 128 128v640a128 128 0 0 1-128 128H192a128 128 0 0 1-128-128V192a128 128 0 0 1 128-128z",
+        selected: {
+          // 选中'系列1'
+          "2019": false,
+          "2020": false,
+          "2021": true,
+      }
+      },
+      grid: {
+        left: '7%',
+        right: '15%',
+        top: '10%',
+        bottom: '10%'
+      },
+      toolbox: {
         show: true,
-        position: 'top',
-        color: '#000',
+        feature: {
+          restore: {},
+          // saveAsImage: {}
+        }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(255,255,255,0.7)',
         formatter: function (param) {
           var value = param.value;
-          return value[2]
+          // prettier-ignore
+          return '<div style="border-bottom: 1px solid rgba(255,255,255,.3); font-size: 18px;padding-bottom: 7px;margin-bottom: 7px">'
+            // param.seriesName
+            + param.seriesName + "：" + value[2]
+            + '</div>'
+            + schema[0] + '：' + value[0] + '<br>'
+            + schema[1] + '：' + value[1] + '<br>';
         }
-      }
-    },
-    {
-      name: '二类企业',
-      type: 'scatter',
-      itemStyle: itemStyle,
-      data: data2,
-      label: {
-        show: true,
-        position: 'top',
-        color: '#000',
-        formatter: function (param) {
-          var value = param.value;
-          return value[2]
+      },
+      xAxis: {
+        type: 'value',
+        name: '企业规模/亿',
+        nameTextStyle: {
+          fontSize: 15,
+        },
+        splitLine: {
+          lineStyle: {
+            type: 'dashed'
+          }
         }
-      }
-    },
-    {
-      name: '三类企业',
-      type: 'scatter',
-      itemStyle: itemStyle,
-      data: data3,
-      label: {
-        show: true,
-        position: 'top',
-        color: '#000',
-        formatter: function (param) {
-          var value = param.value;
-          return value[2]
+
+      },
+      yAxis: {
+        type: 'value',
+        name: '数字化程度\n（最终得分）',
+        nameTextStyle: {
+          fontSize: 15
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            type: 'dashed'
+          }
         }
-      }
-    },
-    {
-      name: '四类企业',
-      type: 'scatter',
-      itemStyle: itemStyle,
-      data: dataSH
-    },
-    {
-      name: '五类企业',
-      type: 'scatter',
-      itemStyle: itemStyle,
-      data: dataGZ
-    }
-  ]
+      },
+      dataZoom: [
+        {
+          type: 'slider',
+          show: true,
+          xAxisIndex: [0],
+          start: 0,
+          end: 1
+        },
+        {
+          type: 'slider',
+          show: true,
+          yAxisIndex: [0],
+          right: '5%',
+          bottom: '15%',
+          top: '10%',
+          start: 5,
+          end: 30
+        },
+        {
+          type: 'inside',
+          xAxisIndex: [0],
+          start: 0,
+          end: 1
+        },
+        {
+          type: 'inside',
+          yAxisIndex: [0],
+          start: 5,
+          end: 30
+        }
+      ],
+      series: data
     };
-    myChart.setOption(option);
+    option && myChart.setOption(option, true);
+
+    // 鼠标点击获取企业名称
+    myChart.on('click', function (param) {
+      if (param.componentType === "series") {
+        setNowEnterpriseThird(param.data[2]);
+      }
+    })
+
     myChart.resize();
   }, [data, w, h]);
 

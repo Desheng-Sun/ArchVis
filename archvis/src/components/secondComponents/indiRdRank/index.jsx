@@ -1,12 +1,48 @@
+import CheckableTag from 'antd/lib/tag/CheckableTag';
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
+import { secondProperty } from '../../../apis/api';
 
-export default function FirstIndicators({w, h}) {
+export default function SecondIndiRDRank({ w, h, selectedIndustrySecond, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd, allDate }) {
   const [data, setData] = useState([]);
+  const [industry, setIndustry] = useState('constru');
   const chartRef = useRef(null);
   useEffect(() => {
-
-  }, [data])
+    if (selectedIndustrySecond === '施工行业') {
+      setIndustry('constru');
+    }
+    else if (selectedIndustrySecond === '设计行业') {
+      setIndustry('design');
+    }
+  }, [selectedIndustrySecond])
+  useEffect(() => {
+    if (selectedIndicatorsRd === undefined) {
+      return
+    }
+    secondProperty(industry, selectedIndicatorsRd, nowEnterprise).then((res) => {
+      let useDataTemp = {}
+      console.log(res)
+      for (let i of res) {
+        if (!useDataTemp.hasOwnProperty(i["企业名称"])) {
+          useDataTemp[i["企业名称"]] = {}
+        }
+        useDataTemp[i["企业名称"]][i["年份"]] = i[selectedIndicatorsRd]
+      }
+      let nowUseData = []
+      for (let i in useDataTemp) {
+        let nowData = []
+        for(let j of allDate){
+          nowData.push(useDataTemp[i][j])
+        }
+        nowUseData.push({
+          name: i,
+          type: "line",
+          data: nowData
+        })
+      }
+      setData(nowUseData);
+    })
+  }, [industry, nowEnterprise, selectedIndicatorsNd, selectedIndicatorsRd])
   // 随系统缩放修改画布大小
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
@@ -15,76 +51,49 @@ export default function FirstIndicators({w, h}) {
     }
     const option = {
       color: [
-        "#5b8ff9",
-        "#5ad8a6",
-        "#5d7092",
-        "#f6bd16",
-        "#e86452",
-        "#6dc8ec",
-        "#945fb9",
-        "#ff9845",
-        "#1e9493",
-        "#ff99c3"
+        "#008080",
+        "#70a494",
+        "#b4c8a8",
+        "#f6edbd",
+        "#edbb8a",
+        "#de8a5a",
+        "#ca562c",
+        "#39b185",
+        "#bd925a",
+        "#42b7b9"
       ],
-          tooltip: {
-            trigger: 'axis'
-          },
-          legend: {
-            top: '5%',
-            data: ['企业1', '企业2', '企业3', '企业4', '企业5']
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-          },
-          xAxis: {
-            type: 'category',
-            boundaryGap: false,
-            data: ['2019年', '2020年', '2021年']
-          },
-          yAxis: {
-            type: 'value',
-            max: (value) => {
-                return value.max
-              }
-          },
-          series: [
-            {
-              name: '企业1',
-              type: 'line',
-              data: [160, 132, 181]
-            },
-            {
-              name: '企业2',
-              type: 'line',
-              data: [220, 182, 161]
-            },
-            {
-              name: '企业3',
-              type: 'line',
-              
-              data: [150, 332, 201]
-            },
-            {
-              name: '企业4',
-              type: 'line',
-              data: [220, 312, 301]
-            },
-            {
-              name: '企业5',
-              type: 'line',
-              data: [200, 332, 401]
-            }
-          ]
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        top: '5%',
+        data: data.name
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '5%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: allDate
+      },
+      yAxis: {
+        type: 'value',
+        max: (value) => {
+          return value.max
+        }
+      },
+      series: data
     };
-    myChart.setOption(option);
+    myChart.setOption(option, true);
     myChart.resize();
   }, [data, w, h]);
 
   return (
-    <div ref={chartRef} style={{ width: "100%", height: "47.2vh" }}>
+    <div ref={chartRef} style={{ width: "100%", height: "61vh" }}>
     </div>
   )
 }

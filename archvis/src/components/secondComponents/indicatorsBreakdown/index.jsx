@@ -1,24 +1,23 @@
 import * as echarts from 'echarts';
 import React, { useState, useEffect, useRef } from "react";
-import { selectIndicators } from '../../../apis/api';
+import { firstArchIndustry } from '../../../apis/api';
 
-export default function FirstIndicators({w, h, selectedIndustry}) {
-  const [industry, setIndustry] = useState('constru');
+export default function FirstIndicators({ w, h, selectedIndustrySecond, setSelectedIndicatorsNd, setSelectedIndicatorsRd }) {
   const [data, setData] = useState([]);
   const chartRef = useRef(null);
+
   useEffect(() => {
-    if (selectedIndustry == '施工行业') {
-      setIndustry('constru');
+    let industry = ""
+    if (selectedIndustrySecond === '施工行业') {
+      industry = 'constru';
     }
-    else if (selectedIndustry == '设计行业') {
-      setIndustry('design');
+    else if (selectedIndustrySecond === '设计行业') {
+      industry = 'design';
     }
-  }, [selectedIndustry])
-  useEffect(() => {
-    selectIndicators(industry).then((res) =>{
+    firstArchIndustry(industry).then((res) => {
       setData(res)
     })
-  }, [industry])
+  }, [selectedIndustrySecond])
   // 随系统缩放修改画布大小
   useEffect(() => {
     let myChart = echarts.getInstanceByDom(chartRef.current)
@@ -28,28 +27,32 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
     var drawdata = [];
     var dataChildren = [];
     for (let i in data) {
-      if (data[i].level == 2) {
+      if (data[i].level === 2) {
         dataChildren.push({
           name: data[i].indi_name,
-          children: []
+          children: [],
+          explain: data[i].explanation
         })
       }
-      else if (data[i].level == 3){
+      else if (data[i].level === 3) {
         dataChildren[data[i].parent_id - 6].children.push({
           name: data[i].indi_name,
+          explain: data[i].explanation,
+          parent: dataChildren[data[i].parent_id - 6].name,
           value: 1
         })
       }
     }
     var j = 0;
     for (let i in data) {
-      if (data[i].level == 1) {
+      if (data[i].level === 1) {
         drawdata.push({
           name: data[i].indi_name,
-          children: []
+          children: [],
+          explain: data[i].explanation
         })
       }
-      else if (data[i].level == 2) {
+      else if (data[i].level === 2) {
         drawdata[data[i].parent_id - 1].children.push(dataChildren[j]);
         j++;
       }
@@ -59,25 +62,38 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
     }
     const option = {
       color: [
-        "#5b8ff9",
-        "#5ad8a6",
-        "#5d7092",
-        "#f6bd16",
-        "#e86452",
-        "#6dc8ec",
-        "#945fb9",
-        "#ff9845",
-        "#1e9493",
-        "#ff99c3"
+        "#008080",
+        "#70a494",
+        "#b4c8a8",
+        "#f6edbd",
+        "#edbb8a",
+        "#de8a5a",
+        "#ca562c",
+        "#39b185",
+        "#bd925a",
+        "#42b7b9"
       ],
+      tooltip: {
+        trigger: 'item',
+        confine: true,
+        formatter: function (params) {
+          if (params.data.explain != null) {
+            return '<span style="font-weight: bold;">' + params.data.name + '</span><br>' + params.data.explain;
+          }
+          else {
+            return params.data.name;
+          }
+        },
+      },
       series: [
         {
           type: 'sunburst',
           id: 'echarts-package-size',
-          radius: ['10%', '80%'],
+          radius: ['10%', '90%'],
           animationDurationUpdate: 1000,
           data: drawdata,
           universalTransition: true,
+          nodeClick: false,
           itemStyle: {
             borderWidth: 1,
             borderColor: 'rgba(255,255,255,.5)'
@@ -106,12 +122,13 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
             },
             {
               r0: '75%',
-              r: '80%',
+              r: '90%',
               label: {
-                position: 'outside',
-                width: '70',
-                color: 'inherit',
-                overflow: 'break'
+                show: false
+                // position: 'outside',
+                // width: '70',
+                // color: 'inherit',
+                // overflow: 'break'
               }
             }
           ]
@@ -119,6 +136,15 @@ export default function FirstIndicators({w, h, selectedIndustry}) {
       ]
     };
     myChart.setOption(option);
+    myChart.on('click', function (params) {
+      if (params.data.value == 1) {
+        setSelectedIndicatorsNd(params.data.parent)
+        setSelectedIndicatorsRd(params.data.name)
+      }
+      else {
+        setSelectedIndicatorsNd(params.data.name)
+      }
+    });
     myChart.resize();
   }, [data, w, h]);
 
